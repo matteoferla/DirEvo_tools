@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Matteo Ferla">
+<meta name="description" content="Mutagenesis calculator by Matteo Ferla">
+<meta name="keywords" content="calculator, tool, mutagenesis, epPCR, mutazyme, wobble, directed evolution, engineering, protein, enzyme, Matteo Ferla, Matteo P. Ferla">
+<title>Mutational bias calculator</title>
+<script src="scripts/jquery-2.1.4.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<link rel="shortcut icon" type="image/png" href="images/flavicon.png"/>
+<link rel="stylesheet" type="text/css" href="scripts/mut.css">
+<!--Webfonts-->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Pacifico' rel='stylesheet' type='text/css'>
+<!--FontAwesome-->
+<link rel="stylesheet" href="scripts/font-awesome-4.4.0/css/font-awesome.min.css">
+
+</head>
+<body><div class="subbody"><div class="header"></div>
+<div class=main>
+<div style="text-align:right"><a href=mutational_bias_calculator.html><i class="fa fa-taxi"></i> Go back</a></p></div>
+<h1>Notes on standard error calculations</h1>
+<h2>Basics</h2>
+There are various ways to propagate errors. One of them is parametrically.
+The mean (μ) and variance (Var(x) or σ&sup2;) of a distribution (random variable) are variables that describe the function and technically they are the first and second moments respectively. The standard error of the mean is the square root of the variance divided by sample size.
+<table width="100%" class=clearspace><tr><td class=clearspace></td><td class=clearspace><img src="images/se.svg" alt="se(x)=\sqrt{\frac{Var(x)}{n}}"/></td><td class=clearspace width="10%">(A1)</td><td width="30%" class=clearspace></td></tr></table>
+To propagate the errors,two formula were used.
+The first is the Binaymé rule, which states that the variance of a sum of averages is the sum of the variances
+of the averages. Second, the variance of a ratio of two averages can be calculated with a formula that is relatively easy to derive.
+<h2>Derivation of standard error of a ratio</h2>
+The expected value (<i>E(x)</i>) is the average of a series of values sampled of a random variable (x). The mean is the expected value of the values themselves (eq. B1), while the variance is the expected variable of the squared differences from the mean (eq. B2).
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/mean.svg" alt="\mu_x=\sum\limits_{i=1}^n\frac{x_i}{n}=E(x)"/></td><td class=clearspace width="10%">(B1)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/var.svg" alt="Var(x)=\sum\limits_{i=1}^n\frac{(x_i-\mu)^2}{n}=E[(x-\mu)^2]"/></td><td class=clearspace width="10%">(B2)</td><td width="30%" class=clearspace></td></tr>
+</table>
+To proceed we need to determine the variance of a function. The eq. B2 can be easily rewritten as eq. B3 (König–Huygens theorem) thanks to a binomial expansion and the rules of linearity of the expected value (eq. B4 and B5).
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/König–Huygens.svg" alt="Var(x)=E\big ((x-\mu)^2 \big )=E(x^2)-[E(x)]^2"/></td><td class=clearspace width="10%">(B3)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/obvious.svg" alt="E(a)=a \textrm{ (where a is a constant) }\therefore E(E(x))=E(x)"/></td><td class=clearspace width="10%">(B4)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/distrib.svg" alt="E(x+y)=E(x)+E(y)"/></td><td class=clearspace width="10%">(B5)</td><td width="30%" class=clearspace></td></tr>
+</table>
+A function at a set point can be approximated to a polynomial, thanks to the Taylor series, which is an infinite sum, but for simplicity only the first two terms are shown in eq. B6, which is what is known as a first-order approximation.
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/Taylor.svg" alt="f(x)\approx f(\mu)+f'(\mu)(x-\mu)"/></td><td class=clearspace width="10%">(B6)</td><td width="30%" class=clearspace></td></tr>
+</table>
+Rewritting eq. B3 for a function and expanding each term as a Taylor series (eq. B6), gives us eq. B8. The first term of eq. B8 is expanded by binomial expansion and then the expected value function is distributed to each member of the sum, whereas in the second term the expected values is distributed on two summands and then the square of the binomial is resolved. It should be noted that by definition the expected value of the (linear) difference from the mean is zero (eq. B9). After that several terms cancel each other out giving the first-order approximation for the variance of a function (eq. B10).
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/KH_fx.svg" alt="Var(f(x))=E([f(x)]^2 )- [E(f(x)]^2"/></td><td class=clearspace width="10%">(B7)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/KH_Taylor.svg" alt="Var(f(x))\approx E\Big([f(\mu)+f'(\mu)\cdot (x-\mu)]^2 \Big)- \Big[E\Big(f(\mu)+f'(\mu)\cdot (x-\mu)\Big)\Big]^2"/></td><td class=clearspace width="10%">(B8)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/obvious2.svg" alt="E(x-\mu)=\mu- \mu=0"/></td><td class=clearspace width="10%">(B9)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/var_fx.svg" alt="Var(f(x))\approx [f'(x)]^2\cdot Var(x)"/></td><td class=clearspace width="10%">(B10)</td><td width="30%" class=clearspace></td></tr>
+</table>
+Higher-order approximations can be done (<i>e.g.</i> second order, eq. B11), but not only there is a diminishing return in precision, the complications increase dramatically.
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/2nd.svg" alt="Var(f(x))\approx [f'(x)]^2\cdot Var(x)+f(x)\cdot f''(x)\cdot Var(x)"/></td><td class=clearspace width="10%">(B11)</td><td width="30%" class=clearspace></td></tr>
+</table>
+Having proved the formula for the variance of a function (eq. B10), we can proceed to determine the variance of a ratio. First, the ratio can be converted into logarithmic form (eq. B12). The variance of a logarithm (eq. B13) can be calculated from the approximation found (eq. B10). This therefore allows the first order Taylor approximation of the variance of a ratio to be found.
+<table width="100%" class=clearspace>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/ln.svg" alt="ln \bigg(\frac{x}{y}\bigg)=ln(x)-ln(y)"/></td><td class=clearspace width="10%">(B12)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/var_ln.svg" alt="Var(ln(x))\approx \bigg(\frac{1}{x}\bigg)^2 \cdot Var(x)"/></td><td class=clearspace width="10%">(B13)</td><td width="30%" class=clearspace></td></tr>
+<tr><td class=clearspace></td><td class=clearspace><img src="images/var_ratio.svg" alt="Var\bigg(\frac{x}{y}\bigg)\approx \frac{Var(x)}{\mu_y^2}+\frac{Var(y) \cdot \mu_x^2}{\mu_y^4}"/></td><td class=clearspace width="10%">(B14)</td><td width="30%" class=clearspace></td></tr>
+</table>
+</div>
+<div class=forefooter><table class=clearspace><tr><td class=clearless style="width:33%"><i class="fa fa-hand-spock-o"></i> Author: <a href="http://www.matteoferla.com">Matteo P. Ferla</a></td><td class=clearless style="width:33%"><i class="fa fa-book"></i>  Citation: <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-0996-7">M.P. Ferla, 2016.</a></td><td class=clearless style="width:33%"><i class="fa fa-university"></i> JS &amp; CSS libraries used: <a href="http://fortawesome.github.io/Font-Awesome/" class=external>FontAwesome</a>, <a href="https://developers.google.com/chart/?hl=en" class=external>Google&nbsp;Charts</a>, <a href="https://www.google.com/fonts" class=external>Google&nbsp;Fonts</a>, <a href="https://github.com/lvandeve/jmat" class=external>Jmat</a>.</td></tr></table></div>
+<div class=footer></div>
+</div>
+</body>
+</html>

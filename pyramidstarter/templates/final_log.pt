@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="${request.static_url('pyramidstarter:static/favicon-16x16.png')}">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="${request.static_url('pyramidstarter:static/favicon-96x96.png')}">
+
+
+    <title>Pedel revamp</title>
+    <!-- Bootstrap core CSS
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap.min.css')}">-->
+
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/font-awesome/css/font-awesome.min.css')}">
+
+    <!-- Custom styles for this scaffold -->
+    <!-- was bootstrap-theme-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/darkly.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}" rel="stylesheet">
+
+    <!--slider-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
+    <!--switch-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+
+    <!--pyspinner-->
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
+    <!--main CSS-->
+        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+     <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body style="padding-top: 60px;">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Pedel Redux</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/">Home</a></li>
+                <li class=""><a href="/glue">Glue</a></li>
+                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
+                <li class=""><a href="/pedel">Pedel</a></li>
+                <li class=""><a href="/driver">Driver</a></li>
+                <li class=""><a href="/deepscan">Deepscan</a></li>
+                <li class=""><a href="/QQC">QQC</a></li>
+                <li class=""><a href="/misc">Miscellaneous</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="/about">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<br/>
+
+<div class="container-fluid" id="fullpage">
+
+    <!--welcome box-->
+    <div class="section"> <!--leftover from fullpage.js-->
+        
+        <div class="row" id="§log">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <div class="page-header">
+                <h1>Log</h1>
+            </div>
+            ${structure: main}
+</div>
+</div>
+    </div>
+
+    </div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<!--footer-->
+<div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
+    <p class="text-muted" style="align:center;">Made without approval from the ethics committee.</p>
+</div>
+<!-- Bootstrap core JavaScript
+ ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--JQUERY moved up...-->
+<!--<script src="https://www.google.com/jsapi"></script>-->
+<!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
+<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <script>
+$(function () {
+$('[data-toggle="tooltip"]').tooltip();
+$(".slider").bootstrapSlider(); // only #DS_primerRange??
+$(".switch").bootstrapSwitch();
+$(".hidden").hide();
+$('#§welcome').modal('show')
+});
+
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-66652240-4', 'auto');
+ ga('send', 'pageview');
+
+ 
+
+</script>
+</body>
+</html>

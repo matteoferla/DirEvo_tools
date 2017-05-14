@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="${request.static_url('pyramidstarter:static/favicon-16x16.png')}">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="${request.static_url('pyramidstarter:static/favicon-96x96.png')}">
+
+
+    <title>Pedel revamp</title>
+    <!-- Bootstrap core CSS
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap.min.css')}">-->
+
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/font-awesome/css/font-awesome.min.css')}">
+
+    <!-- Custom styles for this scaffold -->
+    <!-- was bootstrap-theme-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/darkly.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}" rel="stylesheet">
+
+    <!--slider-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
+    <!--switch-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+
+    <!--pyspinner-->
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
+    <!--main CSS-->
+        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+     <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body style="padding-top: 60px;">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Pedel Redux</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/">Home</a></li>
+                <li class=""><a href="/glue">Glue</a></li>
+                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
+                <li class=""><a href="/pedel">Pedel</a></li>
+                <li class=""><a href="/driver">Driver</a></li>
+                <li class=""><a href="/deepscan">Deepscan</a></li>
+                <li class=""><a href="/QQC">QQC</a></li>
+                <li class="active"><a href="/misc">Miscellaneous</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="/about">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<br/>
+
+<div class="container-fluid" id="fullpage">
+
+    <!--welcome box-->
+    <div class="section"> <!--leftover from fullpage.js-->
+        
+        <div class="row" id="§yield">
+    <div class="col-lg-8  col-lg-offset-2">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Pedicted diversity of one or more libraries based on PCR reaction</h1>
+            </div>
+            <div class="panel-body">
+                <h2>Predicted diversity</h2>
+                <h3>Description</h3>
+                <div class="bs-callout bs-callout-warning">Under construction</div>
+                <p>Roghly predict the mutation load from a PCR reaction based on the template and yields or predict a target template concentration to aim for a given mutation load.
+                    <br/>Do note that this is often off due to a variety of factors and should not be a replacement for a test library, especially for manganese mutagenesis.
+                    <br/>If the PCR has not been done yet, expect around 1,000 ng yield for a 25 µl PCR reaction —the PCR yields with Mutazyme are generally lower than with Phusion, so if you have a value with a different polymerase underestimate from that.</p>
+                <h3>Input</h3>
+
+                <!-- add switch?-->
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Mutation rate of the enzyme per kb per doubling, the value is between 0.9–1.6 for mutazyme (our figure is 0.9). For manganese it completely depends on your concentration and enzyme." data-placement="top">Mutation rate</span>
+                                <input type="number" min="0" class="form-control" placeholder="0.9" id="estimate_rate">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Yield of DNA from the PCR reaction (after purification) in ng. So multiply the nanodrop's ng/µl value by your volume in µl." data-placement="top">ng PCR yield</span>
+                                <input type="number" min="0" class="form-control" placeholder="1000" id="estimate_yield">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Template of DNA in the PCR reaction. If using a plasmid this is the concentration of the actual insert not the whole plasmid. That is, get your ng/µl concentration of plasmid divide it by the plasmid size and times it by the insert size and then multiply it by the volume added to your epPCR reaction" data-placement="top">ng PCR template</span>
+                                <input type="number" min="0" class="form-control" placeholder="5" id="estimate_template">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Size of amplicon in kb" data-placement="top">Size in kb</span>
+                                <input type="number" min="0" class="form-control" placeholder="1.0" id="estimate_size">
+                            </div>
+                            <br/>
+                        </div>
+                    </div><!--row-->
+                <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="btn-group" role="group"  aria-label="...">
+                                <button type="button" class="btn btn-warning" id="estimate_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
+                                </button>
+
+                                <button type="button" class="btn btn-info" id="estimate_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
+                                </button>
+                                <button type="button" class="btn btn-success" id="estimate_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                                </button>
+                            </div>
+                        </div><br/>
+                </div>
+
+
+
+
+                <div id="estimate_results">
+                    The number of doublings is <span id="estimate_doublings">xx</span>.<br/>
+                    The expected mutational load is <span id="estimate_mloadkb">xx</span> per kb.<br/>
+                    The expected mutational load is <span id="estimate_mload">xx</span> per amplicon.<br/>
+                    <div id="estimate_chart"></div></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Misc. tools</h1>
+            </div>
+            <div class="panel-body">
+                <h2>Theoretical maximum PCR yield</h2>
+                <h3>Description</h3>
+                <div class="bs-callout bs-callout-info">This is just an easy demo. It works, but it's kind of pointless as your yield will be around 50 ng per µl rxn and nowhere close to the theoretical maximum. It was made simply as a demo self standing block.</div>
+                <p>To predict how many doubling one could get it is often handy to know the theoretical maximum aDNA yield from a PCR.
+                    As is clear from a QPCR curve, a PCR does not run forever and stops after some cycles, either the primers or dNTPs are finished.<br/>
+                    This is a rough guess for various reasons.
+                    <ul>
+                        <li>This theoretical maximum is not attainable due to minor products or PCR poisoning by various compounds (<i>e.g.</i> dUTP, dITP, dNDPs, magnesium pyrophosphate crystals <i>etc.</i>)</li>
+                        <li>It could even be higher due to pippetting inaccuracies, spectral contaminants (<i>e.g.</i> isopropanol from QG buffer).</li>
+                        <li>Not all bases are used equally...</li>
+                    </ul>
+                    <br/>
+                    N.B. A 20 nt primer final concentration of 2.50 ng/µl (an oddity of the Genemorph II kit) is 0.38 µM.
+                </p>
+                <h3>Input</h3>
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The reaction volume" data-placement="top">µl reaction</span>
+                                <input type="number" min="0" class="form-control" placeholder="25" id="yield_reaction">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The size of the amplicon in bases. Preferably minus the length the primers, but really it does not matter, so within 100 bp will be all good." data-placement="top">Amplicon size</span>
+                                <input type="text" class="form-control" placeholder="1000" id="yield_size">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Method used: full overlap (traditional) of primers or staggered overlap" data-placement="top">Concentration</span>
+                                <input type="checkbox" class="switch" id="yield_calc_method" checked data-off-text="Calc." data-on-text="Final" data-switch-value="large" data-off-color="warning" checked>
+                            </div>
+                            <br/>
+                        </div>
+
+                    </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The primer volume" data-placement="top">Final µM primers</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="0.5" id="yield_final_primer_conc">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The primer volume" data-placement="top">µM primers</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="10" id="yield_primer_conc">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The primer volume" data-placement="top">µl primers</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="1.25" id="yield_primer_vol">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The dNTP final concentration (all four together)" data-placement="top">final µM dNTP</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="800" id="yield_final_dNTP_conc">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The dNTP concentration (all four together)" data-placement="top">µM dNTP</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="40" id="yield_dNTP_conc">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The dNTP volume added" data-placement="top">µl dNTP</span>
+                                <input type="number" min="0" step="1" class="form-control" placeholder="0.5" id="yield_dNTP_vol">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="btn-group" role="group"  aria-label="...">
+                                <button type="button" class="btn btn-warning" id="yield_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
+                                </button>
+
+                                <button type="button" class="btn btn-info" id="yield_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
+                                </button>
+                                <button type="button" class="btn btn-success" id="yield_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                                </button>
+                            </div>
+                        </div><br/>
+                </div>
+                <div class="row">
+                    <div class="well">
+                    <div id="yield_result">here!</div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    </div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<!--footer-->
+<div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
+    <p class="text-muted" style="align:center;">Made without approval from the ethics committee.</p>
+</div>
+<!-- Bootstrap core JavaScript
+ ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--JQUERY moved up...-->
+<!--<script src="https://www.google.com/jsapi"></script>-->
+<!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
+<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <script>
+$(function () {
+$('[data-toggle="tooltip"]').tooltip();
+$(".slider").bootstrapSlider(); // only #DS_primerRange??
+$(".switch").bootstrapSwitch();
+$(".hidden").hide();
+$('#§welcome').modal('show')
+});
+
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-66652240-4', 'auto');
+ ga('send', 'pageview');
+
+function factorial(x) {
+   if(x==0) {
+      return 1;
+   }
+   return x * factorial(x-1);
+}
+
+
+$(function() {
+    $('#estimate_results').hide();
+    $('#yield_calculate').click(function() {
+        ($('#yield_reaction').val()) ? (reaction=$('#yield_reaction').val()) : (reaction=$('#yield_reaction').attr('placeholder'));
+        ($('#yield_final_primer_conc').val()) ? (final_primer_conc=$('#yield_final_primer_conc').val()) : (final_primer_conc=$('#yield_final_primer_conc').attr('placeholder'));
+        ($('#yield_size').val()) ? (size=$('#yield_size').val()) : (size=$('#yield_size').attr('placeholder'));
+        ($('#yield_final_dNTP_conc').val()) ? (final_dNTP_conc=$('#yield_final_dNTP_conc').val()) : (final_dNTP_conc=$('#yield_final_dNTP_conc').attr('placeholder'));
+        //Calc.
+        max_by_primer=final_primer_conc*607*size*1e-6*reaction; // uM to ng/ul is e-6*e3 * MW
+        max_by_dNTP=final_dNTP_conc*304*1e-6*reaction;
+        if (max_by_primer>max_by_dNTP) {
+            $('#yield_result').html('Theoretical maximum: '+Math.round(max_by_dNTP).toString()+' µg due to dNTP depletion (primer maximum: '+Math.round(max_by_primer).toString()+' µg)');
+        }
+        else {
+            $('#yield_result').html('Theoretical maximum: '+Math.round(max_by_primer).toString()+' µg due to primer depletion (dNTP maximum: '+Math.round(max_by_dNTP).toString()+' µg)');
+        }
+    });
+    $('#estimate_calculate').click(function() {
+        //input
+        ($('#estimate_rate').val()) ? (rate=$('#estimate_rate').val()) : (rate=$('#estimate_rate').attr('placeholder'));
+        ($('#estimate_template').val()) ? (template=$('#estimate_template').val()) : (template=$('#estimate_template').attr('placeholder'));
+        ($('#estimate_yield').val()) ? (yield=$('#estimate_yield').val()) : (yield=$('#estimate_yield').attr('placeholder'));
+        ($('#estimate_size').val()) ? (size=$('#estimate_size').val()) : (size=$('#estimate_size').attr('placeholder'));
+        //calculate
+        var doublings=Math.log2(yield/template);
+        var λ=doublings * rate * size;
+        $('#estimate_doublings').html(doublings.toPrecision(1));
+        $('#estimate_mloadkb').html((doublings * rate).toPrecision(1));
+        $('#estimate_mload').html(λ.toPrecision(1));
+
+        //plot
+        var x = [];
+        var y = [];
+        for (var k = 0; k < (1+λ)*3; k ++) {
+            x[k] = k;
+            y[k] = Math.pow(λ, k)* Math.pow(Math.E, -λ)/factorial(k);
+        }
+        Plotly.newPlot('estimate_chart', [{x:x, y:y, type:'bar'}],{title:'Expected library mutational load (Poisson distribution)',xaxis: {title: 'number of mutations'},yaxis:{title:'fraction with given mutations'},bargap:0});
+        $('#estimate_results').show();
+    });
+    $('#estimate_demo').click(function() {});
+    $('#estimate_clear').click(function() {});
+
+
+
+});
+
+</script>
+</body>
+</html>

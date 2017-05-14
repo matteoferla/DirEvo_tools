@@ -1,0 +1,92 @@
+<div class="row" id="§pedel">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <div class="page-header">
+                <h1>Introduction</h1>
+            </div>
+            <div class="well">
+            <p>Pedel comes in two flavours.</p>
+            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Pedel is basic and nucleotide only, Pedel-AA is more advanced and has amino acids" data-placement="top">Choose:</span>
+                                <input type="checkbox" class="switch" id="pedel_method" checked data-off-text="Pedel&#8209;AA" data-on-text="Pedel" data-off-color="warning" data-size="large" checked>
+                            </div>
+                </div>
+            <br/>
+            <div id="pedelbasic">
+            <h1>Pedel</h1>
+                <p>bla bla bla</p>
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Library size L" data-placement="top">Library size</span>
+                                <input type="number" min="0" class="form-control" placeholder="10000000" id="pedel_size">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Sequence length N (nt)" data-placement="top">Seq. legth</span>
+                                <input type="number" min="0" class="form-control" placeholder="1000" id="pedel_len">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Mean number of point mutations per sequence m" data-placement="top">Mutations per seq.</span>
+                                <input type="number" min="0" class="form-control" placeholder="4" id="pedel_mutload">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Number of mutations per sequence: use Poisson or PCR distribution (see note; PCR efficiency calculator)." data-placement="top">Distribution</span>
+                                <input type="checkbox" class="switch" id="pedel_distribution" checked data-off-text="PCR" data-on-text="Poisson" data-off-color="warning" data-size="large" checked>
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="number of PCR cycles" data-placement="top">PCR cycles</span>
+                                <input type="number" min="0" class="form-control" placeholder="30" id="pedel_cycles">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="PCR efficiency" data-placement="top">PCR efficiency</span>
+                                <input type="number" min="0" class="form-control" placeholder="0.6" id="pedel_eff">
+                            </div>
+                            <br/>
+                        </div>
+                    </div><!--row-->
+                <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="btn-group" role="group"  aria-label="...">
+                                <button type="button" class="btn btn-warning" id="pedel_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
+                                </button>
+
+                                <button type="button" class="btn btn-info" id="pedel_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
+                                </button>
+                                <button type="button" class="btn btn-success" id="pedel_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                                </button>
+                            </div>
+                        </div><br/>
+                </div>
+                </div>
+            <!-- The otehr option! -->
+            <div id="pedelAA" class='hidden'>
+                <h1>Pedel-AA</h1>
+                <p>bla bla bla</p>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>Fix</h4>I cannot do this bit! I need to email Andrew or someone proficient in C++ to figure out how to hack the <code>pedel-AAc.cxx</code> file to not require a setup file.</div>
+            </div>
+            <!-- The results -->
+            <div class="row hidden" id="pedel_result">
+                        <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
+                        </div>
+                        <br/>
+                    </div>
+
+</div>
+</div>

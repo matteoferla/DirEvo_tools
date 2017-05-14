@@ -1,0 +1,3 @@
+Create virtual env to run with Pycharm.
+https://www.jetbrains.com/help/pycharm/2016.1/adding-existing-virtual-environment.html
+http://docs.pylonsproject.org/projects/pyramid-cookbook/en/latest/development_tools/pycharm.html#using-pycharm

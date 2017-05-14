@@ -1,0 +1,104 @@
+// THIS HAS JUST BEEN COPY PASTED. FIX IT.
+
+$(function() {
+    formids = ['nvariants', 'library_size', 'completeness', 'prob_complete'];
+    $('#glue_demo').click(function() {
+        for (i = 0; i < formids.length; i++) {
+            $('#glue_' + formids[i]).val($('#glue_' + formids[i]).attr("placeholder"));
+        }
+    })
+
+    $('#glue_clear').click(function() {
+        for (i = 0; i < formids.length; i++) {
+            $('#glue_' + formids[i]).val('');
+        }
+        $("#glue_result").hide();
+    });
+
+    $("#glue_library_size_on").click(function () {
+        crappy_toggle('library_size');
+    });
+
+    $("#glue_completeness_on").click(function () {
+        crappy_toggle('completeness');
+    });
+
+    $("#glue_prob_complete_on").click(function () {
+        crappy_toggle('prob_complete');
+    });
+
+    function crappy_toggle(id) {
+        sf=['library_size', 'completeness', 'prob_complete'];
+        for (i=0; i<3; i++) {
+            if (sf[i] == id) { //turn on
+                $("#glue_"+id+"_on").removeClass("btn-default");
+                $("#glue_"+id+"_on").addClass("btn-success");
+                $("#glue_"+id).prop('disabled', false);
+                $("#glue_"+id).css("background-color","white");
+
+            }
+            else {
+                $("#glue_"+sf[i]+"_on").addClass("btn-default");
+                $("#glue_"+sf[i]+"_on").removeClass("btn-success");
+                $("#glue_"+sf[i]).prop('disabled', true);
+                $("#glue_"+sf[i]).css("background-color","Silver");
+            }
+        }
+        glue_calculate();
+    }
+    crappy_toggle('library_size');
+
+    $('#glue_calculate').click(glue_calculate());
+
+    function glue_calculate() {
+        $("#glue_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#glue_result").removeClass('hidden');
+        $("#glue_result").show(); //weird combo.
+        var data = {};
+        for (i = 0; i < formids.length; i++) {
+            var v = $('#glue_' + formids[i]).val();
+            if (!v) {
+                v = $('#glue_' + formids[i]).attr("placeholder");
+            }
+            data[formids[i]] = v;
+        }
+        // determine whcih button is in use.
+        data['mode'] = $("#glue_form").find(".btn-success").attr("id").replace("glue_","").replace("_on","");
+
+        $.ajax({
+            url: 'ajax_glue',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function(result) {
+                reply = JSON.parse(result.message);
+                //reply=result.message; //SO told me so. Why does it work fro pedel.
+                window.sessionStorage.setItem('glue', JSON.stringify(reply['data']));
+                //TODO clean up this copy paste!!!
+                if (data['mode'] == 'library_size') {
+                $("#glue_completeness").val(reply['data']['completeness']);
+                $("#glue_completeness").css('font-weight','bold');
+                $("#glue_completeness").css("background-color","PaleGreen");
+                }
+                else if (data['mode'] == 'completeness') {
+                $("#glue_library_size").val(reply['data']['required_library_size']);
+                $("#glue_library_size").css('font-weight','bold');
+                $("#glue_library_size").css("background-color","PaleGreen");
+                }
+                else if (data['mode'] == 'prob_complete') {
+                $("#glue_library_size").val(reply['data']['required_library_size']);
+                $("#glue_library_size").css('font-weight','bold');
+                $("#glue_library_size").css("background-color","PaleGreen");
+                }
+                $("#glue_result").html(reply['html']);
+            },
+            error: function() {
+                $("#glue_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    }
+});

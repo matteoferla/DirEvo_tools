@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="${request.static_url('pyramidstarter:static/favicon-16x16.png')}">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="${request.static_url('pyramidstarter:static/favicon-96x96.png')}">
+
+
+    <title>Pedel revamp</title>
+    <!-- Bootstrap core CSS
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap.min.css')}">-->
+
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/font-awesome/css/font-awesome.min.css')}">
+
+    <!-- Custom styles for this scaffold -->
+    <!-- was bootstrap-theme-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/darkly.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}" rel="stylesheet">
+
+    <!--slider-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
+    <!--switch-->
+    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+
+    <!--pyspinner-->
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
+    <!--main CSS-->
+        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+     <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body style="padding-top: 60px;">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Pedel Redux</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/">Home</a></li>
+                <li class=""><a href="/glue">Glue</a></li>
+                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
+                <li class="active"><a href="/pedel">Pedel</a></li>
+                <li class=""><a href="/driver">Driver</a></li>
+                <li class=""><a href="/deepscan">Deepscan</a></li>
+                <li class=""><a href="/QQC">QQC</a></li>
+                <li class=""><a href="/misc">Miscellaneous</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="/about">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<br/>
+
+<div class="container-fluid" id="fullpage">
+
+    <!--welcome box-->
+    <div class="section"> <!--leftover from fullpage.js-->
+        
+        <div class="row" id="§pedel">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <div class="page-header">
+                <h1>Introduction</h1>
+            </div>
+            <div class="well">
+            <p>Pedel comes in two flavours.</p>
+            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Pedel is basic and nucleotide only, Pedel-AA is more advanced and has amino acids" data-placement="top">Choose:</span>
+                                <input type="checkbox" class="switch" id="pedel_method" checked data-off-text="Pedel&#8209;AA" data-on-text="Pedel" data-off-color="warning" data-size="large" checked>
+                            </div>
+                </div>
+            <br/>
+            <div id="pedelbasic">
+            <h1>Pedel</h1>
+                <p>bla bla bla</p>
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Library size L" data-placement="top">Library size</span>
+                                <input type="number" min="0" class="form-control" placeholder="10000000" id="pedel_size">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Sequence length N (nt)" data-placement="top">Seq. legth</span>
+                                <input type="number" min="0" class="form-control" placeholder="1000" id="pedel_len">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Mean number of point mutations per sequence m" data-placement="top">Mutations per seq.</span>
+                                <input type="number" min="0" class="form-control" placeholder="4" id="pedel_mutload">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Number of mutations per sequence: use Poisson or PCR distribution (see note; PCR efficiency calculator)." data-placement="top">Distribution</span>
+                                <input type="checkbox" class="switch" id="pedel_distribution" checked data-off-text="PCR" data-on-text="Poisson" data-off-color="warning" data-size="large" checked>
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="number of PCR cycles" data-placement="top">PCR cycles</span>
+                                <input type="number" min="0" class="form-control" placeholder="30" id="pedel_cycles">
+                            </div>
+                            <br/>
+                        </div>
+                    <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="PCR efficiency" data-placement="top">PCR efficiency</span>
+                                <input type="number" min="0" class="form-control" placeholder="0.6" id="pedel_eff">
+                            </div>
+                            <br/>
+                        </div>
+                    </div><!--row-->
+                <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="btn-group" role="group"  aria-label="...">
+                                <button type="button" class="btn btn-warning" id="pedel_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
+                                </button>
+
+                                <button type="button" class="btn btn-info" id="pedel_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
+                                </button>
+                                <button type="button" class="btn btn-success" id="pedel_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                                </button>
+                            </div>
+                        </div><br/>
+                </div>
+                </div>
+            <!-- The otehr option! -->
+            <div id="pedelAA" class='hidden'>
+                <h1>Pedel-AA</h1>
+                <p>bla bla bla</p>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>Fix</h4>I cannot do this bit! I need to email Andrew or someone proficient in C++ to figure out how to hack the <code>pedel-AAc.cxx</code> file to not require a setup file.</div>
+            </div>
+            <!-- The results -->
+            <div class="row hidden" id="pedel_result">
+                        <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
+                        </div>
+                        <br/>
+                    </div>
+
+</div>
+</div>
+    </div>
+
+    </div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<!--footer-->
+<div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
+    <p class="text-muted" style="align:center;">Made without approval from the ethics committee.</p>
+</div>
+<!-- Bootstrap core JavaScript
+ ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--JQUERY moved up...-->
+<!--<script src="https://www.google.com/jsapi"></script>-->
+<!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
+<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <script>
+$(function () {
+$('[data-toggle="tooltip"]').tooltip();
+$(".slider").bootstrapSlider(); // only #DS_primerRange??
+$(".switch").bootstrapSwitch();
+$(".hidden").hide();
+$('#§welcome').modal('show')
+});
+
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-66652240-4', 'auto');
+ ga('send', 'pageview');
+
+$(function() {
+    $('#pedelAA').hide;
+    $('#pedel_method').on('switchChange.bootstrapSwitch', function(event, state) {
+        $('#pedelbasic').toggle(state);
+        $('#pedelAA').toggle(!state);
+    });
+    formids = ['size', 'len', 'mutload', 'distribution', 'cycles', 'eff'];
+    $('#pedel_demo').click(function() {
+        for (i = 0; i < formids.length; i++) {
+            $('#pedel_' + formids[i]).val($('#pedel_' + formids[i]).attr("placeholder"));
+        }
+    })
+
+    $('#pedel_clear').click(function() {
+        for (i = 0; i < formids.length; i++) {
+            $('#pedel_' + formids[i]).val('');
+        }
+        $("#pedel_result").hide();
+    });
+
+
+    $('#pedel_calculate').click(function() {
+        $("#pedel_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#pedel_result").removeClass('hidden');
+        $("#pedel_result").show(); //weird combo.
+        var data = {};
+        for (i = 0; i < formids.length; i++) {
+            var v = $('#pedel_' + formids[i]).val();
+            if (!v) {
+                v = $('#pedel_' + formids[i]).attr("placeholder");
+            }
+            data[formids[i]] = v;
+        }
+        $.ajax({
+            url: 'ajax_pedel',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function(result) {
+                reply = JSON.parse(result.message);
+                window.sessionStorage.setItem('pedel', JSON.stringify(reply['data']));
+                var table = '<br/><table class="table-striped" width=100%>' +
+                    '<thead><tr><th><a href="#" data-toggle="tooltip" title="Exact number of mutations per sequence">x</th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="Poisson probability of x mutations, given m">P<sub>x</sub></th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="expected number of sequences in library with exactly x mutations">L<sub>x</sub></th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="number of possible sequences with exactly x mutations">V<sub>x</sub></th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="Expected number of distinct sequences in the sub-library comprising sequences with exactly x mutations">C<sub>x</sub></th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="completeness of sub-library">C<sub>x</sub>/V<sub>x</sub></th>' +
+                    '<th><a href="#" data-toggle="tooltip" title="number of redundant sequences in sub-library">L<sub>x</sub> - C<sub>x</sub></th></tr></thead>' +
+                    '<tbody>';
+                for (var i = 0; i < reply['data'].length; i++) {
+                    table += '<tr>'
+                    for (var j = 0; j < reply['data'][i].length; j++) {
+                        table += '<td>' + reply['data'][i][j].toPrecision(2) + '</td>'
+                    }
+                    table += '</tr>'
+                }
+                table += '</tbody></table><br/>';
+                plot = '<br/><div class="radio" id="plotoptdiv"> Plot: &nbsp;&nbsp;' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=1 checked>P<sub>x</sub></label>' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=2>L<sub>x</sub></label>' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=3>V<sub>x</sub></label>' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=4>C<sub>x</sub></label>' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=5>C<sub>x</sub>/V<sub>x</sub></label>' +
+                    '<label class="radio-inline"><input type="radio" name="plotopt" value=6>L<sub>x</sub> - C<sub>x</sub></label>' +
+                    '&nbsp;&nbsp;&nbsp;y axis: <input type="checkbox" class="switch" id="pedel_plot_log" data-off-text="lin" data-on-text="log" data-on-color="warning" data-off-color="success" size="small">' +
+                    '</div><br/><div id="plot_pedel_stats"></div>';
+                $("#pedel_result").html('<br/>' + reply['html'] + table + plot);
+                $("#pedel_plot_log").bootstrapSwitch();
+                replot(reply['data']);
+                $('#plotoptdiv input').on('change', function() {
+                    replot(reply['data']);
+                });
+                $('#pedel_plot_log').on('switchChange.bootstrapSwitch', function(event, state) {
+                    replot(reply['data']);
+                });
+            },
+            error: function() {
+                $("#pedel_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    });
+
+    function replot(data) {
+        var y = data.map(function(x) {
+            return x[$('input[name=plotopt]:radio:checked').val()]
+        });
+        var layout = {
+            yaxis: {
+                title: 'xxx',
+                type: 'lin',
+                autorange: true
+            },
+            xaxis: {
+                title: 'x, Exact number of mutations per sequence',
+                type: 'lin',
+                autorange: true
+            },bargap:0
+        };
+        if ($("#pedel_plot_log").is(":checked")) {
+            layout['yaxis']['type'] = 'log';
+        }
+        Plotly.newPlot('plot_pedel_stats', [{
+            x: data.map(function(x) {
+                return x[0]
+            }),
+            y: y,
+            type: 'bar'
+        }], layout);
+    }
+});
+
+</script>
+</body>
+</html>

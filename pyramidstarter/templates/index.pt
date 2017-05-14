@@ -1,0 +1,16 @@
+<div class="row" id="§index">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+            <div class="page-header">
+                <h1>Planned content</h1></div>
+            <ul class="list-group">
+                <li class="list-group-item">Input from sequence and sampled variants</li>
+                <li class="list-group-item">Mutational load</li>
+                <li class="list-group-item">Input from mutation table</li>
+                <li class="list-group-item">Corrected mutation incidence</li>
+                <li class="list-group-item">Mutational spectrum</li>
+                <li class="list-group-item">Pedel and Pedel AA</li>
+            </ul>
+        </div>
+    </div>
+</div>

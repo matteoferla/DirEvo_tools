@@ -1,0 +1,18 @@
+
+Once installed the things in gccbin gccinc and gcclib you should try
+the following, to see if anything works.
+
+Create a file test.c containing (the old favorite)
+
+
+
+
+Compile it as follows
+
+   gcc test.c
+   gcc2minix < a.out >test
+   chmod +x test   # may not be necessary depending on your umask
+   ./test
+
+Should print Hello world.
+

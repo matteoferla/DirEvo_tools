@@ -1,0 +1,90 @@
+<div class="row" id="§glue">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <div class="page-header">
+            <h1>Introduction</h1>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Pedicted diversity of one or more libraries based on PCR reaction</h1>
+            </div>
+            <div class="panel-body">
+                <h2>Predicted diversity</h2>
+                <h3>Description</h3>
+                <p>Lorem ipsum</p>
+                <h3>Results</h3>
+                <div class="row" id="glue_form">
+                    <form>
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="number of variants"
+                                  data-placement="top">N variants</span>
+                            <input type="number" min="0" class="form-control" placeholder="1000000" id="glue_nvariants">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-lg-5  col-lg-offset-2">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Library size L"
+                                  data-placement="top">Library size</span>
+                            <input type="number" min="0" class="form-control" placeholder="3000000" id="glue_library_size">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" id="glue_library_size_on" data-toggle="tooltip" title="known"
+                                  data-placement="top">Use</button>
+                              </span>
+
+
+
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Completeness"
+                                  data-placement="top">Completeness</span>
+                            <input type="number" min="0" class="form-control" placeholder="0.95" id="glue_completeness" disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="glue_completeness_on" data-toggle="tooltip" title="known"
+                                  data-placement="top">Use</button>
+                              </span>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-lg-5  col-lg-offset-1">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="prob complete"
+                                  data-placement="top">prob 100% complete</span>
+                            <input type="number" min="0" class="form-control" placeholder="0.95" id="glue_prob_complete" disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="glue_prob_complete_on" data-toggle="tooltip" title="known"
+                                  data-placement="top">Use</button>
+                              </span>
+                        </div>
+                        <br/>
+                    </div>
+                        </form>
+                </div><!-- row-->
+                <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="btn-group" role="group"  aria-label="...">
+                                <button type="button" class="btn btn-warning" id="glue_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
+                                </button>
+
+                                <button type="button" class="btn btn-info" id="glue_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
+                                </button>
+                                <button type="button" class="btn btn-success" id="glue_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                                </button>
+                            </div>
+                        </div><br/>
+                </div>
+                <!-- The results -->
+            <div class="row hidden" id="glue_result">
+                        <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
+                        </div>
+                        <br/>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,402 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="author" content="Matteo Ferla">
+                <meta name="description" content="Mutanalyst, mutagenesis calculator by Matteo Ferla">
+                    <meta name="keywords" content="mutanalyst, calculator, tool, mutagenesis, epPCR, mutazyme, wobble, directed evolution, manganese, engineering, protein, enzyme, Matteo Ferla, Matteo P. Ferla">
+                        <title>Mutational bias calculator</title>
+                        <script src="scripts/jquery-2.1.4.min.js"></script>
+                        <script src="https://www.google.com/jsapi"></script>
+                        <!--mutationalBias does the maths, while mutationalAux does DOM iteractions. MutationalBias is meant as a stand alone library-->
+                        <script src="scripts/mutationalBias.js"></script>
+                        <script src="scripts/mutationalAux.js"></script>
+                        <link rel="shortcut icon" type="image/png" href="images/flavicon.png"/>
+                        <link rel="stylesheet" type="text/css" href="scripts/mut.css">
+                            <!--Webfonts-->
+                            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+                                <!--FontAwesome-->
+                                <link rel="stylesheet" href="scripts/font-awesome-4.4.0/css/font-awesome.min.css">
+                                    <script src="scripts/tether.min.js"></script>
+                                    <script src="scripts/drop.min.js"></script>
+                                    <script src="scripts/tooltip.min.js"></script>
+                                    <link rel="stylesheet" href="scripts/tooltip-theme-arrows.css" />
+                                    <script>
+                                        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                                         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                                         
+                                         ga('create', 'UA-66652240-2', 'auto');
+                                         ga('send', 'pageview');
+                                         
+                                        </script>
+                                    
+    </head>
+    <body  height=100%>
+        <!--
+         <div class="splashnote" id="splash"><i class="fa fa-times" style="position:absolute; top:10px; right:10px" onClick="$('#splash').hide();"></i><p>This tool is not yet published —the draft is being written and corrections to this page may be made. If you stumbled upon it —even if nothing links here— and want to know more, email the gmail user matteo.ferla. I will be happy to help (in exchange for any feedback).</p></div>-->
+        <div class="subbody" height=100%>
+            <div class=header></div>
+            <div class=main>
+                <div id="intro§">
+                    <h1 style="font-size:4em">MUTANALYST <img src="images/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
+                    <p>An online tool for assessing the mutational spectrum of epPCR libraries with poor sampling.</p>
+                    <h2>Background &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="introT1" onclick="$('#intro¶').hide('slow'); $('#introT1').hide();$('#introT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="introT2" onclick="$('#intro¶').show('slow'); $('#introT2').hide();$('#introT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <p id="intro¶">Error prone PCR is a method to create a pool of amplicons with some random errors. For the best results the number of mutations and the spectrum of the mutations needs to be controlled, hence the need for a test library. The calculations of a test libray are slightly laborious and are affected by the very small sample size. This calculator tries to overcome these two issues by computing the mutational biases given a starting sequence and list of mutant genotypes, by calculating the mutations per sequence by fitting it to a Poisson distribution and by estimating the errors in the values.
+                    In particular, the errors are
+                    calculated using the assumption that a mutation and its complementary are equally likely in light of the double helix
+                    nature of DNA (<i>e.g.</i> A to G on one strand will result in T to C on the other). For the specific formulae used see <a href="variance_note.html" data-tooltip="walkthrough of variance calculations">	this note about propagating errors.</a><br/>
+                    The program can calculate mutation frequencies from the list of mutations found and the template sequence or it can also accept the frequencies directly. The <a href="javascript:Btn_demo();">'Demo'</a> values are from an actual experiment.</p>
+                </div>
+                <div id="seq§">
+                    <h2>Starting from a sequence and a mutant genotype list &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="seqT1" onclick="$('#seq§2').hide('slow'); $('#seqT1').hide();$('#seqT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="seqT2" onclick="$('#seq§2').show('slow'); $('#seqT2').hide();$('#seqT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="seq§2">
+                        <h3>Sequence</h3>
+                        <p><span class="note" data-tooltip-position="right middle" data-tooltip="all symbols that aren't uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> '>T. maritima Cystathionine &beta;-lyase'), therefore for masked sequences use lowercase.">Sequence</span> amplified by mutagenic PCR:</p>
+                        <p>
+                        <textarea name="sequence" rows="5" id="sequence" style="width:80%"></textarea>
+                        </p>
+                        <h3>Mutations found</h3>
+                        <p>This is the list of the mutations found. Identifying the mutations is best done with visual checks, but if the process needs speeding up the process, <a href=mutation_counter.html>this small helper script</a> may help.<br/>The format is as follows:</p><ul>
+                            <li>Each <span class="note" data-tooltip-position="right middle" data-tooltip="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span> contains <span class="note" data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span> mutations of a variant sampled.</li>
+                            <li>The mutations can only be in the forms A123C or 123A>C, where the number is irrelevant (and can be omitted).</li>
+                            <li>A wild type sequence can be indicated with <span class="note" data-tooltip-position="right middle" data-tooltip="wt or WT or wild, but not an identity 123A>A as that will count as a mutation (roundtrip)">'wt'</span>, it
+                                is not needed for the main calculations and it is used solely for the mutational frequency &mdash;and useful for Pedel.</li>
+                            <li>Rarer events such as insertions, deletion, duplications, frameshifts and inversions, are not taken into account, but their frequency can be easily calculated using the 'values for further analysis' below.
+                            </li>
+                        </ul>
+                        <textarea name="baseList" rows="5" id="baseList"  style="width:80%"></textarea>    <br/>
+                        <table class=clearspace><tr><td class=clearspace><button onclick="Btn_calcFreq()"><i class="fa fa-bar-chart"></i> Calculate</button></td>
+                            <td class=clearspace><button onclick="Btn_demo()"><i class="fa fa-book"></i> Demo values</button></td>
+                            <td class=clearspace><button onclick="Btn_blank(1)"><i class="fa fa-trash"></i> Reset</button></td>
+                        </tr>
+                        </table>
+                    </div>
+                </div><div id="avg§">
+                    <h2>Mutational frequency &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="avgT1" onclick="$('#avg¶').hide('slow'); $('#avgT1').hide();$('#avgT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="avgT2" onclick="$('#avg¶').show('slow'); $('#avgT2').hide();$('#avgT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="avg¶"><p>The simplest estimate of the frequency of mutations per sequence is the average of the point mutations per sequence (<i>m</i>), however due to the small sample size this may be off. The distribution of number of mutations per sequence follows a PCR distribution, which can <span class="note" data-tooltip="converging as the number of PCR cycles tends to infinity">approximated</span> with a Poisson distribution  (<span class="note" data-tooltip="Sun F. (1995). <br/>The polymerase chain reaction and branching processes, J. Comput. Biol., 2, 63-86.">Sun, 1995</span>). In the <span  class="note" data-tooltip="and the former at number of cycles (<i>n</i><sub>PCR</sub>) = &#8734;  as the variance is equal to the mean <b>plus</b> the square of the mean divided by the <i>n</i><sub>PCR</sub> scaled by the PCR efficiency.">latter</span>, the mean and the variance are the same (λ &mdash;unrelated to PCR efficiency&mdash;). The <em>sample</em> average and variance may differ, especially at low sampling. The number to trust the most is the λ<sub>Poisson</sub>. <!--This value is calculated here thanks to a function taken from <a href="https://github.com/lvandeve/jmat">Jmat.js</a>.--></p><p class=marginless>
+                        The average
+                        is <strong><span id="freqMean">N/A</span></strong> mutations per sequence (<span id="size">N/A</span> kb).</p><p class=marginless>
+                        The sample variance is <strong><span id="freqVar">N/A</span></strong> mutations per sequence.</p><p class=marginless>
+                        The λ<sub>Poisson</sub>  is <strong><span id="freqλ">N/A</span></strong>  mutations per sequence.</p><br/>
+                        <div id="disChart" style="width: 80%; height:400px"><i class="fa fa-spinner fa-pulse"></i> Google Charts API loading asynchronously to speed up the script...
+                            
+                        </div>
+                        
+                        <span onclick="window.open(dischart.getImageURI())" class='fake-link' style="margin-left:20px;"><i class="fa fa-download"></i> Download</span>. If you wish to reproduce the above, here are the values used:</p>
+                        <ul>
+                            <li>Frequency bins, sequences sampled with 0,1,2,3 <i>etc.</i> mutations: <strong><span id="freqList">N/A</span></strong></li>
+                            <li>Total mutations sampled: <strong><span id="freqΣ">N/A</span></strong></li>
+                        </ul><br/>
+                        <p class=marginless>
+                        If the λ<sub>Poisson</sub> and average are very different and the plot is very poor, sequencing more variants from the test library may be reccomendable.
+                        
+                        
+                    </div>
+                </div><div id="freq§"><!--JS controlled visibility-->
+                    <h2><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="freqT1" onclick="$('#freq§2').hide('slow'); $('#freqT1').hide();$('#freqT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="freqT2" onclick="$('#freq§2').show('slow'); $('#freqT2').hide();$('#freqT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="freq§2">
+                        Rows represent the wildtype base, while columns the base in the mutant.
+                        <table width="50%" border="0" id="mutTable_raw">
+                            <thead>
+                                <tr>
+                                    <th width="20%">From\To</th>
+                                    <th width="20%">A</th>
+                                    <th width="20%">T</th>
+                                    <th width="20%">G</th>
+                                    <th width="20%">C</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>A</th>
+                                    <td bgcolor="#CCCCCC"><input type="text" disabled="" id="A2A" value="—"/></td>
+                                    <td bgcolor="#FFFF99" ><input type="text" id="A2T" value="0"/></td>
+                                    <td bgcolor="#99FFFF"><input id="A2G" type="text" value="0"/></td>
+                                    <td bgcolor="#FFFF99"><input id="A2C" type="text" value="0"/></td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">T</th>
+                                    <td width="20%" bgcolor="#FFFF99"><input type="text" id="T2A" value="0"/></td>
+                                    <td bgcolor="#CCCCCC"><input type="text" disabled="" id="T2T" value="—"/></td>
+                                    <td bgcolor="#FFFF99"><input id="T2G" type="text" value="0"/></td>
+                                    <td bgcolor="#99FF99"><input id="T2C" type="text" value="0"/></td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">G</th>
+                                    <td width="20%" bgcolor="#99FFFF"><input type="text" id="G2A" value="0"/></td>
+                                    <td bgcolor="#FFFF99"><input type="text" id="G2T" value="0"/></td>
+                                    <td bgcolor="#CCCCCC"><input disabled="" id="G2G" type="text" value="—"/></td>
+                                    <td bgcolor="#FFFF99"><input id="G2C" type="text" value="0"/></td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">C</td>
+                                    <td width="20%" bgcolor="#FFFF99"><input type="text" id="C2A" value="0"/></td>
+                                    <td bgcolor="#99FF99"><input type="text" id="C2T" value="0"/></td>
+                                    <td bgcolor="#FFFF99"><input id="C2G" type="text" value="0"/></td>
+                                    <td bgcolor="#CCCCCC"><input disabled="" id="C2C" type="text" value="—"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                        <table width="50%" border="0">
+                            <tr>
+                                <th width="20%">Colour codes</th>
+                                <td width="20%" bgcolor="#CCCCCC">Identity</td>
+                                <td width="20%" bgcolor="#99FFFF">Purine transition</td>
+                                <td width="20%" bgcolor="#99FF99">Pyrimine transition</td>
+                                <td width="20%" bgcolor="#FFFF99">Transversion</td>
+                            </tr>
+                        </table></p>
+                        <table width="30%" class="clearless">
+                            <tr>
+                                <th width="160" class="clearless">Proportion of Adenine</th>
+                                <td class="clearless"><input type="text" id="sumA" value="25"/>
+                                    % </td>
+                            </tr>
+                            <tr>
+                                <th class="clearless">Proportion of Thymine</th>
+                                <td class="clearless"><input type="text" id="sumT" value="25"/>
+                                    % </td>
+                            </tr>
+                            <tr>
+                                <th class="clearless">Proportion of  Guanine</th>
+                                <td class="clearless"><input type="text" id="sumG" value="25"/>
+                                    %</td>
+                            </tr>
+                            <tr>
+                                <th class="clearless">Proportion of  Cytosine</th>
+                                <td class="clearless"><input type="text" id="sumC" value="25"/>
+                                    % </td>
+                            </tr>
+                        </table>
+                        </p>
+                        
+                        <table class=clearspace><tr><td class=clearspace><button onclick="Btn_calcBias()"><i class="fa fa-bar-chart"></i> Calculate</button></td>
+                            <td class=clearspace><button onclick="Btn_demo()"><i class="fa fa-book"></i> Demo values</button></td>
+                            <td class=clearspace><button onclick="Btn_blank(1)"><i class="fa fa-trash"></i> Reset</button></td>
+                        </tr>
+                        </table>
+                        
+                        </p></div></div>
+                <div id="bias§"><!--JS controlled visibility-->
+                    <h2>Corrected mutation incidence &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="corrT1" onclick="$('#corr§2').hide('slow'); $('#corrT1').hide();$('#corrT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="corrT2" onclick="$('#corr§2').show('slow'); $('#corrT2').hide();$('#corrT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="corr§2">
+                        <table width="50%" class="clearless">
+                            <tr>
+                                <th width="25%"  class="clearless">Data display options</th>
+                                <td width="5%" class="clearless"><input type="radio" name="fig" value="1"  onClick="svg();"></td>
+                                <td width="20%"    class="clearless">Raw data</td>
+                                <td width="5%" class="clearless"><input name="fig" type="radio"  onClick="svg();" value="2" checked></td>
+                                <td width="20%"    class="clearless">Frequency normalised</td>
+                                <td width="5%" class="clearless"><input type="radio" name="fig" value="3"  onClick="svg();"></td>
+                                <td width="20%"    class="clearless">Strand complimentary normalised</td>
+                            </tr>
+                        </table>
+                        <p id="mutBlabla">Sequence-composition–corrected incidence of mutations (%):</p>
+                        <table width="50%" id="outTable">
+                            <thead>
+                                <tr>
+                                    <th width="20%">From/To</th>
+                                    <th width="20%">A</th>
+                                    <th width="20%">T</th>
+                                    <th width="20%">G</th>
+                                    <th width="20%">C</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>A</th>
+                                    <td bgcolor="#CCCCCC"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#99FFFF"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                </tr>
+                                <tr>
+                                    <th>T</th>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#CCCCCC"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#99FF99"> </td>
+                                </tr>
+                                <tr>
+                                    <th>G</th>
+                                    <td bgcolor="#99FFFF"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#CCCCCC"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                </tr>
+                                <tr>
+                                    <th>C</th>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#99FF99"> </td>
+                                    <td bgcolor="#FFFF99"> </td>
+                                    <td bgcolor="#CCCCCC"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                        <h3>Graphical Representation</h3>
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            width="250px" height="250px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve">
+                            <text transform="matrix(1 0 0 1 27.1714 46.6031)" font-family="'Verdana'" font-size="36">A</text>
+                            <text transform="matrix(1 0 0 1 25.5189 224.1352)" font-family="'Verdana'" font-size="36">G</text>
+                            <text transform="matrix(1 0 0 1 194.2528 46.6032)" font-family="'Verdana'" font-size="36">C</text>
+                            <text transform="matrix(1 0 0 1 198.715 224.1356)" font-family="'Verdana'" font-size="36">T</text>
+                            <line id="AC_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="177.808" y1="41.518" x2="60.122" y2="41.518"/>
+                            <line id="AG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="34.476" y1="174.303" x2="34.476" y2="56.616"/><!--issue. seems right-->
+                            <line id="AT_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="57.354" y1="59.616" x2="178.576" y2="180.838"/>
+                            <line id="TA_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="73.889" y1="62.151" x2="195.111" y2="183.373"/><!--issue?? Appaers TA-->
+                            <line id="TC_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="214.821" y1="186.373" x2="214.821" y2="68.687"/>
+                            <line id="CG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="188.111" y1="52.616" x2="66.889" y2="173.838"/><!--issue-->
+                            <line id="CA_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="189.878" y1="31.518" x2="72.192" y2="31.518"/><!--CA? -->
+                            <line id="TG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="189.878" y1="209.05" x2="72.192" y2="209.05"/>
+                            <line id="CT_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="204.821" y1="174.303" x2="204.821" y2="56.616"/>
+                            <line id="GA_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="44.476" y1="186.373" x2="44.476" y2="68.687"/>
+                            <line id="GC_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="185.576" y1="69.151" x2="64.354" y2="190.373"/>
+                            <line id="GT_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="177.808" y1="219.05" x2="60.122" y2="219.05"/>
+                            <path d="M65.354,53.616c2.526,5.506,4.966,13.032,5.362,18.814l4.293-9.159l9.157-4.292
+                            C78.384,58.584,70.859,56.144,65.354,53.616z"/>
+                            <path d="M34.476,186.373c2.107-5.68,5.703-12.727,9.512-17.095l-9.512,3.44l-9.51-3.44
+                            C28.775,173.647,32.371,180.694,34.476,186.373z"/>
+                            <path d="M44.476,56.616c2.107,5.68,5.703,12.727,9.512,17.095l-9.512-3.44l-9.51,3.44C38.775,69.343,42.371,62.296,44.476,56.616
+                            z"/>
+                            <path d="M189.878,41.518c-5.68-2.107-12.727-5.703-17.095-9.512l3.44,9.512l-3.44,9.51
+                            C177.152,47.219,184.199,43.623,189.878,41.518z"/>
+                            <path d="M60.122,31.518c5.68-2.107,12.727-5.703,17.095-9.512l-3.44,9.512l3.44,9.51C72.848,37.219,65.801,33.623,60.122,31.518z
+                            "/>
+                            <path d="M189.878,219.05c-5.68-2.107-12.727-5.703-17.095-9.512l3.44,9.512l-3.44,9.51
+                            C177.152,224.751,184.199,221.155,189.878,219.05z"/>
+                            <path d="M60.122,209.05c5.68-2.107,12.727-5.703,17.095-9.512l-3.44,9.512l3.44,9.51
+                            C72.848,214.751,65.801,211.155,60.122,209.05z"/>
+                            <path d="M204.821,186.373c2.107-5.68,5.703-12.727,9.512-17.095l-9.512,3.44l-9.51-3.44
+                            C199.12,173.647,202.716,180.694,204.821,186.373z"/>
+                            <path d="M214.821,56.616c2.107,5.68,5.703,12.727,9.512,17.095l-9.512-3.44l-9.51,3.44
+                            C209.12,69.343,212.716,62.296,214.821,56.616z"/>
+                            <path d="M187.111,189.373c-5.506-2.526-13.032-4.966-18.814-5.362l9.159-4.293l4.292-9.157
+                            C182.143,176.343,184.584,183.868,187.111,189.373z"/>
+                            <path d="M194.111,60.616c-5.506,2.526-13.032,4.966-18.814,5.362l9.159,4.293l4.292,9.157
+                            C189.143,73.647,191.584,66.121,194.111,60.616z"/>
+                            <path d="M58.354,182.373c2.526-5.506,4.966-13.032,5.362-18.814l4.293,9.159l9.157,4.292
+                            C71.384,177.405,63.859,179.846,58.354,182.373z"/>
+                        </svg>
+                        <p>
+                        <a id="down" href-lang='image/svg+xml' href='#' target="_blank"><i class="fa fa-download" style="margin-left:20px;"></i> Download</a></p></div>
+                    <h2>Bias indicators &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="biasT1" onclick="$('#bias§2').hide('slow'); $('#biasT1').hide();$('#biasT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="biasT2" onclick="$('#bias§2').show('slow'); $('#biasT2').hide();$('#biasT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="bias§2">
+                        <table width="50%" id="biasTable">
+                            <thead>
+                                <tr>
+                                    <th>Indicator</th>
+                                    <th>Calculated</th>
+                                    <th>Estimated error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Ts/Tv</th>
+                                    <td id='TsOverTv'></td>
+                                    <td id='TsOverTv_error'></td>
+                                </tr>
+                                <tr>
+                                    <th>AT&#8594;GC/GC&#8594;AT</th>
+                                    <td id='W2SOverS2W'></td>
+                                    <td id='W2SOverS2W_error'></td>
+                                </tr>
+                                <tr>
+                                    <th>A&#8594;N, T&#8594;N (%)</th>
+                                    <td id="W2N"></td>
+                                    <td id="W2N_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>G&#8594;N,C&#8594;N (%)</th>
+                                    <td id="S2N"></td>
+                                    <td id="S2N_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>AT&#8594;GC (%)</th>
+                                    <td id="W2S"></td>
+                                    <td id="W2S_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>GC&#8594;AT (%)</th>
+                                    <td id="S2W"></td>
+                                    <td id="S2W_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>Transitions (%) total
+                                    </th>
+                                    <td id="ΣTs"></td>
+                                    <td id="ΣTs_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>A&#8594;G, T&#8594;C (%)</th>
+                                    <td id="Ts1"></td>
+                                    <td id="Ts1_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>G&#8594;A, C&#8594;T (%)</th>
+                                    <td id="Ts2"></td>
+                                    <td id="Ts2_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>transversions (%) Total
+                                    </th>
+                                    <td id="ΣTv"></td>
+                                    <td id="ΣTv_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>A&#8594;T, T&#8594;A (%)</th>
+                                    <td id="TvW"></td>
+                                    <td id="TvW_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>A&#8594;C, T&#8594;G (%)</th>
+                                    <td id="TvN1"></td>
+                                    <td id="TvN1_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>G&#8594;C, C&#8594;G (%)</th>
+                                    <td id="TvS"></td>
+                                    <td id="TvS_error"></td>
+                                </tr>
+                                <tr>
+                                    <th>G&#8594;T, C&#8594;A (%)</th>
+                                    <td id="TvN2"></td>
+                                    <td id="TvN2_error"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <div id="biasChart" style="width: 80%; height:400px"><i class="fa fa-spinner fa-pulse"></i> Google Charts API loading asynchronously to speed up the script...</div>
+                        <span onclick="window.open(chart.getImageURI())" class='fake-link' style="margin-left:20px;"><i class="fa fa-download"></i> Download</span><br/>
+                    </div>
+                </div>
+                <div id="next§">
+                    <h2>Where to next? &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="nextT1" onclick="$('#next§2').hide('slow'); $('#nextT1').hide();$('#nextT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="nextT2" onclick="$('#next§2').show('slow'); $('#nextT2').hide();$('#nextT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+                    <div id="next§2">
+                        There are several other complementary easy to use tools, which you can be used for further analysis.
+                        <h3>Pedel</h3>
+                        <p>
+                        <a class=external href="http://guinevere.otago.ac.nz/cgi-bin/aef/pedel-AA.pl" data-tooltip="Open Pedel-AA, without sending your data along" target="_blank">Pedel-AA</a> is a tool to assess library completeness at the amino acid level. Namely, given a library of a given size, what are the chances that one has picked all single mutations and so forth? In essence this is what is mathematically called the coupon collector problem.<br/>If you want you data sent directly, provide library size <input type="text" style="width:100px" onChange="pedel()" id=library value=1000000 /> and <a href="http://guinevere.otago.ac.nz/cgi-bin/aef/pedel-AA.pl" data-tooltip="This will open a new window to Pedel-AA with your data sent to it as URL query string (this is a line that is often seen on the internet after the URL that looks like this: ?xxx=xxx&amp;xxxx=xxxx)." target="_blank" id=pedel class=external> click here</a> (<!--<span style="cursor: pointer;" id="more" onclick='$("#pedel_opt§").toggle("slow");' onMouseOver="$('#more').html('More Options');$('#more').css('color','blue');" onMouseOut="$('#more').html('<i class='+String.fromCharCode(34)+'fa fa-cog'+String.fromCharCode(34)+'></i>'); $('#more').css('color','black');"><i class="fa fa-cog"></i></span>--> <span class=fake-link id="more" onclick='$("#pedel_opt§").toggle("slow");'><i class="fa fa-wrench"></i> More options</span>).
+                        </p>
+                        <div id="pedel_opt§" style="padding:0px 20px;"><div style="padding:10px; border-left:4px solid lightgrey;"><p class=marginless>
+                            <label><input type="checkbox" style="width:20px" id="pedEnd" onChange="pedel()"/>The last three bases are the end codon.</label></p><p class=marginless>
+                            <label><input type="text" style="width:24px" value=0 id="pedOff" onChange="pedel()"/>The offset of your coding frame.</label></p><p class=marginless>
+                            <label><input type="checkbox" style="width:20px" id="pedDist" onChange="pedel()"/>Use PCR distribution.</label></p><p class=marginless>
+                            <label><input type="text" style="width:24px" value=0 id="pedCyc" onChange="pedel()"/>↳Cycles in PCR run.</label></p><p class=marginless>
+                            <label><input type="text" style="width:24px" value=0 id="pedEff" onChange="pedel()"/>↳PCR effieciency.</label></p><p class=marginless>
+                            <label><input type="text" style="width:24px" value=0 id="pedIn" onChange="pedel()"/>Frequency of Insertions.</label></p><p class=marginless>
+                            <label><input type="text" style="width:24px" value=0 id="pedDel" onChange="pedel()"/>Frequency of Deletions.</label></p>
+                        </div></div>
+                        <h3>Weblogo</h3>
+                        If you have a large amount of sequences, then it becomes possible to distribution of mutations across the sequence may become informative. For this <a class=external href="http://weblogo.threeplusone.com/create.cgi" target="_blank">Weblogo, a tool to create sequence logos,</a> might be of use.
+                    </div>
+                </div></div>
+            <div class=forefooter><table class=clearspace><tr><td class=clearless style="width:33%"><!--<i class="fa fa-hand-spock-o">--><i class="fa fa-user"></i> Author: <a href="http://www.matteoferla.com/">Matteo P. Ferla</a> (<a href="http://www.google.com/recaptcha/mailhide/d?k=01A1LVjk_ZjQp5eXQYtJaz9w==&amp;c=4LB277Fx17YAz2GbS4xIZ1YhoXQGDzHTY0a8wvL7WNQ=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501A1LVjk_ZjQp5eXQYtJaz9w\75\75\46c\0754LB277Fx17YAz2GbS4xIZ1YhoXQGDzHTY0a8wvL7WNQ\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address" style="color:black; text-decoration:none"><i class="fa fa-envelope-o"></i></a>, <a href="https://github.com/matteoferla" title="Matteo Ferla's GitHub repositories" style="color:black; text-decoration:none" target="_blank"><i class="fa fa-github-square"></i></a>)</td><td class=clearless style="width:33%"><i class="fa fa-book"></i> Citation: <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-0996-7">M.P. Ferla, 2016</a>.</td><td class=clearless style="width:33%"><i class="fa fa-university"></i> JS &amp; CSS libraries used: <a href="http://fortawesome.github.io/Font-Awesome/" class=external>FontAwesome</a>, <a href="https://developers.google.com/chart/?hl=en" class=external>Google&nbsp;Charts</a>, <a href="https://www.google.com/fonts" class=external>Google&nbsp;Fonts</a>,<a href="http://github.hubspot.com/tooltip/docs/welcome/" class=external>tooltip</a>, <a href="https://github.com/lvandeve/jmat" class=external>Jmat</a>.</td></tr></table></div>
+            <div class=footer></div>
+        </div>
+        </div>
+    </body>
+</html>

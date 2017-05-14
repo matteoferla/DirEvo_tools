@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Matteo Ferla">
+<meta name="description" content="Mutagenesis calculator by Matteo Ferla">
+<meta name="keywords" content="calculator, tool, mutagenesis, epPCR, mutazyme, wobble, directed evolution, engineering, protein, enzyme, Matteo Ferla, Matteo P. Ferla">
+<title>Mutational counter</title>
+</head>
+<!--hosted jQuery library as opposed to local for now.-->
+<script src="scripts/jquery-2.1.4.min.js"></script>
+<script src="scripts/mutationalCounter.js"></script>
+<link rel="shortcut icon" type="image/png" href="images/flavicon.png"/>
+<link rel="stylesheet" type="text/css" href="scripts/mut.css">
+<!--Webfonts-->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Pacifico' rel='stylesheet' type='text/css'>
+<!--FontAwesome-->
+<link rel="stylesheet" href="scripts/font-awesome-4.4.0/css/font-awesome.min.css">
+
+<body  height=100%>
+<div class="subbody" height=100%>
+<div class=header></div>
+<div class=main>
+<div style="text-align:right"><a href=mutational_bias_calculator.html><i class="fa fa-taxi"></i> Go back</a></p></div>
+<div id="intro§">
+<h1>Mutation Counter</h1><h2>Introduction &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="introT1" onclick="$('#intro¶').hide('slow'); $('#introT1').hide();$('#introT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="introT2" onclick="$('#intro¶').show('slow'); $('#introT2').hide();$('#introT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+<p id="intro¶">This page is provided for convinience, but it is reccomended that you verify <span title="ABI trace files are encrypted and it is no easy feat opening the files">manually</span> with your actual trace files to determine whether a mutation is not a Sanger sequencing artefact. My reccomendation is that you open the ABI files and check what each mutation listed below looks like.  </p>
+</div>
+<div id="prep_in§">
+<h2>Prepare sequences &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="prep_inT1" onclick="$('#prep_in¶').hide('slow'); $('#prep_inT1').hide();$('#prep_inT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="prep_inT2" onclick="$('#prep_in¶').show('slow'); $('#prep_inT2').hide();$('#prep_inT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+<div id="prep_in¶">
+<p>Get ref.<br/>
+then twice (for forward and reverse): seq, option for no change, add (primer) or remove (barcode)</p></div>
+<div id="prep_out§">
+<h2>results for alignement</h2>
+<p>Prep_out
+Does this align it? The alignment is pairwise and need not be sophisticated. 2 consecutive mismatchs. insertion/deletion. Trim, find 5 conserved.<br/>
+AB file to XML. what if one could show the base in question. it depends on the XML</p>
+</div></div>
+
+<div id="in_align§">
+<h2>Aligned Sequences &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="in_alignT1" onclick="$('#in_align¶').hide('slow'); $('#in_alignT1').hide();$('#in_alignT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="in_alignT2" onclick="$('#in_align¶').show('slow'); $('#in_alignT2').hide();$('#in_alignT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+<div id="in_align¶">
+<p>Wild type sequence</p>
+<textarea name="wt" rows="5" id="wt" style="width:80%"></textarea>
+<p>Mutant sequences</p>
+<textarea name="mut" rows="5" id="mutants" style="width:80%"></textarea>
+<br/>
+<table class=clearspace><tr><td class=clearspace><button onclick="Btn_identifier()"><i class="fa fa-search"></i> Identify</button></td>
+<td class=clearspace><button onclick="Btn_spam()"><i class="fa fa-cube"></i> Rnd values</button></td>
+<td class=clearspace><button onclick="Btn_blank()"><i class="fa fa-trash"></i> Reset</button></td>
+</tr>
+</table>
+</div></div>
+
+<div id="result§">
+<h2>Possible matches &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="out_matchT1" onclick="$('#out_match§').hide('slow'); $('#out_matchT1').hide();$('#out_matchT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="out_matchT2" onclick="$('#out_match§').show('slow'); $('#out_matchT2').hide();$('#out_matchT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+<div id="out_match§">
+<div id="out_match¶" style="text-align:left">
+</div>
+<br/>
+<table class=clearspace><tr><td class=clearspace   style="text-align:left">
+<button onClick="selector();"><i class="fa fa-shopping-cart"></i> Retrieve selected</button></td>
+<td class=clearspace style="text-align:left; width:300px">
+<form>
+<label><input type="radio" onClick="selector();" value=0 id=radw name=rd style="width:20px" /> with fasta headers</label> <br/>
+<label><input type="radio" onClick="selector();" value=1 id=radwo name=rd checked  style="width:20px" /> without fasta headers</label>
+</form></td></tr></table>
+</div></div>
+
+
+
+<div id="sel§">
+<h2>List of genotypes&nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" id="selT1" onclick="$('#out_sel§').hide('slow'); $('#selT1').hide();$('#selT2').show();"><i class="fa fa-angle-double-down"></i></span><span style="cursor: pointer;" id="selT2" onclick="$('#out_sel§').show('slow'); $('#selT2').hide();$('#selT1').show();"><i class="fa fa-angle-double-up"></i></span></h2>
+<div id="out_sel§">
+</div>
+</div></div>
+<div class=forefooter><table class=clearspace><tr><td class=clearless style="width:33%"><i class="fa fa-hand-spock-o"></i> Author: <a href="http://www.matteoferla.com">Matteo P. Ferla</a></td><td class=clearless style="width:33%"><i class="fa fa-book"></i>  Citation: <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-0996-7">M.P. Ferla, 2016.</a></td><td class=clearless style="width:33%"><i class="fa fa-university"></i> JS &amp; CSS libraries used: <a href="http://fortawesome.github.io/Font-Awesome/" class=external>FontAwesome</a>, <a href="https://developers.google.com/chart/?hl=en" class=external>Google&nbsp;Charts</a>, <a href="https://www.google.com/fonts" class=external>Google&nbsp;Fonts</a>, <a href="https://github.com/lvandeve/jmat" class=external>Jmat</a>.</td></tr></table></div>
+<div class=footer></div>
+</div>
+</body>
+</html>
