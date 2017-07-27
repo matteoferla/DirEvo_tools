@@ -79,18 +79,8 @@
                 <br/>
                 <div class="bs-callout bs-callout-info">
                     <h4>Required coding change</h4>Change to plot.ly.</div>
-                <div id="disChart" style="width: 80%; height:400px"><i class="fa fa-spinner fa-pulse"></i> Chart goes here!
+                <div id="disChart" style="width: 80%; height:400px">
                 </div>
-                <p>
-                    <span onclick="window.open(dischart.getImageURI())" class='fake-link' style="margin-left:20px;"><i
-                        class="fa fa-download"></i> Download</span>. If you wish to reproduce the above, here are the values used:</p>
-                <ul>
-                    <li>Frequency bins, sequences sampled with 0,1,2,3 <i>etc.</i> mutations: <strong><span id="freqList">N/A</span></strong>
-                    </li>
-                    <li>Total mutations sampled: <strong><span id="freqΣ">N/A</span></strong>
-                    </li>
-                </ul>
-                <br/>
                 <p class=marginless>
                     If the λ<sub>Poisson</sub> and average are very different and the plot is very poor, sequencing more variants from the test library may be reccomendable.
                     <!--section-->
@@ -421,10 +411,7 @@
                         </tbody>
                     </table>
                     <br/>
-                    <div id="biasChart" style="width: 80%; height:400px"><i class="fa fa-spinner fa-pulse"></i> Google Charts API loading asynchronously to speed up the script...
-                    </div>
-                    <span onclick="window.open(chart.getImageURI())" class='fake-link' style="margin-left:20px;"><i
-                    class="fa fa-download"></i> Download</span>
+                    <div id="biasChart" style="width: 80%; height:400px"></div>
                     <br/>
             </div>
         </div>

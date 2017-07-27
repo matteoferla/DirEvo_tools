@@ -16,9 +16,10 @@ requires = [
     'biopython',
     'numpy',
     'scipy',
-    'openpyxl',
-    'fcsparser'
+    'openpyxl'
     ]
+
+# no pandas as pandas kill my pyramid.
 
 setup(name='Pyramidstarter',
       version='0.0',

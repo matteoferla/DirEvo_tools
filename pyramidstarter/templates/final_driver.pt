@@ -28,6 +28,9 @@
     <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
     <!--switch-->
     <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css')}" rel="stylesheet">
+    <!--Extras-->
+    <link href="${request.static_url('pyramidstarter:static/sitewide.css')}" rel="stylesheet">
 
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
@@ -41,8 +44,9 @@
     <![endif]-->
 
      <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+<!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>-->
+   <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
 
 
 </head>
@@ -94,7 +98,96 @@
             <div class="page-header">
                 <h1>Introduction</h1>
             </div>
-            Some kind of navigation...
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Driver</h1>
+            </div>
+            <div class="panel-body">
+                <h2>Driver</h2>
+                <h3>Description</h3>
+                <p>bla bla</p>
+                <h3>Results</h3>
+                <form>
+                <div class="row">
+
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Library size"
+                                  data-placement="top">Library size</span>
+                                <input type="number" min="0" class="form-control" placeholder="1600"
+                                       id="driver_library_size">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Sequence length in nucleotides (or amino acids) N"
+                                  data-placement="top">Length</span>
+                                <input type="number" min="1" class="form-control" placeholder="1425"
+                                       id="driver_length">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Mean number of crossovers per sequence m"
+                                  data-placement="top">Mean</span>
+                                <input type="number" min="0" class="form-control" placeholder="2"
+                                       id="driver_mean">
+                            </div>
+                            <br/>
+                        </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" title="Pedel is basic and nucleotide only, Pedel-AA is more advanced and has amino acids" data-placement="top">Crossovers counting</span>
+                                <input type="checkbox" class="switch" id="driver_crossover" checked data-off-text="Observable" data-on-text="All" data-off-color="warning" data-size="large" checked>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                        <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="Positions of variable nucleotides (or amino acids). (Maximum 15 or 20)">Positions
+                        </span>
+                    <textarea class="form-control custom-control" rows="2" style="resize:none" id="driver_positions" name="sequence"></textarea>
+                </div>
+                    <br/>
+                        </div>
+
+                </div><!-- row-->
+                    </form>
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-warning" id="driver_clear"><i class="fa fa-eraser"
+                                                                                             aria-hidden="true"></i>
+                                Clear
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="driver_demo"><i class="fa fa-files-o"
+                                                                                         aria-hidden="true"></i> Demo
+                            </button>
+                            <button type="button" class="btn btn-success" id="driver_calculate"><i class="fa fa-exchange"
+                                                                                                 aria-hidden="true"></i>
+                                Calculate
+                            </button>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <!-- The results -->
+                <div class="row hidden" id="glue_result">
+                    <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went
+                        wrong
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
 </div>
 </div>
     </div>
@@ -120,6 +213,7 @@
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
 <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 

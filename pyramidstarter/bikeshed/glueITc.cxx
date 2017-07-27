@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
   /*
   if (xtotal_aa < 10.) {
     cout << "Warning: Number of possible amino acid variants is small.  "
-	 << "Poisson tatistics may be compromised.<br>\n";
+	 << "Poisson statistics may be compromised.<br>\n";
   }
   */
 

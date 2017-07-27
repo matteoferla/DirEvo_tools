@@ -12,11 +12,12 @@ T = "\t"
 # N = "<br/>
 
 from pyramidstarter.deep_mut_scanning import deep_mutation_scan
-from pyramidstarter.QQC import Trace
+from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
 import re, json, openpyxl
 from Bio.Seq import Seq
 from pyramid.response import FileResponse
 from pyramidstarter import bike
+from collections import defaultdict
 
 
 class SeqEncoder(json.JSONEncoder):
@@ -179,6 +180,18 @@ def IDT(request, size):
     )
     return response
 
+def codon(request):
+    ##parts are stolen from the QCC class. This basically just give the empirical results.
+    #convert str request which should have codons to AA.
+    scheme=scheme_maker(request)
+    #a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
+    schemeprobball = []
+    for primer in scheme:
+        schemeprobball.append(codon_to_AA(primer[1]))
+    AA = {
+        aa: sum([scheme[pi][0] * schemeprobball[pi][aa] for pi in range(len(schemeprobball))]) for aa in
+        schemeprobball[0].keys()}
+    return json.dumps({'data': AA, 'html': ''})
 
 if __name__ == "__main__":
     pass

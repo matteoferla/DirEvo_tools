@@ -28,6 +28,9 @@
     <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
     <!--switch-->
     <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css')}" rel="stylesheet">
+    <!--Extras-->
+    <link href="${request.static_url('pyramidstarter:static/sitewide.css')}" rel="stylesheet">
 
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
@@ -41,8 +44,9 @@
     <![endif]-->
 
      <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+<!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>-->
+   <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
 
 
 </head>
@@ -94,87 +98,189 @@
         <div class="page-header">
             <h1>Introduction</h1>
         </div>
+        <!-- classic -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title">Pedicted diversity of one or more libraries based on PCR reaction</h1>
+                <h1 class="panel-title">Glue —Nucleotide diversity</h1>
             </div>
             <div class="panel-body">
-                <h2>Predicted diversity</h2>
+                <h2>Glue</h2>
                 <h3>Description</h3>
-                <p>Lorem ipsum</p>
+                <p>Pedicted diversity of one or more libraries based on PCR reaction</p>
                 <h3>Results</h3>
                 <div class="row" id="glue_form">
                     <form>
-                    <div class="col-lg-4">
-                        <div class="input-group">
+                        <div class="col-lg-4">
+                            <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="number of variants"
                                   data-placement="top">N variants</span>
-                            <input type="number" min="0" class="form-control" placeholder="1000000" id="glue_nvariants">
+                                <input type="number" min="0" class="form-control" placeholder="1000000"
+                                       id="glue_nvariants">
+                            </div>
+                            <br/>
                         </div>
-                        <br/>
+                        <div class="col-lg-5  col-lg-offset-2">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Library size L"
+                                  data-placement="top">Library size</span>
+                                <input type="number" min="0" class="form-control" placeholder="3000000"
+                                       id="glue_library_size">
+                                <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" id="glue_library_size_on"
+                                        data-toggle="tooltip" title="known"
+                                        data-placement="top">Use</button>
+                              </span>
+
+
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Completeness"
+                                  data-placement="top">Completeness</span>
+                                <input type="number" min="0" class="form-control" placeholder="0.95"
+                                       id="glue_completeness" disabled>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="glue_completeness_on"
+                                        data-toggle="tooltip" title="known"
+                                        data-placement="top">Use</button>
+                              </span>
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-lg-5  col-lg-offset-1">
+                            <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="prob complete"
+                                  data-placement="top">prob 100% complete</span>
+                                <input type="number" min="0" class="form-control" placeholder="0.95"
+                                       id="glue_prob_complete" disabled>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="glue_prob_complete_on"
+                                        data-toggle="tooltip" title="known"
+                                        data-placement="top">Use</button>
+                              </span>
+                            </div>
+                            <br/>
+                        </div>
+                    </form>
+                </div><!-- row-->
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-warning" id="glue_clear"><i class="fa fa-eraser"
+                                                                                             aria-hidden="true"></i>
+                                Clear
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="glue_demo"><i class="fa fa-files-o"
+                                                                                         aria-hidden="true"></i> Demo
+                            </button>
+                            <button type="button" class="btn btn-success" id="glue_calculate"><i class="fa fa-exchange"
+                                                                                                 aria-hidden="true"></i>
+                                Calculate
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-lg-5  col-lg-offset-2">
+                    <br/>
+                </div>
+                <!-- The results -->
+                <div class="row hidden" id="glue_result">
+                    <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went
+                        wrong
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <!-- AA -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Glue-IT —amino acid level</h1>
+            </div>
+            <div class="panel-body">
+                <h2>GlueIT</h2>
+                <h3>Description</h3>
+                <p>Pedicted diversity of one or more libraries based on PCR reaction</p>
+
+                <h3>Results</h3>
+                <div class="row">
+                    <div class="col-lg-4  col-lg-offset-2">
                         <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="Library size L"
                                   data-placement="top">Library size</span>
-                            <input type="number" min="0" class="form-control" placeholder="3000000" id="glue_library_size">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="button" id="glue_library_size_on" data-toggle="tooltip" title="known"
-                                  data-placement="top">Use</button>
-                              </span>
-
-
-
+                            <input type="number" min="0" class="form-control" placeholder="3000000"
+                                   id="glueIT_library_size">
                         </div>
                         <br/>
-                    </div>
-                    <div class="col-lg-5">
                         <div class="input-group">
-                            <span class="input-group-addon" data-toggle="tooltip" title="Completeness"
-                                  data-placement="top">Completeness</span>
-                            <input type="number" min="0" class="form-control" placeholder="0.95" id="glue_completeness" disabled>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="glue_completeness_on" data-toggle="tooltip" title="known"
-                                  data-placement="top">Use</button>
-                              </span>
+                            <span class="input-group-addon" data-toggle="tooltip" title="Number of codons"
+                                  data-placement="top">Varied codons</span>
+                            <input type="number" min="1" max="6" class="form-control" placeholder="1"
+                                   id="glueIT_num_codons">
                         </div>
+                    </div>
+                    <div class="col-lg-4  col-lg-offset-1" id="glueIT_codon_mother">
+                        <div class="input-group" id="glueIT_overcodon1">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon1">
+                            </div>
+                        <br/>
+                        <div class="input-group"  id="glueIT_overcodon2">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon2">
+                            </div>
+                        <br/>
+                        <div class="input-group"  id="glueIT_overcodon3">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon3">
+                            </div>
+                        <br/>
+                        <div class="input-group"  id="glueIT_overcodon4">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon4">
+                            </div>
+                        <br/>
+                        <div class="input-group"  id="glueIT_overcodon5">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon5">
+                            </div>
+                        <br/>
+                        <div class="input-group"  id="glueIT_overcodon6">
+                                <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')." data-placement="top">Scheme</span>
+                                <input type="text" class="form-control" placeholder="NNK" id="glueIT_codon6">
+                            </div>
                         <br/>
                     </div>
-                    <div class="col-lg-5  col-lg-offset-1">
-                        <div class="input-group">
-                            <span class="input-group-addon" data-toggle="tooltip" title="prob complete"
-                                  data-placement="top">prob 100% complete</span>
-                            <input type="number" min="0" class="form-control" placeholder="0.95" id="glue_prob_complete" disabled>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="glue_prob_complete_on" data-toggle="tooltip" title="known"
-                                  data-placement="top">Use</button>
-                              </span>
-                        </div>
-                        <br/>
-                    </div>
-                        </form>
                 </div><!-- row-->
                 <div class="row">
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <div class="btn-group" role="group"  aria-label="...">
-                                <button type="button" class="btn btn-warning" id="glue_clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear
-                                </button>
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-warning" id="glueIT_clear"><i class="fa fa-eraser"
+                                                                                               aria-hidden="true"></i>
+                                Clear
+                            </button>
 
-                                <button type="button" class="btn btn-info" id="glue_demo"><i class="fa fa-files-o" aria-hidden="true"></i> Demo
-                                </button>
-                                <button type="button" class="btn btn-success" id="glue_calculate"><i class="fa fa-exchange" aria-hidden="true"></i> Calculate
-                                </button>
-                            </div>
-                        </div><br/>
+                            <button type="button" class="btn btn-info" id="glueIT_demo"><i class="fa fa-files-o"
+                                                                                           aria-hidden="true"></i> Demo
+                            </button>
+                            <button type="button" class="btn btn-success" id="glueIT_calculate"><i
+                                    class="fa fa-exchange" aria-hidden="true"></i> Calculate
+                            </button>
+                        </div>
+                    </div>
+                    <br/>
                 </div>
                 <!-- The results -->
-            <div class="row hidden" id="glue_result">
-                        <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
-                        </div>
-                        <br/>
+                <div class="row hidden" id="glueIT_result">
+                    <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went
+                        wrong
                     </div>
+                    <br/>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
     </div>
@@ -200,6 +306,7 @@
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
 <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 
@@ -324,6 +431,22 @@ $(function() {
         });
         return false;
     }
+
+    for (i=2; i<7; i++){
+    $('#glueIT_overcodon'+ i.toString()).hide();
+    }
+
+    $('#glueIT_num_codons').change(function () {
+    var codons=parseInt($('#glueIT_num_codons').val());
+    for (i=1; i<codons+1; i++){
+        $('#glueIT_overcodon'+ i.toString()).show();
+    }
+    for (i=codons+1; i<7; i++){
+    $('#glueIT_overcodon'+ i.toString()).hide();
+    }
+    });
+
+    $('#glueIT_calculate').click(function () {alert('This does nothing atm.')})
 });
 
 </script>

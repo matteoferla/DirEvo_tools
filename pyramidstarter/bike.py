@@ -16,6 +16,13 @@ def pedel(library_size, sequence_length, mean_number_of_mutations_per_sequence):
 
 
 def pedel_stats(library_size, sequence_length, mean_number_of_mutations_per_sequence):
+    '''
+    Caculates sublibrary composition.
+    :param library_size:
+    :param sequence_length:
+    :param mean_number_of_mutations_per_sequence:
+    :return:
+    '''
     # Usage './stats.batch.mac library_size sequence_length mean_number_of_mutations_per_sequence outfile'.
     '''
     x = exact number of mutations per sequence.

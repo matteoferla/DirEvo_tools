@@ -69,7 +69,7 @@ def hello_there(request):
 @view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
 @view_config(route_name='misc', renderer='templates/final_misc.pt')
 @view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
-@view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt')
+@view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
 def my_view(request):
     #from pprint import PrettyPrinter
     #PrettyPrinter().pprint(request.__dict__)
@@ -232,7 +232,19 @@ def facser(request):  # temp here
     #                               'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
     #                                   err)})}
 
-
+@view_config(route_name='ajax_codon', renderer='json')
+def codonist(request): #copy paste of pedeller
+    try:
+        reply = wrap.codon(request.json_body)
+        log_passing(request, str(request.json_body))
+        return {'message': str(reply)}
+    except TypeError as err:
+        print('ERROR in codon: ',str(err))
+        log_passing(request, extra=str(request.json_body), status='fail')
+        return {
+            'message': json.dumps({'data': '',
+                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
+                                       err)})}
 
 
 ############### Other #####################

@@ -39,7 +39,7 @@ $(function() {
             success: function(result) {
                 reply = JSON.parse(result.message);
                 window.sessionStorage.setItem('pedel', JSON.stringify(reply['data']));
-                var table = '<br/><table class="table-striped" width=100%>' +
+                var table = '<h3>Sublibrary composition:</h3><br/><table class="table-striped" width=100%>' +
                     '<thead><tr><th><a href="#" data-toggle="tooltip" title="Exact number of mutations per sequence">x</th>' +
                     '<th><a href="#" data-toggle="tooltip" title="Poisson probability of x mutations, given m">P<sub>x</sub></th>' +
                     '<th><a href="#" data-toggle="tooltip" title="expected number of sequences in library with exactly x mutations">L<sub>x</sub></th>' +

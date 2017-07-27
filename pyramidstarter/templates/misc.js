@@ -49,6 +49,52 @@ $(function() {
     $('#estimate_demo').click(function() {});
     $('#estimate_clear').click(function() {});
 
-
-
+    function codonist() {
+        $("#codon_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#codon_result").removeClass('hidden');
+        $("#codon_result").show(); //weird combo.
+        data=$('#codon_drop').val();
+        if (data == 'other') {
+            $("#codon_manual").removeClass('hidden');
+            $("#codon_manual").show();
+            data=$('#codon_mutation').val();
+        }
+        else {
+            $("#codon_manual").addClass('hidden');
+            $("#codon_manual").hide();
+        }
+        $.ajax({
+            url: 'ajax_codon',
+            type: 'POST',
+            data: JSON.stringify(data),
+            success: function(result) {
+                reply = JSON.parse(result.message);
+                window.sessionStorage.setItem('codon', JSON.stringify(reply['data']));
+                $("#codon_result").html(reply['html']);
+                //$("#QQC_download").removeClass('hidden');
+                //$("#QQC_download").show(); //weird combo.
+                //$("#QQC_result").html(reply['html']);
+                AA = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '*'];
+                Plotly.newPlot('codon_graph',[{
+                    x: AA,
+                    y: AA.map(function(a) {
+                        return reply['data'][a]
+                    }),
+                    name: 'Number of codons',
+                    type: 'bar'
+                }], {
+                    barmode: 'group',
+                    title: 'Pedicted amino acid proportions'
+                });
+            },
+            error: function() {
+                $("#codon_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+    $('#codon_drop').change(codonist);
+    $('#codon_mutation').change(codonist);
 });

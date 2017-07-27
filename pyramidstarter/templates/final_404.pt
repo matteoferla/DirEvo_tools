@@ -28,6 +28,9 @@
     <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}" rel="stylesheet">
     <!--switch-->
     <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css')}" rel="stylesheet">
+    <!--Extras-->
+    <link href="${request.static_url('pyramidstarter:static/sitewide.css')}" rel="stylesheet">
 
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
@@ -41,8 +44,9 @@
     <![endif]-->
 
      <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+<!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>-->
+   <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
 
 
 </head>
@@ -115,6 +119,7 @@
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
 <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 

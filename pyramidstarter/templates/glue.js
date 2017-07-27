@@ -101,4 +101,20 @@ $(function() {
         });
         return false;
     }
+
+    for (i=2; i<7; i++){
+    $('#glueIT_overcodon'+ i.toString()).hide();
+    }
+
+    $('#glueIT_num_codons').change(function () {
+    var codons=parseInt($('#glueIT_num_codons').val());
+    for (i=1; i<codons+1; i++){
+        $('#glueIT_overcodon'+ i.toString()).show();
+    }
+    for (i=codons+1; i<7; i++){
+    $('#glueIT_overcodon'+ i.toString()).hide();
+    }
+    });
+
+    $('#glueIT_calculate').click(function () {alert('This does nothing atm.')})
 });

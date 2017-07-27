@@ -104,6 +104,83 @@ class Trace:
             [self.get_intensities(location), self.get_intensities(location + 1), self.get_intensities(location + 2)],
             *args, **kwargs)
 
+def scheme_maker(scheme):
+    """
+    FORMERLY A STATIC METHOD.
+    converts a name of a scheme to a probability set.
+    The input is a string (e.g. NNK). Except some are complicated.
+    So it accepts one or more codons separated by a space and optionally prefixed with a interger number.
+    >>> scheme_maker('12NDT 6VHA 1TGG 1ATG')
+    :param scheme: str of codon proportion.
+    :return: a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
+    """
+    # check first if reserved word.
+    scheme = scheme.upper().replace('-trick'.upper(), '')
+    if scheme == 'Tang'.upper() or scheme.lower() == '20c':
+        scheme = '12NDT 6VHA 1TGG 1ATG'
+    elif scheme.lower() == '19c':
+        scheme = ''
+    elif scheme.lower() == '21c':
+        scheme = ''
+    elif scheme == 'Kille'.upper() or scheme.lower() == '22c':
+        # dx.doi.org / 10.1038 / srep10654
+        scheme = '1NDT 9VHG 1TGG'
+    else:
+        pass  # there seems no need to store a boolean?
+    # Biopython can handle this somewhere but tyhis is easier.
+    degeneracy = {'N': 'ATGC',
+                  'A': 'A',
+                  'T': 'T',
+                  'G': 'G',
+                  'C': 'C',
+                  'W': 'AT',
+                  'S': 'GC',
+                  'K': 'GT',
+                  'M': 'AC',
+                  'R': 'AG',
+                  'Y': 'TC',
+                  'B': 'TGC',
+                  'V': 'AGC',
+                  'H': 'ATC',
+                  'D': 'ATG'}
+    # split for analysis
+    schemelist = scheme.split()
+    proportions = []
+    codons = []
+    for m in schemelist:
+        (prop, codon) = re.match('(\d{0,2})(\w{3})', m).groups()
+        if prop:
+            proportions.append(int(prop))
+        else:
+            proportions.append(1)
+        codons.append(codon)
+    # pars
+    freq = [p / sum(proportions) for p in proportions]
+    codonmix = []
+    for codon in codons:
+        pred = []
+        for i in range(3):
+            basedex = {}
+            for b in 'ATGC':
+                if b in degeneracy[codon[i]]:
+                    basedex[b] = 1 / len(degeneracy[codon[i]])
+                else:
+                    basedex[b] = 0
+            pred.append(basedex)
+        codonmix.append(pred)
+    return list(zip(freq, codonmix))
+
+
+def codon_to_AA(codonball):
+    codprob = [codonball[0][x] * codonball[1][y] * codonball[2][z]
+               for x in 'ATGC' for y in 'ATGC' for z in 'ATGC']
+    codnames = [x + y + z for x in 'ATGC' for y in 'ATGC' for z in 'ATGC']
+    # translate codnames to AA.
+    AAprob = defaultdict(int)
+    for i in range(64):
+        AAprob[str(Seq(codnames[i]).translate())] += codprob[i]
+    return AAprob
+
 class QQC:
     """
     This class is meant to be called via:
@@ -112,7 +189,7 @@ class QQC:
     The normal initialisation relies on as an input a special construct that is the key format of this class and is a list of 3 positions each with a dictionary of the probability of each base. This may be made better in the future.
     There is also a reverse
     >>> QQC.from_trace(filename,str_of_preceding_bases, str_of_scheme)
-    The default scheme is NNK, but complex inputs are possible: see `QQC.scheme_maker()`
+    The default scheme is NNK, but complex inputs are possible: see `scheme_maker()`
     """
 
     def _targetfun(self, offness):
@@ -139,19 +216,9 @@ class QQC:
         * empirical_AA_probabilities: AminoAcid-keyed dict of empirical pobabilities
         """
 
-        def codon_to_AA(codonball):
-            codprob = [codonball[0][x] * codonball[1][y] * codonball[2][z]
-                       for x in 'ATGC' for y in 'ATGC' for z in 'ATGC']
-            codnames = [x + y + z for x in 'ATGC' for y in 'ATGC' for z in 'ATGC']
-            # translate codnames to AA.
-            AAprob = defaultdict(int)
-            for i in range(64):
-                AAprob[str(Seq(codnames[i]).translate())] += codprob[i]
-            return AAprob
-
         self.peak_int = peak_int
         self.scheme = scheme
-        self.scheme_mix = QQC.scheme_maker(scheme)
+        self.scheme_mix = scheme_maker(scheme)
         self.scheme_pred = [
             {b: sum([self.scheme_mix[p][0] * self.scheme_mix[p][1][i][b] for p in range(len(self.scheme_mix))]) for b in
              'ATGC'} for i in range(3)]
@@ -217,72 +284,6 @@ class QQC:
         if not isinstance(trace, Trace):
             trace = Trace(trace)
         return trace.QQC(location, *args, **kwargs)
-
-    @staticmethod
-    def scheme_maker(scheme):
-        """
-        converts a name of a scheme to a probability set.
-        The input is a string (e.g. NNK). Except some are complicated.
-        So it accepts one or more codons separated by a space and optionally prefixed with a interger number.
-        >>> QQC.scheme_maker('12NDT 6VHA 1TGG 1ATG')
-        :param scheme: str of codon proportion.
-        :return: a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
-        """
-        # check first if reserved word.
-        scheme = scheme.upper().replace('-trick'.upper(), '')
-        if scheme == 'Tang'.upper() or scheme.lower() == '20c':
-            scheme = '12NDT 6VHA 1TGG 1ATG'
-        elif scheme.lower() == '19c':
-            scheme = ''
-        elif scheme.lower() == '21c':
-            scheme = ''
-        elif scheme == 'Kille'.upper() or scheme.lower() == '22c':
-            # dx.doi.org / 10.1038 / srep10654
-            scheme = '1NDT 9VHG 1TGG'
-        else:
-            pass  # there seems no need to store a boolean?
-        # Biopython can handle this somewhere but tyhis is easier.
-        degeneracy = {'N': 'ATGC',
-                      'A': 'A',
-                      'T': 'T',
-                      'G': 'G',
-                      'C': 'C',
-                      'W': 'AT',
-                      'S': 'GC',
-                      'K': 'GT',
-                      'M': 'AC',
-                      'R': 'AG',
-                      'Y': 'TC',
-                      'B': 'TGC',
-                      'V': 'AGC',
-                      'H': 'ATC',
-                      'D': 'ATG'}
-        # split for analysis
-        schemelist = scheme.split()
-        proportions = []
-        codons = []
-        for m in schemelist:
-            (prop, codon) = re.match('(\d{0,2})(\w{3})', m).groups()
-            if prop:
-                proportions.append(int(prop))
-            else:
-                proportions.append(1)
-            codons.append(codon)
-        # pars
-        freq = [p / sum(proportions) for p in proportions]
-        codonmix = []
-        for codon in codons:
-            pred = []
-            for i in range(3):
-                basedex = {}
-                for b in 'ATGC':
-                    if b in degeneracy[codon[i]]:
-                        basedex[b] = 1 / len(degeneracy[codon[i]])
-                    else:
-                        basedex[b] = 0
-                pred.append(basedex)
-            codonmix.append(pred)
-        return list(zip(freq, codonmix))
 
 
 if __name__ == "__main__":
