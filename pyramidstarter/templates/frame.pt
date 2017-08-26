@@ -145,7 +145,7 @@
                                     <span class="input-group-addon" data-toggle="tooltip"
                                           title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')."
                                           data-placement="top">Scheme</span>
-                                    <input type="text" class="form-control" placeholder="NNK" id="codon_mutation">
+                                    <input type="text" class="form-control" placeholder="NNN" id="codon_mutation">
                                 </div>
                             </div>
                         </div>
@@ -215,6 +215,7 @@ function codonist() {
             $("#codon_manual").removeClass('hidden');
             $("#codon_manual").show();
             data=$('#codon_mutation').val();
+            if (! data) {data='NNN';}
         }
         else {
             $("#codon_manual").addClass('hidden');
