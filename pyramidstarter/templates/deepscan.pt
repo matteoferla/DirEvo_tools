@@ -24,10 +24,6 @@
                         mutational scanning <i
                             class="fa fa-github" aria-hidden="true"></i></a>).</p>
                 <h3>Input</h3>
-                <div class="row">
-                    <div class="bs-callout bs-callout-warning">
-                        <h4>Check</h4>The switch was never tested as it works only online.
-                    </div>
                     <div class="col-lg-12"><p>To make primers at the ends of the coding sequence, the neighbouring
                         noncoding sequence are required.
                         Two options are available:</p>
