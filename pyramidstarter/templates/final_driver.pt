@@ -286,7 +286,8 @@
 <!--JQUERY moved up...-->
 <!--<script src="https://www.google.com/jsapi"></script>-->
 <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
-<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<!--<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
@@ -297,7 +298,7 @@
     <script>
 $(function () {
 $('[data-toggle="tooltip"]').tooltip();
-$(".slider").bootstrapSlider(); // only #DS_primerRange??
+$(".slider").bootstrapSlider();
 $(".switch").bootstrapSwitch();
 $(".hidden").hide();
 $('#§welcome').modal('show');

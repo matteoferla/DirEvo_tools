@@ -1,10 +1,21 @@
 $(function() {
-    $('#DS_method').on('switchChange.bootstrapSwitch', function(event, state) {
-        if (state == true) {
-            $('#DS_overlap_group').show();
+    $('#DS_startBase_group').hide();
+    $('#DS_stopBase_group').hide();
+
+        //var val = $('input[name=q12_3]:checked').val();
+    $('input[type=radio][name=DS_opt]').change(function() {
+        if (this.value == 'split') {
+        state=true;
         } else {
-            $('#DS_overlap_group').hide();
-        }
+        state=false;}
+        $('#DS_upSequence_group').toggle(state);
+        $('#DS_downSequence_group').toggle(state);
+        $('#DS_startBase_group').toggle(!state);
+        $('#DS_stopBase_group').toggle(!state);
+    });
+
+    $('#DS_method').on('switchChange.bootstrapSwitch', function(event, state) {
+            $('#DS_overlap_group').toggle(state);
     });
 
     $('#DS_demo').click(function() {
@@ -41,6 +52,13 @@ $(function() {
             TMBonus: [0, 2.8, 4.9, 11.6, 13.3][parseInt($('#DS_enzyme').val()) - 1],
             method: $('#DS_method').is(':checked')
         };
+
+        if (! $('#DS_choose').is(':checked')){
+            data.sequence=$('#DS_upSequence').val()+$('#DS_sequence').val()+$('#DS_downSequence').val();
+            data.startBase=$('#DS_upSequence').val().length.toString();
+            data.stopBase=($('#DS_upSequence').val().length+$('#DS_sequence').val().length).toString();
+        }
+
         //console.log(data);
         //throbber
         $("#DS_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
