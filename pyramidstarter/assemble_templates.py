@@ -18,7 +18,7 @@ def make_templates():
     Not sure why serverside it cannot find them...
     """
     temps=os.listdir('templates')
-    frame = open('templates/frame.pt', 'r').read()
+    frame = Template(open('templates/frame.pt', 'r').read()).safe_substitute(codon_modal=open('templates/codon_modal.pt','r').read())
     for word in ['welcome','main']+barnames:
         frame = frame.replace('${' + word + '}', '$' + word).replace('${structure: ' + word + '}', '$' + word)
     open('templates/final_main.pt', 'w').write(

@@ -97,6 +97,7 @@
       <div class="modal-body">
                 <div class="row">
                     <div class="bs-callout bs-callout-warning">Under construction. The ones with question marks fail and this section.</div>
+                    This helper allows displays the proportions of amino acids resulting from
                 </div>
                 <div class="row">
                     <div class="col-md-4">
