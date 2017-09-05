@@ -27,6 +27,9 @@ class SeqEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, obj)
 
+def MP(req):
+    #this is a somewaht copy of DS. I will have to make methods for common bits.
+    pass
 
 def DS(req):
     ###seq.

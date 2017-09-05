@@ -69,7 +69,8 @@ def hello_there(request):
 @view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
 @view_config(route_name='misc', renderer='templates/final_misc.pt')
 @view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
-@view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
+@view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
+#@view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
 def my_view(request):
     #from pprint import PrettyPrinter
     #PrettyPrinter().pprint(request.__dict__)
@@ -206,7 +207,7 @@ def gluer(request): #copy paste of pedeller
                                        err)})}
 
 @view_config(route_name='ajax_facs', renderer='json')
-def facser(request):  # temp here
+def facser(request):  # temp here. DELETE SOON.
     data = {}
     #try:
     # Hack due to server and virt env differences.
@@ -241,6 +242,26 @@ def codonist(request): #copy paste of pedeller
     except TypeError as err:
         print('ERROR in codon: ',str(err))
         log_passing(request, extra=str(request.json_body), status='fail')
+        return {
+            'message': json.dumps({'data': '',
+                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
+                                       err)})}
+
+@view_config(route_name='ajax_mutantprimers', renderer='json')
+def mutationprimerer(request):
+    try:
+        reply = wrap.MP(request.json_body)
+        # Hack due to server and virt env differences.
+        for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
+            if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
+                break
+        filename = os.path.join(path, '{0}.json'.format(uuid.uuid4()))
+        open(filename, 'w').write(reply)
+        request.session['MP'] = filename
+        log_passing(request, str(request.json_body))
+        return {'message': str(reply)}
+    except Exception as err:
+        log_passing(request, str(request.json_body), status='fail')
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(

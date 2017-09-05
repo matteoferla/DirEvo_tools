@@ -25,7 +25,7 @@ def make_templates():
         Template(frame).safe_substitute(main=open('templates/main.pt', 'r').read(), code='',
                                         **set_bar('m_home',True))
     )
-    for (name,welcomed) in (('deepscan',False),('about',False),('QQC',False),('mutanalyst',False),('mutantcaller',False),('misc',False),('pedel',False),('driver',False),('glue',False),('404',False),('log',False),('facs2excel',False)):
+    for (name,welcomed) in (('deepscan',False),('about',False),('QQC',False),('mutanalyst',False),('mutantcaller',False),('misc',False),('pedel',False),('driver',False),('glue',False),('404',False),('log',False),('facs2excel',False),('mutantprimers',False)):
         if '{}.js'.format(name) in temps:
             code=open('templates/{}.js'.format(name)).read()
         else:

@@ -1,3 +1,8 @@
+## mutationprimer
+* temporary name. Most functions are copypaste jobs of deepscan.
+* make more elegant the determination of server or localhost.
+* code currently written until making a function in mutant_wrapper...
+
 ## Glue
 * Glue works.
 * Glue-it. Not done yet.
