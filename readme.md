@@ -24,7 +24,6 @@ Benchling API: Benchling API reqires a key. This seems to be issued on request t
 Mutanalyst is using JS still. Not Ajax.
 
 ## other
-> A variant of deepscan is called for
 > Scheme 19c and 20c in QQC are incomplete!!
 > js of misc for codon has error due to staticmethod being called... changed the static methods fom QQC.
 > GlueIT in pt needs js to change the number of codons.
