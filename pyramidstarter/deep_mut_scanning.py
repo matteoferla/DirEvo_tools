@@ -30,6 +30,7 @@ def parse_AAmutation(mutation, sequence, offset=0,check=True):
     :param check: bol whether to check if the original codon matches the mutated-from AA.
     :return:
     """
+    sequence=str(sequence) #for now..
     AA_choice='QWERTYIPASDFGHKLCVNM*X'
     rex=re.match('(\w)(\d+)(.*)',mutation)
     if not rex:
@@ -112,7 +113,7 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
             mutagenplan.append((x,mutation)) #mutation is the same for all and is a codon
     elif task == 'MP':
         for AA_mut in mutation.split(): # in MP mode mutation is a list A45K
-            mutagenplan.append(*parse_AAmutation(AA_mut, region,section.start))
+            mutagenplan.append(parse_AAmutation(AA_mut, region,section.start))
     else:
         raise NotImplementedError
     for (x,mutcodon) in mutagenplan:

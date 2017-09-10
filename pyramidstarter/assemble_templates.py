@@ -2,7 +2,7 @@ from string import Template
 import re, os
 
 
-barnames='m_home m_mutantcaller m_pedel m_driver m_deepscan m_glue m_QQC m_mutanalyst m_about m_misc'.split()
+barnames='m_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
 def set_bar(name, welcome=False):
     ddex={i:'' for i in barnames}
     ddex[name]='active'
