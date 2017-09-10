@@ -3,7 +3,6 @@ from pyramid.response import Response
 import pyramidstarter.mutant_wrapper as wrap
 import json, os, uuid, shutil
 
-
 import fcsparser
 
 
@@ -52,7 +51,8 @@ def hello_there(request):
     '''
     response = basedict()
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    response['main'] = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead><tbody><tr>' + '</tr><tr>'.join(
+    response[
+        'main'] = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead><tbody><tr>' + '</tr><tr>'.join(
         ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + '</tr></tbody></table>'
     return response
 
@@ -70,15 +70,17 @@ def hello_there(request):
 @view_config(route_name='misc', renderer='templates/final_misc.pt')
 @view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
 @view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
-#@view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
+# @view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
 def my_view(request):
-    #from pprint import PrettyPrinter
-    #PrettyPrinter().pprint(request.__dict__)
+    # from pprint import PrettyPrinter
+    # PrettyPrinter().pprint(request.__dict__)
     log_passing(request)
     return {'project': 'Pyramidstarter'}
 
 
 ############### Ajacean views #####################
+
+@view_config(route_name='ajax_mutantprimers', renderer='json')
 @view_config(route_name='ajax_deepscan', renderer='json')
 def deepscanner(request):
     try:
@@ -99,14 +101,15 @@ def deepscanner(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='deepscan_IDT96')
 def IDT96(request):
-    return wrap.IDT(request,96)
+    return wrap.IDT(request, 96)
+
 
 @view_config(route_name='deepscan_IDT384')
 def IDT384(request):
-    return wrap.IDT(request,384)
-
+    return wrap.IDT(request, 384)
 
 
 @view_config(route_name='ajax_QQC', renderer='json')
@@ -143,6 +146,7 @@ def QQCer(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_mutantcaller', renderer='json')
 def mutantcaller(request):
     data = {}
@@ -178,6 +182,7 @@ def mutantcaller(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_pedel', renderer='json')
 def pedeller(request):
     try:
@@ -192,24 +197,26 @@ def pedeller(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_glue', renderer='json')
-def gluer(request): #copy paste of pedeller
+def gluer(request):  # copy paste of pedeller
     try:
         reply = wrap.glue(request.json_body)
         log_passing(request, str(request.json_body))
         return {'message': str(reply)}
     except TypeError as err:
-        print('ERROR in glue: ',str(err))
+        print('ERROR in glue: ', str(err))
         log_passing(request, extra=str(request.json_body), status='fail')
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_facs', renderer='json')
 def facser(request):  # temp here. DELETE SOON.
     data = {}
-    #try:
+    # try:
     # Hack due to server and virt env differences.
     for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
         if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
@@ -226,42 +233,23 @@ def facser(request):  # temp here. DELETE SOON.
     meta, fcs = fcsparser.parse(file_path)
     reply = fcs.to_csv()
     return {'csv': str(reply)}
-    #except Exception as err:
+    # except Exception as err:
     #    log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
     #    return {
     #        'message': json.dumps({'data': '',
     #                               'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
     #                                   err)})}
 
+
 @view_config(route_name='ajax_codon', renderer='json')
-def codonist(request): #copy paste of pedeller
+def codonist(request):  # copy paste of pedeller
     try:
         reply = wrap.codon(request.json_body)
         log_passing(request, str(request.json_body))
         return {'message': str(reply)}
     except TypeError as err:
-        print('ERROR in codon: ',str(err))
+        print('ERROR in codon: ', str(err))
         log_passing(request, extra=str(request.json_body), status='fail')
-        return {
-            'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
-
-@view_config(route_name='ajax_mutantprimers', renderer='json')
-def mutationprimerer(request):
-    try:
-        reply = wrap.MP(request.json_body)
-        # Hack due to server and virt env differences.
-        for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
-            if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
-                break
-        filename = os.path.join(path, '{0}.json'.format(uuid.uuid4()))
-        open(filename, 'w').write(reply)
-        request.session['MP'] = filename
-        log_passing(request, str(request.json_body))
-        return {'message': str(reply)}
-    except Exception as err:
-        log_passing(request, str(request.json_body), status='fail')
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
@@ -281,7 +269,7 @@ def ajaxian(request):
     return {'message': '<div class="alert alert-success" role="alert">I got this back.</div>'}
 
 
-@notfound_view_config(renderer = 'templates/final_404.pt')
+@notfound_view_config(renderer='templates/final_404.pt')
 def notfound(request):
     request.response.status = 404
     log_passing(request)

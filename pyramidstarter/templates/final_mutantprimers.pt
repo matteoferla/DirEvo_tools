@@ -73,7 +73,7 @@
                 <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
                 <li class=""><a href="/pedel">Pedel</a></li>
                 <li class=""><a href="/driver">Driver</a></li>
-                <li class="active"><a href="/deepscan">Deepscan</a></li>
+                <li class=""><a href="/deepscan">Deepscan</a></li>
                 <li class=""><a href="/QQC">QQC</a></li>
                 <li class=""><a href="/misc">Miscellaneous</a></li>
 
@@ -173,34 +173,19 @@
     <div class="col-lg-8  col-lg-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title">Primer design for deep mutational scanning</h1>
+                <h1 class="panel-title">Primer design for semi-random mutagenesis</h1>
             </div>
             <div class="panel-body">
-                <h2>Deepscan</h2>
+                <h2>Title TBC</h2>
                 <h3>Description</h3>
-                <p>Deepscan generates a list of partially overlapping QuikChange-based primers aimed at constructing
-                    mutability landscapes using PCR. It iterates across a DNA sequence, codon by codon and generates a
-                    primer pair that employs the partially overlapping primer pair strategy (<a
-                            href="http://nar.oxfordjournals.org/content/43/2/e12.long" target="_blank"><span
-                            data-toggle="tooltip" data-placement="top" title="Xia, Y., et al., (2015) New insights into the QuikChange process guide the use of
-                    Phusion DNA polymerase for site-directed mutagenesis. Nucleic Acids Res
-43(2):e12">Xia <i>et al.</i>, 2015 <i class="fa fa-external-link" aria-hidden="true"></i></span></a>). Namely, the
-                    primers in a pair will have an user-defined overlap length (
-                    <i>e.g.</i> 22 bp) centred around the codon to mutate and will have a 3’ overhand long enough to
-                    allow the region beyond the mutagenized codon to anneal with the template above a given melting
-                    temperature, while taking into account terminal GC clamp. The traditional Quikchange protocol
-                    (Agilent) works poorly for codon mutants.
-                    <br/>The serverside calculations use a Python 3 script obtainable from: <a target="_blank"
-                                                                                               href="https://github.com/matteoferla/mutational_scanning">
-                        mutational scanning <i
-                            class="fa fa-github" aria-hidden="true"></i></a>).</p>
+                <p>Woof woof</p>
                 <h3>Input</h3>
                     <div class="col-lg-12"><p>To make primers at the ends of the coding sequence, the neighbouring
                         noncoding sequence are required.
                         Two options are available:</p>
-                        <input type="radio" name="DS_opt" value="split" checked> To give the upstream and downstream sequence
+                        <input type="radio" name="MP_opt" value="split" checked> To give the upstream and downstream sequence
                         separately.<br/>
-                        <input type="radio" name="DS_opt" value="pos"> To give a sequence with a start and end position. A variant
+                        <input type="radio" name="MP_opt" value="pos"> To give a sequence with a start and end position. A variant
                         of this is to give the
                         starting/end position as a short sequence to match as opposed to a number.<br/>
                         <br/></div>
@@ -210,7 +195,7 @@
                     <span class="input-group-addon" data-toggle="tooltip"
                           title="Choose input method."
                           data-placement="top">Choose given:</span>
-                            <input type="checkbox" class="switch" id="DS_choose" checked data-off-text="2"
+                            <input type="checkbox" class="switch" id="MP_choose" checked data-off-text="2"
                                    data-on-text="1" data-off-color="warning" data-size="large" checked>
                         </div>
                     </div>
@@ -218,70 +203,77 @@
                 <!--</div>-->
                 <div class="form-group">
 
-                    <div id="DS_upSequence_group">
+                    <div id="MP_upSequence_group">
                         <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
                               title="Sequence of the upstream region to prime off.">Upstream<br/>Sequence
                         </span>
                             <textarea class="form-control custom-control" rows="5" style="resize:none"
-                                      id="DS_upSequence"
+                                      id="MP_upSequence"
                                       name="upsequence"></textarea>
                         </div>
                         <br/>
                     </div>
-                    <div id="DS_sequence_group">
+                    <div id="MP_sequence_group">
                         <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
                               title="Sequence with some of the upstream and downstream region to prime off if position mode active, else just the coding sequence.">Sequence
                         </span>
-                            <textarea class="form-control custom-control" rows="5" style="resize:none" id="DS_sequence"
+                            <textarea class="form-control custom-control" rows="5" style="resize:none" id="MP_sequence"
                                       name="sequence"></textarea>
                         </div>
                         <br/></div>
-                    <div id="DS_downSequence_group">
+                    <div id="MP_downSequence_group">
                         <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
                               title="Sequence with downstream region to prime off.">Downstream<br/>Sequence
                         </span>
                             <textarea class="form-control custom-control" rows="5" style="resize:none"
-                                      id="DS_downSequence"
+                                      id="MP_downSequence"
                                       name="downsequence"></textarea>
                         </div>
                         <br/>
                     </div>
                     &nbsp;
                     <div class="row">
-                        <div class="col-lg-4" id="DS_startBase_group">
+                        <div class="col-lg-4" id="MP_startBase_group">
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="The value can be a number —the first base of the given sequence will be 1— or a short sequence starting with the first base of the target"
                                       data-placement="top">First base</span>
-                                <input type="text" class="form-control" id="DS_startBase"
+                                <input type="text" class="form-control" id="MP_startBase"
                                        placeholder="number or string">
                             </div>
                             <br/>
                         </div>
-                        <div class="col-lg-4" id="DS_stopBase_group">
+                        <div class="col-lg-4" id="MP_stopBase_group">
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="The value can be a number —the first base of the given sequence will be 1— or a short sequence ending with the last base of the target"
                                       data-placement="top"> Last base</span>
-                                <input type="text" class="form-control" id="DS_stopBase" placeholder="number or string">
+                                <input type="text" class="form-control" id="MP_stopBase" placeholder="number or string">
                             </div>
                             <br/>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="input-group">
-                                <span class="input-group-addon" data-toggle="tooltip"
-                                      title="Codon to insert in place of each codon in the target region"
-                                      data-placement="top">Mutation</span>
-                                <input type="text" class="form-control" placeholder="NNK" id="DS_mutationCodon">
-                                <span class="input-group-btn">
-                                <button class="btn btn-info" type="button" data-toggle="modal"
+                        <div class="col-lg-9">
+                            <p>Add to the following textarea the list of mutations desired, such as A13P. If more complex mutations, such as degenerate codons are to be use mark the destination codon in square brakets after the AA residue and its number, <i>e.g.</i> A13[NNK]. For mutations to multiple amino acids (<i>e.g.</i> A13GP) please specify the required codon for now. If considering degenerate codons and are not sure which to pick, try using the helper tool.</p>
+                        </div>
+                        <div class="col-lg-3"><button class="btn btn-info" type="button" data-toggle="modal"
                                         data-target="#scheme_modal"><i
-                                        class="fa fa-flask" aria-hidden="true"></i></button>
-                            </span>
-                            </div>
+                                        class="fa fa-flask" aria-hidden="true"></i> helper tool</button><br/><br/></div>
+                        </div><div class="row">
+                        <div class="col-lg-12">
+                            <div id="MP_mutationList_group">
+                        <div class="input-group">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                              title="Sequence with downstream region to prime off.">Mutation<br/>List
+                        </span>
+                            <textarea class="form-control custom-control" rows="5" style="resize:none"
+                                      id="MP_mutationList"
+                                      name="mutationList"></textarea>
+                        </div>
+                        <br/>
+                    </div>
                             <br/>
                         </div>
                         <div class="col-lg-4">
@@ -289,7 +281,7 @@
                                 <span class="input-group-addon warning" data-toggle="tooltip"
                                       title="Enzyme system used, which affects the Tm"
                                       data-placement="top">Enzyme</span>
-                                <select class="form-control" id="DS_enzyme">
+                                <select class="form-control" id="MP_enzyme">
                                     <option value="1">no salts (+0&deg;C)</option>
                                     <option value="2">50 mM Na (+2.8&deg;C)</option>
                                     <option value="3">Taq buffer (+4.9&deg;C)</option>
@@ -303,7 +295,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip" title="Target melting temperature"
                                       data-placement="top">Target T<sub>m</sub></span>
-                                <input type="text" class="form-control" placeholder="55" id="DS_targetTemp">
+                                <input type="text" class="form-control" placeholder="55" id="MP_targetTemp">
                             </div>
                             <br/>
                         </div>
@@ -311,7 +303,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="&deg;C tollerance for GC clamp" data-placement="top">GC clamp bonus</span>
-                                <input type="text" class="form-control" placeholder="1" id="DS_GCclamp">
+                                <input type="text" class="form-control" placeholder="1" id="MP_GCclamp">
                             </div>
                             <br/>
                         </div>
@@ -320,17 +312,17 @@
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="Method used: full overlap (traditional) of primers or staggered overlap"
                                       data-placement="top">Method</span>
-                                <input type="checkbox" class="switch" id="DS_method" checked data-off-text="Full"
+                                <input type="checkbox" class="switch" id="MP_method" checked data-off-text="Full"
                                        data-on-text="Stagger" data-switch-value="large" data-off-color="warning"
                                        checked>
                             </div>
                             <br/>
                         </div>
                         <div class="col-lg-4">
-                            <div class="input-group" id="DS_overlap_group">
+                            <div class="input-group" id="MP_overlap_group">
                                 <span class="input-group-addon" data-toggle="tooltip" title="The length of the overlap"
                                       data-placement="top">Overlap</span>
-                                <input type="text" class="form-control" placeholder="22" id="DS_overlap">
+                                <input type="text" class="form-control" placeholder="22" id="MP_overlap">
                             </div>
                             <br/>
                         </div>
@@ -338,7 +330,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="Total length range of the primers" data-placement="top">Length</span>
-                                <input id="DS_primerRange" type="text" class="form-control span2 slider" value=""
+                                <input id="MP_primerRange" type="text" class="form-control span2 slider" value=""
                                        data-slider-min="18" data-slider-max="60" data-slider-step="1"
                                        data-slider-value="[22,40]"/>
                             </div>
@@ -350,14 +342,14 @@
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
                             <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-warning" id="DS_clear"><i class="fa fa-eraser"
+                                <button type="button" class="btn btn-warning" id="MP_clear"><i class="fa fa-eraser"
                                                                                                aria-hidden="true"></i>
                                     Clear
                                 </button>
-                                <button type="button" class="btn btn-info" id="DS_demo"><i class="fa fa-files-o"
+                                <button type="button" class="btn btn-info" id="MP_demo"><i class="fa fa-files-o"
                                                                                            aria-hidden="true"></i> Demo
                                 </button>
-                                <button type="button" class="btn btn-success" id="DS_calculate"><i
+                                <button type="button" class="btn btn-success" id="MP_calculate"><i
                                         class="fa fa-exchange" aria-hidden="true"></i> Calculate
                                 </button>
                             </div>
@@ -365,29 +357,29 @@
                         <br/>
                     </div>
 
-                    <div class="row hidden" id="DS_download">
+                    <div class="row hidden" id="MP_download">
                         <h3>Downloads</h3>
                         <br/>
                         <div class="col-lg-3">Dowload results as:</div>
 
                         <div class="col-lg-9">
                             <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-success" id="DS_table"><i class="fa fa-bars"
+                                <button type="button" class="btn btn-success" id="MP_table"><i class="fa fa-bars"
                                                                                                aria-hidden="true"></i>
                                     CSV
                                 </button>
-                                <button type="button" class="btn btn-warning" id="DS_json"><i class="fa fa-cog"
+                                <button type="button" class="btn btn-warning" id="MP_json"><i class="fa fa-cog"
                                                                                               aria-hidden="true"></i>
                                     JSON
                                 </button>
-                                <button type="button" class="btn btn-info" id="DS_IDT_bulk"><i
+                                <button type="button" class="btn btn-info" id="MP_IDT_bulk"><i
                                         class="fa fa-shopping-basket" aria-hidden="true"></i> IDT bulk
                                 </button>
-                                <a class="btn btn-info" id="DS_IDT_plate96" href='/deepscan_IDT96'
+                                <a class="btn btn-info" id="MP_IDT_plate96" href='/deepscan_IDT96'
                                    download="deepscan_primers_IDT96.xlsx"><i class="fa fa-shopping-cart"
                                                                              aria-hidden="true"></i> IDT 96-plate
                                 </a>
-                                <a class="btn btn-info" id="DS_IDT_plate384" href='/deepscan_IDT384'
+                                <a class="btn btn-info" id="MP_IDT_plate384" href='/deepscan_IDT384'
                                    download="deepscan_primers_IDT384.xlsx"><i class="fa fa-shopping-cart"
                                                                               aria-hidden="true"></i> IDT 384-plate
                                 </a>
@@ -398,7 +390,7 @@
 
 
                     </div>
-                    <div class="row hidden" id="DS_result">
+                    <div class="row hidden" id="MP_result">
                         <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something
                             went wrong
                         </div>
@@ -414,7 +406,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Results</h4>
                           </div>
-                          <div class="modal-body" id="DS_result">
+                          <div class="modal-body" id="MP_result">
                             <p><span class="pycorpse"></span> Oh Snap. Something went wrong</p>
                           </div>
                           <div class="modal-footer">
@@ -531,101 +523,99 @@ function codonist() {
  ga('send', 'pageview');
 
 $(function() {
-    $('#DS_startBase_group').hide();
-    $('#DS_stopBase_group').hide();
+    $('#MP_startBase_group').hide();
+    $('#MP_stopBase_group').hide();
 
         //var val = $('input[name=q12_3]:checked').val();
-    $('input[type=radio][name=DS_opt]').change(function() {
+    $('input[type=radio][name=MP_opt]').change(function() {
         if (this.value == 'split') {
         state=true;
         } else {
         state=false;}
-        $('#DS_upSequence_group').toggle(state);
-        $('#DS_downSequence_group').toggle(state);
-        $('#DS_startBase_group').toggle(!state);
-        $('#DS_stopBase_group').toggle(!state);
+        $('#MP_upSequence_group').toggle(state);
+        $('#MP_downSequence_group').toggle(state);
+        $('#MP_startBase_group').toggle(!state);
+        $('#MP_stopBase_group').toggle(!state);
     });
 
-    $('#DS_method').on('switchChange.bootstrapSwitch', function(event, state) {
-            $('#DS_overlap_group').toggle(state);
+    $('#MP_method').on('switchChange.bootstrapSwitch', function(event, state) {
+            $('#MP_overlap_group').toggle(state);
     });
 
-    $('#DS_demo').click(function() {
-        if ($('input[name=DS_opt]:checked').val() == 'split'){
-        $('#DS_sequence').val('ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGAT');
-        $('#DS_upSequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGC');
-        $('#DS_downSequence').val('TAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
+    $('#MP_demo').click(function() {
+        if ($('input[name=MP_opt]:checked').val() == 'split'){
+        $('#MP_sequence').val('ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGAT');
+        $('#MP_upSequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGC');
+        $('#MP_downSequence').val('TAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
         }
         else {
-        $('#DS_startBase').val(105);
-        $('#DS_stopBase').val(882);
-        $('#DS_sequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGCATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGATTAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
+        $('#MP_startBase').val(105);
+        $('#MP_stopBase').val(882);
+        $('#MP_sequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGCATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGATTAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
         }
-        $('#DS_startBase').val(105);
-        $('#DS_stopBase').val(882);
-        $('#DS_sequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGCATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGATTAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
-        $("#DS_result").removeClass('hidden');
-        $("#DS_result").show();
-        $("#DS_result").html("<br/><div class='bs-callout bs-callout-info'>The sequence loaded encodes superfolded GFP (in pBAD from <a target='_blank' href='https://www.addgene.org/54519/'>Addgene <i class='fa fa-external-link' aria-hidden='true'></i></a>).</div>");
+        $('#MP_mutationList').val('H66W');
+        $("#MP_result").removeClass('hidden');
+        $("#MP_result").show();
+        $("#MP_result").html("<br/><div class='bs-callout bs-callout-info'>The sequence loaded encodes superfolded GFP (in pBAD from <a target='_blank' href='https://www.addgene.org/54519/'>Addgene <i class='fa fa-external-link' aria-hidden='true'></i></a>).</div>");
 
     })
 
-    $('#DS_clear').click(function() {
-        $('#DS_startBase').val('');
-        $('#DS_stopBase').val('');
-        $('#DS_sequence').val('');
-        $("#DS_result").addClass('hidden');
-        $("#DS_download").addClass('hidden');
+    $('#MP_clear').click(function() {
+        $('#MP_startBase').val('');
+        $('#MP_stopBase').val('');
+        $('#MP_sequence').val('');
+        $("#MP_result").addClass('hidden');
+        $("#MP_download").addClass('hidden');
     })
 
 
-    $('#DS_calculate').click(function() {
+    $('#MP_calculate').click(function() {
         //nah to .serialize() so I can do sanity tests.
         var data = {
-            task: 'DS',
-            startBase: $('#DS_startBase').val(),
-            stopBase: $('#DS_stopBase').val(),
-            sequence: $('#DS_sequence').val(),
-            mutationCodon: $('#DS_mutationCodon').val(),
-            targetTemp: $('#DS_targetTemp').val(),
-            overlap: $('#DS_overlap').val(),
-            primerRange: $('#DS_primerRange').val(),
-            GCclamp: $('#DS_GCclamp').val(),
-            TMBonus: [0, 2.8, 4.9, 11.6, 13.3][parseInt($('#DS_enzyme').val()) - 1],
-            method: $('#DS_method').is(':checked')
+            task: 'MP',
+            startBase: $('#MP_startBase').val(),
+            stopBase: $('#MP_stopBase').val(),
+            sequence: $('#MP_sequence').val(),
+            mutationList: $('#MP_mutationList').val(),
+            targetTemp: $('#MP_targetTemp').val(),
+            overlap: $('#MP_overlap').val(),
+            primerRange: $('#MP_primerRange').val(),
+            GCclamp: $('#MP_GCclamp').val(),
+            TMBonus: [0, 2.8, 4.9, 11.6, 13.3][parseInt($('#MP_enzyme').val()) - 1],
+            method: $('#MP_method').is(':checked')
         };
 
-        if (! $('#DS_choose').is(':checked')){
-            data.sequence=$('#DS_upSequence').val()+$('#DS_sequence').val()+$('#DS_downSequence').val();
-            data.startBase=$('#DS_upSequence').val().length.toString();
-            data.stopBase=($('#DS_upSequence').val().length+$('#DS_sequence').val().length).toString();
+        if (! $('#MP_choose').is(':checked')){
+            data.sequence=$('#MP_upSequence').val()+$('#MP_sequence').val()+$('#MP_downSequence').val();
+            data.startBase=$('#MP_upSequence').val().length.toString();
+            data.stopBase=($('#MP_upSequence').val().length+$('#MP_sequence').val().length).toString();
         }
 
         //console.log(data);
         //throbber
-        $("#DS_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
-        $("#DS_result").removeClass('hidden');
-        $("#DS_result").show(); //weird combo.
+        $("#MP_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#MP_result").removeClass('hidden');
+        $("#MP_result").show(); //weird combo.
                 //Ajax
         $.ajax({
-            url: "ajax_deepscan",
+            url: "ajax_mutantprimers",
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),
             success: function(result) {
                 reply = JSON.parse(result.message);
                 window.sessionStorage.setItem('primers', JSON.stringify(reply['data']));
-                $("#DS_download").removeClass('hidden');
-                $("#DS_download").show();
-                $("#DS_result").html(reply['html']);
+                $("#MP_download").removeClass('hidden');
+                $("#MP_download").show();
+                $("#MP_result").html(reply['html']);
             },
             error: function() {
-                $("#DS_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+                $("#MP_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
             }
         });
     });
 
-    $('#DS_table').click(function() {
+    $('#MP_table').click(function() {
         headers = 'base,AA,codon,fw_primer,rv_primer,len_homology,fw_len_anneal,rv_len_anneal,fw_len_primer,rv_len_primer,homology_start,homology_stop,homology_Tm,fw_anneal_Tm,rv_anneal_Tm'.split(",");;
         var csv = JSON.parse(window.sessionStorage.getItem('primers')).map(function(obj) {
             return headers.map(function(h) {
@@ -637,14 +627,14 @@ $(function() {
         }), 'deepscan_primers.csv');
     });
 
-    $('#DS_json').click(function() {
+    $('#MP_json').click(function() {
         saveAs(new Blob([window.sessionStorage.getItem('primers')], {
             type: "text/plain;charset=utf-8"
         }), 'deepscan_primers.json');
     });
 
 
-    $('#DS_IDT_bulk').click(function() {
+    $('#MP_IDT_bulk').click(function() {
         idt = JSON.parse(window.sessionStorage.getItem('primers')).map(function(obj) {
             return obj.AA + '_fw\t' + obj.fw_primer.replace(/ /g, '') + '\t25nm\tSTD\n' + obj.AA + '_rv\t' + obj.rv_primer.replace(/ /g, '') + '\t25nm\tSTD\n'
         }).join('');

@@ -27,10 +27,6 @@ class SeqEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, obj)
 
-def MP(req):
-    #this is a somewaht copy of DS. I will have to make methods for common bits.
-    pass
-
 def DS(req):
     ###seq.
     # for some reason I abided by the keep python variables pythonic and the JS variables JavaScribal
@@ -50,12 +46,20 @@ def DS(req):
             else:
                 pass
     #### parse rest
-    pyreq = {'mutation': req['mutationCodon'],
+    pyreq = {
              'region': req['sequence'],
              'primer_range': [int(x) for x in req['primerRange'].split(',')],
              'section': slice(int(req['startBase']), int(req['stopBase'])),
              'Tm_bonus': float(req['TMBonus'])}
-
+    if req['task'] == 'MP':
+        pyreq['mutation'] = req['mutationList']
+        pyreq['task'] = 'MP'
+    elif req['task'] == 'DS':
+        pyreq['mutation']=req['mutationCodon']
+        pyreq['task']='DS'
+    else:
+        print(req)
+        raise ValueError('Unrecognised: MP or DS mode?')
     if req['targetTemp']:
         pyreq['target_temp'] = float(req['targetTemp'])
     if req['GCclamp']:

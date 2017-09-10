@@ -2,6 +2,7 @@
 * temporary name. Most functions are copypaste jobs of deepscan.
 * make more elegant the determination of server or localhost.
 * code currently written until making a function in mutant_wrapper...
+* why is Y66 actually Y67? Does GFP not start from ATG??
 
 ## Glue
 * Glue works.

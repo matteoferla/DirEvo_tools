@@ -17,11 +17,45 @@ from Bio.Alphabet import generic_dna
 from Bio.SeqUtils import MeltingTemp as mt
 import math
 from warnings import warn
-import random
+import random, re
+from pyramidstarter.mutagenesis import Mutation
 
+
+def parse_AAmutation(mutation, sequence, offset=0,check=True):
+    """
+    Coverts a AA mutation to codon
+    :param mutation: AA mutation, eg. A23K or A23[NNK]
+    :param sequence: the sequence
+    :param offset: the start codon is n (from zero)
+    :param check: bol whether to check if the original codon matches the mutated-from AA.
+    :return:
+    """
+    AA_choice='QWERTYIPASDFGHKLCVNM*X'
+    rex=re.match('(\w)(\d+)(.*)',mutation)
+    if not rex:
+        raise ValueError('{0} is not a valid mutation, unlike say A23K'.format(mutation))
+    (start_AA,num,target)=rex.groups()
+    num=int(num)
+    assert start_AA in AA_choice, ValueError('{0} is not an amino acid letter'.format(start_AA))
+    pos = (num - 1) * 3 + offset
+    if check:
+        if isinstance(sequence,Seq):
+            actual_AA = str(sequence[pos:pos + 3].translate())
+        else:
+            actual_AA=str(Seq(sequence[pos:pos+3]).translate())
+        assert actual_AA == start_AA, ValueError('Pos {0} is a {1} not a {2}'.format(pos, actual_AA, start_AA))
+    if target in AA_choice and target != 'X': #AA target
+        ori_codon=str(Seq(sequence[pos:pos+3]))
+        #temp solution. Not using the Mutation class itself
+        return (pos,Mutation.codon_codex[ori_codon][target])
+    elif target.find('['): # nucleotide target A23[NNK]
+        return (pos,re.search('\[(\w{3})\]', target).groups()[0])
+        # assert if real codon?
+    else:
+        raise ValueError('{0} is an unrecognised target')
 
 def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_range=(None, 60), mutation='NNK',
-                       GC_bonus=1, Tm_bonus=2.8, staggered=True, count_from_one=True):
+                       GC_bonus=1, Tm_bonus=2.8, staggered=True, count_from_one=True, task='DS'):
     """
     Designs primers for quikchange for deep mutation scanning.
     Based on the overlap principle of http://nar.oxfordjournals.org/content/43/2/e12.long
@@ -37,6 +71,7 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
     :param Tm_bonus: Temp increase due to salt. Distilled water (+0). To match the IDT oligoanalyser with 50 mM Na (+2.8&deg;C). Taq buffer (+4.9&deg;C), Phusion buffer (+11.6&deg;C), Q5 buffer (+13.3&deg;C)
     :param staggered: Boolean. If true (default) staggered primers will be designed. If not, Agilent-QC primers with full overlap will be designed.
     :param count_from_one: Boolean or int. If true (default) the first amino acid mutated will be the first one, else whatever number it was in the sequence.
+    :param mode: DS the normal way deepscan. MP make primers based on mutation list.
     :return: a list of dictionaries with the following keys: base codon primer len_homology len_anneal len_primer homology_start homology_stop homology_Tm anneal_Tm
 
     Regarding salts. check out mt.salt_correction at http://biopython.org/DIST/docs/api/Bio.SeqUtils.MeltingTemp-module.html#salt_correction
@@ -56,8 +91,8 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
     else:  # try if it is an iterable.
         section = slice(*section)
     gene = region[section]
-    if len(gene) % 3 != 0:
-        warn('The length of the region is not a multiple of three: ' + str(len(region)))
+    #if len(gene) % 3 != 0:
+    #    warn('The length of the region is not a multiple of three: ' + str(len(region)))
     # max size
     if not staggered and primer_range[0]:  # in case someone gives a rather odd input.
         overlap_len = primer_range[0]
@@ -71,7 +106,16 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
         offset=count_from_one
     else:
         offset=0
-    for x in range(section.start, section.stop, 3):
+    mutagenplan=[] #list of tuple of two: nt position, codon
+    if task =='DS':
+        for x in range(section.start, section.stop, 3):
+            mutagenplan.append((x,mutation)) #mutation is the same for all and is a codon
+    elif task == 'MP':
+        for AA_mut in mutation.split(): # in MP mode mutation is a list A45K
+            mutagenplan.append(*parse_AAmutation(AA_mut, region,section.start))
+    else:
+        raise NotImplementedError
+    for (x,mutcodon) in mutagenplan:
         start = x - int(overlap_len / 2)
         stop = x + overlap_len - int(overlap_len / 2)
         codon = {'codon': region[x:x + 3],
@@ -117,21 +161,21 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
                 warn('Target temperature not met. {0}C > {1}C'.format(target_temp, t))
             if dir == 'fw':
                 if staggered:
-                    codon[dir + '_primer'] = region[start:x].upper() + mutation.lower() + mut.upper()
+                    codon[dir + '_primer'] = region[start:x].upper() + mutcodon.lower() + mut.upper()
                 else:
                     # placeholder
                     codon[dir + '_primer'] = mut.upper()
             else:  # dir == 'rv'
                 if staggered:
                     codon[dir + '_primer'] = region[x + 3:stop].reverse_complement().upper() + Seq(
-                        mutation).reverse_complement().lower() + mut.upper()
+                        mutcodon).reverse_complement().lower() + mut.upper()
                 else:
                     codon[dir + '_primer'] = mut.upper()
             codon[dir + '_len_primer'] = len(codon[dir + '_primer'])
             codon[dir + '_anneal_Tm'] = round(t, 1)
             codon[dir + '_len_anneal'] = i
         if not staggered:
-            codon['fw_primer'] = codon['rv_primer'].reverse_complement().upper() + mutation.lower() + codon['fw_primer']
+            codon['fw_primer'] = codon['rv_primer'].reverse_complement().upper() + mutcodon.lower() + codon['fw_primer']
             codon['rv_primer'] = codon['fw_primer'].reverse_complement()
         geneball.append(codon)
     return geneball
@@ -149,15 +193,22 @@ def randomer(n):
 
 def test():
     """Diagnostic!"""
+    print('Testing deep_mutation_scan...')
     n = 30
     m = 21
     query = randomer(n).lower() + randomer(m).upper() + randomer(n).lower()
     print('sequence:', query)
     import csv
-    w = csv.DictWriter(open('out.csv', 'w', newline=''),
+    f=open('out.csv', 'w', newline='')
+    w = csv.DictWriter(f,
                        fieldnames='base AA codon fw_primer rv_primer len_homology fw_len_anneal rv_len_anneal fw_len_primer rv_len_primer homology_start homology_stop homology_Tm fw_anneal_Tm rv_anneal_Tm'.split())
     w.writeheader()
     w.writerows(deep_mutation_scan(query, (n, n + m)))
+    f.close()
+    print(open('out.csv').read())
+    ##
+    print('Testing parse_AAmutation...')
+    print('Y2K',parse_AAmutation('Y2K', 'ATGTATGGT', 0,True)[1])
 
 
 def cmdline():
