@@ -44,16 +44,16 @@ def parse_AAmutation(mutation, sequence, offset=0,check=True):
             actual_AA = str(sequence[pos:pos + 3].translate())
         else:
             actual_AA=str(Seq(sequence[pos:pos+3]).translate())
-        assert actual_AA == start_AA, ValueError('Pos {0} is a {1} not a {2}'.format(pos, actual_AA, start_AA))
+        assert actual_AA == start_AA, ValueError('In {mutation}, Pos {pos}-{pos2} ({seq}) encodes a {actual} not a {start}. Neighbourhood: {neigh}'.format(pos=pos, pos2=pos+3, seq=str(Seq(sequence[pos:pos+3])), actual=actual_AA, start=start_AA, mutation=mutation,neigh=str(Seq(sequence[pos-9:pos+12]))))
     if target in AA_choice and target != 'X': #AA target
         ori_codon=str(Seq(sequence[pos:pos+3]))
         #temp solution. Not using the Mutation class itself
         return (pos,Mutation.codon_codex[ori_codon][target])
-    elif target.find('['): # nucleotide target A23[NNK]
+    elif target.find('[') != -1: # nucleotide target A23[NNK]
         return (pos,re.search('\[(\w{3})\]', target).groups()[0])
         # assert if real codon?
     else:
-        raise ValueError('{0} is an unrecognised target')
+        raise ValueError('{0} is an unrecognised target'.format(target))
 
 def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_range=(None, 60), mutation='NNK',
                        GC_bonus=1, Tm_bonus=2.8, staggered=True, count_from_one=True, task='DS'):
@@ -112,7 +112,7 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
         for x in range(section.start, section.stop, 3):
             mutagenplan.append((x,mutation)) #mutation is the same for all and is a codon
     elif task == 'MP':
-        for AA_mut in mutation.split(): # in MP mode mutation is a list A45K
+        for AA_mut in mutation.replace("\n"," ").split(): # in MP mode mutation is a list A45K
             mutagenplan.append(parse_AAmutation(AA_mut, region,section.start))
     else:
         raise NotImplementedError
