@@ -2,9 +2,16 @@ from pyramid.view import view_config, notfound_view_config
 from pyramid.response import Response
 import pyramidstarter.mutant_wrapper as wrap
 import json, os, uuid, shutil
-
 import fcsparser
 
+
+if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ: #openshift 2 and 3 savvy!
+    PLACE = "server"
+    PATH = "/opt/app-root/src/pyramidstarter/"
+else:
+    PLACE = "localhost"
+    PATH = "pyramidstarter/"
+print(PLACE)
 
 def basedict():
     return {'project': 'Pyramidstarter',
@@ -85,11 +92,7 @@ def my_view(request):
 def deepscanner(request):
     try:
         reply = wrap.DS(request.json_body)
-        # Hack due to server and virt env differences.
-        for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
-            if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
-                break
-        filename = os.path.join(path, '{0}.json'.format(uuid.uuid4()))
+        filename = os.path.join(PATH,'tmp', '{0}.json'.format(uuid.uuid4()))
         open(filename, 'w').write(reply)
         request.session['DS'] = filename
         log_passing(request, str(request.json_body))
@@ -116,21 +119,16 @@ def IDT384(request):
 def QQCer(request):
     data = {}
     try:
-        # Hack due to server and virt env differences.
-        for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
-            if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
-                break
         if request.POST['file'] == 'demo':
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            # file_path = os.path.join(os.getcwd(), '/pyramidstarter/tmp', '22c_demo.ab1')
-            file_path = os.path.join(path, '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+            file_path = os.path.join(PATH,'static', '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
             input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
             new_filename = '{0}.ab1'.format(uuid.uuid4())
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(path, new_filename)
+            file_path = os.path.join(PATH,'tmp', new_filename)
             temp_file_path = file_path + '~'
             input_file.seek(0)
             with open(temp_file_path, 'wb') as output_file:
@@ -152,21 +150,16 @@ def mutantcaller(request):
     data = {}
     raise NotImplementedError
     try:
-        # Hack due to server and virt env differences.
-        for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
-            if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
-                break
         if request.POST['file'] == 'demo':
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            # file_path = os.path.join(os.getcwd(), '/pyramidstarter/tmp', '22c_demo.ab1')
-            file_path = os.path.join(path, '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+            file_path = os.path.join(PATH,'static', '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
             input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
             new_filename = '{0}.ab1'.format(uuid.uuid4())
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(path, new_filename)
+            file_path = os.path.join(PATH, 'tmp',new_filename)
             temp_file_path = file_path + '~'
             input_file.seek(0)
             with open(temp_file_path, 'wb') as output_file:
@@ -216,15 +209,10 @@ def gluer(request):  # copy paste of pedeller
 @view_config(route_name='ajax_facs', renderer='json')
 def facser(request):  # temp here. DELETE SOON.
     data = {}
-    # try:
-    # Hack due to server and virt env differences.
-    for path in ['pyramidstarter/tmp/', 'app-root/runtime/repo/pyramidstarter/tmp/']:
-        if os.path.isfile(os.path.join(path, '22c_demo.ab1')):
-            break
     input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
     new_filename = '{0}.ab1'.format(uuid.uuid4())
     data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
-    file_path = os.path.join(path, new_filename)
+    file_path = os.path.join(PATH, 'tmp',new_filename)
     temp_file_path = file_path + '~'
     input_file.seek(0)
     with open(temp_file_path, 'wb') as output_file:
