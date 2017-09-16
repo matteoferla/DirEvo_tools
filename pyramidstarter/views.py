@@ -245,17 +245,17 @@ def codonist(request):  # copy paste of pedeller
                                        err)})}
 
 @view_config(route_name='ajax_email',renderer='json')
-def send_email():
-    subject=''
-    body=''
+def send_email(request):
+    reply = request.json_body
+    subject='Comment from '+reply['message']
+    body=reply['name']
     gmail_user = 'squidonius.tango@gmail.com'
-    gmail_pwd = ''
+    gmail_pwd = 'Thermotoga1986'
     FROM = 'squidonius.tango@gmail.com'
     recipient = 'matteo.ferla@gmail.com'
     TO = recipient if type(recipient) is list else [recipient]
     SUBJECT = subject
     TEXT = body
-
     # Prepare actual message
     message = """From: %s\nTo: %s\nSubject: %s\n\n%s
     """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
@@ -269,6 +269,7 @@ def send_email():
         return json.dumps({'msg': 'successfully sent the mail'})
     except Exception as e:
         return json.dumps({'msg': str(e)})
+
 
 
 

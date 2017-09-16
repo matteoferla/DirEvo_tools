@@ -34,7 +34,7 @@
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
     <!--main CSS-->
-        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,10 +42,10 @@
     <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-     <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>-->
-   <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
+    <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>-->
+    <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
 
 
 </head>
@@ -160,7 +160,6 @@
     </div>
   </div>
 </div>
-
 
 
 <!--Main -->
@@ -596,7 +595,7 @@
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/mutationalAux.js')}"></script>
     </div>
 
-    </div>
+</div>
 
 <br/>
 <br/>
@@ -607,26 +606,54 @@
 <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
 <div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
     <div class="container">
-        <div class="row"><div class="col-md-offset-2 col-md-6"><p class="text-muted">Made without approval from the ethics committee.</p></div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4"><p class="text-muted">Made without approval from the ethics
+                committee.</p></div>
             <div class="col-md-2">
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
-                  </ul>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
+                    </ul>
                 </div>
-
-
-
-
-
-
-
-                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default" onclick="$('#comment_modal').modal('show');">Comment <i
+                        class="fa fa-comment" aria-hidden="true"></i></button>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal" id="comment_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="comment_title">Send Comment</h4>
+            </div>
+            <div class="modal-body" id="comment_body">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Name (optional)</span>
+                    <input id="comment_name" type="text" class="form-control" placeholder="Name"
+                           aria-describedby="name">
+                </div>
+                <br/>
+                <textarea id="comment_msg" rows="5" style="width:100%;" placeholder="Message"></textarea>
+                <br/>
+                <div id="comment_status"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="comment_send">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <!-- Bootstrap core JavaScript
  ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -634,15 +661,19 @@
 <!--<script src="https://www.google.com/jsapi"></script>-->
 <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
 <!--<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap.min.js')}"></script>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
 <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 
-    <script>
+<script>
 
 $(function(){
 var themeNames=["darkly","default","amelia","cerulean","cosmo","cyborg","flatly","journal","readable","sandstone","simplex","slate","solar","spacelab","superhero","united","lumen","paper","yeti"];
@@ -664,6 +695,30 @@ $(".switch").bootstrapSwitch();
 $(".hidden").hide();
 $('#§welcome').modal('show');
 $('#scheme_modal').modal('hide');
+$('#comment_modal').modal('hide');
+
+$('#comment_send').click(function() {
+    $("#comment_status").show();
+    $("#comment_status").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+    $.ajax({
+            url: 'ajax_email',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({"message": $('#comment_msg').val(), "name": $('#comment_name').val()}),
+            success: function(result) {
+                reply = JSON.parse(result);
+                $("#comment_status").html('<div class="alert alert-success" role="alert">'+reply.msg+'</div>');
+            },
+            error: function() {
+                $("#comment_status").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        $("#comment_status").delay(2000).fadeOut();
+});
+
 
 function codonist() {
         $("#codon_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
@@ -728,6 +783,10 @@ function codonist() {
  ga('send', 'pageview');
 
  
+
+
+
+
 
 </script>
 </body>
