@@ -13,15 +13,14 @@
 
 
     <title>Pedel revamp</title>
-    <!-- Bootstrap core CSS
-    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap.min.css')}">-->
+    <!-- Bootstrap core CSS-->
+    <!--<link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/themes/darkly.min.css')}">-->
 
     <!--Fontawesome-->
     <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/font-awesome/css/font-awesome.min.css')}">
 
     <!-- Custom styles for this scaffold -->
     <!-- was bootstrap-theme-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/darkly.min.css')}" rel="stylesheet">
     <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}" rel="stylesheet">
 
     <!--slider-->
@@ -434,8 +433,28 @@
 <br/>
 
 <!--footer-->
+<!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
 <div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
-    <p class="text-muted" style="align:center;">Made without approval from the ethics committee.</p>
+    <div class="container">
+        <div class="row"><div class="col-md-offset-2 col-md-6"><p class="text-muted">Made without approval from the ethics committee.</p></div>
+            <div class="col-md-2">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
+                  </ul>
+                </div>
+
+
+
+
+
+
+
+                </div>
+    </div>
+</div>
 </div>
 <!-- Bootstrap core JavaScript
  ================================================== -->
@@ -453,7 +472,21 @@
 
 
     <script>
-$(function () {
+
+$(function(){
+var themeNames=["darkly","default","amelia","cerulean","cosmo","cyborg","flatly","journal","readable","sandstone","simplex","slate","solar","spacelab","superhero","united","lumen","paper","yeti"];
+    var themes = {};
+    for (i=0; i<themeNames.length; i++) {
+        themes[themeNames[i]]="${request.static_url('pyramidstarter:static/bootstrap/themes/')}"+themeNames[i]+".min.css";
+        $('#themeSelector').append('<li><a href="#" data-theme='+themeNames[i]+' class="theme-link">'+themeNames[i]+'</a></li>');
+    }
+   var themesheet = $('<link href="'+themes['darkly']+'" rel="stylesheet" />');
+    themesheet.appendTo('head');
+    $('.theme-link').click(function(){
+       var themeurl = themes[$(this).attr('data-theme')];
+        themesheet.attr('href',themeurl);
+    $('#current_theme').html($(this).attr('data-theme'));
+    });
 $('[data-toggle="tooltip"]').tooltip();
 $(".slider").bootstrapSlider();
 $(".switch").bootstrapSwitch();

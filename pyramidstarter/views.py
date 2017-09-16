@@ -13,6 +13,7 @@ else:
     PATH = "pyramidstarter/"
 print(PLACE)
 
+
 def basedict():
     return {'project': 'Pyramidstarter',
             'main': '',
@@ -82,6 +83,7 @@ def my_view(request):
     # from pprint import PrettyPrinter
     # PrettyPrinter().pprint(request.__dict__)
     log_passing(request)
+    #print(request.matched_route.name)
     return {'project': 'Pyramidstarter'}
 
 
