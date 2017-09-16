@@ -3,6 +3,7 @@ from pyramid.response import Response
 import pyramidstarter.mutant_wrapper as wrap
 import json, os, uuid, shutil
 import fcsparser
+import smtplib
 
 
 if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ: #openshift 2 and 3 savvy!
@@ -64,9 +65,7 @@ def hello_there(request):
         ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + '</tr></tbody></table>'
     return response
 
-
 ############### Main views #####################
-
 @view_config(route_name='about', renderer='templates/final_about.pt')
 @view_config(route_name='deepscan', renderer='templates/final_deepscan.pt')
 @view_config(route_name='home', renderer='templates/final_main.pt')
@@ -244,6 +243,33 @@ def codonist(request):  # copy paste of pedeller
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
+
+@view_config(route_name='ajax_email',renderer='json')
+def send_email():
+    subject=''
+    body=''
+    gmail_user = 'squidonius.tango@gmail.com'
+    gmail_pwd = ''
+    FROM = 'squidonius.tango@gmail.com'
+    recipient = 'matteo.ferla@gmail.com'
+    TO = recipient if type(recipient) is list else [recipient]
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.ehlo()
+        server.starttls()
+        server.login(gmail_user, gmail_pwd)
+        server.sendmail(FROM, TO, message)
+        server.close()
+        return json.dumps({'msg': 'successfully sent the mail'})
+    except Exception as e:
+        return json.dumps({'msg': str(e)})
+
 
 
 ############### Other #####################

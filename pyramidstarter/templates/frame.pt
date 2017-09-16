@@ -34,7 +34,7 @@
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
     <!--main CSS-->
-        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,10 +42,10 @@
     <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-     <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>-->
-   <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
+    <!--my code was Jquery 2. boots used 1 <script src="http://oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>-->
+    <script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>
 
 
 </head>
@@ -89,7 +89,6 @@
 ${codon_modal}
 
 
-
 <!--Main -->
 <div class="container-fluid" id="fullpage">
 
@@ -99,7 +98,7 @@ ${codon_modal}
         ${structure: main}
     </div>
 
-    </div>
+</div>
 
 <br/>
 <br/>
@@ -110,25 +109,24 @@ ${codon_modal}
 <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
 <div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro">
     <div class="container">
-        <div class="row"><div class="col-md-offset-2 col-md-6"><p class="text-muted">Made without approval from the ethics committee.</p></div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-6"><p class="text-muted">Made without approval from the ethics
+                committee.</p></div>
             <div class="col-md-2">
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
-                  </ul>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
+                    </ul>
+                    <i class="fa fa-comment" aria-hidden="true"></i>
                 </div>
 
 
-
-
-
-
-
-                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 <!-- Bootstrap core JavaScript
  ================================================== -->
@@ -137,15 +135,17 @@ ${codon_modal}
 <!--<script src="https://www.google.com/jsapi"></script>-->
 <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/modernizr.js')}"></script>-->
 <!--<script type='text/javascript' src="http://oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+<script type='text/javascript'
+        src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
 <script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
 <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 
-    <script>
+<script>
 
 $(function(){
 var themeNames=["darkly","default","amelia","cerulean","cosmo","cyborg","flatly","journal","readable","sandstone","simplex","slate","solar","spacelab","superhero","united","lumen","paper","yeti"];
@@ -231,6 +231,7 @@ function codonist() {
  ga('send', 'pageview');
 
 ${code}
+
 
 </script>
 </body>
