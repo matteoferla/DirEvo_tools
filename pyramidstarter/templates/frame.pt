@@ -287,7 +287,8 @@ function codonist() {
 
 ${code}
 
-
+//dumped here for now. Unuse why (=by what) its state gets vandalised in the inserted code.
+//TO DO one day. Figure out why.
 $('#§welcome').show();
 
 
