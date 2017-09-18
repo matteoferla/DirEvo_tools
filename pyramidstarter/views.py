@@ -150,6 +150,7 @@ def QQCer(request):
 def mutantcaller(request):
     data = {}
     raise NotImplementedError
+    # this is just a copy paste.
     try:
         if request.POST['file'] == 'demo':
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',

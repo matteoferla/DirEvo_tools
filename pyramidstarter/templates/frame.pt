@@ -288,6 +288,9 @@ function codonist() {
 ${code}
 
 
+$('#§welcome').show();
+
+
 
 
 
