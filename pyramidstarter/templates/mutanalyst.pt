@@ -6,10 +6,6 @@
             </div>
             <div class="panel-body">
                 <h2>Mutanalyst</h2>
-                <div class="bs-callout bs-callout-warning">
-                    <h4>Moved!</h4>The mutanalyst server was a static set of webpages hosted on Dropbox. As the latter is not allowed as of 1st September the site is temporarily moved here.<br/>
-                To my annoyance, RH openshift have changed their server policy too so I find myself drop from three free openshift servers to one. So I need to wait for the 30th of September to apply for Amazon AWS academic credits to move it to an EC2 server there...<br/>A bit of a mess. So apologies for the mess. Nevertheless mutanalyst is fully functional. And what is this website it is in? Hopefully a cool new site just in time for Christmas!</div>
-
                 <h3>Description</h3>
                 <div class="bs-callout bs-callout-info">
                     <h4>Add</h4>Description</div>

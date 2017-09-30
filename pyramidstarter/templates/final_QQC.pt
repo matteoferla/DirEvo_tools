@@ -363,7 +363,6 @@ $(".hidden").hide();
 $('#§welcome').modal('show');
 $('#scheme_modal').modal('hide');
 $('#comment_modal').modal('hide');
-$('#§welcome').show()
 
 $('#comment_send').click(function() {
     $("#comment_status").show();
@@ -617,6 +616,10 @@ $(function() {
         return false;
     });
 });
+
+//dumped here for now. Unuse why (=by what) its state gets vandalised in the inserted code.
+//TO DO one day. Figure out why.
+$('#§welcome').show();
 
 
 
