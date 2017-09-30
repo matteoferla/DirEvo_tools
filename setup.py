@@ -16,7 +16,8 @@ requires = [
     'biopython',
     'numpy',
     'scipy',
-    'openpyxl'
+    'openpyxl',
+    'markdown'
     ]
 
 # no pandas as pandas kill my pyramid.

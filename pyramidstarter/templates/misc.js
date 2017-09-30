@@ -64,7 +64,7 @@ $(function() {
             $("#codon_manual").hide();
         }
         $.ajax({
-            url: 'ajax_codon',
+            url: '../ajax_codon',
             type: 'POST',
             data: JSON.stringify(data),
             success: function(result) {

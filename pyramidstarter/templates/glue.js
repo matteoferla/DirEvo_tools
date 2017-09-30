@@ -66,7 +66,7 @@ $(function() {
         data['mode'] = $("#glue_form").find(".btn-success").attr("id").replace("glue_","").replace("_on","");
 
         $.ajax({
-            url: 'ajax_glue',
+            url: '../ajax_glue',
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),

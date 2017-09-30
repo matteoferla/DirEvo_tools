@@ -67,19 +67,19 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="/">Home</a></li>
-                <li class=""><a href="/glue">Glue</a></li>
-                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
-                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
-                <li class=""><a href="/pedel">Pedel</a></li>
-                <li class=""><a href="/driver">Driver</a></li>
-                <li class=""><a href="/deepscan">Deepscan</a></li>
-                <li class=""><a href="/mutantprimers">Mutantprimers</a></li>
-                <li class=""><a href="/QQC">QQC</a></li>
-                <li class=""><a href="/misc">Miscellaneous</a></li>
+                <li class=""><a href="/main/glue">Glue</a></li>
+                <li class=""><a href="/main/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/main/mutanalyst">Mutanalyst</a></li>
+                <li class=""><a href="/main/pedel">Pedel</a></li>
+                <li class=""><a href="/main/driver">Driver</a></li>
+                <li class=""><a href="/main/deepscan">Deepscan</a></li>
+                <li class=""><a href="/main/mutantprimers">Mutantprimers</a></li>
+                <li class=""><a href="/main/QQC">QQC</a></li>
+                <li class=""><a href="/main/misc">Miscellaneous</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class=""><a href="/about">About</a></li>
+                <li class=""><a href="/main/about">About</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -405,62 +405,7 @@ function codonist() {
  ga('create', 'UA-66652240-4', 'auto');
  ga('send', 'pageview');
 
-$(function() {
-    var files;
-    $('#facs_upload').on('change', function(event) {
-        files = event.target.files;
-        demo = false;
-        $('#facs_upload_group').removeClass('btn-warning');
-        $('#facs_upload_group').addClass('btn-success');
-    });
-
-    $('#facs_demo').click(function() {
-        alert('xxxx');
-    })
-
-    $('#QQC_clear').click(function() {
-        demo = false;
-        $('#facs_upload_group').removeClass('btn-success');
-        $('#facs_upload_group').removeClass('btn-default');
-        $('#facs_upload_group').addClass('btn-warning');
-    })
-
-$('#DS_IDT_bulk').click(function() {
-        idt = JSON.parse(window.sessionStorage.getItem('primers')).map(function(obj) {
-            return obj.AA + '_fw\t' + obj.fw_primer.replace(/ /g, '') + '\t25nm\tSTD\n' + obj.AA + '_rv\t' + obj.rv_primer.replace(/ /g, '') + '\t25nm\tSTD\n'
-        }).join('');
-
-    });
-
-
-
-    $('#facs_calculate').click(function() {
-        $("#facs_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
-        $("#facs_result").removeClass('hidden');
-        $("#facs_result").show(); //weird combo.
-        var data = new FormData();
-        data.append("file", files[0]);
-        $.ajax({
-            url: 'ajax_facs',
-            type: 'POST',
-            data: data,
-            success: function(result) {
-                reply = result.message //JSON.parse(result.message);
-                saveAs(new Blob([result.csv], {
-                type: "text/plain;charset=utf-8"
-            }), $("#facs_outfile").val());
-            $("#facs_result").html('<div class="alert alert-success" role="alert">Done</div>');
-                },
-            error: function() {
-                $("#facs_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-        return false;
-    });
-});
+${structure: code}
 
 //dumped here for now. Unuse why (=by what) its state gets vandalised in the inserted code.
 //TO DO one day. Figure out why.

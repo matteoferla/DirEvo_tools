@@ -4,6 +4,7 @@ import pyramidstarter.mutant_wrapper as wrap
 import json, os, uuid, shutil
 import fcsparser
 import smtplib
+import markdown
 
 
 if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ: #openshift 2 and 3 savvy!
@@ -24,66 +25,6 @@ def basedict():
             'm_about': 'not-active',
             'm_QQC': 'not-active'}
 
-
-############### LOG! #####################
-import logging
-
-'''
-import logging, io
-
-log = logging.getLogger(__name__)
-f = io.StringIO('This is the StringIO stream of the Log', '\n')
-handler = logging.StreamHandler(f)
-handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'))
-log.addHandler(handler)
-'''
-
-
-def log_passing(req, extra='—', status='—'):
-    if "HTTP_X_FORWARDED_FOR" in req.environ:
-        # Virtual host
-        ip = req.environ["HTTP_X_FORWARDED_FOR"]
-    elif "HTTP_HOST" in req.environ:
-        # Non-virtualhost
-        ip = req.environ["REMOTE_ADDR"]
-    else:
-        ip = '0.0.0.0'
-    logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
-
-
-@view_config(route_name='log', renderer='templates/final_log.pt')
-def hello_there(request):
-    log_passing(request)
-    '''to find what city the users are from...
-    http://ip-api.com/json/195.166.143.137
-    {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
-    '''
-    response = basedict()
-    log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    response[
-        'main'] = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead><tbody><tr>' + '</tr><tr>'.join(
-        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + '</tr></tbody></table>'
-    return response
-
-############### Main views #####################
-@view_config(route_name='about', renderer='templates/final_about.pt')
-@view_config(route_name='deepscan', renderer='templates/final_deepscan.pt')
-@view_config(route_name='home', renderer='templates/final_main.pt')
-@view_config(route_name='QQC', renderer='templates/final_QQC.pt')
-@view_config(route_name='pedel', renderer='templates/final_pedel.pt')
-@view_config(route_name='driver', renderer='templates/final_driver.pt')
-@view_config(route_name='glue', renderer='templates/final_glue.pt')
-@view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
-@view_config(route_name='misc', renderer='templates/final_misc.pt')
-@view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
-@view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
-# @view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
-def my_view(request):
-    # from pprint import PrettyPrinter
-    # PrettyPrinter().pprint(request.__dict__)
-    log_passing(request)
-    #print(request.matched_route.name)
-    return {'project': 'Pyramidstarter'}
 
 
 ############### Ajacean views #####################
@@ -274,12 +215,103 @@ def send_email(request):
 
 
 
-############### Other #####################
+############### Main views #####################
+barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
+def set_bar(name, welcome=False):
+    ddex={i:'' for i in barnames}
+    ddex[name]='active'
+    if welcome:
+        ddex['welcome']=open(os.path.join(PATH,'templates','welcome.pt')).read()
+    else:
+        ddex['welcome'] = ''
+    return ddex
 
-@view_config(route_name='admin')
-def hello_world(request):
+@view_config(route_name='home',renderer='templates/frame.pt')
+def admin_callable(request):
     log_passing(request)
-    return Response('Hello world!')
+    return {'main':open(os.path.join(PATH,'templates','main.pt')).read(),'codon_modal':'','code':'',**set_bar('m_home', True)}
+
+@view_config(route_name='admin',renderer='templates/frame.pt')
+def admin_callable(request):
+    log_passing(request)
+    if PLACE == "server":
+        md=markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1],'README.md')),'r').read())
+    else:
+        md=markdown.markdown(open('README.md').read())
+        return {'main':md,'codon_modal':'','code':'',**set_bar('m_admin', False)}
+
+@view_config(route_name='main',renderer='templates/frame.pt')
+def main_callable(request):
+    log_passing(request)
+    page=request.matchdict['page']
+    return {'main': open(os.path.join(PATH,'templates',page+'.pt')).read(), 'codon_modal': open(os.path.join(PATH,'templates','codon_modal.pt')).read(), 'code': open(os.path.join(PATH,'templates',page+'.js')).read(), **set_bar('m_'+page, False)}
+
+    #request.params['key']
+
+############### LOG! #####################
+import logging
+
+'''
+import logging, io
+
+log = logging.getLogger(__name__)
+f = io.StringIO('This is the StringIO stream of the Log', '\n')
+handler = logging.StreamHandler(f)
+handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'))
+log.addHandler(handler)
+'''
+
+
+def log_passing(req, extra='—', status='—'):
+    if "HTTP_X_FORWARDED_FOR" in req.environ:
+        # Virtual host
+        ip = req.environ["HTTP_X_FORWARDED_FOR"]
+    elif "HTTP_HOST" in req.environ:
+        # Non-virtualhost
+        ip = req.environ["REMOTE_ADDR"]
+    else:
+        ip = '0.0.0.0'
+    logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
+
+
+@view_config(route_name='log', renderer='templates/final_log.pt')
+def hello_there(request):
+    log_passing(request)
+    '''to find what city the users are from...
+    http://ip-api.com/json/195.166.143.137
+    {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
+    '''
+    response = basedict()
+    log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
+    response[
+        'main'] = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead><tbody><tr>' + '</tr><tr>'.join(
+        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + '</tr></tbody></table>'
+    return response
+
+
+'''
+############### Main views #####################
+@view_config(route_name='about', renderer='templates/final_about.pt')
+@view_config(route_name='deepscan', renderer='templates/final_deepscan.pt')
+@view_config(route_name='home', renderer='templates/final_main.pt')
+@view_config(route_name='QQC', renderer='templates/final_QQC.pt')
+@view_config(route_name='pedel', renderer='templates/final_pedel.pt')
+@view_config(route_name='driver', renderer='templates/final_driver.pt')
+@view_config(route_name='glue', renderer='templates/final_glue.pt')
+@view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
+@view_config(route_name='misc', renderer='templates/final_misc.pt')
+@view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
+@view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
+# @view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
+def my_view(request):
+    # from pprint import PrettyPrinter
+    # PrettyPrinter().pprint(request.__dict__)
+    log_passing(request)
+    #print(request.matched_route.name)
+    return {'project': 'Pyramidstarter'}
+    '''
+
+############### Other #####################
 
 
 @view_config(route_name='ajax_test', renderer='json')

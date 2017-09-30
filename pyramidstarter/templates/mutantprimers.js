@@ -74,7 +74,7 @@ $(function() {
         $("#MP_result").show(); //weird combo.
                 //Ajax
         $.ajax({
-            url: "ajax_mutantprimers",
+            url: "../ajax_mutantprimers",
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),

@@ -67,19 +67,19 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="/">Home</a></li>
-                <li class=""><a href="/glue">Glue</a></li>
-                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
-                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
-                <li class=""><a href="/pedel">Pedel</a></li>
-                <li class=""><a href="/driver">Driver</a></li>
-                <li class="active"><a href="/deepscan">Deepscan</a></li>
-                <li class=""><a href="/mutantprimers">Mutantprimers</a></li>
-                <li class=""><a href="/QQC">QQC</a></li>
-                <li class=""><a href="/misc">Miscellaneous</a></li>
+                <li class=""><a href="/main/glue">Glue</a></li>
+                <li class=""><a href="/main/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/main/mutanalyst">Mutanalyst</a></li>
+                <li class=""><a href="/main/pedel">Pedel</a></li>
+                <li class=""><a href="/main/driver">Driver</a></li>
+                <li class="active"><a href="/main/deepscan">Deepscan</a></li>
+                <li class=""><a href="/main/mutantprimers">Mutantprimers</a></li>
+                <li class=""><a href="/main/QQC">QQC</a></li>
+                <li class=""><a href="/main/misc">Miscellaneous</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class=""><a href="/about">About</a></li>
+                <li class=""><a href="/main/about">About</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -619,129 +619,7 @@ function codonist() {
  ga('create', 'UA-66652240-4', 'auto');
  ga('send', 'pageview');
 
-$(function() {
-    $('#DS_startBase_group').hide();
-    $('#DS_stopBase_group').hide();
-
-        //var val = $('input[name=q12_3]:checked').val();
-    $('input[type=radio][name=DS_opt]').change(function() {
-        if (this.value == 'split') {
-        state=true;
-        } else {
-        state=false;}
-        $('#DS_upSequence_group').toggle(state);
-        $('#DS_downSequence_group').toggle(state);
-        $('#DS_startBase_group').toggle(!state);
-        $('#DS_stopBase_group').toggle(!state);
-    });
-
-    $('#DS_method').on('switchChange.bootstrapSwitch', function(event, state) {
-            $('#DS_overlap_group').toggle(state);
-    });
-
-    $('#DS_demo').click(function() {
-        if ($('input[name=DS_opt]:checked').val() == 'split'){
-        $('#DS_sequence').val('ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGAT');
-        $('#DS_upSequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGC');
-        $('#DS_downSequence').val('TAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
-        }
-        else {
-        $('#DS_startBase').val(105);
-        $('#DS_stopBase').val(882);
-        $('#DS_sequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGCATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGATTAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
-        }
-        $('#DS_startBase').val(105);
-        $('#DS_stopBase').val(882);
-        $('#DS_sequence').val('ATGCGGGGTTCTCATCATCATCATCATCATGGTATGGCTAGCATGACTGGTGGACAGCAAATGGGTCGGGATCTGTACGAGAACCTGTACTTCCAGGGCTCGAGCATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCGCCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCAGCTTCAAGGACGACGGCACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACGTGGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGTGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCACGGCATGGACGAGCTGTACAAGTAAGAATTCGAAGCTTGGCTGTTTTGGCGGATGAGAGAAGATTTTCAGCCTGATACAGATTAAATCAGAACGCAGAAGCGGTCTGATAAAACAGAATTTGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCG');
-        $("#DS_result").removeClass('hidden');
-        $("#DS_result").show();
-        $("#DS_result").html("<br/><div class='bs-callout bs-callout-info'>The sequence loaded encodes superfolded GFP (in pBAD from <a target='_blank' href='https://www.addgene.org/54519/'>Addgene <i class='fa fa-external-link' aria-hidden='true'></i></a>).</div>");
-
-    })
-
-    $('#DS_clear').click(function() {
-        $('#DS_startBase').val('');
-        $('#DS_stopBase').val('');
-        $('#DS_sequence').val('');
-        $("#DS_result").addClass('hidden');
-        $("#DS_download").addClass('hidden');
-    })
-
-
-    $('#DS_calculate').click(function() {
-        //nah to .serialize() so I can do sanity tests.
-        var data = {
-            task: 'DS',
-            startBase: $('#DS_startBase').val(),
-            stopBase: $('#DS_stopBase').val(),
-            sequence: $('#DS_sequence').val(),
-            mutationCodon: $('#DS_mutationCodon').val(),
-            targetTemp: $('#DS_targetTemp').val(),
-            overlap: $('#DS_overlap').val(),
-            primerRange: $('#DS_primerRange').val(),
-            GCclamp: $('#DS_GCclamp').val(),
-            TMBonus: [0, 2.8, 4.9, 11.6, 13.3][parseInt($('#DS_enzyme').val()) - 1],
-            method: $('#DS_method').is(':checked')
-        };
-
-        if (! $('#DS_choose').is(':checked')){
-            data.sequence=$('#DS_upSequence').val()+$('#DS_sequence').val()+$('#DS_downSequence').val();
-            data.startBase=$('#DS_upSequence').val().length.toString();
-            data.stopBase=($('#DS_upSequence').val().length+$('#DS_sequence').val().length).toString();
-        }
-
-        //console.log(data);
-        //throbber
-        $("#DS_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
-        $("#DS_result").removeClass('hidden');
-        $("#DS_result").show(); //weird combo.
-                //Ajax
-        $.ajax({
-            url: "ajax_deepscan",
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify(data),
-            success: function(result) {
-                reply = JSON.parse(result.message);
-                window.sessionStorage.setItem('primers', JSON.stringify(reply['data']));
-                $("#DS_download").removeClass('hidden');
-                $("#DS_download").show();
-                $("#DS_result").html(reply['html']);
-            },
-            error: function() {
-                $("#DS_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
-            }
-        });
-    });
-
-    $('#DS_table').click(function() {
-        headers = 'base,AA,codon,fw_primer,rv_primer,len_homology,fw_len_anneal,rv_len_anneal,fw_len_primer,rv_len_primer,homology_start,homology_stop,homology_Tm,fw_anneal_Tm,rv_anneal_Tm'.split(",");;
-        var csv = JSON.parse(window.sessionStorage.getItem('primers')).map(function(obj) {
-            return headers.map(function(h) {
-                return obj[h]
-            }).join(', ')
-        }).join('\n');
-        saveAs(new Blob([headers.join(', ') + '\n', csv], {
-            type: "text/plain;charset=utf-8"
-        }), 'deepscan_primers.csv');
-    });
-
-    $('#DS_json').click(function() {
-        saveAs(new Blob([window.sessionStorage.getItem('primers')], {
-            type: "text/plain;charset=utf-8"
-        }), 'deepscan_primers.json');
-    });
-
-
-    $('#DS_IDT_bulk').click(function() {
-        idt = JSON.parse(window.sessionStorage.getItem('primers')).map(function(obj) {
-            return obj.AA + '_fw\t' + obj.fw_primer.replace(/ /g, '') + '\t25nm\tSTD\n' + obj.AA + '_rv\t' + obj.rv_primer.replace(/ /g, '') + '\t25nm\tSTD\n'
-        }).join('');
-        saveAs(new Blob([idt], {
-            type: "text/plain;charset=utf-8"
-        }), 'deepscan_primers_IDT.tsv');
-    });
-});
+${structure: code}
 
 //dumped here for now. Unuse why (=by what) its state gets vandalised in the inserted code.
 //TO DO one day. Figure out why.

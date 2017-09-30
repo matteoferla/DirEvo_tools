@@ -52,7 +52,7 @@ $(function() {
         data.append("location", $('#QQC_preceding').val());
         data.append("scheme", $('#QQC_mutation').val());
         $.ajax({
-            url: 'ajax_QQC',
+            url: '../ajax_QQC',
             type: 'POST',
             data: data,
 

@@ -76,7 +76,7 @@ $(function() {
         $("#DS_result").show(); //weird combo.
                 //Ajax
         $.ajax({
-            url: "ajax_deepscan",
+            url: "../ajax_deepscan",
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),

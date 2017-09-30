@@ -18,13 +18,14 @@ def make_templates():
     Not sure why serverside it cannot find them...
     """
     temps=os.listdir('templates')
-    frame = Template(open('templates/frame.pt', 'r').read()).safe_substitute(codon_modal=open('templates/codon_modal.pt','r').read())
-    for word in ['welcome','main']+barnames:
+    frame = open('templates/frame.pt', 'r').read()
+    for word in ['welcome','main','codon_modal']+barnames:
         frame = frame.replace('${' + word + '}', '$' + word).replace('${structure: ' + word + '}', '$' + word)
     open('templates/final_main.pt', 'w').write(
         Template(frame).safe_substitute(main=open('templates/main.pt', 'r').read(), code='',
                                         **set_bar('m_home',True))
     )
+    frame=Template(frame).safe_substitute(codon_modal=open('templates/codon_modal.pt','r').read())
     for (name,welcomed) in (('deepscan',False),('about',False),('QQC',False),('mutanalyst',False),('mutantcaller',False),('misc',False),('pedel',False),('driver',False),('glue',False),('404',False),('log',False),('facs2excel',False),('mutantprimers',False)):
         if '{}.js'.format(name) in temps:
             code=open('templates/{}.js'.format(name)).read()

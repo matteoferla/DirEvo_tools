@@ -67,19 +67,19 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="/">Home</a></li>
-                <li class=""><a href="/glue">Glue</a></li>
-                <li class=""><a href="/mutantcaller">MutantCaller</a></li>
-                <li class=""><a href="/mutanalyst">Mutanalyst</a></li>
-                <li class=""><a href="/pedel">Pedel</a></li>
-                <li class=""><a href="/driver">Driver</a></li>
-                <li class=""><a href="/deepscan">Deepscan</a></li>
-                <li class=""><a href="/mutantprimers">Mutantprimers</a></li>
-                <li class=""><a href="/QQC">QQC</a></li>
-                <li class=""><a href="/misc">Miscellaneous</a></li>
+                <li class=""><a href="/main/glue">Glue</a></li>
+                <li class=""><a href="/main/mutantcaller">MutantCaller</a></li>
+                <li class=""><a href="/main/mutanalyst">Mutanalyst</a></li>
+                <li class=""><a href="/main/pedel">Pedel</a></li>
+                <li class=""><a href="/main/driver">Driver</a></li>
+                <li class=""><a href="/main/deepscan">Deepscan</a></li>
+                <li class=""><a href="/main/mutantprimers">Mutantprimers</a></li>
+                <li class=""><a href="/main/QQC">QQC</a></li>
+                <li class=""><a href="/main/misc">Miscellaneous</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class=""><a href="/about">About</a></li>
+                <li class=""><a href="/main/about">About</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -362,7 +362,7 @@ function codonist() {
  ga('create', 'UA-66652240-4', 'auto');
  ga('send', 'pageview');
 
- 
+${structure: code}
 
 //dumped here for now. Unuse why (=by what) its state gets vandalised in the inserted code.
 //TO DO one day. Figure out why.
