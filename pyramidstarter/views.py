@@ -6,8 +6,7 @@ import fcsparser
 import smtplib
 import markdown
 
-
-if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ: #openshift 2 and 3 savvy!
+if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ:  # openshift 2 and 3 savvy!
     PLACE = "server"
     PATH = "/opt/app-root/src/pyramidstarter/"
 else:
@@ -26,7 +25,6 @@ def basedict():
             'm_QQC': 'not-active'}
 
 
-
 ############### Ajacean views #####################
 
 @view_config(route_name='ajax_mutantprimers', renderer='json')
@@ -34,7 +32,7 @@ def basedict():
 def deepscanner(request):
     try:
         reply = wrap.DS(request.json_body)
-        filename = os.path.join(PATH,'tmp', '{0}.json'.format(uuid.uuid4()))
+        filename = os.path.join(PATH, 'tmp', '{0}.json'.format(uuid.uuid4()))
         open(filename, 'w').write(reply)
         request.session['DS'] = filename
         log_passing(request, str(request.json_body))
@@ -64,13 +62,14 @@ def QQCer(request):
         if request.POST['file'] == 'demo':
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH,'static', '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+            file_path = os.path.join(PATH, 'static',
+                                     '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
             input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
             new_filename = '{0}.ab1'.format(uuid.uuid4())
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH,'tmp', new_filename)
+            file_path = os.path.join(PATH, 'tmp', new_filename)
             temp_file_path = file_path + '~'
             input_file.seek(0)
             with open(temp_file_path, 'wb') as output_file:
@@ -96,13 +95,14 @@ def mutantcaller(request):
         if request.POST['file'] == 'demo':
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH,'static', '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+            file_path = os.path.join(PATH, 'static',
+                                     '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
             input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
             new_filename = '{0}.ab1'.format(uuid.uuid4())
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH, 'tmp',new_filename)
+            file_path = os.path.join(PATH, 'tmp', new_filename)
             temp_file_path = file_path + '~'
             input_file.seek(0)
             with open(temp_file_path, 'wb') as output_file:
@@ -155,7 +155,7 @@ def facser(request):  # temp here. DELETE SOON.
     input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
     new_filename = '{0}.ab1'.format(uuid.uuid4())
     data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
-    file_path = os.path.join(PATH, 'tmp',new_filename)
+    file_path = os.path.join(PATH, 'tmp', new_filename)
     temp_file_path = file_path + '~'
     input_file.seek(0)
     with open(temp_file_path, 'wb') as output_file:
@@ -186,11 +186,12 @@ def codonist(request):  # copy paste of pedeller
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
-@view_config(route_name='ajax_email',renderer='json')
+
+@view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
     reply = request.json_body
-    subject='Comment from '+reply['message']
-    body=reply['name']
+    subject = 'Comment from ' + reply['message']
+    body = reply['name']
     gmail_user = 'squidonius.tango@gmail.com'
     gmail_pwd = 'Thermotoga1986'
     FROM = 'squidonius.tango@gmail.com'
@@ -213,48 +214,56 @@ def send_email(request):
         return json.dumps({'msg': str(e)})
 
 
-
-
 ############### Main views #####################
 barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
-def set_bar(name, welcome=False):
-    ddex={i:'' for i in barnames}
-    ddex[name]='active'
-    if welcome:
-        ddex['welcome']=open(os.path.join(PATH,'templates','welcome.pt')).read()
-    else:
-        ddex['welcome'] = ''
+
+
+def set_navbar_state(name): # this is uttterly unneccessary now. Old code.
+    ddex = {i: '' for i in barnames}
+    if name in barnames:
+        ddex[name] = 'active'
     return ddex
 
-@view_config(route_name='home',renderer='templates/frame.pt')
-def admin_callable(request):
-    log_passing(request)
-    return {'main':open(os.path.join(PATH,'templates','main.pt')).read(),'codon_modal':open(os.path.join(PATH,'templates','codon_modal.pt')).read(),'code':open(os.path.join(PATH,'templates','main.js')).read(),**set_bar('m_home', True)}
 
-@view_config(route_name='admin',renderer='templates/frame.pt')
+@view_config(route_name='home', renderer='templates/frame.pt')
+def home_callable(request):
+    log_passing(request)
+    return {'main': open(os.path.join(PATH, 'templates', 'main.pt')).read(),
+            'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
+            'code': open(os.path.join(PATH, 'templates', 'main.js')).read(),
+            'welcome': open(os.path.join(PATH, 'templates', 'welcome.pt')).read(), **set_navbar_state('m_home')}
+
+
+@view_config(route_name='admin', renderer='templates/frame.pt')
 def admin_callable(request):
     log_passing(request)
     if PLACE == "server":
-        md=markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1],'README.md')),'r').read())
+        md = markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1], 'README.md')), 'r').read())
     else:
-        md=markdown.markdown(open('README.md').read())
-        return {'main':md,'codon_modal':'','code':'',**set_bar('m_admin', False)}
+        md = markdown.markdown(open('README.md').read())
+        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_admin')}
 
-@view_config(route_name='main',renderer='templates/frame.pt')
+
+@view_config(route_name='main', renderer='templates/frame.pt')
 def main_callable(request):
     log_passing(request)
-    page=request.matchdict['page']
-    return {'main': open(os.path.join(PATH,'templates',page+'.pt')).read(), 'codon_modal': open(os.path.join(PATH,'templates','codon_modal.pt')).read(), 'code': open(os.path.join(PATH,'templates',page+'.js')).read(), **set_bar('m_'+page, False)}
+    page = request.matchdict['page']
+    return {'main': open(os.path.join(PATH, 'templates', page + '.pt')).read(),
+            'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
+            'code': open(os.path.join(PATH, 'templates', page + '.js')).read(), 'welcome': '',
+            **set_navbar_state('m_' + page, False)}
 
-    #request.params['key']
+
+# request.params['key']
+
 
 @notfound_view_config(renderer='templates/frame.pt')
-def notfound(request):
+def notfound_callable(request):
     request.response.status = 404
     log_passing(request)
-    return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read(),
+    return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request),
             'codon_modal': '',
-            'code': ' ', **set_bar('m_404', False)}
+            'code': ' ', 'welcome': '', **set_navbar_state('m_404')}
 
 
 ############### LOG! #####################
@@ -283,19 +292,21 @@ def log_passing(req, extra='—', status='—'):
     logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
 
 
-@view_config(route_name='log', renderer='templates/final_log.pt')
+@view_config(route_name='log', renderer='templates/frame.pt')
 def hello_there(request):
     log_passing(request)
     '''to find what city the users are from...
     http://ip-api.com/json/195.166.143.137
     {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
     '''
-    response = basedict()
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    response[
-        'main'] = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead><tbody><tr>' + '</tr><tr>'.join(
-        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + '</tr></tbody></table>'
-    return response
+    log_response = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
+                   '<tbody><tr>' + '</tr><tr>'.join(
+        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
+                   '</tr></tbody></table>'
+    return {'main': log_response,
+            'codon_modal': '',
+            'code': ' ', **set_navbar_state('m_log', False)}
 
 
 '''
@@ -319,6 +330,7 @@ def my_view(request):
     #print(request.matched_route.name)
     return {'project': 'Pyramidstarter'}
     '''
+
 
 ############### Other #####################
 

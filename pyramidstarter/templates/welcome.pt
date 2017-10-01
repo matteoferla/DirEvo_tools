@@ -26,48 +26,48 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/meowl.jpg')}"
+                                    <img src="/static/hybrids/meowl.jpg"
                                          alt="Meowls">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/rhinawk.jpg')}"
+                                    <img src="/static/hybrids/rhinawk.jpg"
                                          alt="rhinawk">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/hamlion.jpeg')}"
+                                    <img src="/static/hybrids/hamlion.jpeg"
                                          alt="Hàmlion">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/neckless-dog.jpg')}"
+                                    <img src="/static/hybrids/neckless-dog.jpg"
                                          alt="neckless-dog">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/gorrilacentaur.jpg')}"
+                                    <img src="/static/hybrids/gorrilacentaur.jpg"
                                          alt="gorrilacentaur">
                                 </div>
 
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/pandarrot.jpg')}"
+                                    <img src="/static/hybrids/pandarrot.jpg"
                                          alt="pandarrot">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/pandeguin.jpg')}"
+                                    <img src="/static/hybrids/pandeguin.jpg"
                                          alt="pandeguin">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/reverse-meowl.jpg')}"
+                                    <img src="/static/hybrids/reverse-meowl.jpg"
                                          alt="reverse-meowl">
                                 </div>
 
                                 <div class="item">
-                                    <img src="${request.static_url('pyramidstarter:static/hybrids/snowy-meowl.jpg')}"
+                                    <img src="/static/hybrids/snowy-meowl.jpg"
                                          alt="snowy-meowl">
                                 </div>
                             </div>
