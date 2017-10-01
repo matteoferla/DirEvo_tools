@@ -229,7 +229,7 @@ def set_bar(name, welcome=False):
 @view_config(route_name='home',renderer='templates/frame.pt')
 def admin_callable(request):
     log_passing(request)
-    return {'main':open(os.path.join(PATH,'templates','main.pt')).read(),'codon_modal':'','code':'',**set_bar('m_home', True)}
+    return {'main':open(os.path.join(PATH,'templates','main.pt')).read(),'codon_modal':open(os.path.join(PATH,'templates','codon_modal.pt')).read(),'code':open(os.path.join(PATH,'templates','main.js')).read(),**set_bar('m_home', True)}
 
 @view_config(route_name='admin',renderer='templates/frame.pt')
 def admin_callable(request):
@@ -247,6 +247,15 @@ def main_callable(request):
     return {'main': open(os.path.join(PATH,'templates',page+'.pt')).read(), 'codon_modal': open(os.path.join(PATH,'templates','codon_modal.pt')).read(), 'code': open(os.path.join(PATH,'templates',page+'.js')).read(), **set_bar('m_'+page, False)}
 
     #request.params['key']
+
+@notfound_view_config(renderer='templates/frame.pt')
+def notfound(request):
+    request.response.status = 404
+    log_passing(request)
+    return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read(),
+            'codon_modal': '',
+            'code': ' ', **set_bar('m_404', False)}
+
 
 ############### LOG! #####################
 import logging
@@ -317,10 +326,3 @@ def my_view(request):
 @view_config(route_name='ajax_test', renderer='json')
 def ajaxian(request):
     return {'message': '<div class="alert alert-success" role="alert">I got this back.</div>'}
-
-
-@notfound_view_config(renderer='templates/final_404.pt')
-def notfound(request):
-    request.response.status = 404
-    log_passing(request)
-    return {'project': 'Pyramidstarter'}
