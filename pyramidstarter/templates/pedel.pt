@@ -89,7 +89,7 @@
                         </span>
                     <textarea class="form-control custom-control" rows="5" style="resize:none" id="sequence" name="pedelAA_sequence"></textarea>
                 </div>
-                <h4>???</h4>
+
                 <div class="col-lg-4">
                             <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip" title="Library size L" data-placement="top">Library size</span>
@@ -98,6 +98,8 @@
                             <br/>
                         </div>
             </div>
+                <h4>Nucleotide mutation matrix</h4>
+                 (non-negative numbers. Overall scaling is unimportant as this is taken from the 'mean number of substitutions per daughter sequence' parameter.)
                 <div class="row">
                 <div class="col-lg-8">
                     <table>
@@ -181,6 +183,16 @@
                     </table>
                             </td></tr>
                     </table>
+                </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="input-group">
+                                Values are
+                                <input type="checkbox" class="switch" id="pedelAA_normal" data-off-text="Unnormalised" data-on-text="Normalised" data-off-color="warning">
+                            </div>
+                        </div>
+                    </div>
 
 
 
