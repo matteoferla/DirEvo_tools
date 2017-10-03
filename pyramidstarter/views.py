@@ -231,7 +231,7 @@ def home_callable(request):
     return {'main': open(os.path.join(PATH, 'templates', 'main.pt')).read(),
             'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
             'code': open(os.path.join(PATH, 'templates', 'main.js')).read(),
-            'welcome': open(os.path.join(PATH, 'templates', 'welcome.pt')).read(), **set_navbar_state('m_home')}
+            'welcome': open(os.path.join(PATH, 'templates', 'welcome.pt')).read(), 'm_home':'active'}
 
 
 @view_config(route_name='admin', renderer='templates/frame.pt')
@@ -241,7 +241,7 @@ def admin_callable(request):
         md = markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1], 'README.md')), 'r').read())
     else:
         md = markdown.markdown(open('README.md').read())
-        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_admin')}
+        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', 'm_admin':'active'}
 
 
 @view_config(route_name='main', renderer='templates/frame.pt')
@@ -251,7 +251,7 @@ def main_callable(request):
     return {'main': open(os.path.join(PATH, 'templates', page + '.pt')).read(),
             'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
             'code': open(os.path.join(PATH, 'templates', page + '.js')).read(), 'welcome': '',
-            **set_navbar_state('m_' + page, False)}
+            'm_' + page:'active'}
 
 
 # request.params['key']
@@ -263,7 +263,7 @@ def notfound_callable(request):
     log_passing(request)
     return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request),
             'codon_modal': '',
-            'code': ' ', 'welcome': '', **set_navbar_state('m_404')}
+            'code': ' ', 'welcome': '', 'm_404':'active'}
 
 
 ############### LOG! #####################
@@ -306,7 +306,7 @@ def hello_there(request):
                    '</tr></tbody></table>'
     return {'main': log_response,
             'codon_modal': '',
-            'code': ' ', **set_navbar_state('m_log', False)}
+            'code': ' ', 'm_log':'active'}
 
 
 '''
