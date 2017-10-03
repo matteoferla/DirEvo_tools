@@ -417,5 +417,5 @@
         </div>
     </div>
 </div>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/mutationalBias.js')}"></script>
-<script type='text/javascript' src="${request.static_url('pyramidstarter:static/mutationalAux.js')}"></script>
+<script type='text/javascript' src="/static/mutationalBias.js"></script>
+<script type='text/javascript' src="/static/mutationalAux.js"></script>

@@ -1,5 +1,5 @@
 $(function() {
-    $('#pedelAA').hide;
+    $('#pedelAA').toggle(false);
     $('#pedel_method').on('switchChange.bootstrapSwitch', function(event, state) {
         $('#pedelbasic').toggle(state);
         $('#pedelAA').toggle(!state);
