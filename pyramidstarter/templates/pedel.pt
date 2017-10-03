@@ -75,11 +75,21 @@
                 </div>
                 </div>
             <!-- The otehr option! -->
-            <div id="pedelAA" class='hidden'>
+            <div id="pedelAA">
                 <h1>Pedel-AA</h1>
                 <p>bla bla bla</p>
                 <div class="bs-callout bs-callout-warning">
-                    <h4>Fix</h4>I cannot do this bit! I need to email Andrew or someone proficient in C++ to figure out how to hack the <code>pedel-AAc.cxx</code> file to not require a setup file.</div>
+                    <h4>Fix</h4>I cannot do this bit! I need the parser perl script to figure out how to hack the <code>pedel-AAc.cxx</code> file to not require a setup file.</div>
+            <div class="row">
+                <!--section-->
+                <h4>Sequence</h4>
+                <p>In frame sequence that was mutagenised. Note that all symbols that aren't uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> '>T. maritima Cystathionine &beta;-lyase'), therefore for masked sequences use lowercase.</p>
+                <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="Amino acid sequence">Sequence
+                        </span>
+                    <textarea class="form-control custom-control" rows="5" style="resize:none" id="sequence" name="sequence"></textarea>
+                </div>
+            </div>
             </div>
             <!-- The results -->
             <div class="row hidden" id="pedel_result">
