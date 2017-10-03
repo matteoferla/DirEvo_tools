@@ -1,0 +1,9 @@
+numpy
+pyramid
+pyramid_chameleon
+pyramid_debugtoolbar
+waitress
+biopython
+scipy
+openpyxl
+markdown
