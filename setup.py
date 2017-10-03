@@ -9,15 +9,7 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
-    'pyramid',
-    'pyramid_chameleon',
-    'pyramid_debugtoolbar',
-    'waitress',
-    'biopython',
-    'numpy',
-    'scipy',
-    'openpyxl',
-    'markdown'
+    'numpy'
     ]
 
 # no pandas as pandas kill my pyramid.
