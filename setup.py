@@ -14,7 +14,6 @@ requires = [
     'pyramid_debugtoolbar',
     'waitress',
     'biopython',
-    'openpyxl',
     'markdown'
     ]
 
