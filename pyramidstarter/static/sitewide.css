@@ -3,18 +3,21 @@
     max-height: 200px;
     overflow-x: hidden;
 }
-.rotate {
-  text-align: center;
+th.rotate {
+  /* Something you can count on */
+  height: 140px;
   white-space: nowrap;
-  vertical-align: middle;
-  width: 1.5em;
 }
-.rotate div {
-     -moz-transform: rotate(-90.0deg);  /* FF3.5+ */
-       -o-transform: rotate(-90.0deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-90.0deg);  /* Saf3.1+, Chrome */
-             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);  /* IE6,IE7 */
-         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
-         margin-left: -10em;
-         margin-right: -10em;
+
+th.rotate > div {
+  transform:
+    /* Magic Numbers */
+    translate(25px, 51px)
+    /* 45 is really 360 - 45 */
+    rotate(315deg);
+  width: 30px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
 }

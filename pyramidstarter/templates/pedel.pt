@@ -97,17 +97,18 @@
                             </div>
                             <br/>
                         </div>
+            </div>
+                <div class="row">
                 <div class="col-lg-8">
-
-
-                        <table width="50%" border="0" id="mutTable_raw">
+                    <table>
+                        <tr><td></td><td align="center"><b>To</b></td></tr>
+                        <tr><td valign="middle"><b>From</b>&nbsp;&nbsp;</td>
+                            <td>
+                                <table width="50%" border="0" id="mutTable_raw">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th colspan="4">To</th>
                             </tr>
                             <tr>
-                                <th rowspan="4">From</th>
                                 <th width="20%"></th>
                                 <th width="20%">A</th>
                                 <th width="20%">T</th>
@@ -178,6 +179,11 @@
                             </tr>
                         </tbody>
                     </table>
+                            </td></tr>
+                    </table>
+
+
+
 
                 </div>
             </div>
