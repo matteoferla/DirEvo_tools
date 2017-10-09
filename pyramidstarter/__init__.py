@@ -11,12 +11,13 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('main', '/main/{page}')
     for route in 'admin log ajax_test ajax_deepscan deepscan_IDT96 deepscan_IDT384 ajax_QQC ajax_pedel ajax_glue ajax_mutantcaller ajax_facs ajax_codon ajax_mutantprimers ajax_email'.split():
-        config.add_route(route,'/'+route)
-        #deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
+        config.add_route(route, '/' + route)
+        # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.set_session_factory(SignedCookieSessionFactory('methionine'))
     config.scan()
     config_logging()
     return config.make_wsgi_app()
+
 
 def config_logging():
     import logging, io

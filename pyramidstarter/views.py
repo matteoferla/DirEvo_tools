@@ -2,10 +2,11 @@ from pyramid.view import view_config, notfound_view_config
 from pyramid.response import Response
 import pyramidstarter.mutant_wrapper as wrap
 import json, os, uuid, shutil
-#import fcsparser
+# import fcsparser
 import smtplib
 import markdown
 import pprint
+
 pprinter = pprint.PrettyPrinter().pprint
 
 if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ:  # openshift 2 and 3 savvy!
@@ -18,7 +19,7 @@ else:
         PATH = "/opt/app-root/src/pyramidstarter/"
         if not os.path.isdir(PATH):
             print("I have no idea where I am.")
-            print("pwd ",os.getcwd())
+            print("pwd ", os.getcwd())
             pprinter(dict(os.environ))
             raise FileExistsError
         print("This appears to be a VENV... but not OPENSHIFT")
@@ -228,7 +229,7 @@ def send_email(request):
 barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
 
 
-def set_navbar_state(name): # this is uttterly unneccessary now. Old code.
+def set_navbar_state(name):  # this is uttterly unneccessary now. Old code.
     ddex = {i: '' for i in barnames}
     if name in barnames:
         ddex[name] = 'active'
