@@ -5,6 +5,8 @@ import json, os, uuid, shutil
 #import fcsparser
 import smtplib
 import markdown
+import pprint
+pprinter = pprint.PrettyPrinter().pprint
 
 if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ:  # openshift 2 and 3 savvy!
     PLACE = "server"
@@ -12,6 +14,14 @@ if 'OPENSHIFT_APP_NAME' in os.environ or 'OPENSHIFT_BUILD_NAME' in os.environ:  
 else:
     PLACE = "localhost"
     PATH = "pyramidstarter/"
+    if not os.path.isdir(PATH):
+        PATH = "/opt/app-root/src/pyramidstarter/"
+        if not os.path.isdir(PATH):
+            print("I have no idea where I am.")
+            print("pwd ",os.getcwd())
+            pprinter(dict(os.environ))
+            raise FileExistsError
+        print("This appears to be a VENV... but not OPENSHIFT")
 print(PLACE)
 
 

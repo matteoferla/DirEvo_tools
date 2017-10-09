@@ -1,8 +1,9 @@
-import os, pprint
+import os
 
 from pyramid.paster import get_app
 from pyramid.paster import get_appsettings
 
+import pprint
 pprinter = pprint.PrettyPrinter().pprint
 
 
