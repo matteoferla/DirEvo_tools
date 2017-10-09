@@ -9,6 +9,12 @@ import pprint
 pprinter = pprint.PrettyPrinter().pprint
 
 
+PATH = "/opt/app-root/src/pyramidstarter/"
+PLACE = "server"
+if not os.path.isdir(PATH):
+    PATH = "pyramidstarter/"
+    PLACE = "localhost"
+
 
 def basedict():
     return {'project': 'Pyramidstarter',
