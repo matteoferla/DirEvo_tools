@@ -1,4 +1,5 @@
-
+print("You have looked in the code junk yard. Go away!")
+exit()
 if 'OPENSHIFT_APP_NAME' in os.environ:  # are we on OPENSHIFT 2?
     ip = os.environ['OPENSHIFT_PYTHON_IP']
     port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
