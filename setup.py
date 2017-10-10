@@ -8,7 +8,7 @@ with open(os.path.join(here, 'README.txt')) as f:
 with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
-requires = open(os.path.join(here, 'requirements.txt')).read()
+requires = '' #open(os.path.join(here, 'requirements.txt')).read()
 
 # no pandas as pandas kill my pyramid.
 
