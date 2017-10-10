@@ -5,4 +5,3 @@ pyramid_debugtoolbar
 waitress
 openpyxl
 markdown
-numpy

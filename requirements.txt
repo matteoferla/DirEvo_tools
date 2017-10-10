@@ -1,2 +1,3 @@
 pip>=9.0
 pyramid
+numpy
