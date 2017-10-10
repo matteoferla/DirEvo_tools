@@ -1,3 +1,6 @@
+# Setup
+The setup.py 
+
 # To Do list
 ## mutationprimer
 * temporary name. Most functions are copypaste jobs of deepscan.

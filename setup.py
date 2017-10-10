@@ -8,7 +8,8 @@ with open(os.path.join(here, 'README.txt')) as f:
 with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
-requires = '' #open(os.path.join(here, 'requirements.txt')).read()
+# run pip install -r requirements.txt if not running from Openshift
+requires = open(os.path.join(here, 'requirements_extra.txt')).read()
 
 # no pandas as pandas kill my pyramid.
 
@@ -30,7 +31,7 @@ setup(name='Pyramidstarter',
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
-      tests_require=requires,
+      tests_require='', #don't test anything!
       test_suite="pyramidstarter",
       entry_points="""\
       [paste.app_factory]
