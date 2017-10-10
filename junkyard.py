@@ -26,3 +26,34 @@ else:
     pprinter(dict(os.environ))
 
     config = os.path.join(here, 'development.ini')
+
+
+
+
+
+
+    #####
+
+
+    @view_config(route_name='ajax_facs', renderer='json')
+    def facser(request):  # temp here. DELETE SOON.
+        data = {}
+        input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
+        new_filename = '{0}.ab1'.format(uuid.uuid4())
+        data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
+        file_path = os.path.join(PATH, 'tmp', new_filename)
+        temp_file_path = file_path + '~'
+        input_file.seek(0)
+        with open(temp_file_path, 'wb') as output_file:
+            shutil.copyfileobj(input_file, output_file)
+        os.rename(temp_file_path, file_path)
+        meta, fcs = fcsparser.parse(file_path)
+        reply = fcs.to_csv()
+        return {'csv': str(reply)}
+        # except Exception as err:
+        #    log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
+        #    return {
+        #        'message': json.dumps({'data': '',
+        #                               'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
+        #                                   err)})}
+
