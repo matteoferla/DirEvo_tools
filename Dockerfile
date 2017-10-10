@@ -5,8 +5,8 @@ COPY . /opt/app-root/src/
 ENTRYPOINT ["container-entrypoint"]
 
 
-EXPOSE  8000
+EXPOSE  8080
 USER 1001
 
 RUN pip install -r requirements.txt
-CMD ["python", "app.py", "-p 8000"]
+CMD ["python", "app.py", "-p 8080"]
