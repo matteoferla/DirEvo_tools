@@ -1,8 +1,8 @@
-numpy
+biopython
 scipy
 pyramid_chameleon
 pyramid_debugtoolbar
 waitress
-biopython
 openpyxl
 markdown
+numpy
