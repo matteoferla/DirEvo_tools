@@ -8,7 +8,6 @@ ENTRYPOINT ["container-entrypoint"]
 EXPOSE  8080
 USER 1001
 
-# Unfortunately had to split requirements up to make Openshift work. Docker is fine.
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN pip install -r requirements_extra.txt
 CMD ["python", "app.py", "-p 8080"]

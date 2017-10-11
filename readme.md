@@ -1,5 +1,5 @@
-# Setup
-The setup.py 
+# Intro
+Please see my mutagenesis repository. 
 
 # To Do list
 ## mutationprimer

@@ -1,7 +1,0 @@
-biopython
-scipy
-pyramid_chameleon
-pyramid_debugtoolbar
-waitress
-openpyxl
-markdown
