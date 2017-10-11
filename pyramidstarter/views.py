@@ -170,7 +170,7 @@ def send_email(request):
     subject = 'Comment from ' + reply['message']
     body = reply['name']
     gmail_user = 'squidonius.tango@gmail.com'
-    gmail_pwd = 'Thermotoga1986'
+    gmail_pwd = '*******'
     FROM = 'squidonius.tango@gmail.com'
     recipient = 'matteo.ferla@gmail.com'
     TO = recipient if type(recipient) is list else [recipient]
