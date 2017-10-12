@@ -9,7 +9,7 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 # run pip install -r requirements.txt if not running from Openshift
-requires = open(os.path.join(here, 'requirements_extra.txt')).read()
+requires = open(os.path.join(here, 'requirements.txt')).read()
 
 # no pandas as pandas kill my pyramid.
 
