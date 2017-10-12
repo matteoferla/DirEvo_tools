@@ -1,5 +1,4 @@
 FROM centos/python-36-centos7
-# s2i build https://github.com/matteoferla/pedel2.git  centos/python-36-centos7 python-docker-pedel
 WORKDIR /opt/app-root/src
 COPY . /opt/app-root/src/
 ENTRYPOINT ["container-entrypoint"]
