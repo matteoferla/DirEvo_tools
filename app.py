@@ -14,7 +14,8 @@ if __name__ == '__main__':
     if os.path.isdir("/opt/app-root/src/pyramidstarter/"):
         config = os.path.join(here, 'production.ini')
     else:
-        config = os.path.join(here, 'production.ini')
+        config = os.path.join(here, 'devolpment.ini')
+        print('RUNNING LOCALLY')
 
     print('Binding to {ip}:{port}'.format(ip=ip, port=port))
     app = get_app(config, 'main')  # find 'main' method in __init__.py.  That is our wsgi app
