@@ -38,8 +38,8 @@ Mutanalyst is using JS still. Not Ajax.
 * Glue needs a switch like Pedel
 * URL query string needs to be integrated
 * make size responsive.
-* https damn it
-
+* https. switch to gnunicorn from waitress?
+* add color choice to request.session? Actually just make it a JS thing.
 
 
 ## GlueIT hackshop
