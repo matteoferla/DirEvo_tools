@@ -14,7 +14,9 @@ PLACE = "server"
 if not os.path.isdir(PATH):
     PATH = "pyramidstarter/"
     PLACE = "localhost"
-
+GMAIL_USER = 'squidonius.tango@gmail.com'
+GMAIL_PWD = '*******'
+GMAIL_SET = False
 
 def basedict():
     return {'project': 'Pyramidstarter',
@@ -166,28 +168,25 @@ def codonist(request):  # copy paste of pedeller
 
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
+    global GMAIL_PWD, GMAIL_USER
     reply = request.json_body
     subject = 'Comment from ' + reply['message']
     body = reply['name']
-    gmail_user = 'squidonius.tango@gmail.com'
-    gmail_pwd = '*******'
-    FROM = 'squidonius.tango@gmail.com'
     recipient = 'matteo.ferla@gmail.com'
-    TO = recipient if type(recipient) is list else [recipient]
-    SUBJECT = subject
-    TEXT = body
+    addressee = recipient if type(recipient) is list else [recipient]
     # Prepare actual message
     message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    """ % (GMAIL_USER, ", ".join(addressee), subject, body)
     try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.ehlo()
         server.starttls()
-        server.login(gmail_user, gmail_pwd)
-        server.sendmail(FROM, TO, message)
+        server.login(GMAIL_USER, GMAIL_PWD)
+        server.sendmail(GMAIL_USER, addressee, message)
         server.close()
         return json.dumps({'msg': 'successfully sent the mail'})
     except Exception as e:
+        print(GMAIL_USER,GMAIL_PWD,str(e))
         return json.dumps({'msg': str(e)})
 
 
@@ -211,15 +210,29 @@ def home_callable(request):
             'welcome': open(os.path.join(PATH, 'templates', 'welcome.pt')).read(), **set_navbar_state('m_home')}
 
 
-@view_config(route_name='admin', renderer='templates/frame.pt')
-def admin_callable(request):
+@view_config(route_name='upcoming', renderer='templates/frame.pt')
+def upcoming_callable(request):
     log_passing(request)
     if PLACE == "server":
         md = markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1], 'README.md')), 'r').read())
     else:
         md = markdown.markdown(open('README.md').read())
-        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_admin')}
+        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_upcoming')}
 
+@view_config(route_name='admin', renderer='templates/frame.pt')
+def admin_callable(request):
+    return {'main': open(os.path.join(PATH, 'templates', 'admin.pt')).read(),'code': open(os.path.join(PATH, 'templates', 'admin.js')).read()}
+
+@view_config(route_name='set', renderer='json')
+def set_callable(request):
+    global GMAIL_SET, GMAIL_PWD
+    if not GMAIL_SET:
+        GMAIL_PWD=request.params['pwd']
+        GMAIL_SET = True
+        print('Password for gmail set')
+        return 'Sucess'
+    else:
+        return 'Password already set.'
 
 @view_config(route_name='main', renderer='templates/frame.pt')
 def main_callable(request):

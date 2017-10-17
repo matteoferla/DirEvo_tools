@@ -207,7 +207,7 @@ $('#comment_send').click(function() {
     $("#comment_status").show();
     $("#comment_status").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
     $.ajax({
-        url: 'ajax_email',
+        url: '/ajax_email',
         type: 'POST',
         dataType: 'json',
         data: JSON.stringify({

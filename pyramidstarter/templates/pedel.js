@@ -112,4 +112,9 @@ $(function() {
             type: 'bar'
         }], layout);
     }
+
+    $('#pedelAA_§cycles').hide();
+    $('#pedelAA_PCR').on('switchChange.bootstrapSwitch', function(event, state) {
+        $('#pedelAA_§cycles').toggle(state);
+    });
 });

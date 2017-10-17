@@ -18,6 +18,8 @@ Please see my mutagenesis repository.
 * pedel PCR not active
 * pedel range of conditions not doen yet, but pedel_batch wrapper made.
 * Pedel-AA not done yet
+* calc for PCR in Pedel-AA not done.
+* Talk to Wayne about conceptual issues with PCR efficiency
 
 ## Mutant caller
 * wired but not written
@@ -30,10 +32,13 @@ Benchling API: Benchling API reqires a key. This seems to be issued on request t
 Mutanalyst is using JS still. Not Ajax.
 
 ## other
-> Scheme 19c and 20c in QQC are incomplete!!
-> js of misc for codon has error due to staticmethod being called... changed the static methods fom QQC.
-> GlueIT in pt needs js to change the number of codons.
-> Glue needs a switch like Pedel
+* Scheme 19c and 20c in QQC are incomplete!!
+* js of misc for codon has error due to staticmethod being called... changed the static methods fom QQC.
+* GlueIT in pt needs js to change the number of codons.
+* Glue needs a switch like Pedel
+* URL query string needs to be integrated
+* make size responsive.
+* https damn it
 
 
 

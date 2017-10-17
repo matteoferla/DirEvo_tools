@@ -1,0 +1,15 @@
+<div class="row" id="§pedel">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1>Admin page</h1>
+        <!--
+        <div class="row">
+            <div class="input-group">
+      <input type="password" class="form-control" placeholder="****" id="admin_pwd">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" id="admin_set"><i class="fa fa-key" aria-hidden="true"></i></button>
+      </span>
+    </div>
+    </div> -->
+    </div>
+</div>
