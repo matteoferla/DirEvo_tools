@@ -30,27 +30,10 @@
                         </span>
                                     <textarea class="form-control custom-control" rows="5" style="resize:none"
                                               id="MC_sequence"
-                                              name="pedelAA_sequence"></textarea>
-
+                                              name="MC_sequence"></textarea>
                                 </div>
                                 <br/>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                            <span class="input-group-addon" data-toggle="tooltip"
-                                  title="The mutation used. The input is a string which can be simply four bases (e.g. 'NNK') or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. '12NDT 6VHA 1TGG 1ATG') or a special mix (e.g. 'Tang')."
-                                  data-placement="top">Scheme</span>
-
-                                    <input type="text" class="form-control" placeholder="NNK" id="QQC_mutation">
-                                    <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" data-toggle="modal"
-                                        data-target="#scheme_modal"><i
-                                        class="fa fa-flask" aria-hidden="true"></i></button>
-                            </span>
-                                </div>
-                                <br/>
-                            </div>
-
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-lg-offset-3">

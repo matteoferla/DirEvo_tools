@@ -104,6 +104,16 @@ class Trace:
             [self.get_intensities(location), self.get_intensities(location + 1), self.get_intensities(location + 2)],
             *args, **kwargs)
 
+    def MC(self, sequence, *args, **kwargs):
+        """
+        While QQC does a partial match, MC has to do a full alignment
+        :param sequence:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        raise NotImplementedError
+
 def scheme_maker(scheme):
     """
     FORMERLY A STATIC METHOD.

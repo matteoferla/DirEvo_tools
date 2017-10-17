@@ -100,6 +100,10 @@ def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK'):
     return json.dumps({'data': {'raw': raw, 'nt': Q.codon_peak_freq, 'AAemp': Q.empirical_AA_probabilities,
                                 'AAscheme': Q.scheme_AA_probabilities, 'Qpool': Q.Qpool}, 'html': html})
 
+def MC(file_path, stored_filename, tainted_filename, sequence):
+    chroma = Trace.from_filename(file_path)
+    Q = chroma.MC(sequence)
+
 def glue(jsonreq):
     #{'prob_complete': '0.95', 'completeness': '0.95', 'library_size': '3000000', 'nvariants': '1000000', 'mode': 'prob_complete'}
     for id in ['prob_complete','completeness','library_size']:

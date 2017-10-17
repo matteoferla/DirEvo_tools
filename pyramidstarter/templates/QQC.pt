@@ -18,7 +18,7 @@
                     proportions.
                     In the case of sequences mutated with multiple codons a rough estimate of the contributions of each
                     is obtained by optimining the function:</p>
-                <div align="center"><img src="${request.static_url('pyramidstarter:static/eq_QQC_white-01.svg')}"
+                <div align="center"><img src="/static/eq_QQC_white-01.svg"
                                          alt="equation 1" height="82 em"></div>
                 <p>where <i><b>x</b></i> is a scaling factor (4x3xN tensor) of the deviation from expected, <i><b>m</b></i>
                     is the empirical

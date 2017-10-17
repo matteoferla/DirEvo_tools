@@ -9,7 +9,7 @@ def main(global_config, **settings):
     config.include('pyramid_chameleon')
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
-    for route in 'admin set upcoming log ajax_test ajax_deepscan deepscan_IDT96 deepscan_IDT384 ajax_QQC ajax_pedel ajax_glue ajax_mutantcaller ajax_facs ajax_codon ajax_mutantprimers ajax_email'.split():
+    for route in 'admin set upcoming log ajax_test ajax_deepscan deepscan_IDT96 deepscan_IDT384 ajax_QQC ajax_pedel ajax_glue ajax_MC ajax_facs ajax_codon ajax_mutantprimers ajax_email'.split():
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.add_route('main', '/main/{page}')

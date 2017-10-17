@@ -57,6 +57,16 @@ def IDT96(request):
 def IDT384(request):
     return wrap.IDT(request, 384)
 
+def save_file(fileball):
+    input_file = fileball.file  # <class '_io.BufferedRandom'>
+    new_filename='{0}.ab1'.format(uuid.uuid4())
+    file_path=os.path.join(PATH, 'tmp', new_filename)
+    temp_file_path = file_path + '~'
+    input_file.seek(0)
+    with open(temp_file_path, 'wb') as output_file:
+        shutil.copyfileobj(input_file, output_file)
+    os.rename(temp_file_path, file_path)
+    return (new_filename,file_path)
 
 @view_config(route_name='ajax_QQC', renderer='json')
 def QQCer(request):
@@ -68,16 +78,9 @@ def QQCer(request):
             file_path = os.path.join(PATH, 'static',
                                      '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
-            input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
-            new_filename = '{0}.ab1'.format(uuid.uuid4())
+            (new_filename, file_path) = save_file(request.POST['file'])
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH, 'tmp', new_filename)
-            temp_file_path = file_path + '~'
-            input_file.seek(0)
-            with open(temp_file_path, 'wb') as output_file:
-                shutil.copyfileobj(input_file, output_file)
-            os.rename(temp_file_path, file_path)
         reply = wrap.QQC(file_path=file_path, **data)
         log_passing(request, json.dumps(data))
         return {'message': str(reply)}
@@ -88,30 +91,21 @@ def QQCer(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
-
-@view_config(route_name='ajax_mutantcaller', renderer='json')
-def mutantcaller(request):
+@view_config(route_name='ajax_MC', renderer='json')
+def MCer(request):
     data = {}
-    raise NotImplementedError
-    # this is just a copy paste.
     try:
         if request.POST['file'] == 'demo':
+            raise NotImplementedError
             data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
                     'location': request.POST['location'], 'scheme': request.POST['scheme']}
             file_path = os.path.join(PATH, 'static',
                                      '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
-            input_file = request.POST['file'].file  # <class '_io.BufferedRandom'>
-            new_filename = '{0}.ab1'.format(uuid.uuid4())
+            (new_filename,file_path) = save_file(request.POST['file'])
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
-                    'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH, 'tmp', new_filename)
-            temp_file_path = file_path + '~'
-            input_file.seek(0)
-            with open(temp_file_path, 'wb') as output_file:
-                shutil.copyfileobj(input_file, output_file)
-            os.rename(temp_file_path, file_path)
-        reply = wrap.QQC(file_path=file_path, **data)
+                    'sequence': request.POST['sequence']}
+        reply = wrap.MC(file_path=file_path, **data)
         log_passing(request, json.dumps(data))
         return {'message': str(reply)}
     except Exception as err:

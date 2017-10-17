@@ -1,5 +1,8 @@
 # Intro
-Please see my mutagenesis repository. 
+Please see my mutagenesis repository.
+
+# Where was I?
+* in QQC.py MC module.
 
 # To Do list
 ## mutationprimer
