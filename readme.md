@@ -5,6 +5,11 @@ Please see my mutagenesis repository.
 * in QQC.py MC module.
 
 # To Do list
+## Main
+What nav is needed?
+* table
+* clicable map (image)
+
 ## mutationprimer
 * temporary name. Most functions are copypaste jobs of deepscan.
 * make more elegant the determination of server or localhost.
@@ -26,10 +31,17 @@ Please see my mutagenesis repository.
 
 ## Mutant caller
 * wired but not written
-SO this script would require the user to upload sequence trace file
+* input penalty values for match
+* add reverser
+
+So this script would require the user to upload sequence trace file
 And a reference sequence (mutated only)
-returns mutations. Quality score?
-Benchling API: Benchling API reqires a key. This seems to be issued on request to devs. SO this is not an option.
+returns mutations. Quality score?     
+
+NB. Benchling API: Benchling API reqires a key. This seems to be issued on request to devs. SO this is not an option.
+
+## QQC
+* wire reverse
 
 ## Mutanalyst
 Mutanalyst is using JS still. Not Ajax.
@@ -43,6 +55,7 @@ Mutanalyst is using JS still. Not Ajax.
 * make size responsive.
 * https. switch to gnunicorn from waitress?
 * add color choice to request.session? Actually just make it a JS thing.
+* Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
 
 
 ## GlueIT hackshop

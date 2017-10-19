@@ -51,6 +51,7 @@ $(function() {
         }
         data.append("location", $('#QQC_preceding').val());
         data.append("scheme", $('#QQC_mutation').val());
+        data.append("reverse",! $('#QQC_direction').is(":checked"));
         $.ajax({
             url: '../ajax_QQC',
             type: 'POST',

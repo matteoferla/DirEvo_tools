@@ -6,6 +6,7 @@ import json, os, uuid, shutil
 import smtplib
 import markdown
 import pprint
+import traceback
 pprinter = pprint.PrettyPrinter().pprint
 
 
@@ -96,11 +97,10 @@ def MCer(request):
     data = {}
     try:
         if request.POST['file'] == 'demo':
-            raise NotImplementedError
-            data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
-                    'location': request.POST['location'], 'scheme': request.POST['scheme']}
+            data = {'tainted_filename': 'N/A', 'stored_filename': 'demo_MC.ab1',
+                    'sequence': request.POST['sequence'], 'reverse': request.POST['reverse']}
             file_path = os.path.join(PATH, 'static',
-                                     '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+                                     'demo_MC.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
             (new_filename,file_path) = save_file(request.POST['file'])
             data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
@@ -112,8 +112,8 @@ def MCer(request):
         log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
         return {
             'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
+                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/><pre><code>{0}</pre><code></div><br/>'.format(
+                                       traceback.format_exc())})}
 
 
 @view_config(route_name='ajax_pedel', renderer='json')

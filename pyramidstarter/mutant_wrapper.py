@@ -100,9 +100,32 @@ def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK'):
     return json.dumps({'data': {'raw': raw, 'nt': Q.codon_peak_freq, 'AAemp': Q.empirical_AA_probabilities,
                                 'AAscheme': Q.scheme_AA_probabilities, 'Qpool': Q.Qpool}, 'html': html})
 
-def MC(file_path, stored_filename, tainted_filename, sequence):
+def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False):
     chroma = Trace.from_filename(file_path)
-    Q = chroma.MC(sequence)
+    if isinstance(reverse,str): #js sends a string...
+        reverse = True if reverse == 'true' else False
+    if reverse:
+        neochroma = chroma.reverse().align(sequence)
+    else:
+        neochroma = chroma.align(sequence)
+    ref = Seq(neochroma.alignment[1].replace('-', '')).translate()
+    query = Seq(neochroma.alignment[0].replace('-', '')).translate()
+    d=[(resi*3,'{0}{1}{2}'.format(ref[resi],resi+1, query[resi])) for resi in range(len(ref)) if ref[resi] != query[resi]]
+    html="<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(d),l=' '.join([x[1] for x in d]))+\
+         "<div class='row'>"+\
+        "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in range(len(d))])+\
+         "</div>"
+    # in QCC raw contains the snapshot. here it is a list of raw
+    raws=[]
+    neochroma.size_test()
+    for resi, mut in d:
+        window = round(5.5 * neochroma.span)
+        doubleindex = chroma.peak_index[resi]
+        raws.append({base:
+            [getattr(neochroma, base)[doubleindex + i] for i in range(-window,window)]
+        for base in 'ATGC'})
+    return json.dumps({'data':{'raw':raws,'mutants':[r for (i,r) in d]},'html':html})
+
 
 def glue(jsonreq):
     #{'prob_complete': '0.95', 'completeness': '0.95', 'library_size': '3000000', 'nvariants': '1000000', 'mode': 'prob_complete'}

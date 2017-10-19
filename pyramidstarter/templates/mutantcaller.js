@@ -24,7 +24,8 @@ $(function() {
         demo = true;
         $('#MC_upload_group').removeClass('btn-warning');
         $('#MC_upload_group').addClass('btn-default');
-        $('#MC_sequence').val('oh bugger. I have not loaded a demo file yet.');
+        $('#MC_sequence').val('GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG');
+        $("#MC_direction").bootstrapSwitch('state',false);
     })
 
     $('#MC_clear').click(function() {
@@ -48,107 +49,40 @@ $(function() {
             data.append("file", files[0]);
         }
         data.append("sequence", $('#MC_sequence').val());
+        data.append("reverse", !$('#MC_direction').is(":checked"));
         $.ajax({
-            url: '../ajax_MC',
+            url: '/ajax_MC',
             type: 'POST',
             data: data,
 
             success: function(result) {
                 reply = JSON.parse(result.message);
-                window.sessionStorage.setItem('primers', JSON.stringify(reply['data']));
+                window.sessionStorage.setItem('MC', JSON.stringify(reply['data']));
                 $("#MC_download").removeClass('hidden');
                 $("#MC_download").show(); //weird combo.
                 $("#MC_result").html(reply['html']);
                 //traces
                 bases = ['A', 'T', 'G', 'C'];
-                var raw_trace = bases.map(function(base) {
-                    return {
-                        x: Array.apply(null, {
-                            length: reply['data']['raw'][base].length
-                        }).map(Number.call, Number),
-                        y: reply['data']['raw'][base],
-                        name: base,
-                        type: 'scatter',
-                        line: {
-                            color: chromatomap[base]
-                        }
-                    };
-                });
-                Plotly.newPlot('MC_raw_plot', raw_trace, {
-                    title: 'Raw chromatogram data'
-                });
+                for (var mi = 0; mi < reply['data']['raw'].length; mi++) {
+                    // interate per mutation
+                    var raw_trace = bases.map(function(base) {
+                        return {
+                            x: Array.apply(null, {
+                                length: reply['data']['raw'][mi][base].length
+                            }).map(Number.call, Number),
+                            y: reply['data']['raw'][mi][base],
+                            name: base,
+                            type: 'scatter',
+                            line: {
+                                color: chromatomap[base]
+                            }
+                        };
+                    });
+                    Plotly.newPlot('MC_mutant_'+mi.toString(), raw_trace, {
+                    title: reply['data']['mutants'][mi]+' chromatogram data'
+                    });
+                }
 
-                //piecharts
-                cm2 = bases.map(function(base) {
-                    return chromatomap256[base]
-                });
-                piedata = [{
-                    values: bases.map(function(base) {
-                        return reply['data']['nt'][0][base]
-                    }),
-                    labels: bases,
-                    type: 'pie',
-                    marker: {
-                        colors: cm2
-                    },
-                    domain: {
-                        x: [0, 0.30],
-                        y: [0, 1]
-                    }
-                }, {
-                    values: bases.map(function(base) {
-                        return reply['data']['nt'][1][base]
-                    }),
-                    labels: bases,
-                    type: 'pie',
-                    marker: {
-                        colors: cm2
-                    },
-                    domain: {
-                        x: [0.35, 0.65],
-                        y: [0, 1]
-                    }
-                }, {
-                    values: bases.map(function(base) {
-                        return reply['data']['nt'][2][base]
-                    }),
-                    labels: bases,
-                    type: 'pie',
-                    marker: {
-                        colors: cm2
-                    },
-                    domain: {
-                        x: [0.70, 1],
-                        y: [0, 1]
-                    }
-                }]
-                Plotly.newPlot('MC_pie', piedata, {
-                    title: 'Frequency at each position (non-deconvoluted'
-                });
-                //AA
-                AA = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '*'];
-                var aadata = [{
-                    x: AA,
-                    y: AA.map(function(a) {
-                        return reply['data']['AAscheme'][a]
-                    }),
-                    name: 'Expected',
-                    type: 'bar'
-                }, {
-                    x: AA,
-                    y: AA.map(function(a) {
-                        return reply['data']['AAemp'][a]
-                    }),
-                    name: 'Observed',
-                    type: 'bar'
-                }];
-
-                var layout = {
-                    barmode: 'group',
-                    title: 'Pedicted amino acid proportions (deconvoluted)'
-                };
-
-                Plotly.newPlot('MC_bar', aadata, layout);
 
 
             },

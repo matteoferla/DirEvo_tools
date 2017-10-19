@@ -18,6 +18,9 @@ from Bio.Seq import Seq
 from collections import defaultdict
 import numpy as np
 from scipy.optimize import minimize
+from Bio import pairwise2
+from pprint import PrettyPrinter
+pprint = PrettyPrinter().pprint
 
 
 class Trace:
@@ -27,11 +30,19 @@ class Trace:
     """
     bases = ('A', 'T', 'G', 'C')
 
-    def __init__(self, record):
-        for ni, N in enumerate(record.annotations['abif_raw']['FWO_1'].upper()):
-            setattr(self, N, record.annotations['abif_raw']['DATA{0}'.format(9 + ni)])
-        self.peak_index = record.annotations['abif_raw']['PLOC1']
-        self.peak_id = record.annotations['abif_raw']['PBAS1']
+    def __init__(self, record=None,**kwargs):
+        if record:
+            for ni, N in enumerate(record.annotations['abif_raw']['FWO_1'].upper()):
+                setattr(self, N, record.annotations['abif_raw']['DATA{0}'.format(9 + ni)])
+            self.peak_index = record.annotations['abif_raw']['PLOC1']
+            self.peak_id = record.annotations['abif_raw']['PBAS1']
+        else:
+            for k in ['A', 'T', 'G', 'C', 'peak_id', 'peak_index']:
+                setattr(self,k,kwargs[k])
+            print('from init',len(self.A))
+        self.span=len(self.A) / len(self.peak_index)  # float
+        self.halfspan = round(len(self.A) / (2* len(self.peak_index))) #int
+
 
     @classmethod
     def from_filename(cls, file):
@@ -44,6 +55,25 @@ class Trace:
         handle = open(file, 'rb')
         record = SeqIO.read(handle, "abi")
         return cls(record)
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            print('halfspan...',self.peak_index[key.start]-self.halfspan,self.peak_index[key.stop]+self.halfspan)
+            print(self.A[self.peak_index[key.start]-self.halfspan:self.peak_index[key.stop]+self.halfspan])
+            print(key)
+            print(key.start)
+            print('hs',self.halfspan)
+            peak_values={k:getattr(self,k)[self.peak_index[key.start]-self.halfspan:self.peak_index[key.stop]+self.halfspan] for k in ['A', 'T', 'G', 'C']}
+            fluoro_values={k:getattr(self,k)[key] for k in ['peak_id', 'peak_index']}
+            return Trace(**{**peak_values, **fluoro_values})
+        elif isinstance(key, int):
+            raise NotImplementedError
+        else:
+            raise TypeError
+
+    def size_test(self):
+        for k in ['A', 'T', 'G', 'C', 'peak_id', 'peak_index']:
+            print(k, len(getattr(self, k)))
 
     def find_peak(self, target_seq, strict=True):
         """
@@ -88,6 +118,18 @@ class Trace:
                 [getattr(self, base)[doubleindex + i] for i in range(-round(span * wobble), round(span * wobble))])
             for base in self.bases}
 
+    def reverse(self):
+        """
+        Is the trace from a reverse primer?
+        :return: a new trace
+        """
+        return Trace(peak_index=self.peak_index[::-1],
+              peak_id=str(Seq(self.peak_id).reverse_complement()),
+              A=self.T[::-1],
+              T=self.A[::-1],
+              G=self.C[::-1],
+              C=self.G[::-1])
+
     def QQC(self, location, *args, **kwargs):
         """
         Intended main entry point to the QQC class.
@@ -104,15 +146,46 @@ class Trace:
             [self.get_intensities(location), self.get_intensities(location + 1), self.get_intensities(location + 2)],
             *args, **kwargs)
 
-    def MC(self, sequence, *args, **kwargs):
+    def align(self, sequence, *args, **kwargs):
         """
-        While QQC does a partial match, MC has to do a full alignment
+        While QQC does a partial match, MC has to do a full alignment.
         :param sequence:
         :param args:
         :param kwargs:
         :return:
         """
-        raise NotImplementedError
+        #sanitise
+        ref_seq = re.sub('[^ATGC]', '', sequence.upper())
+        # play around... >>> pairwise2.align.localxs(''.join([random.choice('A T G C'.split()) for i in range(100)]), ''.join([random.choice('A T G C'.split()) for i in range(60)]),-5,-.2)
+        match=pairwise2.align.localxs(self.peak_id,ref_seq,-5,-.2,one_alignment_only=True)[0]
+        if not match:
+            raise ValueError('target_seq not found!')
+        #case 1. The read is longer than the CDS
+        if match[1][0] == '-':
+            #front trim
+            for i in range(len(match[1])):
+                if match[1][i] != '-':
+                    break
+            else:
+                raise ValueError('Seq does not match')
+            #back trim
+            for j in range(len(match[1])-1,-1,-1):
+                if match[1][j] != '-':
+                    break
+            else:
+                raise ValueError('Seq does not match')
+            trim=self[i:j]
+            setattr(trim,'alignment',(match[0][i:j],match[1][i:j]))
+        #case 2. The read is shorter...
+        else:
+            print('case 2. The read is shorter than the CDS at the front.')
+            raise NotImplementedError
+        return trim
+
+    def MC(self):
+        if not hasattr(self,'alignment'):
+            raise ValueError('Call MC on an aligned Trace...')
+
 
 def scheme_maker(scheme):
     """
@@ -296,12 +369,25 @@ class QQC:
         return trace.QQC(location, *args, **kwargs)
 
 
-if __name__ == "__main__":
+def QQC_test():
     file = "example data/ACE-AA-088-02-60Â°C-BM3-A82_NDT-VHG-TGG-T7Hi-T7minus1.ab1"
     x = Trace.from_filename(file)
     q = x.QQC('CGT GAT TTT', '22c')
     # q = x.QQC('CGT GAT TTT', 'NNK') # works
-    print('Bases ',sum([p[i][b] for p in q.codon_peak_freq_split for i in range(3) for b in 'ATGC']) / (
+    print('Bases ', sum([p[i][b] for p in q.codon_peak_freq_split for i in range(3) for b in 'ATGC']) / (
         3 * len(q.codon_peak_freq_split)))
+    print('AA ', sum(q.empirical_AA_probabilities.values()))
 
-    print('AA ',sum(q.empirical_AA_probabilities.values()))
+def MC_test():
+    seq='GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG'
+    x=Trace.from_filename('pyramidstarter/static/demo_MC.ab1').reverse().align(seq)
+    pprint(x.alignment)
+    ref=Seq(x.alignment[1].replace('-','')).translate()
+    query=Seq(x.alignment[0].replace('-','')).translate()
+    for resi in range(len(ref)):
+        if ref[resi] != query[resi]:
+            print('{0}{1}{2}'.format(ref[resi],resi+1, query[resi]))
+
+
+if __name__ == "__main__":
+    MC_test()
