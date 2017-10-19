@@ -123,7 +123,7 @@ class Trace:
         Is the trace from a reverse primer?
         :return: a new trace
         """
-        return Trace(peak_index=self.peak_index[::-1],
+        return Trace(peak_index=[len(self.T)-x for x in self.peak_index[::-1]],
               peak_id=str(Seq(self.peak_id).reverse_complement()),
               A=self.T[::-1],
               T=self.A[::-1],
