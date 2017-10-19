@@ -39,7 +39,6 @@ class Trace:
         else:
             for k in ['A', 'T', 'G', 'C', 'peak_id', 'peak_index']:
                 setattr(self,k,kwargs[k])
-            print('from init',len(self.A))
         self.span=len(self.A) / len(self.peak_index)  # float
         self.halfspan = round(len(self.A) / (2* len(self.peak_index))) #int
 
@@ -58,11 +57,6 @@ class Trace:
 
     def __getitem__(self, key):
         if isinstance(key, slice):
-            print('halfspan...',self.peak_index[key.start]-self.halfspan,self.peak_index[key.stop]+self.halfspan)
-            print(self.A[self.peak_index[key.start]-self.halfspan:self.peak_index[key.stop]+self.halfspan])
-            print(key)
-            print(key.start)
-            print('hs',self.halfspan)
             peak_values={k:getattr(self,k)[self.peak_index[key.start]-self.halfspan:self.peak_index[key.stop]+self.halfspan] for k in ['A', 'T', 'G', 'C']}
             fluoro_values={k:getattr(self,k)[key] for k in ['peak_id', 'peak_index']}
             return Trace(**{**peak_values, **fluoro_values})
