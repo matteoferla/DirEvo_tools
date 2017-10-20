@@ -7,3 +7,4 @@ openpyxl
 markdown
 pyramid
 numpy
+Paste
