@@ -1,14 +1,16 @@
-from pyramid.view import view_config, notfound_view_config
-from pyramid.response import Response
-import pyramidstarter.mutant_wrapper as wrap
-import json, os, uuid, shutil
-# import fcsparser
-import smtplib
-import markdown
+import json
+import os
 import pprint
+import shutil
+import smtplib
 import traceback
-pprinter = pprint.PrettyPrinter().pprint
+import uuid
 
+import markdown
+import pyramidstarter.mutant_wrapper as wrap
+from pyramid.view import view_config, notfound_view_config
+
+pprinter = pprint.PrettyPrinter().pprint
 
 PATH = "/opt/app-root/src/pyramidstarter/"
 PLACE = "server"
@@ -18,6 +20,7 @@ if not os.path.isdir(PATH):
 GMAIL_USER = 'squidonius.tango@gmail.com'
 GMAIL_PWD = '*******'
 GMAIL_SET = False
+
 
 def basedict():
     return {'project': 'Pyramidstarter',
@@ -58,16 +61,18 @@ def IDT96(request):
 def IDT384(request):
     return wrap.IDT(request, 384)
 
+
 def save_file(fileball):
     input_file = fileball.file  # <class '_io.BufferedRandom'>
-    new_filename='{0}.ab1'.format(uuid.uuid4())
-    file_path=os.path.join(PATH, 'tmp', new_filename)
+    new_filename = '{0}.ab1'.format(uuid.uuid4())
+    file_path = os.path.join(PATH, 'tmp', new_filename)
     temp_file_path = file_path + '~'
     input_file.seek(0)
     with open(temp_file_path, 'wb') as output_file:
         shutil.copyfileobj(input_file, output_file)
     os.rename(temp_file_path, file_path)
-    return (new_filename,file_path)
+    return (new_filename, file_path)
+
 
 @view_config(route_name='ajax_QQC', renderer='json')
 def QQCer(request):
@@ -92,19 +97,21 @@ def QQCer(request):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_MC', renderer='json')
 def MCer(request):
     data = {}
     try:
         if request.POST['file'] == 'demo':
-            data = {'tainted_filename': 'N/A', 'stored_filename': 'demo_MC.ab1',
-                    'sequence': request.POST['sequence'], 'reverse': request.POST['reverse']}
+            data = {'tainted_filename': 'N/A', 'stored_filename': 'demo_MC.ab1'}
             file_path = os.path.join(PATH, 'static',
                                      'demo_MC.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
         else:
-            (new_filename,file_path) = save_file(request.POST['file'])
-            data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
-                    'sequence': request.POST['sequence']}
+            (new_filename, file_path) = save_file(request.POST['file'])
+            data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
+        data['sequence'] = request.POST['sequence']
+        data['sigma'] = int(request.POST['sigma'])
+        data['reverse']=request.POST['reverse']
         reply = wrap.MC(file_path=file_path, **data)
         log_passing(request, json.dumps(data))
         return {'message': str(reply)}
@@ -145,6 +152,7 @@ def gluer(request):  # copy paste of pedeller
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        err)})}
 
+
 @view_config(route_name='ajax_codon', renderer='json')
 def codonist(request):  # copy paste of pedeller
     try:
@@ -180,7 +188,7 @@ def send_email(request):
         server.close()
         return json.dumps({'msg': 'successfully sent the mail'})
     except Exception as e:
-        print(GMAIL_USER,GMAIL_PWD,str(e))
+        print(GMAIL_USER, GMAIL_PWD, str(e))
         return json.dumps({'msg': str(e)})
 
 
@@ -208,25 +216,29 @@ def home_callable(request):
 def upcoming_callable(request):
     log_passing(request)
     if PLACE == "server":
-        md = markdown.markdown(open(os.path.join('/'.join(PATH.split('/')[0:-1], 'README.md')), 'r').read())
+        md = markdown.markdown(open(os.path.join(*PATH.split('/')[0:-1], 'README.md'), 'r').read())
     else:
         md = markdown.markdown(open('README.md').read())
         return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_upcoming')}
 
+
 @view_config(route_name='admin', renderer='templates/frame.pt')
 def admin_callable(request):
-    return {'main': open(os.path.join(PATH, 'templates', 'admin.pt')).read(),'code': open(os.path.join(PATH, 'templates', 'admin.js')).read()}
+    return {'main': open(os.path.join(PATH, 'templates', 'admin.pt')).read(),
+            'code': open(os.path.join(PATH, 'templates', 'admin.js')).read()}
+
 
 @view_config(route_name='set', renderer='json')
 def set_callable(request):
     global GMAIL_SET, GMAIL_PWD
     if not GMAIL_SET:
-        GMAIL_PWD=request.params['pwd']
+        GMAIL_PWD = request.params['pwd']
         GMAIL_SET = True
         print('Password for gmail set')
         return 'Sucess'
     else:
         return 'Password already set.'
+
 
 @view_config(route_name='main', renderer='templates/frame.pt')
 def main_callable(request):

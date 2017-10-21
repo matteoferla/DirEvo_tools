@@ -1,5 +1,6 @@
 $(function() {
     var files;
+    var uppdbfiles;
     var chromatomap = {
         A: 'rgb(0.4660, 0.6740, 0.1880)',
         T: 'rgb(0.8500, 0.3250, 0.0980)',
@@ -20,19 +21,32 @@ $(function() {
         $('#MC_upload_group').addClass('btn-success');
     });
 
+    $('#MC_upload_pdb').on('change', function(event) {
+        uppdbfiles = event.target.files;
+        demo = false;
+        $('#MC_upload_pdb_group').removeClass('btn-warning');
+        $('#MC_upload_pdb_group').addClass('btn-success');
+    });
+
     $('#MC_demo').click(function() {
         demo = true;
         $('#MC_upload_group').removeClass('btn-warning');
-        $('#MC_upload_group').addClass('btn-default');
+        $('#MC_upload_group').addClass('btn-success');
         $('#MC_sequence').val('GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG');
         $("#MC_direction").bootstrapSwitch('state',false);
+        $('#MC_upload_pdb_group').removeClass('btn-warning');
+        $('#MC_upload_pdb_group').addClass('btn-success');
     })
 
     $('#MC_clear').click(function() {
         demo = false;
-        $('#MC_upload_group').removeClass('btn-success');
-        $('#MC_upload_group').removeClass('btn-default');
-        $('#MC_upload_group').addClass('btn-warning');
+        ids=['#MC_upload_group','#MC_upload_pdb_group'];
+        for (var idi=0; idi<2; idi++) {
+            var id=ids[idi];
+            $(id).removeClass('btn-success');
+            $(id).removeClass('btn-default');
+            $(id).addClass('btn-warning');
+        }
         $('#MC_sequence').val('');
         $("#MC_result").hide();
     })
@@ -50,7 +64,13 @@ $(function() {
         }
         data.append("sequence", $('#MC_sequence').val());
         data.append("reverse", !$('#MC_direction').is(":checked"));
-        data.append("sigma",3); //to be encoded.
+        data.append("sigma",$('#MC_sigma').val() ? $('#MC_sigma').val() : $('#MC_sigma').attr("placeholder"));
+        var pdb=false;
+        var pdb_loaded=false;
+        if ($('#MC_pdb_code').val() || demo) {
+            pdb=true;
+            $.getScript("/static/bio-pv.min.js", function(){pdb_loaded=true});
+        }
         $.ajax({
             url: '/ajax_MC',
             type: 'POST',
@@ -116,6 +136,7 @@ $(function() {
                 }//end of traces.
                 };
                 plot_mutants(data['mutants'],'MC_mutant_');
+                plot_mutants(data['heteromutants'],'MC_heteromutant_');
                 var noise = ['main_peaks','minor_peaks'].map(function(k) {return {
                             x: Array.apply(null, {
                                 length: data['noise'][k].length
@@ -125,9 +146,48 @@ $(function() {
                             type: 'scatter',
                         };});
                 Plotly.newPlot('MC_noise',noise,{title: 'Noise across read (SNR={0})'.format(Math.round(data['noise']['snr']))});
+                if (!! pdb) {
+                    var structure_loaded=false;
+                    function view_structure() {
+                        if(structure_loaded == false) {
+                           window.setTimeout(view_structure, 100);
+                        } else {
+                        viewer.cartoon('protein', structure);
+                        viewer.centerOn(structure);
+                        viewer.ballsAndSticks('mutant', structure.select({rindices : data['mutants']['zeroed_indices_for_pv']}));
+                        }
+                    }
 
-
-
+                    function load_structure() {
+                        if(pdb_loaded == false) {
+                           window.setTimeout(load_structure, 100);
+                        } else {
+                          viewer = pv.Viewer(document.getElementById('MC_viewer'));
+                        var pdbfile='';
+                        if (!! $('#MC_pdb_code').val()) {
+                        pdbfile='http://files.rcsb.org/view/'+$('#MC_pdb_code').val().toUpperCase()+'.pdb';
+                        $.get(pdbfile, function(pdbdata) {
+                            structure = pv.io.pdb(pdbdata);
+                            structure_loaded=true;});
+                            }
+                        else if (!! uppdbfiles) {
+                        var reader=new FileReader();
+                        reader.readAsText(uppdbfiles[0]);
+                        reader.onloadend = function() {
+                        structure = pv.io.pdb(reader.result);
+                        structure_loaded=true;};
+                        }
+                        else if (!! demo) {
+                        pdbfile='/static/demo.pdb';
+                        $.get(pdbfile, function(pdbdata) {
+                            structure = pv.io.pdb(pdbdata);
+                            structure_loaded=true;});}
+                        else {alert('ERROR.')}
+                    }
+                }
+                load_structure();
+                view_structure();
+                }
             },
             error: function() {
                 $("#MC_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');

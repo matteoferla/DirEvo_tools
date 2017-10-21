@@ -206,12 +206,13 @@ class Trace:
         # find outliers.
         outliers=np.nonzero(minorPeaks > snrThresh)[0]  #why tuple?
         outball=[]
-        if outliers:
+        print(outliers)
+        if outliers.size:
             for i in np.nditer(outliers):
                 tally={b: getattr(self,b)[self.peak_index[i]] for b in self.bases}
                 st=sum(tally.values())
                 prop={b: tally[b]/st for b in self.bases}
-                outball.append((i,prop))
+                outball.append((int(i),prop))
         return {'snr': snrMedian, 'main_peaks': main_peaks, 'minor_peaks': minor_peaks, 'outliers':outball}
 
 
@@ -422,7 +423,7 @@ def MC_test():
             print('{0}{1}{2}'.format(ref[resi], resi + 1, query[resi]))
     print('#' * 20)
     x.size_test()
-    print('SNR', x.noise_analysis(sigma=5)['snr'])
+    print('SNR', x.noise_analysis(sigma=2)['snr'])
 
 
 if __name__ == "__main__":

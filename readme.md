@@ -3,7 +3,10 @@
 <a href="https://codeclimate.com/github/matteoferla/pedel2/"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/issue_count.svg" /></a>
 
 # Intro
-Please see my mutagenesis repository.
+Repo for the new site, currently called [pedel2](http://pedel2-git-matteo-ferla.a3c1.starter-us-west-1.openshiftapps.com/) —but may change name.
+It is still WIP and I do not have enough Pods to keep a stable version for viewing, so if a current version is needed email me.
+See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
+
 
 # Where was I?
 * in QQC.py MC module.

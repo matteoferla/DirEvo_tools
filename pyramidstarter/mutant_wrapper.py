@@ -12,9 +12,9 @@ T = "\t"
 # N = "<br/>
 
 import json
-import openpyxl
 import re
 
+import openpyxl
 from Bio.Seq import Seq
 from pyramid.response import FileResponse
 from pyramidstarter import bike
@@ -105,37 +105,15 @@ def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK'):
 
 
 def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False, show=11, sigma=5):
-    chroma = Trace.from_filename(file_path)
-    if isinstance(reverse, str):  # js sends a string...
-        reverse = True if reverse == 'true' else False
-    if reverse:
-        neochroma = chroma.reverse().align(sequence)
-    else:
-        neochroma = chroma.align(sequence)
-    ref_AA = Seq(neochroma.alignment[1].replace('-', '')).translate()
-    query_AA = Seq(neochroma.alignment[0].replace('-', '')).translate()
-    mutants = [(resi * 3, '{0}{1}{2}'.format(ref_AA[resi], resi + 1, query_AA[resi])) for resi in range(len(ref_AA)) if
-         ref_AA[resi] != query_AA[resi]]
-    noise=neochroma.noise_analysis(sigma=sigma)
-    heteromutants=[(nti, None) for (nti,prop) in noise['outliers']]
-    html = "<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(mutants),
-                                                                                l=' '.join([x[1] for x in mutants])) + \
-           "<div class='row'>" + \
-           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
-                      range(len(mutants))]) + \
-           "</div>"+ \
-           "<div class='row'><div class='col-lg-12'>&nbsp;<div id='MC_noise'></div></div></div>"+ \
-           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_heteromutant_{id}'></div></div>".format(id=i) for i in
-                      range(len(heteromutants))])
-    # in QCC raw contains the snapshot. here it is a list of raw
-    window = round(show/2 * neochroma.span)
+
     def prep_windows(variant):
         raws = []
         window_seq = []
-        window_subseq=[]
+        window_subseq = []
         diff = []
+        pv_indices=[]
         for nti, mut in variant:
-            # figure out why difference...
+            # figure out why difference... backwards way as 2 mutations in the same codon are different than alone.
             diff.append([int(show / 2) + (1 + n - nti) for n in range(nti, nti + 3) if
                          neochroma.alignment[1][n] != neochroma.alignment[0][n]])
             # output the neighbourhood
@@ -148,17 +126,46 @@ def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False, sh
                  j in
                  range(nti - int(show / 2), nti + int(show / 2) + 1)])
             window_subseq.append(
-                [str(1+(j % 3)) for j in range(nti - int(show / 2), nti + int(show / 2) + 1)])
+                [str(1 + (j % 3)) for j in range(nti - int(show / 2), nti + int(show / 2) + 1)])
+            pv_indices.append(str(int(nti/3)))
         return {'raw': raws,
                 'mutants': [resn for (nti, resn) in variant],
-                'codons': [(neochroma.alignment[1][nti:nti + 3], neochroma.alignment[0][nti:nti + 3]) for (nti, resn) in variant],
-                'differing':diff,
+                'codons': [(neochroma.alignment[1][nti:nti + 3], neochroma.alignment[0][nti:nti + 3]) for (nti, resn) in
+                           variant],
+                'differing': diff,
                 'window_seq': window_seq,
-                'window_subseq': window_subseq}
+                'window_subseq': window_subseq,
+                'zeroed_indices_for_pv':pv_indices}
+
+    chroma = Trace.from_filename(file_path)
+    if isinstance(reverse, str):  # js sends a string...
+        reverse = True if reverse == 'true' else False
+    if reverse:
+        neochroma = chroma.reverse().align(sequence)
+    else:
+        neochroma = chroma.align(sequence)
+    ref_AA = Seq(neochroma.alignment[1].replace('-', '')).translate()
+    query_AA = Seq(neochroma.alignment[0].replace('-', '')).translate()
+    mutants = [(resi * 3, '{0}{1}{2}'.format(ref_AA[resi], resi + 1, query_AA[resi])) for resi in range(len(ref_AA)) if
+               ref_AA[resi] != query_AA[resi]]
+    noise = neochroma.noise_analysis(sigma=sigma)
+    heteromutants = [(nti, '{0}{1}{2}'.format(ref_AA[int(nti/3)],int(nti/3)+1,query_AA[int(nti/3)])) for (nti, prop) in noise['outliers']]
+    html = "<div class='row'><div class='col-lg-12'><p>There are {n} coding mutations ({l})</p></div></div>".format(n=len(mutants),
+                                                                                l=' '.join([x[1] for x in mutants])) + \
+           "<div class='row'>" + \
+           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
+                      range(len(mutants))]) + \
+           "</div>" + \
+           "<div id='MC_viewer'>&nbsp;</div>" +\
+           "<div class='row'><div class='col-lg-12'>&nbsp;<div id='MC_noise'></div></div></div>" + \
+           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_heteromutant_{id}'></div></div>".format(id=i) for i in
+                      range(len(heteromutants))])
+    # in QCC raw contains the snapshot. here it is a list of raw
+    window = round(show / 2 * neochroma.span)
     return json.dumps({'data': {'window': window * 2,
                                 'mutants': prep_windows(mutants),
-                                'heteromutants':prep_windows(heteromutants),
-                                'noise':noise},
+                                'heteromutants': prep_windows(heteromutants),
+                                'noise': noise},
                        'html': html})
 
 
