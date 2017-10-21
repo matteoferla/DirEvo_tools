@@ -11,13 +11,15 @@ N = "\n"
 T = "\t"
 # N = "<br/>
 
-from pyramidstarter.deep_mut_scanning import deep_mutation_scan
-from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
-import re, json, openpyxl
+import json
+import openpyxl
+import re
+
 from Bio.Seq import Seq
 from pyramid.response import FileResponse
 from pyramidstarter import bike
-from collections import defaultdict
+from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
+from pyramidstarter.deep_mut_scanning import deep_mutation_scan
 
 
 class SeqEncoder(json.JSONEncoder):
@@ -26,6 +28,7 @@ class SeqEncoder(json.JSONEncoder):
             return str(obj)
         else:
             return json.JSONEncoder.default(self, obj)
+
 
 def DS(req):
     ###seq.
@@ -47,16 +50,16 @@ def DS(req):
                 pass
     #### parse rest
     pyreq = {
-             'region': req['sequence'],
-             'primer_range': [int(x) for x in req['primerRange'].split(',')],
-             'section': slice(int(req['startBase']), int(req['stopBase'])),
-             'Tm_bonus': float(req['TMBonus'])}
+        'region': req['sequence'],
+        'primer_range': [int(x) for x in req['primerRange'].split(',')],
+        'section': slice(int(req['startBase']), int(req['stopBase'])),
+        'Tm_bonus': float(req['TMBonus'])}
     if req['task'] == 'MP':
         pyreq['mutation'] = req['mutationList']
         pyreq['task'] = 'MP'
     elif req['task'] == 'DS':
-        pyreq['mutation']=req['mutationCodon']
-        pyreq['task']='DS'
+        pyreq['mutation'] = req['mutationCodon']
+        pyreq['task'] = 'DS'
     else:
         print(req)
         raise ValueError('Unrecognised: MP or DS mode?')
@@ -100,43 +103,65 @@ def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK'):
     return json.dumps({'data': {'raw': raw, 'nt': Q.codon_peak_freq, 'AAemp': Q.empirical_AA_probabilities,
                                 'AAscheme': Q.scheme_AA_probabilities, 'Qpool': Q.Qpool}, 'html': html})
 
-def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False):
+
+def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False, show=11, sigma=5):
     chroma = Trace.from_filename(file_path)
-    if isinstance(reverse,str): #js sends a string...
+    if isinstance(reverse, str):  # js sends a string...
         reverse = True if reverse == 'true' else False
     if reverse:
         neochroma = chroma.reverse().align(sequence)
     else:
         neochroma = chroma.align(sequence)
-    ref = Seq(neochroma.alignment[1].replace('-', '')).translate()
-    query = Seq(neochroma.alignment[0].replace('-', '')).translate()
-    d=[(resi*3,'{0}{1}{2}'.format(ref[resi],resi+1, query[resi])) for resi in range(len(ref)) if ref[resi] != query[resi]]
-    html="<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(d),l=' '.join([x[1] for x in d]))+\
-         "<div class='row'>"+\
-        "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in range(len(d))])+\
-         "</div>"
+    ref_AA = Seq(neochroma.alignment[1].replace('-', '')).translate()
+    query_AA = Seq(neochroma.alignment[0].replace('-', '')).translate()
+    variant = [(resi * 3, '{0}{1}{2}'.format(ref_AA[resi], resi + 1, query_AA[resi])) for resi in range(len(ref_AA)) if
+         ref_AA[resi] != query_AA[resi]]
+    noise=neochroma.noise_analysis(sigma=sigma)
+    html = "<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(variant),
+                                                                                l=' '.join([x[1] for x in variant])) + \
+           "<div class='row'>" + \
+           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
+                      range(len(variant))]) + \
+           "</div>"+ \
+           "<div class='row'><div class='col-lg-12'>&nbsp;<div id='MC_noise'></div></div></div>"+ \
+           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
+                      range(len(variant))])
     # in QCC raw contains the snapshot. here it is a list of raw
-    raws=[]
-    neochroma.size_test()
-    for resi, mut in d:
-        window = round(5.5 * neochroma.span)
-        doubleindex = chroma.peak_index[resi]
+    raws = []
+    window_seq = []
+    diff = []
+    window = round(show/2 * neochroma.span)
+    for nti, mut in variant:
+        # figure out why difference...
+        diff.append([int(show/2) + (1+n-nti) for n in range(nti, nti + 3) if neochroma.alignment[1][n] != neochroma.alignment[0][n]])
+        # output the neighbourhood
+        doubleindex = chroma.peak_index[nti]
         raws.append({base:
-            [getattr(neochroma, base)[doubleindex + i] for i in range(-window,window)]
-        for base in 'ATGC'})
-    return json.dumps({'data':{'raw':raws,'mutants':[r for (i,r) in d]},'html':html})
+                         [getattr(neochroma, base)[doubleindex + i] for i in range(-window, window)]
+                     for base in 'ATGC'})
+        window_seq.append(
+            ['{0}{1}{2}'.format(ref_AA[int(j / 3)], int(j / 3) + 1, query_AA[int(j / 3)]) if j % 3 == 0 else ' ' for j in
+             range(nti - int(show/2), nti + int(show/2)+1)])
+    return json.dumps({'data': {'raw': raws,
+                                'mutants': [resn for (nti, resn) in variant],
+                                'codons': [(neochroma.alignment[1][nti:nti + 3], neochroma.alignment[0][nti:nti + 3]) for (nti, resn) in variant],
+                                'differing':diff,
+                                'window_seq': window_seq, 'window': window * 2,
+                                'noise':noise},
+                       'html': html})
 
 
 def glue(jsonreq):
-    #{'prob_complete': '0.95', 'completeness': '0.95', 'library_size': '3000000', 'nvariants': '1000000', 'mode': 'prob_complete'}
-    for id in ['prob_complete','completeness','library_size']:
+    # {'prob_complete': '0.95', 'completeness': '0.95', 'library_size': '3000000', 'nvariants': '1000000', 'mode': 'prob_complete'}
+    for id in ['prob_complete', 'completeness', 'library_size']:
         if jsonreq['mode'] == id:
-            glue_out=bike.glue(jsonreq['nvariants'], **{id: jsonreq[id]})
-            if float(jsonreq['nvariants']) <10:
-                hreply='<div class="alert alert-info" role="alert"><i class ="fa fa-exclamation-triangle" aria-hidden="true" > </ i > <span>Number of variants very small. Poisson statistics may be compromised.</span></div>'
+            glue_out = bike.glue(jsonreq['nvariants'], **{id: jsonreq[id]})
+            if float(jsonreq['nvariants']) < 10:
+                hreply = '<div class="alert alert-info" role="alert"><i class ="fa fa-exclamation-triangle" aria-hidden="true" > </ i > <span>Number of variants very small. Poisson statistics may be compromised.</span></div>'
             else:
-                hreply='<div></div>'
-            return json.dumps({'data': glue_out,'html':hreply})
+                hreply = '<div></div>'
+            return json.dumps({'data': glue_out, 'html': hreply})
+
 
 def pedel(jsonreq):
     pedel_out = bike.pedel(library_size=jsonreq['size'], sequence_length=jsonreq['len'],
@@ -214,11 +239,12 @@ def IDT(request, size):
     )
     return response
 
+
 def codon(request):
     ##parts are stolen from the QCC class. This basically just give the empirical results.
-    #convert str request which should have codons to AA.
-    scheme=scheme_maker(request)
-    #a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
+    # convert str request which should have codons to AA.
+    scheme = scheme_maker(request)
+    # a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
     schemeprobball = []
     for primer in scheme:
         schemeprobball.append(codon_to_AA(primer[1]))
@@ -226,6 +252,7 @@ def codon(request):
         aa: sum([scheme[pi][0] * schemeprobball[pi][aa] for pi in range(len(schemeprobball))]) for aa in
         schemeprobball[0].keys()}
     return json.dumps({'data': AA, 'html': ''})
+
 
 if __name__ == "__main__":
     pass

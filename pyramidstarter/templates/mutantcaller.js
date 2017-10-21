@@ -78,10 +78,34 @@ $(function() {
                             }
                         };
                     });
+                    // resi labels. oddly xref page causes issues.
+                    residue_labels=[];
+                    intm=Math.max(...reply['data']['raw'][mi]['A'],...reply['data']['raw'][mi]['T'],...reply['data']['raw'][mi]['G'],...reply['data']['raw'][mi]['C']);
+                    for (var ri=0; ri<reply['data']['window_seq'][mi].length; ri++){
+                        residue_labels.push({
+                        x: ri*reply['data']['raw'][mi]['A'].length/11 + reply['data']['raw'][mi]['A'].length/22,
+                        y: intm * 1.05,
+                        xanchor: 'center',
+                        yanchor: 'middle',
+                        text: reply['data']['window_seq'][mi][ri],
+                        showarrow: false,
+                        });
+                    }
+                    for (var di=0; di<reply['data']['differing'][mi].length; di++) {
+                        residue_labels[reply['data']['differing'][mi][di]].showarrow=true;
+                    }
                     Plotly.newPlot('MC_mutant_'+mi.toString(), raw_trace, {
-                    title: reply['data']['mutants'][mi]+' chromatogram data'
-                    });
-                }
+                    title: '{0} chromatogram data ({1} to {2})'.format(reply['data']['mutants'][mi],reply['data']['codons'][mi][0],reply['data']['codons'][mi][1]),annotations: residue_labels});
+                }//end of traces.
+                var noise = ['main_peaks','minor_peaks'].map(function(k) {return {
+                            x: Array.apply(null, {
+                                length: reply['data']['noise'][k].length
+                            }).map(Number.call, Number),
+                            y: reply['data']['noise'][k],
+                            name: k,
+                            type: 'scatter',
+                        };});
+                Plotly.newPlot('MC_noise',noise,{title: 'Noise across read (SNR={0})'.format(Math.round(reply['data']['noise']['snr']))});
 
 
 

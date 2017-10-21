@@ -1,0 +1,3 @@
+exclude_paths:
+- "pyramidstarter/static/"
+- "pyramidstarter/templates/archive"

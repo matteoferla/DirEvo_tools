@@ -12,14 +12,16 @@ N = "\n"
 T = "\t"
 # N = "<br/>
 import re
-from warnings import warn
-from Bio import SeqIO
-from Bio.Seq import Seq
 from collections import defaultdict
-import numpy as np
-from scipy.optimize import minimize
-from Bio import pairwise2
 from pprint import PrettyPrinter
+from warnings import warn
+
+import numpy as np
+from Bio import SeqIO
+from Bio import pairwise2
+from Bio.Seq import Seq
+from scipy.optimize import minimize
+
 pprint = PrettyPrinter().pprint
 
 
@@ -30,7 +32,7 @@ class Trace:
     """
     bases = ('A', 'T', 'G', 'C')
 
-    def __init__(self, record=None,**kwargs):
+    def __init__(self, record=None, **kwargs):
         if record:
             for ni, N in enumerate(record.annotations['abif_raw']['FWO_1'].upper()):
                 setattr(self, N, record.annotations['abif_raw']['DATA{0}'.format(9 + ni)])
@@ -38,10 +40,10 @@ class Trace:
             self.peak_id = record.annotations['abif_raw']['PBAS1']
         else:
             for k in ['A', 'T', 'G', 'C', 'peak_id', 'peak_index']:
-                setattr(self,k,kwargs[k])
-        self.span=len(self.A) / len(self.peak_index)  # float
-        self.halfspan = round(len(self.A) / (2* len(self.peak_index))) #int
-
+                setattr(self, k, kwargs[k])
+        self.span = len(self.A) / len(self.peak_index)  # float
+        self.halfspan = round(len(self.A) / (2 * len(self.peak_index)))  # int
+        self.alignment = None
 
     @classmethod
     def from_filename(cls, file):
@@ -57,9 +59,13 @@ class Trace:
 
     def __getitem__(self, key):
         if isinstance(key, slice):
-            peak_values={k:getattr(self,k)[self.peak_index[key.start]-self.halfspan:self.peak_index[key.stop]+self.halfspan] for k in ['A', 'T', 'G', 'C']}
-            fluoro_values={k:getattr(self,k)[key] for k in ['peak_id', 'peak_index']}
-            return Trace(**{**peak_values, **fluoro_values})
+            peak_values = {
+                k: getattr(self, k)[
+                   self.peak_index[key.start] - self.halfspan:self.peak_index[key.stop] + self.halfspan]
+                for k in self.bases}
+            fluoro_values = {k: getattr(self, k)[key] for k in ['peak_id', 'peak_index']}
+            return Trace(**{**peak_values, 'peak_index': [n - self.peak_index[key.start] + self.halfspan for n in
+                                                          self.peak_index[key]], 'peak_id': self.peak_id[key]})
         elif isinstance(key, int):
             raise NotImplementedError
         else:
@@ -117,12 +123,12 @@ class Trace:
         Is the trace from a reverse primer?
         :return: a new trace
         """
-        return Trace(peak_index=[len(self.T)-x for x in self.peak_index[::-1]],
-              peak_id=str(Seq(self.peak_id).reverse_complement()),
-              A=self.T[::-1],
-              T=self.A[::-1],
-              G=self.C[::-1],
-              C=self.G[::-1])
+        return Trace(peak_index=[len(self.T) - x for x in self.peak_index[::-1]],
+                     peak_id=str(Seq(self.peak_id).reverse_complement()),
+                     A=self.T[::-1],
+                     T=self.A[::-1],
+                     G=self.C[::-1],
+                     C=self.G[::-1])
 
     def QQC(self, location, *args, **kwargs):
         """
@@ -148,37 +154,64 @@ class Trace:
         :param kwargs:
         :return:
         """
-        #sanitise
+        # sanitise
         ref_seq = re.sub('[^ATGC]', '', sequence.upper())
         # play around... >>> pairwise2.align.localxs(''.join([random.choice('A T G C'.split()) for i in range(100)]), ''.join([random.choice('A T G C'.split()) for i in range(60)]),-5,-.2)
-        match=pairwise2.align.localxs(self.peak_id,ref_seq,-5,-.2,one_alignment_only=True)[0]
+        match = pairwise2.align.globalxs(self.peak_id, ref_seq, -5, -.2, one_alignment_only=True)[0]
         if not match:
             raise ValueError('target_seq not found!')
-        #case 1. The read is longer than the CDS
+        # case 1. The read is longer than the CDS
         if match[1][0] == '-':
-            #front trim
+            # front trim
             for i in range(len(match[1])):
                 if match[1][i] != '-':
                     break
             else:
                 raise ValueError('Seq does not match')
-            #back trim
-            for j in range(len(match[1])-1,-1,-1):
+            # back trim
+            for j in range(len(match[1]) - 1, -1, -1):
                 if match[1][j] != '-':
                     break
             else:
                 raise ValueError('Seq does not match')
-            trim=self[i:j]
-            setattr(trim,'alignment',(match[0][i:j],match[1][i:j]))
-        #case 2. The read is shorter...
+            trim = self[i:j]
+            setattr(trim, 'alignment', (match[0][i:j], match[1][i:j]))
+        # case 2. The read is shorter...
         else:
             print('case 2. The read is shorter than the CDS at the front.')
             raise NotImplementedError
         return trim
 
-    def MC(self):
-        if not hasattr(self,'alignment'):
-            raise ValueError('Call MC on an aligned Trace...')
+    def other_bases(self, base):
+        other_bases = set(self.bases)
+        if isinstance(base,str):
+            other_bases.remove(base)
+        elif isinstance(base,int):
+            other_bases.remove(self.peak_id[base])
+        return other_bases
+
+    def noise_analysis(self, sigma=5):
+        # get intensity of main peaks and of minor peak sums
+        main_peaks = []
+        minor_peaks = []
+        for i in range(len(self.peak_index)):
+            ii = self.peak_index[i]
+            main_peaks.append(getattr(self, self.peak_id[i])[ii])
+            minor_peaks.append(sum([getattr(self, b)[ii] for b in self.other_bases(i)]))
+        mainPeaks = np.array(main_peaks)  # why do I always call np varibles C++ style? oh well.
+        minorPeaks = np.array(minor_peaks)
+        SNR = np.divide(mainPeaks, minorPeaks)
+        snrMedian = np.median(SNR)
+        snrThresh = np.std(minorPeaks) * sigma + np.median(minorPeaks)
+        # find outliers.
+        outliers=np.nonzero(minorPeaks > snrThresh)[0]  #why tuple?
+        if outliers:
+            for i in np.nditer(outliers):
+                tally={b: getattr(self,b)[self.peak_index[i]] for b in self.bases}
+                st=sum(tally.values())
+                prop={b: tally[b]/st for b in self.bases}
+                print(i, prop)
+        return {'snr': snrMedian, 'main_peaks': main_peaks, 'minor_peaks': minor_peaks, 'outliers':outliers.tolist()}
 
 
 def scheme_maker(scheme):
@@ -258,6 +291,7 @@ def codon_to_AA(codonball):
         AAprob[str(Seq(codnames[i]).translate())] += codprob[i]
     return AAprob
 
+
 class QQC:
     """
     This class is meant to be called via:
@@ -331,18 +365,21 @@ class QQC:
             self.codon_peak_freq_split = [self.codon_peak_freq]
             self.empirical_AA_probabilities = codon_to_AA(self.codon_peak_freq)
         else:  # deconvolute!
-            prinumb=len(self.scheme_mix)
+            prinumb = len(self.scheme_mix)
             offness_zero = np.array([[[0.25 for b in 'ATGC'] for i in range(3)] for p in
                                      range(prinumb)])  # ones(3,4,numel(ppro))
             res = minimize(self._targetfun, offness_zero)
-            r=res.x.reshape(prinumb, 3, 4)
+            r = res.x.reshape(prinumb, 3, 4)
             self.codon_peak_freq_split = [
                 [{'ATGC'[bi]: abs(r[p, i, bi] * self.scheme_mix[p][1][i]['ATGC'[bi]]) for bi in range(4)} for i in
                  range(3)]
                 for p in range(prinumb)]
             if normalise_hack:
-                s=sum([self.codon_peak_freq_split[p][i][b] for b in 'ATGC' for i in range(3) for p in range(len(self.scheme_mix))])/(3*prinumb)
-                self.codon_peak_freq_split =[[{b: self.codon_peak_freq_split[p][i][b]/s for b in 'ATGC'} for i in range(3)] for p in range(prinumb)]
+                s = sum([self.codon_peak_freq_split[p][i][b] for b in 'ATGC' for i in range(3) for p in
+                         range(len(self.scheme_mix))]) / (3 * prinumb)
+                self.codon_peak_freq_split = [
+                    [{b: self.codon_peak_freq_split[p][i][b] / s for b in 'ATGC'} for i in range(3)] for p in
+                    range(prinumb)]
             codonprobball = []
             for primer in self.codon_peak_freq_split:
                 codonprobball.append(codon_to_AA(primer))
@@ -372,15 +409,19 @@ def QQC_test():
         3 * len(q.codon_peak_freq_split)))
     print('AA ', sum(q.empirical_AA_probabilities.values()))
 
+
 def MC_test():
-    seq='GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG'
-    x=Trace.from_filename('pyramidstarter/static/demo_MC.ab1').reverse().align(seq)
+    seq = 'GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG'
+    x = Trace.from_filename('pyramidstarter/static/demo_MC.ab1').reverse().align(seq)
     pprint(x.alignment)
-    ref=Seq(x.alignment[1].replace('-','')).translate()
-    query=Seq(x.alignment[0].replace('-','')).translate()
+    ref = Seq(x.alignment[1].replace('-', '')).translate()
+    query = Seq(x.alignment[0].replace('-', '')).translate()
     for resi in range(len(ref)):
         if ref[resi] != query[resi]:
-            print('{0}{1}{2}'.format(ref[resi],resi+1, query[resi]))
+            print('{0}{1}{2}'.format(ref[resi], resi + 1, query[resi]))
+    print('#' * 20)
+    x.size_test()
+    print('SNR', x.noise_analysis(sigma=5)['snr'])
 
 
 if __name__ == "__main__":

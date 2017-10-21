@@ -1,3 +1,7 @@
+
+<a href="https://codeclimate.com/github/matteoferla/pedel2"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/gpa.svg" /></a>
+<a href="https://codeclimate.com/github/matteoferla/pedel2/"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/issue_count.svg" /></a>
+
 # Intro
 Please see my mutagenesis repository.
 
@@ -16,6 +20,7 @@ What nav is needed?
 * code currently written until making a function in mutant_wrapper...
 * why is Y66 actually Y67? Does GFP not start from ATG??
 * IDT does not accept lowercase degenrte nts.
+* does not check for terminal indels if set to local. Currently set to global.
 
 ## Glue
 * Glue works.
@@ -33,6 +38,8 @@ What nav is needed?
 * wired but not written
 * input penalty values for match
 * add reverser
+* there is a conceptual error in that the peak highlighted is the middle one (it could be any other in the codon)
+
 
 So this script would require the user to upload sequence trace file
 And a reference sequence (mutated only)
