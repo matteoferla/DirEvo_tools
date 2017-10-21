@@ -114,39 +114,50 @@ def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False, sh
         neochroma = chroma.align(sequence)
     ref_AA = Seq(neochroma.alignment[1].replace('-', '')).translate()
     query_AA = Seq(neochroma.alignment[0].replace('-', '')).translate()
-    variant = [(resi * 3, '{0}{1}{2}'.format(ref_AA[resi], resi + 1, query_AA[resi])) for resi in range(len(ref_AA)) if
+    mutants = [(resi * 3, '{0}{1}{2}'.format(ref_AA[resi], resi + 1, query_AA[resi])) for resi in range(len(ref_AA)) if
          ref_AA[resi] != query_AA[resi]]
     noise=neochroma.noise_analysis(sigma=sigma)
-    html = "<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(variant),
-                                                                                l=' '.join([x[1] for x in variant])) + \
+    heteromutants=[(nti, None) for (nti,prop) in noise['outliers']]
+    html = "<div class='row'>There are {n} coding mutations ({l})</div>".format(n=len(mutants),
+                                                                                l=' '.join([x[1] for x in mutants])) + \
            "<div class='row'>" + \
            "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
-                      range(len(variant))]) + \
+                      range(len(mutants))]) + \
            "</div>"+ \
            "<div class='row'><div class='col-lg-12'>&nbsp;<div id='MC_noise'></div></div></div>"+ \
-           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_mutant_{id}'></div></div>".format(id=i) for i in
-                      range(len(variant))])
+           "\n".join(["<div class='col-lg-6'>&nbsp;<div id='MC_heteromutant_{id}'></div></div>".format(id=i) for i in
+                      range(len(heteromutants))])
     # in QCC raw contains the snapshot. here it is a list of raw
-    raws = []
-    window_seq = []
-    diff = []
     window = round(show/2 * neochroma.span)
-    for nti, mut in variant:
-        # figure out why difference...
-        diff.append([int(show/2) + (1+n-nti) for n in range(nti, nti + 3) if neochroma.alignment[1][n] != neochroma.alignment[0][n]])
-        # output the neighbourhood
-        doubleindex = chroma.peak_index[nti]
-        raws.append({base:
-                         [getattr(neochroma, base)[doubleindex + i] for i in range(-window, window)]
-                     for base in 'ATGC'})
-        window_seq.append(
-            ['{0}{1}{2}'.format(ref_AA[int(j / 3)], int(j / 3) + 1, query_AA[int(j / 3)]) if j % 3 == 0 else ' ' for j in
-             range(nti - int(show/2), nti + int(show/2)+1)])
-    return json.dumps({'data': {'raw': raws,
-                                'mutants': [resn for (nti, resn) in variant],
-                                'codons': [(neochroma.alignment[1][nti:nti + 3], neochroma.alignment[0][nti:nti + 3]) for (nti, resn) in variant],
-                                'differing':diff,
-                                'window_seq': window_seq, 'window': window * 2,
+    def prep_windows(variant):
+        raws = []
+        window_seq = []
+        window_subseq=[]
+        diff = []
+        for nti, mut in variant:
+            # figure out why difference...
+            diff.append([int(show / 2) + (1 + n - nti) for n in range(nti, nti + 3) if
+                         neochroma.alignment[1][n] != neochroma.alignment[0][n]])
+            # output the neighbourhood
+            doubleindex = chroma.peak_index[nti]
+            raws.append({base:
+                             [getattr(neochroma, base)[doubleindex + i] for i in range(-window, window)]
+                         for base in 'ATGC'})
+            window_seq.append(
+                ['{0}{1}{2}'.format(ref_AA[int(j / 3)], int(j / 3) + 1, query_AA[int(j / 3)]) if j % 3 == 1 else ' ' for
+                 j in
+                 range(nti - int(show / 2), nti + int(show / 2) + 1)])
+            window_subseq.append(
+                [str(1+(j % 3)) for j in range(nti - int(show / 2), nti + int(show / 2) + 1)])
+        return {'raw': raws,
+                'mutants': [resn for (nti, resn) in variant],
+                'codons': [(neochroma.alignment[1][nti:nti + 3], neochroma.alignment[0][nti:nti + 3]) for (nti, resn) in variant],
+                'differing':diff,
+                'window_seq': window_seq,
+                'window_subseq': window_subseq}
+    return json.dumps({'data': {'window': window * 2,
+                                'mutants': prep_windows(mutants),
+                                'heteromutants':prep_windows(heteromutants),
                                 'noise':noise},
                        'html': html})
 

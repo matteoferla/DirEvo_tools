@@ -205,13 +205,14 @@ class Trace:
         snrThresh = np.std(minorPeaks) * sigma + np.median(minorPeaks)
         # find outliers.
         outliers=np.nonzero(minorPeaks > snrThresh)[0]  #why tuple?
+        outball=[]
         if outliers:
             for i in np.nditer(outliers):
                 tally={b: getattr(self,b)[self.peak_index[i]] for b in self.bases}
                 st=sum(tally.values())
                 prop={b: tally[b]/st for b in self.bases}
-                print(i, prop)
-        return {'snr': snrMedian, 'main_peaks': main_peaks, 'minor_peaks': minor_peaks, 'outliers':outliers.tolist()}
+                outball.append((i,prop))
+        return {'snr': snrMedian, 'main_peaks': main_peaks, 'minor_peaks': minor_peaks, 'outliers':outball}
 
 
 def scheme_maker(scheme):

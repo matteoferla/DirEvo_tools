@@ -50,6 +50,7 @@ $(function() {
         }
         data.append("sequence", $('#MC_sequence').val());
         data.append("reverse", !$('#MC_direction').is(":checked"));
+        data.append("sigma",3); //to be encoded.
         $.ajax({
             url: '/ajax_MC',
             type: 'POST',
@@ -58,19 +59,22 @@ $(function() {
             success: function(result) {
                 reply = JSON.parse(result.message);
                 window.sessionStorage.setItem('MC', JSON.stringify(reply['data']));
+                var data=reply['data'];
                 $("#MC_download").removeClass('hidden');
                 $("#MC_download").show(); //weird combo.
                 $("#MC_result").html(reply['html']);
                 //traces
                 bases = ['A', 'T', 'G', 'C'];
-                for (var mi = 0; mi < reply['data']['raw'].length; mi++) {
+
+                plot_mutants=function(variants,prefix) {
+                    for (var mi = 0; mi < variants['raw'].length; mi++) {
                     // interate per mutation
                     var raw_trace = bases.map(function(base) {
                         return {
                             x: Array.apply(null, {
-                                length: reply['data']['raw'][mi][base].length
+                                length: variants['raw'][mi][base].length
                             }).map(Number.call, Number),
-                            y: reply['data']['raw'][mi][base],
+                            y: variants['raw'][mi][base],
                             name: base,
                             type: 'scatter',
                             line: {
@@ -80,32 +84,47 @@ $(function() {
                     });
                     // resi labels. oddly xref page causes issues.
                     residue_labels=[];
-                    intm=Math.max(...reply['data']['raw'][mi]['A'],...reply['data']['raw'][mi]['T'],...reply['data']['raw'][mi]['G'],...reply['data']['raw'][mi]['C']);
-                    for (var ri=0; ri<reply['data']['window_seq'][mi].length; ri++){
+                    pos_labels=[];
+                    intm=Math.max(...variants['raw'][mi]['A'],...variants['raw'][mi]['T'],...variants['raw'][mi]['G'],...variants['raw'][mi]['C']);
+                    for (var ri=0; ri<variants['window_seq'][mi].length; ri++){
                         residue_labels.push({
-                        x: ri*reply['data']['raw'][mi]['A'].length/11 + reply['data']['raw'][mi]['A'].length/22,
+                        x: ri*variants['raw'][mi]['A'].length/11 + variants['raw'][mi]['A'].length/22,
                         y: intm * 1.05,
                         xanchor: 'center',
                         yanchor: 'middle',
-                        text: reply['data']['window_seq'][mi][ri],
+                        text: variants['window_seq'][mi][ri],
                         showarrow: false,
                         });
+                        pos_labels.push({
+                        x: ri*variants['raw'][mi]['A'].length/11 + variants['raw'][mi]['A'].length/22,
+                        y: intm * 0.95,
+                        xanchor: 'center',
+                        yanchor: 'middle',
+                        text: variants['window_subseq'][mi][ri],
+                        showarrow: false,
+                        font:{
+                            size: 8,
+                            color: 'gainsboro'
+                          }
+                        });
                     }
-                    for (var di=0; di<reply['data']['differing'][mi].length; di++) {
-                        residue_labels[reply['data']['differing'][mi][di]].showarrow=true;
+                    for (var di=0; di<variants['differing'][mi].length; di++) {
+                        pos_labels[variants['differing'][mi][di]]['font']['color']='red';
                     }
-                    Plotly.newPlot('MC_mutant_'+mi.toString(), raw_trace, {
-                    title: '{0} chromatogram data ({1} to {2})'.format(reply['data']['mutants'][mi],reply['data']['codons'][mi][0],reply['data']['codons'][mi][1]),annotations: residue_labels});
+                    Plotly.newPlot(prefix+mi.toString(), raw_trace, {
+                    title: '{0} chromatogram data ({1} to {2})'.format(variants['mutants'][mi],variants['codons'][mi][0],variants['codons'][mi][1]),annotations: [...residue_labels,...pos_labels]});
                 }//end of traces.
+                };
+                plot_mutants(data['mutants'],'MC_mutant_');
                 var noise = ['main_peaks','minor_peaks'].map(function(k) {return {
                             x: Array.apply(null, {
-                                length: reply['data']['noise'][k].length
+                                length: data['noise'][k].length
                             }).map(Number.call, Number),
-                            y: reply['data']['noise'][k],
+                            y: data['noise'][k],
                             name: k,
                             type: 'scatter',
                         };});
-                Plotly.newPlot('MC_noise',noise,{title: 'Noise across read (SNR={0})'.format(Math.round(reply['data']['noise']['snr']))});
+                Plotly.newPlot('MC_noise',noise,{title: 'Noise across read (SNR={0})'.format(Math.round(data['noise']['snr']))});
 
 
 

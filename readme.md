@@ -21,6 +21,7 @@ What nav is needed?
 * why is Y66 actually Y67? Does GFP not start from ATG??
 * IDT does not accept lowercase degenrte nts.
 * does not check for terminal indels if set to local. Currently set to global.
+* silent mutations! Also ratio of these!
 
 ## Glue
 * Glue works.
@@ -63,6 +64,7 @@ Mutanalyst is using JS still. Not Ajax.
 * https. switch to gnunicorn from waitress?
 * add color choice to request.session? Actually just make it a JS thing.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
+* edit ajax views to specificy server side errors. Also edit js side to catch client side errors.
 
 
 ## GlueIT hackshop
