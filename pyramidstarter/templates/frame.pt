@@ -275,6 +275,7 @@ $(function() {
         $.ajax({
             url: '/ajax_codon',
             type: 'POST',
+            dataType: 'json',
             data: JSON.stringify(data),
             success: function(result) {
                 reply = JSON.parse(result.message);

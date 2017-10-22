@@ -1,7 +1,5 @@
 <div class="row" id="§yield">
     <div class="col-lg-8  col-lg-offset-2">
-
-        <!--   -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1 class="panel-title">Pedicted diversity of one or more libraries based on PCR reaction</h1>
@@ -9,7 +7,6 @@
             <div class="panel-body">
                 <h2>Predicted diversity</h2>
                 <h3>Description</h3>
-                <div class="bs-callout bs-callout-warning">Under construction</div>
                 <p>Roghly predict the mutation load from a PCR reaction based on the template and yields or predict a
                     target template concentration to aim for a given mutation load.
                     <br/>Do note that this is often off due to a variety of factors and should not be a replacement for

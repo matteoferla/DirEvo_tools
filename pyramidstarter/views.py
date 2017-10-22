@@ -157,7 +157,7 @@ def codonist(request):
 
 
 @view_config(route_name='ajax_driver', renderer='json')
-def codonist(request):
+def driverist(request):
     return std_ajacean(request, calc.driver)
 
 
@@ -259,7 +259,10 @@ def main_callable(request):
 @notfound_view_config(renderer='templates/frame.pt')
 def notfound_callable(request):
     request.response.status = 404
-    log_passing(request)
+    if request.method == 'POST':
+        log_passing(request,extra=str(request.POST), status='404')
+    else:
+        log_passing(request, extra=str(request.GET), status='404')
     return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request),
             'codon_modal': '',
             'code': ' ', 'welcome': '', **set_navbar_state('m_404')}
