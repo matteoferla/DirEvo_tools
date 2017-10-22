@@ -120,6 +120,7 @@
                     </div>
                     <br/>
                 </div>
+
                 <!-- The results -->
                 <div class="row hidden" id="glue_result">
                     <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went

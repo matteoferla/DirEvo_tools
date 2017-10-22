@@ -39,11 +39,9 @@ What nav is needed?
 
 ## Mutant caller
 * input penalty values for match
-
-
 So this script would require the user to upload sequence trace file
 And a reference sequence (mutated only)
-returns mutations. Quality score?     
+returns mutations.    
 
 NB. Benchling API: Benchling API reqires a key. This seems to be issued on request to devs. SO this is not an option.
 
@@ -52,6 +50,9 @@ NB. Benchling API: Benchling API reqires a key. This seems to be issued on reque
 
 ## Mutanalyst
 Mutanalyst is using JS still. Not Ajax.
+
+## Driver
+* driver output could be made into a nice table actual.
 
 ## other
 * Scheme 19c and 20c in QQC are incomplete!!
@@ -65,6 +66,9 @@ Mutanalyst is using JS still. Not Ajax.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
 * edit ajax views to specificy server side errors. Also edit js side to catch client side errors.
 
+## Next Gen mutantcaller
+Pipedream. fastq files are several GB big, thus they cannot be uploaded.
+However, a small simple custom alignment algorithm running with GPU.JS could do it quite fast.
 
 ## GlueIT hackshop
 I have no idea how GlueIT or PedelAA work, so I need to reverse engineer them first.

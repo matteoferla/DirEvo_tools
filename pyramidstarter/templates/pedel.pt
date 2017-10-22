@@ -579,7 +579,8 @@
                             class="fa fa-caret-down"
                             aria-hidden="true"></i> show</a>)
                     </h3>
-                    <div class="collapse" id="pedelAA_Rx_note"><p>The 'Lx < 0.1 Vx_1' criterion for deciding when to use
+                    <div class="collapse" id="pedelAA_Rx_note">
+                        <p>The 'Lx < 0.1 Vx_1' criterion for deciding when to use
                         the 'Cx ~ Lx'
                         approximation is sometimes inaccurate, and can be refined as
                         follows.</p>
@@ -914,7 +915,7 @@
                     </div>
                     <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
                                                                             data-target="#pedel_note">here</a>.</p>
-                    <!--row-->
+                    <!--button row-->
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
                             <div class="btn-group" role="group" aria-label="...">
