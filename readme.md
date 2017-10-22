@@ -8,9 +8,6 @@ It is still WIP and I do not have enough Pods to keep a stable version for viewi
 See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
 
 
-# Where was I?
-* in QQC.py MC module.
-
 # To Do list
 ## Main
 What nav is needed?
