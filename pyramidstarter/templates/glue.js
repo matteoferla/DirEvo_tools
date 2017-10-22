@@ -1,6 +1,7 @@
 // THIS HAS JUST BEEN COPY PASTED. FIX IT.
 
 $(function() {
+    $('#nucleotide_modal').modal('hide');
     formids = ['nvariants', 'library_size', 'completeness', 'prob_complete'];
     $('#glue_demo').click(function() {
         for (i = 0; i < formids.length; i++) {

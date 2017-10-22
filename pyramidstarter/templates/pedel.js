@@ -1,10 +1,11 @@
 $(function() {
     $('#pedelAA').toggle(false);
+    $('#pedel_note').modal('hide');
     $('#pedel_method').on('switchChange.bootstrapSwitch', function(event, state) {
         $('#pedelbasic').toggle(state);
         $('#pedelAA').toggle(!state);
     });
-    formids = ['size', 'len', 'mutload', 'distribution', 'cycles', 'eff'];
+    formids = ['size', 'len', 'mutload', 'distribution', 'cycles', 'efficiency'];
     $('#pedel_demo').click(function() {
         for (i = 0; i < formids.length; i++) {
             $('#pedel_' + formids[i]).val($('#pedel_' + formids[i]).attr("placeholder"));
@@ -31,6 +32,7 @@ $(function() {
             }
             data[formids[i]] = v;
         }
+        data['PCR_mode']=$("#pedel_PCR").bootstrapSwitch('state');
         $.ajax({
             url: '/ajax_pedel',
             type: 'POST',
@@ -116,5 +118,10 @@ $(function() {
     $('#pedelAA_§cycles').hide();
     $('#pedelAA_PCR').on('switchChange.bootstrapSwitch', function(event, state) {
         $('#pedelAA_§cycles').toggle(state);
+    });
+
+    $('#pedel_§cycles').hide();
+    $('#pedel_PCR').on('switchChange.bootstrapSwitch', function(event, state) {
+        $('#pedel_§cycles').toggle(state);
     });
 });

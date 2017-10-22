@@ -18,7 +18,142 @@
         <br/>
         <div id="pedelbasic">
             <h1>Pedel</h1>
-            <p>bla bla bla</p>
+            <div id="pedel_intro">
+                <h3>Description</h3>
+                <p>Given a library of <i>L</i> sequences, comprising
+                    variants of a sequence of <i>N</i> nucleotides, into which random point
+                    mutations have been introduced, we wish to calculate the expected number
+                    of distinct sequences in the library. (Typically assuming <i>L</i> > 10,
+                    <i>N</i> > 5, and the mean number of mutations per sequence <i>m</i> <
+                    0.1 x <i>N</i>).</p>
+                <h3>Example (<a data-toggle="collapse" href="#pedel_example"><i class="fa fa-caret-down"
+                                                                                aria-hidden="true"></i> show</a>)
+                </h3>
+                <div class="collapse" id="pedel_example">
+                    <p>Saab-Rincon et al (2001, <i>Protein Eng.</i>, <b>14</b>, 149-155)
+                        constructed a library of 5 million clones with a single round of epPCR
+                        on a 700 bp gene. Sequencing 10 of these, indicated an error rate of
+                        3-4 nucleotide substitutions per daughter sequence. Entering <i>L</i>
+                        = 5000000, <i>N</i> = 700 and <i>m</i> = 3.5 into the base PEDEL sever
+                        page, and clicking 'Calculate', shows that the expected number of distinct
+                        sequences in the library is 4.153 x 10^6, or about 4.2 million.</p>
+                    <p>
+                        If you follow the link to 'detailed statistics' and, once again, enter
+                        <i>L</i> = 5000000, <i>N</i> = 700 and <i>m</i> = 3.5 and click
+                        'Calculate', you get a breakdown of library statistics for each of
+                        the sub-libraries comprising all those daughter sequences with exactly
+                        <i>x</i> base substitutions (<i>x</i> = 0, 1, 2, 3, ...).</p>
+                    <p>
+                        For example the first line of the table shows that <b>Px</b> = 3.02%
+                        of the library (i.e. <b>Lx</b> = 1.51 x 10^5 daughter sequences) have
+                        <i>x</i> = 0 base substitutions (i.e. they are identical to the parent
+                        sequence). The total number of possible variants with 0 base
+                        substitutions is, of course, <b>Vx</b> = 1 (just the parent sequence)
+                        and the total number of distinct sequences with 0 base substitutions
+                        present in the library is, similarly, <b>Cx</b> = 1. The completeness
+                        of the <i>x</i> = 0 sub-library is <b>Cx/Vx</b> = 100%. The
+                        redundancy of this sub-library - i.e. wasted duplication - is
+                        <b>Lx-Cx</b> = 1.51 x 10^5.</p>
+                    <p>
+                        You also have the option to plot this data by following the 'Plot this
+                        data' link. Choose the statistic to plot and whether or not to use a
+                        logscale on the y-axis. For example, a plot of <b>Px</b> or <b>Lx</b>
+                        gives a Poisson distribution. A plot of <b>Vx</b> shows how the
+                        number of possible variants increases very rapidly as the number of
+                        base substitutions is increased. A plot of <b>Cx</b> shows how the
+                        expected number of distinct sequences in the sub-libraries initially
+                        increases - limited by the number of possible variants, <b>Vx</b> - and
+                        then decreases - limited by the size of the sub-library, <b>Lx</b>. A
+                        plot of <b>Lx-Cx</b> shows the extent of wasted duplication in the
+                        lower <i>x</i>-value sub-libraries.</p>
+                    <p>
+                        Returning to the base PEDEL server page, you can follow links to plot
+                        the expected number of distinct sequences in a library for a range of
+                        mutation rates, library sizes or sequence lengths. The third option
+                        probably won't be very useful, but the first two will help you to
+                        decide what library size to aim for in order to obtain a given
+                        diversity, and what mutation rate to use to maximize the diversity for
+                        a given library size.</p>
+                    <p>
+                        For example, follow the 'mutation rates' link, enter <i>L</i> =
+                        5000000, <i>N</i> = 700 and <i>m</i> = 0.2 - 20, and click
+                        'Calculate'. From the plot, you can see that the expected number of
+                        distinct sequences increases rapidly with <i>m</i> until <i>m</i> ~ 5,
+                        and then levels off with < 10% redundancy in the library. On the
+                        other hand, if you chose <i>m</i> ~ 1.5, then the library would be
+                        about 60% redundant. After selecting an optimal mutation rate
+                        <i>m</i>, you can go back to the 'detailed statistics' page to check
+                        the expected completeness of the <i>x</i> = 0, 1, 2, 3,
+                        ... sub-libraries.</p>
+                </div>
+                <h3>Caveats (<a data-toggle="collapse" href="#pedel_caveats"><i class="fa fa-caret-down"
+                                                                                aria-hidden="true"></i> show</a>)
+                </h3>
+                <div class="collapse" id="pedel_caveats">
+                    <p>PEDEL uses a generic Poisson model of sequence mutations.
+                        There are a couple of simplifications that you should be aware of:
+
+                    <ul>
+
+                        <li>All base substitution are assumed equally likely. In reality,
+                            under error-prone conditions, the polymerase favours some
+                            substitutions over others. This has the effect of reducing the
+                            expected number of distinct sequences compared with the PEDEL
+                            predictions. This is in fact not as big an issue as you might
+                            expect. Using the notation from the 'detailed statistics' page (see
+                            link on base PEDEL server page), this is not an issue when the
+                            number of possible variants <b>Vx</b> is much greater than the
+                            sub-library size <b>Lx</b> (i.e. large <i>x</i> values), since here
+                            there are so many possible variants that there is little duplication
+                            within the sub-library even if there is strong bias. Conversely, if
+                            <b>Lx</b> is much greater than <b>Vx</b> (i.e. small <i>x</i>
+                            values) then, unless the bias is very strong, nearly all the
+                            possible variants will still be sampled. Note that it is now
+                            possible, by using sequential PCR amplifications with two different
+                            polymerases that have opposite substitution biases, to produce
+                            unbiased libraries.
+
+                        <li>Inherent to the PCR process used to produce epPCR libraries, is
+                            amplification bias: any mutation introduced in an early PCR cycle,
+                            will be present in a significant fraction of the final library. In
+                            practice, researchers use a variety of techniques to reduce
+                            amplification bias - e.g. reduce the number of epPCR cycles and
+                            combine a number of individual libraries. For example, one might
+                            start with 10^9 identical parent sequences; amplify them in an epPCR
+                            to 10^15 sequences; and, after ligation and transformation of
+                            <i>E. coli</i>, end up with a library of 10^7 sequences. Any
+                            amplification bias would have a maximum frequency of only 1 in 10^9
+                            so would not show up in the final library.
+
+                        <li>During the PCR cycles, different parent sequences may be
+                            amplified a different number of times. However, empirically, the
+                            end result is a library with a Poisson distribution of mutations
+                            (e.g. Cadwell R.C., Joyce G.F., 1992, Randomization of genes by PCR
+                            mutagenesis, <i>PCR Methods Appl.</i>, <b>2</b>, 28-33). <b>But see
+                                also this <a href=pedelpcrdist.html>note</a>.</b>
+
+                        <li>Any biases in library construction will decrease the actual
+                            number of distinct variants represented in the library. In such
+                            cases, PEDEL provides the user with a useful upper bound on the
+                            diversity present in the library.
+
+                    </ul>
+
+                    Please refer to Patrick W. M., Firth A. E., Blackburn J.M., 2003,
+                    User-friendly algorithms for estimating completeness and diversity in
+                    randomized protein-encoding libraries, <i>Protein Eng.</i>, <b>16</b>,
+                    451-457 for further discussion of PEDEL.</p><p>
+
+                    A good review of the sources of bias in epPCR (and other directed
+                    evolution protocols) can be found in Neylon C., 2004, Chemical and
+                    biochemical strategies for the randomization of protein encoding DNA
+                    sequences: library construction methods for directed evolution,
+                    <i>Nucleic Acids Res.</i>, <b>32</b>, 1448-1459.</p>
+
+
+                </div>
+            </div>
+            <h3>Input</h3>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="input-group">
@@ -44,33 +179,46 @@
                     </div>
                     <br/>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <span class="input-group-addon" data-toggle="tooltip"
-                              title="Number of mutations per sequence: use Poisson or PCR distribution (see note; PCR efficiency calculator)."
-                              data-placement="top">Distribution</span>
-                        <input type="checkbox" class="switch" id="pedel_distribution" checked data-off-text="PCR"
-                               data-on-text="Poisson" data-off-color="warning" data-size="large" checked>
+                        Distribution
+                        <input type="checkbox" title="Number of mutations per sequence: use Poisson or PCR distribution (see note; PCR efficiency calculator)." class="switch" id="pedel_PCR" data-off-text="Poisson"
+                               data-on-text="+ PCR" data-off-color="warning">
                     </div>
-                    <br/>
+                        <br/>
                 </div>
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" data-toggle="tooltip" title="number of PCR cycles"
-                              data-placement="top">PCR cycles</span>
-                        <input type="number" min="0" class="form-control" placeholder="30" id="pedel_cycles">
-                    </div>
                     <br/>
-                </div>
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" data-toggle="tooltip" title="PCR efficiency"
-                              data-placement="top">PCR efficiency</span>
-                        <input type="number" min="0" class="form-control" placeholder="0.6" id="pedel_eff">
-                    </div>
-                    <br/>
-                </div>
             </div><!--row-->
+                <div class="row">
+                <div id="pedel_§cycles" class="well well-lg">
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="Number of PCR cycles"
+                                  data-placement="top">PCR cycles</span>
+                            <input type="number" min="0" class="form-control" placeholder="4.5" id="pedel_cycles">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" title="PCR efficiency"
+                                  data-placement="top">PCR efficiency</span>
+                            <input type="number" min="0" max='1' class="form-control" placeholder="0.6"
+                                   id="pedel_efficiency">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                                data-target="#pedel_calc_modal">
+                            <i class="fa fa-calculator" aria-hidden="true"></i> Calculator
+                        </button>
+                    </div>
+                    <br/>
+                </div>
+
+            </div>
+                <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
+                                                                                data-target="#pedel_note">here</a>.</p>
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="btn-group" role="group" aria-label="...">
@@ -254,6 +402,7 @@
                                   data-placement="top">PCR cycles</span>
                             <input type="number" min="0" class="form-control" placeholder="4.5" id="pedelAA_cycles">
                         </div>
+                        <br/>
                     </div>
                     <div class="col-lg-4">
                         <div class="input-group">
@@ -262,17 +411,21 @@
                             <input type="number" min="0" max='1' class="form-control" placeholder="0.6"
                                    id="pedelAA_efficiency">
                         </div>
+                        <br/>
                     </div>
                     <div class="col-lg-2">
                         <button type="button" class="btn btn-info" data-toggle="modal"
-                                data-target="#PedelAA_calc_modal">
+                                data-target="#pedelAA_calc_modal">
                             <i class="fa fa-calculator" aria-hidden="true"></i> Calculator
                         </button>
+                        <br/>
                     </div>
-<br/>
+                    <br/>
                 </div>
 
             </div>
+            <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
+                                                                                data-target="#pedel_note">here</a>.</p>
             <!--row-->
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
@@ -306,8 +459,8 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div id="PedelAA_calc_modal" class="modal fade" role="dialog">
+<!-- Modals -->
+<div id="pedelAA_calc_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -318,6 +471,74 @@
             </div>
             <div class="modal-body">
                 <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modals -->
+<div id="pedel_note" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>In our paper (Firth &amp; Patrick, 2005), we assumed a Poisson
+distribution to determine the fraction of sequences in an epPCR
+library that contain exactly 0, 1, 2, 3, ... mutations, given the mean
+number of mutations, <i>m</i>, per sequence.<br><br>
+
+Since publication of Firth &amp Patrick (2005), however, Drummond et
+al. (2005) have revisited the pioneering work of Sun (1995) and
+provided experimental evidence in support of his more accurate
+equation describing the distribution of <i>m</i>. This 'PCR
+distribution' takes into account the number of PCR thermal cycles
+<i>ncycles</i> and the PCR efficiency <i>eff</i> (i.e. the probability
+that any particular sequence is duplicated in a given PCR cycle).  We
+have therefore now included the PCR distribution as an optional
+alternative to the Poisson distribution in PEDEL.<br><br>
+
+For large <i>m</i>, small <i>ncycles</i>, or low <i>eff</i>, the PCR
+distribution is broader than the Poisson distribution.  For low
+<i>m</i>, large <i>ncycles</i> and large <i>eff</i>, the PCR
+distribution approximates the Poisson distribution.
+In a 'typical' epPCR (e.g. <i>ncycles</i> = 30, <i>eff</i> = 0.6,
+<i>m</i> = 4), the estimated total number of distinct sequences in a
+library typically agrees to within 5% for the two distributions, though
+the sub-library statistics can show more variation.<br><br>
+
+If you know <i>ncycles</i> and <i>eff</i>, then we recommend that you
+use the PCR distribution instead of the Poisson distribution.
+Drummond et al. (2005) use the formula <i>d</i> =
+<i>ncycles</i> &times <i>eff</i>, where <i>d</i> is the number of
+doublings.  For example, if you start with 10^9 identical parent
+sequences and amplify them in an epPCR to 10^15 sequences, then you
+have had about <i>d</i> = 20 doublings (10^9 &times 2^20 ~= 10^15),
+and you can calculate <i>eff</i> = <i>d</i> &divide; <i>ncycles</i>.
+Actually the <i>d</i> = <i>ncycles</i> &times <i>eff</i> formula is
+wrong.  The correct formula is 2^d = (1+eff)^ncycles, so that the
+efficiency is given by eff = 2^(d/ncycles) -
+1 (<a href=/cgi-bin/aef/PCReff.pl>PCR efficiency calculator</a>).<br><br><br>
+
+<b>References</b><br><br>
+
+<li>Drummond D.A., Iverson B.L., Georgiou G., Arnold F.H. (2005). Why
+high-error-rate random mutagenesis libraries are enriched in
+functional and improved proteins, <i>J. Mol. Biol.</i>,
+<b>350</b>, 806-816.</li>
+
+<li>Firth A.E., Patrick W.M., (2005). Statistics of protein library
+construction, <i>Bioinformatics</i>, <b>21</b>, 3314-3315.</li>
+
+<li>Sun F. (1995). The polymerase chain reaction and branching
+    processes, <i>J. Comput. Biol.</i>, <b>2</b>, 63-86.</li></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
