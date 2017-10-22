@@ -13,7 +13,36 @@
             <div class="panel-body">
                 <h2>Glue</h2>
                 <h3>Description</h3>
-                <p>Pedicted diversity of one or more libraries based on PCR reaction</p>
+                <p>Given a library of <i>L</i> sequences, where each
+    sequence is chosen at random from a set of <i>V</i> equiprobable variants,
+    we wish to calculate the expected number of distinct (i.e. unique)
+    sequences represented in the
+    library.  Alternatively, given a set of <i>V</i> equiprobable variants, we
+    wish to calculate the library size <i>L</i> necessary to obtain a given
+    percentage completeness, or to have a given probability of being 100%
+    complete. (Typically assuming <i>V</i> >> 1, e.g. V > 10.)</p>
+                <h3>Example (<a data-toggle="collapse" href="#glue_example"><i class="fa fa-caret-down"
+                                                                                     aria-hidden="true"></i> show</a>)
+                    </h3>
+                    <div class="collapse" id="glue_example">
+                        <p>For the default values on the web server, there are a total of one
+million possible variants.  This is roughly equivalent to an
+oligonucleotide directed randomization experiment involving four NNS
+codons (which gives <i>V</i> = 32<sup>4</sup> = 1048576).</p><p>
+In the first panel, the experimenter has constructed a library of
+three million transformants and wishes to estimate how many of the one
+million possible variants are represented in the library.  The answer
+is ~95.02% or 950200 variants.</p><p>
+In the second panel, s/he knows that there are one million possible
+variants, and wants to know how big her/his library should be in order
+to ensure that ~95% of them (i.e. 950000 variants) are represented.
+The answer is that a library of ~2.996 million transformants is
+                            required.</p><p>
+In the ideal situation her/his library would contain all one million
+variants.  In the third panel s/he calculates the library size
+required in order to be 95% sure of complete representation.  The
+answer is ~16.79 million transformants.</p>
+                    </div>
                 <h3>Results</h3>
                 <div class="row" id="glue_form">
                     <form>
@@ -108,7 +137,17 @@
             <div class="panel-body">
                 <h2>GlueIT</h2>
                 <h3>Description</h3>
-                <p>Pedicted diversity of one or more libraries based on PCR reaction</p>
+                <p>Programme to find the expected amino acid completeness of a given
+     library (not counting any variants with introduced stop codons)
+     where the sequences in the library are chosen at
+     random from a set of XYZ codon variants (where X,Y,Z are <a data-toggle="collapse" href="#nucleotide_modal">standard nucleotide codes</a> chosen by the user, e.g. XYZ = NNS [N = A/C/G/T; S = C/G; 32
+     possible equiprobable codon variants; 20 + 1 possible
+     non-equiprobable amino acid/stop codon variants]).  Up to six codons
+     may be independently varied.<br /><br />To calculate the library size required in order to obtain a given
+   completeness, or to have a given probability of being 100% complete,
+   just try entering different library sizes and check the resulting
+   library statistics until you home in on your required values.<p />
+                <div class="bs-callout bs-callout-warning">I'll need to make options for glue1AA</div>
 
                 <h3>Results</h3>
                 <div class="row">
@@ -222,4 +261,46 @@
         </div>
 
     </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div id="nucleotide_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Nucleotide codes</h4>
+      </div>
+      <div class="modal-body">
+          <p>Standard IUPAC code for ambiguous nucleotides.</p>
+        <table class="table table-striped">
+<tr align="left"><th>Symbol</th><th>Meaning</th></tr>
+<tr align="left"><td>G</td><td>G</td></tr>
+<tr align="left"><td>A</td><td>A</td></tr>
+<tr align="left"><td>T</td><td>T</td></tr>
+<tr align="left"><td>C</td><td>C</td></tr>
+<tr align="left"><td>R</td><td>G or A</td></tr>
+<tr align="left"><td>Y</td><td>T or C</td></tr>
+<tr align="left"><td>M</td><td>A or C</td></tr>
+<tr align="left"><td>K</td><td>G or T</td></tr>
+<tr align="left"><td>S</td><td>G or C</td></tr>
+<tr align="left"><td>W</td><td>A or T</td></tr>
+<tr align="left"><td>H</td><td>A or C or T</td></tr>
+<tr align="left"><td>B</td><td>G or T or C</td></tr>
+<tr align="left"><td>V</td><td>G or C or A</td></tr>
+<tr align="left"><td>D</td><td>G or A or T</td></tr>
+<tr align="left"><td>N</td><td>G or A or T or C</td></tr>
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
