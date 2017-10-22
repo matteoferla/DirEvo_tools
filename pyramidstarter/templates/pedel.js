@@ -32,7 +32,7 @@ $(function() {
             data[formids[i]] = v;
         }
         $.ajax({
-            url: '../ajax_pedel',
+            url: '/ajax_pedel',
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),

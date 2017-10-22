@@ -191,6 +191,13 @@ def pedel(jsonreq):
     return json.dumps({'data': stats, 'html': '<div>Expected number of distinct sequences in library: {0}</div>'.format(
         pedel_out['expected_number_of_distinct_sequences_in_library'])})
 
+def driver(jsonreq):
+    """
+    :param jsonreq:
+    :return:
+    """
+    driver_out=bike.driver()
+    return json.dumps({})
 
 def platecounter(size):
     if size == 96:

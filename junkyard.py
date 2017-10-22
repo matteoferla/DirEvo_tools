@@ -57,3 +57,29 @@ else:
         #                               'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
         #                                   err)})}
 
+
+
+
+
+'''
+############### Main views #####################
+@view_config(route_name='about', renderer='templates/final_about.pt')
+@view_config(route_name='deepscan', renderer='templates/final_deepscan.pt')
+@view_config(route_name='home', renderer='templates/final_main.pt')
+@view_config(route_name='QQC', renderer='templates/final_QQC.pt')
+@view_config(route_name='pedel', renderer='templates/final_pedel.pt')
+@view_config(route_name='driver', renderer='templates/final_driver.pt')
+@view_config(route_name='glue', renderer='templates/final_glue.pt')
+@view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
+@view_config(route_name='misc', renderer='templates/final_misc.pt')
+@view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
+@view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
+# @view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
+def my_view(request):
+    # from pprint import PrettyPrinter
+    # PrettyPrinter().pprint(request.__dict__)
+    log_passing(request)
+    #print(request.matched_route.name)
+    return {'project': 'Pyramidstarter'}
+    '''
+

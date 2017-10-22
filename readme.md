@@ -28,21 +28,20 @@ What nav is needed?
 
 ## Glue
 * Glue works.
+* make it print a graph at different values.
 * Glue-it. Not done yet.
 
 ## Pedel
 * main works.
-* pedel PCR not active
 * pedel range of conditions not doen yet, but pedel_batch wrapper made.
 * Pedel-AA not done yet
-* calc for PCR in Pedel-AA not done.
+
+* pedel PCR not active
+* calc for PCR in Pedel not done.
 * Talk to Wayne about conceptual issues with PCR efficiency
 
 ## Mutant caller
-* wired but not written
 * input penalty values for match
-* add reverser
-* there is a conceptual error in that the peak highlighted is the middle one (it could be any other in the codon)
 
 
 So this script would require the user to upload sequence trace file

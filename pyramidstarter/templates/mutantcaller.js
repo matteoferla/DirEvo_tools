@@ -75,7 +75,6 @@ $(function() {
             url: '/ajax_MC',
             type: 'POST',
             data: data,
-
             success: function(result) {
                 reply = JSON.parse(result.message);
                 window.sessionStorage.setItem('MC', JSON.stringify(reply['data']));

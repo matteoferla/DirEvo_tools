@@ -5,8 +5,8 @@
 #include <iomanip>
 #include <cstring>
 using namespace std;
-#define maxpos 20
-#define maxndaugh 524288    // pow(2,maxpos-1)
+#define maxpos 15  //altered
+#define maxndaugh 32768  //altered
 #define maxn 100000000      // 10^8
 #define maxl 1000000000000. // 10^12
 

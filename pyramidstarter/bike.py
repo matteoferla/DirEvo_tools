@@ -87,6 +87,14 @@ def glue(nvariants, library_size=None,completeness=None,prob_complete=None):
     elif not library_size and not completeness and prob_complete:
         return wrap('glue.mod','=','3',nvariants,prob_complete)
 
+def driver():
+    """
+    Usage './driver.mac library_size sequence_length mean_number_of_crossovers_per_sequence list_of_variable_positions_file outfile xtrue'.
+    I really really need to change the inputs.
+    :return:
+    """
+    pass
+
 def wrap(fun, separator, *args):
     """
     Okay. I really ought to have altred the C code for distutils, but this nasty hack is fine.

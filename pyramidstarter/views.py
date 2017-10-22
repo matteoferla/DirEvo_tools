@@ -7,7 +7,7 @@ import traceback
 import uuid
 
 import markdown
-import pyramidstarter.mutant_wrapper as wrap
+import pyramidstarter.calculations as calc
 from pyramid.view import view_config, notfound_view_config
 
 pprinter = pprint.PrettyPrinter().pprint
@@ -38,7 +38,7 @@ def basedict():
 @view_config(route_name='ajax_deepscan', renderer='json')
 def deepscanner(request):
     try:
-        reply = wrap.DS(request.json_body)
+        reply = calc.DS(request.json_body)
         filename = os.path.join(PATH, 'tmp', '{0}.json'.format(uuid.uuid4()))
         open(filename, 'w').write(reply)
         request.session['DS'] = filename
@@ -49,17 +49,17 @@ def deepscanner(request):
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
+                                       traceback.format_exc())})}
 
 
 @view_config(route_name='deepscan_IDT96')
 def IDT96(request):
-    return wrap.IDT(request, 96)
+    return calc.IDT(request, 96)
 
 
 @view_config(route_name='deepscan_IDT384')
 def IDT384(request):
-    return wrap.IDT(request, 384)
+    return calc.IDT(request, 384)
 
 
 def save_file(fileball):
@@ -74,20 +74,11 @@ def save_file(fileball):
     return (new_filename, file_path)
 
 
-@view_config(route_name='ajax_QQC', renderer='json')
-def QQCer(request):
+### file ajacean views
+def file_ajacean(request, fun):
     data = {}
     try:
-        if request.POST['file'] == 'demo':
-            data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
-                    'location': request.POST['location'], 'scheme': request.POST['scheme']}
-            file_path = os.path.join(PATH, 'static',
-                                     '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
-        else:
-            (new_filename, file_path) = save_file(request.POST['file'])
-            data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
-                    'location': request.POST['location'], 'scheme': request.POST['scheme']}
-        reply = wrap.QQC(file_path=file_path, **data)
+        (reply, data) = fun(request)
         log_passing(request, json.dumps(data))
         return {'message': str(reply)}
     except Exception as err:
@@ -95,38 +86,50 @@ def QQCer(request):
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
-
-
-@view_config(route_name='ajax_MC', renderer='json')
-def MCer(request):
-    data = {}
-    try:
-        if request.POST['file'] == 'demo':
-            data = {'tainted_filename': 'N/A', 'stored_filename': 'demo_MC.ab1'}
-            file_path = os.path.join(PATH, 'static',
-                                     'demo_MC.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
-        else:
-            (new_filename, file_path) = save_file(request.POST['file'])
-            data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
-        data['sequence'] = request.POST['sequence']
-        data['sigma'] = int(request.POST['sigma'])
-        data['reverse']=request.POST['reverse']
-        reply = wrap.MC(file_path=file_path, **data)
-        log_passing(request, json.dumps(data))
-        return {'message': str(reply)}
-    except Exception as err:
-        log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
-        return {
-            'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/><pre><code>{0}</pre><code></div><br/>'.format(
                                        traceback.format_exc())})}
 
 
-@view_config(route_name='ajax_pedel', renderer='json')
-def pedeller(request):
+def QQC_inner(request):
+    if request.POST['file'] == 'demo':
+        data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
+                'location': request.POST['location'], 'scheme': request.POST['scheme']}
+        file_path = os.path.join(PATH, 'static',
+                                 '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+    else:
+        (new_filename, file_path) = save_file(request.POST['file'])
+        data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
+                'location': request.POST['location'], 'scheme': request.POST['scheme']}
+    return calc.QQC(file_path=file_path, **data), data
+
+
+def MC_inner(request):
+    if request.POST['file'] == 'demo':
+        data = {'tainted_filename': 'N/A', 'stored_filename': 'demo_MC.ab1'}
+        file_path = os.path.join(PATH, 'static',
+                                 'demo_MC.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
+    else:
+        (new_filename, file_path) = save_file(request.POST['file'])
+        data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename}
+    data['sequence'] = request.POST['sequence']
+    data['sigma'] = int(request.POST['sigma'])
+    data['reverse'] = request.POST['reverse']
+    return calc.MC(file_path=file_path, **data), data
+
+
+@view_config(route_name='ajax_QQC', renderer='json')
+def QQC_outer(request):
+    return file_ajacean(request, QQC_inner)
+
+
+@view_config(route_name='ajax_MC', renderer='json')
+def MC_outer(request):
+    return file_ajacean(request, MC_inner)
+
+
+### standard ajacean views (dataType: JSON requests)
+def std_ajacean(request, fun):
     try:
-        reply = wrap.pedel(request.json_body)
+        reply = fun(request.json_body)
         log_passing(request, str(request.json_body))
         return {'message': str(reply)}
     except TypeError as err:
@@ -135,37 +138,27 @@ def pedeller(request):
         return {
             'message': json.dumps({'data': '',
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
+                                       traceback.format_exc())})}
+
+
+@view_config(route_name='ajax_pedel', renderer='json')
+def pedeller(request):
+    return std_ajacean(request, calc.pedel)
 
 
 @view_config(route_name='ajax_glue', renderer='json')
-def gluer(request):  # copy paste of pedeller
-    try:
-        reply = wrap.glue(request.json_body)
-        log_passing(request, str(request.json_body))
-        return {'message': str(reply)}
-    except TypeError as err:
-        print('ERROR in glue: ', str(err))
-        log_passing(request, extra=str(request.json_body), status='fail')
-        return {
-            'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
+def gluer(request):
+    return std_ajacean(request, calc.glue)
 
 
 @view_config(route_name='ajax_codon', renderer='json')
-def codonist(request):  # copy paste of pedeller
-    try:
-        reply = wrap.codon(request.json_body)
-        log_passing(request, str(request.json_body))
-        return {'message': str(reply)}
-    except TypeError as err:
-        print('ERROR in codon: ', str(err))
-        log_passing(request, extra=str(request.json_body), status='fail')
-        return {
-            'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       err)})}
+def codonist(request):
+    return std_ajacean(request, calc.codon)
+
+
+@view_config(route_name='ajax_driver', renderer='json')
+def codonist(request):
+    return std_ajacean(request, calc.driver)
 
 
 @view_config(route_name='ajax_email', renderer='json')
@@ -190,6 +183,11 @@ def send_email(request):
     except Exception as e:
         print(GMAIL_USER, GMAIL_PWD, str(e))
         return json.dumps({'msg': str(e)})
+
+
+@view_config(route_name='ajax_test', renderer='json')
+def ajacean_test(request):
+    return {'message': '<div class="alert alert-success" role="alert">I got this back.</div>'}
 
 
 ############### Main views #####################
@@ -230,6 +228,11 @@ def admin_callable(request):
 
 @view_config(route_name='set', renderer='json')
 def set_callable(request):
+    """
+    For now the only setting changeable is /set?pwd=****
+    :param request:
+    :return:
+    """
     global GMAIL_SET, GMAIL_PWD
     if not GMAIL_SET:
         GMAIL_PWD = request.params['pwd']
@@ -302,35 +305,6 @@ def hello_there(request):
                    '</tr></tbody></table>'
     return {'main': log_response,
             'codon_modal': '',
-            'code': ' ', **set_navbar_state('m_log', False)}
-
-
-'''
-############### Main views #####################
-@view_config(route_name='about', renderer='templates/final_about.pt')
-@view_config(route_name='deepscan', renderer='templates/final_deepscan.pt')
-@view_config(route_name='home', renderer='templates/final_main.pt')
-@view_config(route_name='QQC', renderer='templates/final_QQC.pt')
-@view_config(route_name='pedel', renderer='templates/final_pedel.pt')
-@view_config(route_name='driver', renderer='templates/final_driver.pt')
-@view_config(route_name='glue', renderer='templates/final_glue.pt')
-@view_config(route_name='mutanalyst', renderer='templates/final_mutanalyst.pt')
-@view_config(route_name='misc', renderer='templates/final_misc.pt')
-@view_config(route_name='mutantcaller', renderer='templates/final_mutantcaller.pt')
-@view_config(route_name='mutantprimers', renderer='templates/final_mutantprimers.pt')
-# @view_config(route_name='facs2excel', renderer='templates/final_facs2excel.pt') #I am leaving this? It is harmless untill I get pandas going.
-def my_view(request):
-    # from pprint import PrettyPrinter
-    # PrettyPrinter().pprint(request.__dict__)
-    log_passing(request)
-    #print(request.matched_route.name)
-    return {'project': 'Pyramidstarter'}
-    '''
-
+            'code': ' ', **set_navbar_state('m_log')}
 
 ############### Other #####################
-
-
-@view_config(route_name='ajax_test', renderer='json')
-def ajaxian(request):
-    return {'message': '<div class="alert alert-success" role="alert">I got this back.</div>'}
