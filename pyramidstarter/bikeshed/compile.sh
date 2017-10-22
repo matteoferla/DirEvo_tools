@@ -1,4 +1,5 @@
-os="mac"
+#!/usr/bin/env bash
+os="linux"
 g++ -o driver.batch.$os driver.batch.cxx
 g++ -o driver.$os driver.cxx
 g++ -o glue.$os glue.cxx

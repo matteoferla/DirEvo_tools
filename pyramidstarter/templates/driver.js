@@ -1,6 +1,7 @@
 $(function() {
-    formids = ['library_size','length','mean'];
+    $("#driver_by_list").toggle(false);
     $('#driver_demo').click(function() {
+    formids = ['library_size','length','mean','positions','sequenceA', 'sequenceB'];
         for (i = 0; i < formids.length; i++) {
             $('#driver_' + formids[i]).val($('#driver_' + formids[i]).attr("placeholder"));
         }
@@ -13,6 +14,11 @@ $(function() {
         $("#driver_result").hide();
     });
 
+    $('#driver_mode').on('switchChange.bootstrapSwitch', function(event, state) {
+        $('#driver_by_seq').toggle(state);
+        $('#driver_by_list').toggle(!state);
+    });
+
     $('#driver_calculate').click(function() {
 
     $("#driver_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
@@ -20,6 +26,17 @@ $(function() {
     $("#driver_result").show(); //weird combo.
         try {
         var data = {};
+
+            xformids=['library_size','length','mean'];;
+        for (i = 0; i < formids.length; i++) {
+            var v = $('#driver_' + formids[i]).val();
+            if (!v) {
+                v = $('#driver_' + formids[i]).attr("placeholder");
+            }
+            data[formids[i]] = v;
+        }
+        data['xtrue']=$("#driver_xtrue").bootstrapSwitch('state');
+        data['mode']=$("#driver_mode").bootstrapSwitch('state');
         $.ajax({
             url: '/ajax_driver',
             type: 'POST',
@@ -28,6 +45,10 @@ $(function() {
             success: function(result) {
                 reply = JSON.parse(result.message);
                 window.sessionStorage.setItem('driver', JSON.stringify(reply['data']));
+                $("#driver_result").html(reply['html']);
+                if (!! $("#driver_mode").bootstrapSwitch('state')) {
+                    $("driver_positions").val(reply['data']['positions']);
+                }
                 },
             error: function(xhr) {
                 $("#driver_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span>Oh Snap. Ajax error ({0})</h3><pre><code>{1}</pre><code></div>'.format(xhr.status,escapeHtml(xhr.responseText)));

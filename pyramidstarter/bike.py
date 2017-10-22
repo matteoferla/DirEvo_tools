@@ -87,28 +87,34 @@ def glue(nvariants, library_size=None,completeness=None,prob_complete=None):
     elif not library_size and not completeness and prob_complete:
         return wrap('glue.mod','=','3',nvariants,prob_complete)
 
-def driver():
+def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue):
     """
     Usage './driver.mac library_size sequence_length mean_number_of_crossovers_per_sequence list_of_variable_positions_file outfile xtrue'.
     I really really need to change the inputs.
+    Total number of possible sequences = 512.<br>
+    Expected number of distinct sequences = 67.96.<br>
+    Mean number of actual crossovers per sequence = 2.<br>
+    Mean number of observable crossovers per sequence = 0.8022.<br>
     :return:
     """
-    pass
+    return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
 def wrap(fun, separator, *args):
     """
-    Okay. I really ought to have altred the C code for distutils, but this nasty hack is fine.
+    Okay. I really ought to have altred the C code for distutils, but this nasty hack is fine for now.
     :param fun:
     :param args:
     :return:
     """
     cmd = affix + fun + suffix + ' ' + ' '.join(args)
     print('HERE ', cmd)
+    if separator == ' ':
+        return str(os.popen(cmd).read())
     if separator == '=':
         preply = {}
     elif separator == 'HTML' or separator == 'table':
         preply = []
-    for r in os.popen(cmd).read().split('.<br>\n'):
+    for r in str(os.popen(cmd).read()).split('.<br>\n'):   #str is redundant but for some reason pycharm pre-warns against it.
         if r and separator == '=':
             r2 = r.split(' = ')
             key = r2[0].replace(' ', '_').lower()

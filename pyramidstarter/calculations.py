@@ -12,7 +12,9 @@ T = "\t"
 # N = "<br/>
 
 import json
+import os
 import re
+import uuid
 
 import openpyxl
 from Bio.Seq import Seq
@@ -20,6 +22,12 @@ from pyramid.response import FileResponse
 from pyramidstarter import bike
 from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
 from pyramidstarter.deep_mut_scanning import deep_mutation_scan
+
+PATH = "/opt/app-root/src/pyramidstarter/"
+PLACE = "server"
+if not os.path.isdir(PATH):
+    PATH = "pyramidstarter/"
+    PLACE = "localhost"
 
 
 class SeqEncoder(json.JSONEncoder):
@@ -193,11 +201,44 @@ def pedel(jsonreq):
 
 def driver(jsonreq):
     """
+    nasty...
+    from {'length': '1425', 'library_size': '1600', 'mean': '2', 'positions' : '250 274 375 650 655 757 763 982 991'}
+    library_size sequence_length mean_number_of_crossovers_per_sequence list_of_variable_positions_file outfile xtrue
     :param jsonreq:
     :return:
     """
-    driver_out=bike.driver()
-    return json.dumps({})
+    mode=jsonreq['mode']
+    if isinstance(mode, str):  # js sends a string...
+        mode = True if mode == 'true' else False
+    if mode:
+        a=re.sub('\W','',jsonreq['sequenceA'])
+        b=re.sub('\W','',jsonreq['sequenceB'])
+        print(a)
+        print(b)
+        if len(a) != len(b):
+            raise ValueError('The lengths of the sequences differ. In future I might do an alignment, for now it&#8217;s matching')
+        pos=[str(i+1) for i in range(len(a)) if a[i] != b[i]]
+    else:
+        pos = jsonreq['positions'].split()
+    xtrue=jsonreq['xtrue']
+    if isinstance(xtrue, str):  # js sends a string...
+        xtrue = '1' if xtrue == 'true' else '0'
+    elif isinstance(xtrue, bool):  # unneccassry here
+        xtrue = '1' if xtrue == True else '0'
+    else:
+        pass # most likely a number already.
+    listfile =os.path.join(PATH, 'tmp', 'listfile_{0}.txt'.format(uuid.uuid4()))
+    outfile = os.path.join(PATH, 'tmp', 'outfile_{0}.txt'.format(uuid.uuid4()))
+
+    open(listfile,'w').write('\n'.join([str(len(pos)),*pos]))
+    driver_out=bike.driver(sequence_length=jsonreq['length'],
+                           library_size=jsonreq['library_size'],
+                           mean_number_of_crossovers_per_sequence=jsonreq['mean'],
+                           list_of_variable_positions_file=listfile,
+                           outfile=outfile,
+                           xtrue=xtrue)
+    hreply ="<p>"+driver_out + "</p>"+open(outfile).read()
+    return json.dumps({'data': {'positions': ' '.join(pos)}, 'html':hreply})
 
 def platecounter(size):
     if size == 96:
@@ -280,4 +321,4 @@ def codon(request):
 
 
 if __name__ == "__main__":
-    pass
+    driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})

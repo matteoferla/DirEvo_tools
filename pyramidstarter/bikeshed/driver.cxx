@@ -191,17 +191,17 @@ int main(int argc, char* argv[])
     exit(EXIT_FAILURE);
   }
   outfile << setprecision(4);
-  outfile << "<table cellspacing=\"0\" cellpadding=\"3\" border=\"1\"><tr>\n"
-	  << "<th align=\"center\">coordinates of interval</th>\n"
-	  << "<th align=\"center\">number of nt</th>\n"
-	  << "<th align=\"center\">mean number of crossovers</th>\n"
-	  << "<th align=\"center\">P(even number of crossovers)</th>\n"
-	  << "<th align=\"center\">P(odd number of crossovers)</th></tr>\n";
+  outfile << "<table class=\"table table-striped\"><tr>\n"
+	  << "<th>coordinates of interval</th>\n"
+	  << "<th>number of nt</th>\n"
+	  << "<th>mean number of crossovers</th>\n"
+	  << "<th>P(even number of crossovers)</th>\n"
+	  << "<th>P(odd number of crossovers)</th></tr>\n";
 
   lobs = calcprob(lambda, N, M, nn, A, lnn, Pb0, Pb1, nseqs, PBk);
 
   for (i = 0; i < M-1; ++i) {
-    outfile << "<tr align=\"right\"><td>" << A[i] << "--" << A[i+1] 
+    outfile << "<tr><td>" << A[i] << "&mdash;" << A[i+1]
 	    << "</td><td>" << nn[i] << "</td><td>" << lnn[i]
 	    << "</td><td>" << Pb0[i] << "</td><td>" << Pb1[i] 
 	    << "</td></tr>\n";
