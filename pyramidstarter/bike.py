@@ -5,7 +5,7 @@ if sys.platform == 'darwin':
     affix = '/Users/matteo/Coding/pedel2/pyramidstarter/bikeshed/'
 elif sys.platform == 'linux':
     suffix = '.linux'
-    affix = '~/app-root/runtime/repo/pyramidstarter/bikeshed/'
+    affix = '~/pyramidstarter/bikeshed/' # ~ maps to /opt/app-root/src
 else:
     raise Exception(os.name + '\t' + os.path.realpath())
 
