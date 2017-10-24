@@ -295,7 +295,7 @@ def log_passing(req, extra='—', status='—'):
 
 
 @view_config(route_name='log', renderer='templates/frame.pt')
-def hello_there(request):
+def lumberjack(request):
     log_passing(request)
     '''to find what city the users are from...
     http://ip-api.com/json/195.166.143.137
@@ -308,6 +308,7 @@ def hello_there(request):
                    '</tr></tbody></table>'
     return {'main': log_response,
             'codon_modal': '',
+            'welcome':'',
             'code': ' ', **set_navbar_state('m_log')}
 
 ############### Other #####################

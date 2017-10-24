@@ -26,4 +26,5 @@ if __name__ == '__main__':
     from waitress import serve
 
     print("Starting Waitress.")
+    print("working directory: ",os.getcwd())
     serve(app, host=ip, port=port, threads=50)
