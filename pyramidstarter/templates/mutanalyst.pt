@@ -22,11 +22,23 @@
                 <!--section-->
                 <h4>Sequence</h4>
                 <p>In frame sequence that was mutagenised. Note that all symbols that aren't uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> '>T. maritima Cystathionine &beta;-lyase'), therefore for masked sequences use lowercase.</p>
-                <div class="input-group">
-                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised.">Sequence
+                <div class="row">
+                <div class="col-lg-12">
+                            <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                          title="In frame sequence that was mutagenised.">Sequence
                         </span>
-                    <textarea class="form-control custom-control" rows="5" style="resize:none" id="sequence" name="sequence"></textarea>
-                </div>
+                                <textarea class="form-control custom-control" rows="5" style="resize:none"
+                                          id="sequence"
+                                              name="sequence"></textarea>
+                                    <span class="input-group-addon">Retrieve previous<br/>
+            <button class="btn btn-default" type="button" id="sequence_retrieve" data-toggle="tooltip" data-placement="top"
+                          title="In frame sequence that was mutagenised."><i class="fa fa-history"></i></button>
+          </span>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
                 <!--section-->
                 <h4>Mutations found</h4>
                 <p>This is the list of the mutations found. Identifying the mutations is best done with visual checks, but if the process needs speeding up the process, <a href="https://dl.dropboxusercontent.com/u/73404587/website/mutation_counter.html">this small
@@ -418,4 +430,3 @@
     </div>
 </div>
 <script type='text/javascript' src="/static/mutationalBias.js"></script>
-<script type='text/javascript' src="/static/mutationalAux.js"></script>
