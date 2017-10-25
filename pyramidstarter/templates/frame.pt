@@ -96,6 +96,7 @@ ${structure: codon_modal}
 
     <!--welcome box-->
     <div class="section"> <!--leftover from fullpage.js-->
+        ${structure: headsup}
         ${structure: welcome}
         ${structure: main}
     </div>

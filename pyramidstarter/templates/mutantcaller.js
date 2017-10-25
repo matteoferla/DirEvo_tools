@@ -53,6 +53,7 @@ $(function() {
 
 
     $('#MC_calculate').click(function() {
+    try {
         $("#MC_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
         $("#MC_result").removeClass('hidden');
         $("#MC_result").show(); //weird combo.
@@ -63,6 +64,7 @@ $(function() {
             data.append("file", files[0]);
         }
         data.append("sequence", $('#MC_sequence').val());
+        window.sessionStorage.setItem('sequence', $('#MC_sequence').val());
         data.append("reverse", !$('#MC_direction').is(":checked"));
         data.append("sigma",$('#MC_sigma').val() ? $('#MC_sigma').val() : $('#MC_sigma').attr("placeholder"));
         var pdb=false;
@@ -188,13 +190,17 @@ $(function() {
                 view_structure();
                 }
             },
-            error: function() {
-                $("#MC_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
-            },
+            error: function(xhr) {ajax_error(xhr,"#MC_result")},
             cache: false,
             contentType: false,
             processData: false
         });
-        return false;
+        }
+    catch(err) {client_error(err,"#MC_result")}
+    return false;
+    });
+
+    $('#MC_sequence_retrieve').click(function () {
+    $('#MC_sequence').val(window.sessionStorage.getItem('sequence'));
     });
 });

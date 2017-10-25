@@ -11,8 +11,8 @@ See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis)
 # To Do list
 ## Main
 What nav is needed?
-* table
-* clicable map (image)
+* table?
+* clicable map (image)?
 
 ## mutationprimer
 * temporary name. Most functions are copypaste jobs of deepscan.
@@ -62,7 +62,6 @@ Mutanalyst is using JS still. Not Ajax.
 * URL query string needs to be integrated
 * make size responsive.
 * https. switch to gnunicorn from waitress?
-* add color choice to request.session? Actually just make it a JS thing.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
 * edit ajax views to specificy server side errors. Also edit js side to catch client side errors.
 

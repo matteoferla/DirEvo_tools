@@ -20,7 +20,11 @@
                         </span>
                                 <textarea class="form-control custom-control" rows="5" style="resize:none"
                                           id="MC_sequence"
-                                          name="MC_sequence"></textarea>
+                                              name="MC_sequence"></textarea>
+                                    <span class="input-group-addon">Retrieve previous<br/>
+            <button class="btn btn-default" type="button" id="MC_sequence_retrieve" data-toggle="tooltip" data-placement="top"
+                          title="In frame sequence that was mutagenised."><i class="fa fa-history"></i></button>
+          </span>
                             </div>
                             <br/>
                         </div>

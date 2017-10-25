@@ -20,9 +20,10 @@ if not os.path.isdir(PATH):
 GMAIL_USER = 'squidonius.tango@gmail.com'
 GMAIL_PWD = '*******'
 GMAIL_SET = False
+STATUS = 'construction'
 
 
-def basedict():
+def basedict(**kwargs):
     return {'project': 'Pyramidstarter',
             'main': '',
             'welcome': '',
@@ -30,6 +31,15 @@ def basedict():
             'm_deep': 'not-active',
             'm_about': 'not-active',
             'm_QQC': 'not-active'}
+
+def talk_to_user():
+    outer='''<div class="row" id="warning"><div class="col-md-8 col-md-offset-2">{note}</div></div>'''
+    if STATUS == 'normal':
+        return '<!-- all nominal -->'
+    elif STATUS == 'construction':
+        return outer.format(note='<div class="bs-callout bs-callout-warning"><h4>Warning</h4>Matteo is playing with the server. This version may be unstable.</div>')
+    else:
+        return '<!-- no warnings -->'
 
 
 ############### Ajacean views #####################
@@ -197,20 +207,27 @@ def ajacean_test(request):
 barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
 
 
-def set_navbar_state(name):  # this is uttterly unneccessary now. Old code.
+def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_flag=False):
     ddex = {i: '' for i in barnames}
-    if name in barnames:
-        ddex[name] = 'active'
+    if thisbar in barnames:
+        ddex[thisbar] = 'active'
+    ddex['headsup']=talk_to_user()
+    if os.path.isfile(os.path.join(PATH, 'templates', main)): #it is a file name
+        ddex['main'] = open(os.path.join(PATH, 'templates', main)).read()
+    elif main: #it is a str itself.
+        ddex['main'] = main
+    else:
+        ddex['main'] ='&nbsp;'
+    ddex['codon_modal'] = open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read() if codon_flag else '&nbsp;'
+    ddex['welcome'] = open(os.path.join(PATH, 'templates', 'welcome.pt')).read() if welcome_flag else '&nbsp;'
+    ddex['code'] = open(os.path.join(PATH, 'templates', code_file)).read() if code_file else '&nbsp;'
     return ddex
 
 
 @view_config(route_name='home', renderer='templates/frame.pt')
 def home_callable(request):
     log_passing(request)
-    return {'main': open(os.path.join(PATH, 'templates', 'main.pt')).read(),
-            'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
-            'code': open(os.path.join(PATH, 'templates', 'main.js')).read(),
-            'welcome': open(os.path.join(PATH, 'templates', 'welcome.pt')).read(), **set_navbar_state('m_home')}
+    return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=True)
 
 
 @view_config(route_name='upcoming', renderer='templates/frame.pt')
@@ -220,13 +237,12 @@ def upcoming_callable(request):
         md = markdown.markdown(open(os.path.join(*PATH.split('/')[0:-1], 'README.md'), 'r').read())
     else:
         md = markdown.markdown(open('README.md').read())
-        return {'main': md, 'codon_modal': '', 'code': '', 'welcome': '', **set_navbar_state('m_upcoming')}
+        return ready_fields('m_upcoming', md, 'main.js')
 
 
 @view_config(route_name='admin', renderer='templates/frame.pt')
 def admin_callable(request):
-    return {'main': open(os.path.join(PATH, 'templates', 'admin.pt')).read(),
-            'code': open(os.path.join(PATH, 'templates', 'admin.js')).read()}
+    return ready_fields('m_admin', 'admin.pt', 'admin.js')
 
 
 @view_config(route_name='set', renderer='json')
@@ -250,13 +266,7 @@ def set_callable(request):
 def main_callable(request):
     log_passing(request)
     page = request.matchdict['page']
-    return {'main': open(os.path.join(PATH, 'templates', page + '.pt')).read(),
-            'codon_modal': open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read(),
-            'code': open(os.path.join(PATH, 'templates', page + '.js')).read(), 'welcome': '',
-            **set_navbar_state('m_' + page)}
-
-
-# request.params['key']
+    return ready_fields('m_'+page, page + '.pt', page + '.js',codon_flag=True)
 
 
 @notfound_view_config(renderer='templates/frame.pt')
@@ -266,10 +276,21 @@ def notfound_callable(request):
         log_passing(request,extra=str(request.POST), status='404')
     else:
         log_passing(request, extra=str(request.GET), status='404')
-    return {'main': open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request),
-            'codon_modal': '',
-            'code': ' ', 'welcome': '', **set_navbar_state('m_404')}
+    return ready_fields('m_404', open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request))
 
+@view_config(route_name='log', renderer='templates/frame.pt')
+def lumberjack(request):
+    log_passing(request)
+    '''to find what city the users are from...
+    http://ip-api.com/json/195.166.143.137
+    {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
+    '''
+    log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
+    log_response = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
+                   '<tbody><tr>' + '</tr><tr>'.join(
+        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
+                   '</tr></tbody></table>'
+    return ready_fields('m_log', log_response,None)
 
 ############### LOG! #####################
 import logging
@@ -295,23 +316,5 @@ def log_passing(req, extra='—', status='—'):
     else:
         ip = '0.0.0.0'
     logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
-
-
-@view_config(route_name='log', renderer='templates/frame.pt')
-def lumberjack(request):
-    log_passing(request)
-    '''to find what city the users are from...
-    http://ip-api.com/json/195.166.143.137
-    {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
-    '''
-    log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    log_response = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
-                   '<tbody><tr>' + '</tr><tr>'.join(
-        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
-                   '</tr></tbody></table>'
-    return {'main': log_response,
-            'codon_modal': '',
-            'welcome':'',
-            'code': ' ', **set_navbar_state('m_log')}
 
 ############### Other #####################

@@ -141,7 +141,17 @@ var entityMap = {
 };
 
 function escapeHtml (string) {
-  return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+  return String(string).replace(/[&<>"'`=\/]/g,
+    function (s) {
     return entityMap[s];
   });
+  }
+
+
+function ajax_error(xhr,id) {
+    $(id).html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span>Oh Snap. Ajax error ({0})</h3><pre><code>{1}</pre><code></div>'.format(xhr.status,escapeHtml(xhr.responseText)));
+}
+
+function client_error(err,id) {
+    $(id).html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span> Client side error (<i>i.e.</i> something is wrong on your side)</h3><pre><code>{0}</pre><code></div>'.format(err.message));
 }
