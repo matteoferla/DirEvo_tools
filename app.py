@@ -28,3 +28,7 @@ if __name__ == '__main__':
     print("Starting Waitress.")
     print("working directory: ",os.getcwd())
     serve(app, host=ip, port=port, threads=50)
+
+    # did I change the C++ scripts. Let's recompile anyway!
+    os.system('bash '+os.path.join(here,'bikeshed/compile.sh'))
+    print('C++ compiled')
