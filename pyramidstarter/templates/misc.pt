@@ -45,7 +45,7 @@
                                 <br/></div>
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <table class="table" width="100%">
+                                    <table class="table">
                                         <tr>
                                             <td></td>
                                             <td align="center"><b>To</b></td>
@@ -69,79 +69,79 @@
                                                     <tr>
                                                         <th>A</th>
                                                         <td>
-                                                            <input class="mutation_identity" type="text" disabled=""
+                                                            <input class="mutation_identity" type="number" disabled=""
                                                                    id="A2A"
                                                                    value="—"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" type="text" id="A2T"
+                                                            <input class="mutation_transversion" type="number" id="A2T"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_Rtransition" id="A2G" type="text"
+                                                            <input class="mutation_Rtransition" id="A2G" type="number"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" id="A2C" type="text"
+                                                            <input class="mutation_transversion" id="A2C" type="number"
                                                                    value="0"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th width="20%">T</th>
                                                         <td width="20%">
-                                                            <input class="mutation_transversion" type="text" id="T2A"
+                                                            <input class="mutation_transversion" type="number" id="T2A"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_identity" type="text" disabled=""
+                                                            <input class="mutation_identity" type="number" disabled=""
                                                                    id="T2T"
                                                                    value="—"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" id="T2G" type="text"
+                                                            <input class="mutation_transversion" id="T2G" type="number"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_Ytransition" id="T2C" type="text"
+                                                            <input class="mutation_Ytransition" id="T2C" type="number"
                                                                    value="0"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th width="20%">G</th>
                                                         <td width="20%">
-                                                            <input class="mutation_Rtransition" type="text" id="G2A"
+                                                            <input class="mutation_Rtransition" type="number" id="G2A"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" type="text" id="G2T"
+                                                            <input class="mutation_transversion" type="number" id="G2T"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
                                                             <input class="mutation_identity" disabled="" id="G2G"
-                                                                   type="text"
+                                                                   type="number"
                                                                    value="—"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" id="G2C" type="text"
+                                                            <input class="mutation_transversion" id="G2C" type="number"
                                                                    value="0"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="20%">C</td>
-                                                        <td width="20%" bgcolor="#FFFF99">
-                                                            <input type="text" id="C2A" value="0"/>
+                                                        <td width="20%">
+                                                            <input type="number" id="C2A" value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_Ytransition" type="text" id="C2T"
+                                                            <input class="mutation_Ytransition" type="number" id="C2T"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
-                                                            <input class="mutation_transversion" id="C2G" type="text"
+                                                            <input class="mutation_transversion" id="C2G" type="number"
                                                                    value="0"/>
                                                         </td>
                                                         <td>
                                                             <input class="mutation_identity" disabled="" id="C2C"
-                                                                   type="text"
+                                                                   type="number"
                                                                    value="—"/>
                                                         </td>
                                                     </tr>
@@ -157,12 +157,12 @@
                                         <div class="btn-group" role="group">
                                             <label class="btn btn-default btn-file" id="silico_load_group">
                                                 <i class="fa fa-upload" aria-hidden="true"></i> Load<input type="file"
-                                                                                                           id='silico_load'
+                                                                                                           id='silico_load_spectrum'
                                                                                                            style="display: none;">
                                             </label>
                                         </div>
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-default dropdown-toggle pull-right"
+                                            <button type="button" class="btn btn-default dropdown-toggle"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Preset
                                                 <span class="caret"></span>
@@ -176,7 +176,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <br/></div>
+                                <br/>
+                            </div>
+                            <div class="row">
+        <div class="col-lg-4">
+                                    <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip"
+                                      title="Mean number of nucleotide substitutions per daughter sequence"
+                                      data-placement="top">Mutation load</span>
+                                        <input type="number" min="0" class="form-control" placeholder="4.5" id="silico_load">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-lg-offset-3">
@@ -200,7 +211,7 @@
                             </div>
                             <br/>
                         </div>
-                        <div class="row hidden" id="silico_results">
+                        <div class="row hidden" id="silico_result">
                             <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap.
                                 Something went
                                 wrong
@@ -312,10 +323,10 @@
                 </div>
 
             </div>
-            <!--Codon balance-->
+            <!--Codon balance
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#§estimate">Codon
+                    <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#§codon">Codon
                         balance</a></h1>
                 </div>
                 <div id="§codon" class="panel-collapse collapse">
@@ -397,7 +408,7 @@
                 </div>
 
             </div>
-
+                -->
             <!--PCR -->
             <div class="panel panel-default">
                 <div class="panel-heading">

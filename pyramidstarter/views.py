@@ -132,7 +132,7 @@ def std_ajacean(request, fun):
         reply = fun(request.json_body)
         log_passing(request, str(request.json_body))
         return {'message': str(reply)}
-    except TypeError as err:
+    except Exception as err:
         print(str(err))
         log_passing(request, extra=str(request.json_body), status='fail')
         return {
@@ -140,6 +140,9 @@ def std_ajacean(request, fun):
                                    'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
                                        traceback.format_exc())})}
 
+@view_config(route_name='ajax_silico', renderer='json')
+def silicator(request):
+    return std_ajacean(request, calc.silico)
 
 @view_config(route_name='ajax_pedel', renderer='json')
 def pedeller(request):

@@ -26,8 +26,6 @@ $(function() {
     $("#driver_result").show(); //weird combo.
         try {
         var data = {};
-
-            xformids=['library_size','length','mean'];;
         for (i = 0; i < formids.length; i++) {
             var v = $('#driver_' + formids[i]).val();
             if (!v) {

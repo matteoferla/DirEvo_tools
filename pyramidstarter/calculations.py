@@ -17,7 +17,9 @@ import re
 import uuid
 
 import openpyxl
+import numpy as np
 from Bio.Seq import Seq
+from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 from pyramid.response import FileResponse
 from pyramidstarter import bike
 from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
@@ -240,6 +242,7 @@ def driver(jsonreq):
     hreply ="<p>"+driver_out + "</p>"+open(outfile).read()
     return json.dumps({'data': {'positions': ' '.join(pos)}, 'html':hreply})
 
+
 def platecounter(size):
     if size == 96:
         letters = 'ABCDEFGH'
@@ -252,6 +255,34 @@ def platecounter(size):
     for i in range(1, m + 1):
         for l in letters:
             yield l + str(i)
+
+def silico(jsonreq):
+    #get data
+    load=float(jsonreq['load'])
+    seq=MutationDNASeq(jsonreq['sequence'].upper())
+    spectra=MutationTable({k: float(v) for (k,v) in jsonreq.items() if k.find('2') != -1}).normalize()
+    ## randomise!
+    bases=('A','T','G','C')
+    n_muts=np.random.poisson(load) # n of mutations
+    m_data=[]
+    try:
+        for mi in range(n_muts):
+            # choose mutation type
+            q=np.random.uniform(0,1)
+            for m_type in spectra:
+                q = q - spectra[m_type]
+                if q < 0:
+                    maps = {b: [i for i in range(len(seq)) if seq[i] == b] for b in bases} #has to be recalculated due to mut on mut
+                    nti=maps[m_type[0]][np.random.random_integers(0,len(maps[m_type[0]]))]
+                    m_data.append({'type':m_type,'nti':nti})
+                    seq.mutate(str(nti+1)+m_type)
+                    break
+    except IndexError: #this happens due to the violation of the assumption of equal base prob... FIX!
+        return silico(jsonreq)
+    hreply ='>variant_'+' '.join([str(m) for m in sorted(seq.mutations, key=lambda x: x.num_aa)])+'\n'+str(seq)
+    return json.dumps({'data': None, 'html':hreply})
+
+
 
 
 def IDT(request, size):

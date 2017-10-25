@@ -497,6 +497,10 @@ class MutationTable:
             for item in frequencies:
                 if item.find(">") != -1:
                     self[item] = frequencies[item]
+                elif item.find("2") != -1:
+                    self[item.replace("2",">")] = frequencies[item]
+                else:
+                    pass
 
     def _parse_input(self, item):
         item = item.upper().replace("U", "T")
@@ -510,7 +514,7 @@ class MutationTable:
 
     def normalize(self, A=0.25, T=0.25, G=0.25, C=0.25):  # returns a copy. I was not sure if to do it in place...
         # TODO make it so that a zero base freq does not cause a div by zero.
-        freqs = {"A": A, "T": T, "G": G, "C": C}  # seems a bit circular...
+        freqs = {"A": A, "T": T, "G": G, "C": C}  # seems a bit shoddy
         norm1 = {bfrom + ">" + bto: self[bfrom + ">" + bto] / freqs[bfrom] for bto in self._bases for bfrom in
                  self._bases}
         norm2 = {d: norm1[d] / sum(norm1.values()) for d in norm1}
