@@ -127,6 +127,7 @@ $(function() {
     }
     $('#codon_drop').change(codonist);
     $('#codon_mutation').change(codonist);
+    parse_query();
 });
 
 var entityMap = {
@@ -150,6 +151,54 @@ function escapeHtml (string) {
 
 function ajax_error(xhr,id) {
     $(id).html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span>Oh Snap. Ajax error ({0})</h3><pre><code>{1}</pre><code></div>'.format(xhr.status,escapeHtml(xhr.responseText)));
+}
+
+function parse_query() {
+    var query = window.location.search.substring(1);
+    if (! query) {return }
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        //find it...
+        var pair = vars[i].split('=');
+        var key='error';
+        if ($('#'+pair[0]).length) {
+            key='#'+pair[0];
+        } else {
+            var match_flag=false;
+            var id = ['main','pedel','MC','MA','QQC','pedelAA','driver','silico','glue'];
+            for (var j=0; j < id.length; j++) {
+                if ($('#'+id[j]+'_'+pair[0]).length) {
+                    key='#'+id[j]+'_'+pair[0];
+                    match_flag=true;
+                    break;
+                }
+            }
+            if (! match_flag) {alert('document element with id="{0}" not found (value to set: {1})'.format(pair[0], pair[1])); continue;}
+        }
+        //parse it..
+        var value=pair[1];
+        if ($(key).is(':checkbox')) {
+            switch (value) {
+                case 'true': value=true; break;
+                case true: value=true; break;
+                case '1': value=true; break;
+                case 1: value=true; break;
+                case 'false': value=false; break;
+                case false: value=false; break;
+                case '0': value=false; break;
+                case 0: value=false; break;
+                default: alert('Unrecognised boolean value {1} for id {0}'.format(key, value)); break;
+            }
+            $(key).bootstrapSwitch('state', value);
+            $(key).prop("checked", value);
+        }
+        else if ($(key).hasClass('btn')) {
+            $(key).click();
+        }
+        else {
+            $(key).val(value);
+        }
+    }
 }
 
 function client_error(err,id) {

@@ -279,7 +279,7 @@ def silico(jsonreq):
                     break
     except IndexError: #this happens due to the violation of the assumption of equal base prob... FIX!
         return silico(jsonreq)
-    hreply ='>variant_'+' '.join([str(m) for m in sorted(seq.mutations, key=lambda x: x.num_aa)])+'\n'+str(seq)
+    hreply ='<pre><code>>variant_'+' '.join([str(m) for m in sorted(seq.mutations, key=lambda x: x.num_aa)])+'\n'+str(seq)+'</pre></code>'
     return json.dumps({'data': None, 'html':hreply})
 
 
