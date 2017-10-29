@@ -158,6 +158,9 @@ def silicator(request):
 def pedeller(request):
     return std_ajacean(request, calc.pedel)
 
+@view_config(route_name='ajax_codonAA', renderer='json')
+def aminocodonist(request):
+    return std_ajacean(request, calc.codonAA)
 
 @view_config(route_name='ajax_glue', renderer='json')
 def gluer(request):

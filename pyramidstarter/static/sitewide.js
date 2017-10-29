@@ -127,6 +127,29 @@ $(function() {
     }
     $('#codon_drop').change(codonist);
     $('#codon_mutation').change(codonist);
+    $('#codonAA_calculate').click(aminocodonist);
+    function aminocodonist() {
+    try {
+        var data={list: $('#codonAA_list').val()};
+        $.ajax({
+            url: '/ajax_codonAA',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function(result) {
+                reply = JSON.parse(result.message);
+                window.sessionStorage.setItem('codonAA', JSON.stringify(reply['data']));
+                $("#codonAA_result").html(reply['html']);
+                },
+            error: function(xhr) {ajax_error(xhr,"#codonAA_result")},
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        }
+        catch(err) {client_error(err,"#codonAA_result")}
+        return false;
+    }
     parse_query();
 });
 

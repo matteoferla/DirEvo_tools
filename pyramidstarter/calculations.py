@@ -15,15 +15,21 @@ import json
 import os
 import re
 import uuid
+import itertools
 
-import openpyxl
 import numpy as np
+import openpyxl
 from Bio.Seq import Seq
-from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 from pyramid.response import FileResponse
+from collections import Counter, defaultdict
+
 from pyramidstarter import bike
 from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
 from pyramidstarter.deep_mut_scanning import deep_mutation_scan
+from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
+
+from pprint import PrettyPrinter
+pprint = PrettyPrinter().pprint
 
 PATH = "/opt/app-root/src/pyramidstarter/"
 PLACE = "server"
@@ -282,7 +288,41 @@ def silico(jsonreq):
     hreply ='<pre><code>>variant_'+' '.join([str(m) for m in sorted(seq.mutations, key=lambda x: x.num_aa)])+'\n'+str(seq)+'</pre></code>'
     return json.dumps({'data': None, 'html':hreply})
 
-
+(codonball, codontallyball)=json.load(open(os.path.join(PATH,'AAcalc.json'),'r'))
+AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tryptophan': 'W', 'Thr': 'T', 'I': 'I',
+              'Cys': 'C', 'Gln': 'Q', 'Y': 'Y', 'Methionine': 'M', 'Proline': 'P', 'K': 'K', 'S': 'S', 'Valine': 'V',
+              'Glutamine': 'Q', 'Tyr': 'Y', 'Val': 'V', 'Histidine': 'H', 'Lysine': 'K', 'glutamate': 'E', 'L': 'L',
+              'Alanine': 'A', 'N': 'N', 'Gly': 'G', 'D': 'D', 'Ala': 'A', 'Glu': 'E', 'Phenylalanine': 'F', 'Met': 'M',
+              'V': 'V', 'Glycine': 'G', 'Arg': 'R', 'A': 'A', 'M': 'M', 'Q': 'Q', 'Lys': 'K', 'Asparagine': 'N',
+              'Pro': 'P', 'Trp': 'W', 'E': 'E', 'H': 'H', 'Tyrosine': 'Y', 'P': 'P', 'Cysteine': 'C', 'aspartate': 'D',
+              'G': 'G', 'F': 'F', 'Asn': 'N', 'Leucine': 'L', 'Asp': 'D', 'Threonine': 'T', 'C': 'C', 'Phe': 'F',
+              'T': 'T', 'Ile': 'I', 'Arginine': 'R', 'Serine': 'S', 'Leu': 'L'}
+def codonAA(jsonreq):
+    # parse
+    AAset = {AAnamemask[aa] for aa in jsonreq['list'].replace(',', ' ').replace(';', ' ').split()}
+    validcodon=[]
+    for cd in codonball:
+        if AAset.issubset(set(codonball[cd].keys())):
+            #detemrining number of correct hits
+            validcodon.append({'codon': cd,
+                        'N_codons': sum(codonball[cd].values()),
+                        'N_AA': len(set(codonball[cd].keys())),
+                        '%_valid': sum([codonball[cd][aa] for aa in codonball[cd].keys() if aa in AAset])/sum(codonball[cd].values()),
+                        '%_stop': codonball[cd]['*']/sum(codonball[cd].values()) if '*' in codonball[cd] else 0,
+                        'N_selected': {aa: codonball[cd][aa] for aa in AAset},
+                        'N_all': codonball[cd]
+                        })
+    # sort with a 2x penalty for stop and give precence to more equal distributions.
+    def varmod(x):
+        mu=sum(x.values())/len(x)
+        return 0.001* sum([(x[i] - mu) ** 2 for i in x])/len(x)
+    svalidcodon=sorted(validcodon, key=lambda x: x['%_valid'] - 2* x['%_stop'] - varmod(x['N_selected']) - 0.0001*x['N_codons'], reverse=True)
+    headers=['codon','N_codons','N_AA','%_valid','%_stop','N_selected','N_all']
+    hreply='<table class=\'table table-striped\'><tr><th>{header}</th></tr><tr>{body}</tr></table>'.format(
+        header='</th><th>'.join(headers),
+        body='</tr><tr>'.join([''.join(['<td>{}</td>'.format(str(cdball[key])) for key in headers]) for cdball in svalidcodon[0:50]])
+    )
+    return json.dumps({'data': None, 'html': hreply})
 
 
 def IDT(request, size):
@@ -351,5 +391,35 @@ def codon(request):
     return json.dumps({'data': AA, 'html': ''})
 
 
+def make_AAcalc_json():
+    degeneracy = {'N': 'ATGC',
+                  'A': 'A',
+                  'T': 'T',
+                  'G': 'G',
+                  'C': 'C',
+                  'W': 'AT',
+                  'S': 'GC',
+                  'K': 'GT',
+                  'M': 'AC',
+                  'R': 'AG',
+                  'Y': 'TC',
+                  'B': 'TGC',
+                  'V': 'AGC',
+                  'H': 'ATC',
+                  'D': 'ATG'}
+    codonball = dict()
+    codontallyball = dict()
+    for cd in itertools.product('ATGCWSKMYRBVHDN', repeat=3):
+        incodonball = defaultdict(int)
+        t = 0
+        for cdx in itertools.product(degeneracy[cd[0]], degeneracy[cd[1]], degeneracy[cd[2]]):
+            aa = str(Seq(''.join(cdx)).translate())
+            incodonball[aa] = incodonball[aa] + 1
+            t = t + 1
+        codonball[''.join(cd)] = dict(incodonball)
+        codontallyball[''.join(cd)] = t
+    json.dump((codonball, codontallyball), open('AAcalc.json', 'w'))
+
 if __name__ == "__main__":
-    driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
+    #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
+    pprint(codonAA({'list':'G P S'}))

@@ -1,17 +1,25 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CodonScheme" id="scheme_modal">
-  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document">
 
-      <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="codon_title">Helper to plan degenerate codons</h4>
-      </div>
-      <div class="modal-body">
-                <div class="row">
-                    <div class="bs-callout bs-callout-warning">Under construction. The ones with question marks fail and this section.</div>
-                    This helper allows displays the proportions of amino acids resulting from
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="codon_title">Helper to plan degenerate codons</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="codon_intro">
+                    <div class="bs-callout bs-callout-warning">Under construction. The ones with question marks fail and
+                        this section.
+                    </div>
+                    <h1>Description</h1>
+                    This helper allows you to pick the most ideal degenerate codons. It comes in two forms. You choose
+                    the required amino acids or you choose the codons to inspect.
                 </div>
-                <div class="row">
+                <h3>By codon (<a data-toggle="collapse" href="#codon_bycodon"><i class="fa fa-caret-down"
+                                                                                    aria-hidden="true"></i> show</a>)
+                    </h3>
+                <div class="row collapse" id="codon_bycodon">
                     <div class="col-md-4">
                         <div class="row">
                             <div class="input-group"><span class="input-group-addon">Codon</span><select
@@ -68,7 +76,22 @@
                     </div>
                     <div id="codon_result"></div>
                 </div>
-      </div>
+                <h3>By amino acids (<a data-toggle="collapse" href="#codon_byAA"><i class="fa fa-caret-down"
+                                                                                    aria-hidden="true"></i> show</a>)
+                    </h3>
+                <div class="row collapse" id="codon_byAA">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="codonAA_list_addon">AAs</span>
+                          <input type="text" class="form-control" placeholder="G P S" aria-describedby="codonAA_list_addon" id="codonAA_list">
+                            <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" id="codonAA_calculate"><i class="fa fa-calculator"></i></button>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="codonAA_result"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

@@ -23,6 +23,7 @@ def main(global_config, **settings):
                   'ajax_MC',
                   'ajax_facs',
                   'ajax_codon',
+                  'ajax_codonAA',
                   'ajax_silico',
                   'ajax_mutantprimers',
                   'ajax_email',
