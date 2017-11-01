@@ -27,7 +27,8 @@ def main(global_config, **settings):
                   'ajax_silico',
                   'ajax_mutantprimers',
                   'ajax_email',
-                  'ajax_driver']:
+                  'ajax_driver',
+                  'ajax_probably']:
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.add_route('main', '/main/{page}')

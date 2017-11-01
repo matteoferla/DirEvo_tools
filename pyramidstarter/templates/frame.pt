@@ -77,6 +77,8 @@
                 <li class="${m_deepscan}"><a href="/main/deepscan">Deepscan</a></li>
                 <li class="${m_QQC}"><a href="/main/QQC">QQC</a></li>
                 <li class="${m_mutantprimers}"><a href="/main/mutantprimers">Mutantprimers</a></li>
+                <li class="${m_silico}"><a href="/main/silico">Generator</a></li>
+                <li class="${m_probably}"><a href="/main/probably">Chances</a></li>
                 <li class="${m_misc}"><a href="/main/misc">Miscellaneous</a></li>
 
             </ul>

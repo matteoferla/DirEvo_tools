@@ -166,6 +166,10 @@ def aminocodonist(request):
 def gluer(request):
     return std_ajacean(request, calc.glue)
 
+@view_config(route_name='ajax_probably', renderer='json')
+def probablier(request):
+    return std_ajacean(request, calc.probably)
+
 
 @view_config(route_name='ajax_codon', renderer='json')
 def codonist(request):
@@ -207,7 +211,7 @@ def ajacean_test(request):
 
 
 ############### Main views #####################
-barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc'.split()
+barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc m_silico m_probably'.split()
 
 
 def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_flag=False):

@@ -16,6 +16,7 @@ import os
 import re
 import uuid
 import itertools
+import operator
 
 import numpy as np
 import openpyxl
@@ -30,6 +31,8 @@ from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 
 from pprint import PrettyPrinter
 pprint = PrettyPrinter().pprint
+
+from functools import reduce
 
 PATH = "/opt/app-root/src/pyramidstarter/"
 PLACE = "server"
@@ -420,6 +423,22 @@ def make_AAcalc_json():
         codontallyball[''.join(cd)] = t
     json.dump((codonball, codontallyball), open('AAcalc.json', 'w'))
 
+def probably(jsonreq):
+    load = float(jsonreq['load'])
+    mlist=jsonreq['list']
+    lib=float(jsonreq['size'])
+    seq = MutationDNASeq(jsonreq['sequence'].upper())
+    spectra = MutationTable({k: float(v) for (k, v) in jsonreq.items() if k.find('2') != -1}).normalize()
+    mutant=seq.mutate(mlist)
+    diff=(''.join([m.from_nuc for m in mutant.mutations]) ,''.join([m.to_nuc for m in mutant.mutations]))
+    muts=['{f}>{t}'.format(f=m.from_nuc[n],t=m.to_nuc[n]) for m in mutant.mutations for n in range(len(m.to_nuc))]
+    singles=[spectra[m] for m in muts]
+    p=reduce(operator.mul, singles, 1)*load/len(seq)
+    plib=1-(1-p)**lib
+    return json.dumps({'data': {'p': p, 'mutations':muts}, 'html': '<p>overall probability of encountering a {v} genotype in a given variant is {p:2g}, amid the library {l:2g}.</p>'.format(p=p, v=mlist, l=plib)})
+
 if __name__ == "__main__":
     #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
-    pprint(codonAA({'list':'G P S'}))
+    #pprint(codonAA({'list':'G P S'}))
+    bases='A','T','G','C'
+    print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
