@@ -14,6 +14,7 @@
 
     <title>Pedel revamp</title>
     <!-- Bootstrap core CSS-->
+    '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="theme_CSS"/>'
     <!--<link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/themes/darkly.min.css')}">-->
 
     <!--Fontawesome-->
@@ -48,8 +49,6 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
      <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/jquery-3.2.1.min.js')}"></script>-->
-
-
 </head>
 
 <body style="padding-top: 60px;">
@@ -69,17 +68,30 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="${m_home}"><a href="/">Home</a></li>
-                <li class="${m_mutantcaller}"><a href="/main/mutantcaller">MutantCaller</a></li>
-                <li class="${m_mutanalyst}"><a href="/main/mutanalyst">Mutanalyst</a></li>
-                <li class="${m_pedel}"><a href="/main/pedel">Pedel</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Primers <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li class="${m_mutantprimers}"><a href="/main/mutantprimers">Mutantprimers</a></li>
+                        <li class="${m_deepscan}"><a href="/main/deepscan">Deepscan</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">epPCR <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li class="${m_mutantcaller}"><a href="/main/mutantcaller">MutantCaller</a></li>
+                    <li class="${m_mutanalyst}"><a href="/main/mutanalyst">Mutanalyst</a></li>
+                    <li class="${m_pedel}"><a href="/main/pedel">Pedel</a></li>
+                    <li class="${m_probably}"><a href="/main/probably">Chances</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="${m_silico}"><a href="/main/silico">Generator</a></li>
+                  </ul>
+                </li>
                 <li class="${m_glue}"><a href="/main/glue">Glue</a></li>
                 <li class="${m_driver}"><a href="/main/driver">Driver</a></li>
-                <li class="${m_deepscan}"><a href="/main/deepscan">Deepscan</a></li>
                 <li class="${m_QQC}"><a href="/main/QQC">QQC</a></li>
-                <li class="${m_mutantprimers}"><a href="/main/mutantprimers">Mutantprimers</a></li>
-                <li class="${m_silico}"><a href="/main/silico">Generator</a></li>
-                <li class="${m_probably}"><a href="/main/probably">Chances</a></li>
                 <li class="${m_misc}"><a href="/main/misc">Miscellaneous</a></li>
+
+
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

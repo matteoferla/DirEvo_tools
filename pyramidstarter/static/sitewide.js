@@ -20,15 +20,16 @@ $(function() {
         if (themeNames[i] == mytheme) {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link"><b>' + themeNames[i] + '</b></a></li>');}
         else {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link">' + themeNames[i] + '</a></li>');}
     }
-    var themesheet = $('<link href="' + themes[mytheme] + '" rel="stylesheet" />');
-    themesheet.appendTo('head');
+    var themesheet = $('#theme_CSS');
+    themesheet.attr('href',themes[mytheme]); //The CDN is loaded first, then I override with the default because JS is done last.
     $('.theme-link').click(function() {
         var themeurl = themes[$(this).attr('data-theme')];
         themesheet.attr('href', themeurl);
         $('#current_theme').html($(this).attr('data-theme'));
         sessionStorage.setItem('theme',$(this).attr('data-theme'));
     });
-    // Let's mod string alla StackOverflow (.formatUnicorn)
+
+    // Let's mod string python-style alla StackOverflow (.formatUnicorn)
     String.prototype.format = String.prototype.format ||
         function() {
             "use strict";
