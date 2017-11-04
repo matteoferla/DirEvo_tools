@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # Waitress
 
     # did I change the C++ scripts. Let's recompile anyway!
-    os.system('bash '+os.path.join(here,'bikeshed/compile.sh'))
+    os.system('bash '+os.path.join(here,'pyramidstarter/bikeshed/compile.sh'))
     print('C++ compiled')
 
     from waitress import serve

@@ -5,9 +5,10 @@
                 <h1 class="panel-title">Primer design for semi-random mutagenesis</h1>
             </div>
             <div class="panel-body">
-                <h2>Title TBC</h2>
+                <h2>Mutantprimers</h2>
                 <h3>Description</h3>
-                <p>Woof woof</p>
+                <p>This tool designs QuickChange primers in bulk, either traditional or staggered, like the Deepscan tool, except that the amino acid mutations required are specified.
+                    This includes options for degerate codons (see <a href="#codon_scheme_descriptor">below</a>).</p>
                 <h3>Input</h3>
                     <div class="col-lg-12"><p>To make primers at the ends of the coding sequence, the neighbouring
                         noncoding sequence are required.
@@ -84,7 +85,7 @@
                             </div>
                             <br/>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9" id="codon_scheme_descriptor">
                             <p>Add to the following textarea the list of mutations desired, such as A13P. If more complex mutations, such as degenerate codons are to be use mark the destination codon in square brakets after the AA residue and its number, <i>e.g.</i> A13[NNK]. For mutations to multiple amino acids (<i>e.g.</i> A13GP) please specify the required codon for now. If considering degenerate codons and are not sure which to pick, try using the helper tool.</p>
                         </div>
                         <div class="col-lg-3"><button class="btn btn-info" type="button" data-toggle="modal"
