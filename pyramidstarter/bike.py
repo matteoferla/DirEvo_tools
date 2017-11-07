@@ -99,6 +99,10 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
     """
     return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
+def glueit(library_size,codonfile):
+    cmd= " csh {aff}glueIT.csh {lib:f} {cf}".format(aff=affix,lib=library_size,cf=codonfile)
+    return str(os.popen(cmd).read())
+
 def wrap(fun, separator, *args):
     """
     Okay. I really ought to have altred the C code for distutils, but this nasty hack is fine for now.
@@ -107,7 +111,7 @@ def wrap(fun, separator, *args):
     :return:
     """
     cmd = affix + fun + suffix + ' ' + ' '.join(args)
-    print('HERE ', cmd)
+    print('from bike.wrap: ', cmd)
     if separator == ' ':
         return str(os.popen(cmd).read())
     if separator == '=':

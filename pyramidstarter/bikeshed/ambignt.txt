@@ -1,0 +1,15 @@
+G:G
+A:A
+T:T
+C:C
+R:GA
+Y:TC
+M:AC
+K:GT
+S:GC
+W:AT
+H:ACT
+B:GTC
+V:GCA
+D:GAT
+N:GATC

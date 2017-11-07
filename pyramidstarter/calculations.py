@@ -200,6 +200,22 @@ def glue(jsonreq):
             return json.dumps({'data': glue_out, 'html': hreply})
 
 
+def glueit(jsonreq):
+    library_size=int(jsonreq['library_size']) #it will be stringified anyway. Not sure why I am converting it.
+    filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
+    with open(filename, 'w') as f:
+        for i in range(1,7):
+            f.write(jsonreq['codon{}'.format(i)]+'\n')
+    print(filename)
+    print(bike.glueit(library_size=library_size, codonfile=filename))
+    print(open(filename + '.dat', 'r').read())
+
+def pedelAA(jsonreq):
+    filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
+    with open(filename,'w') as f:
+        for k in ['ninsert', 'ndelete','nsubst','a1','b1','c1','d1','e1','f1','a2','b2','c2','d2','e2','f2','nucnorm','distr','ncycles','eff']
+            f.write("set {k} = {v}".format(k=k, v=jsonreq[k]))
+
 def pedel(jsonreq):
     pedel_out = bike.pedel(library_size=jsonreq['size'], sequence_length=jsonreq['len'],
                            mean_number_of_mutations_per_sequence=jsonreq['mutload'])
@@ -440,5 +456,9 @@ def probably(jsonreq):
 if __name__ == "__main__":
     #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
     #pprint(codonAA({'list':'G P S'}))
-    bases='A','T','G','C'
-    print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
+    #bases='A','T','G','C'
+    #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
+
+    #glueit({'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'})
+
+    pedelAA()
