@@ -213,7 +213,7 @@ def glueit(jsonreq):
 def pedelAA(jsonreq):
     filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
     with open(filename,'w') as f:
-        for k in ['ninsert', 'ndelete','nsubst','a1','b1','c1','d1','e1','f1','a2','b2','c2','d2','e2','f2','nucnorm','distr','ncycles','eff']
+        for k in ['ninsert', 'ndelete','nsubst','a1','b1','c1','d1','e1','f1','a2','b2','c2','d2','e2','f2','nucnorm','distr','ncycles','eff']:
             f.write("set {k} = {v}".format(k=k, v=jsonreq[k]))
 
 def pedel(jsonreq):
