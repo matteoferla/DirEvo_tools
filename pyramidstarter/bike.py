@@ -103,6 +103,9 @@ def glueit(library_size,codonfile):
     cmd= " csh {aff}glueIT.csh {lib:f} {cf}".format(aff=affix,lib=library_size,cf=codonfile)
     return str(os.popen(cmd).read())
 
+def pedelAA(filename):
+    return wrap('pedel-AAc',' ',filename)
+
 def wrap(fun, separator, *args):
     """
     Okay. I really ought to have altred the C code for distutils, but this nasty hack is fine for now.

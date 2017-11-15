@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
   // Read codon to amino acid table.
   ifstream aa2codonfile(aa2codon_file);
   if (!aa2codonfile) {
-    cout << "\nAborting: can't find file '" << aa2codon_file << "'.<br>\n";
+    cout << "\nAborting: can't find aa2codon file '" << aa2codon_file << "'.<br>\n";
     exit(EXIT_FAILURE);
   }
   for (i = 0; i < 64; ++i) {
@@ -161,7 +161,7 @@ int main(int argc, char* argv[])
 
   ifstream Afile(A_file);
   if (!Afile) {
-    cout << "\nAborting: can't find file '" << A_file << "'.<br>\n";
+    cout << "\nAborting: can't find A file '" << A_file << "'.<br>\n";
     exit(EXIT_FAILURE);
   }
   for (i = 0; i < 64; ++i) {
@@ -176,7 +176,7 @@ int main(int argc, char* argv[])
   seqnuc[0] = seqnuc[1] = seqnuc[2] = seqnuc[3] = 0;
   ifstream sequence1(seq_file);
   if (!sequence1) {
-    cout << "Aborting: can't find file '" << seq_file << "'.<br>\n";
+    cout << "Aborting: can't find seq file '" << seq_file << "'.<br>\n";
     exit(EXIT_FAILURE);
   }
   nlines = 0;
@@ -309,7 +309,7 @@ int main(int argc, char* argv[])
   //  ignored, scaling unimportant; row i -> column k.)
   ifstream nucfile(nuc_file);
   if (!nucfile) {
-    cout << "\nAborting: can't find file '" << nuc_file << "'.<br>\n";
+    cout << "\nAborting: can't find nuc file '" << nuc_file << "'.<br>\n";
     exit(EXIT_FAILURE);
   }
   for (i = 0; i < 4; ++i) {
