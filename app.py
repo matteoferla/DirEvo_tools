@@ -22,12 +22,11 @@ if __name__ == '__main__':
     settings = get_appsettings(config,
                                'main')  # don't really need this but is an example on how to get settings from the '.ini' files
 
-    # Waitress
-
     # did I change the C++ scripts. Let's recompile anyway!
-    os.system('bash '+os.path.join(here,'pyramidstarter/bikeshed/compile.sh'))
-    print('C++ compiled')
+    # os.system('bash '+os.path.join(here,'pyramidstarter/bikeshed/compile.sh'))
+    # print('C++ compiled')
 
+    # Waitress
     from waitress import serve
 
     print("Starting Waitress.")
