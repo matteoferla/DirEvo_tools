@@ -13,6 +13,7 @@ def main(global_config, **settings):
                   'set',
                   'upcoming',
                   'log',
+                  'status',
                   'ajax_test',
                   'ajax_deepscan',
                   'deepscan_IDT96',

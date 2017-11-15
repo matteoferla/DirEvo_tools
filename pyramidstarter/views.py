@@ -325,3 +325,6 @@ def log_passing(req, extra='—', status='—'):
     logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
 
 ############### Other #####################
+@view_config(route_name='status', renderer='string')
+def pinger(request):
+    return 'OK'
