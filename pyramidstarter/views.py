@@ -158,6 +158,12 @@ def silicator(request):
 def pedeller(request):
     return std_ajacean(request, calc.pedel)
 
+#raise Exception('JS variables differ from modules')
+
+@view_config(route_name='ajax_pedelAA', renderer='json')
+def aminopedeller(request):
+    return std_ajacean(request, calc.pedelAA)
+
 @view_config(route_name='ajax_codonAA', renderer='json')
 def aminocodonist(request):
     return std_ajacean(request, calc.codonAA)

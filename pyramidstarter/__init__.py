@@ -28,6 +28,7 @@ def main(global_config, **settings):
                   'ajax_silico',
                   'ajax_mutantprimers',
                   'ajax_email',
+                  'ajax_pedelAA',
                   'ajax_driver',
                   'ajax_probably']:
         config.add_route(route, '/' + route)
