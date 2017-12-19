@@ -14,7 +14,7 @@
 
     <title>Pedel revamp</title>
     <!-- Bootstrap core CSS-->
-    '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="theme_CSS"/>'
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="theme_CSS"/>
     <!--<link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/themes/darkly.min.css')}">-->
 
     <!--Fontawesome-->

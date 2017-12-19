@@ -2,12 +2,14 @@ import os, random, re, sys
 
 if sys.platform == 'darwin':
     suffix = '.mac'
-    affix = '/Users/matteo/Coding/pedel2/pyramidstarter/bikeshed/'
 elif sys.platform == 'linux':
     suffix = '.linux'
-    affix = '~/pyramidstarter/bikeshed/' # ~ maps to /opt/app-root/src
 else:
-    raise Exception(os.name + '\t' + os.path.realpath())
+    raise Exception("Unknown operating system, {}. This program does not run on Atari, Windows or Solaris or other junk".format(os.name))
+
+PATH = "/opt/app-root/src/pyramidstarter/bikeshed"
+if not os.path.isdir(PATH):
+    PATH = "pyramidstarter/bikeshed"
 
 
 def pedel(library_size, sequence_length, mean_number_of_mutations_per_sequence):
@@ -56,13 +58,13 @@ def pedel_batch(library_size, sequence_length, mean_number_of_mutations_per_sequ
     """
     if isinstance(mean_number_of_mutations_per_sequence, (list, tuple)):
         stats = wrap('pedel.batch', 'HTML', 1, library_size, sequence_length, mean_number_of_mutations_per_sequence[0],
-                     mean_number_of_mutations_per_sequence[1], nsteps, affix+'outfile')
+                     mean_number_of_mutations_per_sequence[1], nsteps, os.path.join(PATH,'outfile'))
     elif isinstance(library_size, (list, tuple)):
         stats = wrap('pedel.batch', 'HTML', 2, mean_number_of_mutations_per_sequence, sequence_length, library_size[0],
-                     library_size[1], nsteps, affix+'outfile')
+                     library_size[1], nsteps, os.path.join(PATH,'outfile'))
     elif isinstance(sequence_length, (list, tuple)):
         stats = wrap('pedel.batch', 'HTML', 3, library_size, mean_number_of_mutations_per_sequence, sequence_length[0],
-                     sequence_length[1], nsteps, affix+'outfile')
+                     sequence_length[1], nsteps, os.path.join(PATH,'outfile'))
     else:
         raise TypeError
     return stats  # library_size sequence_length mean_number_of_mutations_per_sequence
@@ -100,11 +102,25 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
     return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
 def glueit(library_size,codonfile):
-    cmd= " csh {aff}glueIT.csh {lib:f} {cf}".format(aff=affix,lib=library_size,cf=codonfile)
+    cmd= " csh {aff}/glueIT.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile)
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
-    return wrap('pedel-AAc',' ',filename)
+    html=wrap('pedel-AAc',' ',filename)
+    print(html)
+    data={'html': html}
+    # base freq
+    rex=re.search('There are (\d+) T\'s, (\d+) C\'s, (\d+) A\'s and (\d+) G\'s in the input sequence.', html)
+    rex.group(1)
+    for i,k in enumerate(('T','C','A','G')):
+        data[k]=rex.group(i+1)
+    # summary table
+    data['summary_table']='<table class="table table-striped">'+re.search('\<table.*?\>(.*?)\<\/table',html,re.DOTALL).group(1)+'</table>'
+    # indel
+    data['middle']=re.search('table><br>(.*?)<br><b>Links to further information', html,re.DOTALL).group(1)
+    with open(filename[:-6]+'table.html','r') as f:
+        data['sub_table']='<table>{}</table'.format(re.search('<table.*?>(.*?)</table',f.read(),re.DOTALL).group(1))
+    return data
 
 def wrap(fun, separator, *args):
     """
@@ -113,7 +129,7 @@ def wrap(fun, separator, *args):
     :param args:
     :return:
     """
-    cmd = affix + fun + suffix + ' ' + ' '.join(args)
+    cmd = os.path.join(PATH,fun + suffix)  + ' ' + ' '.join(args)
     print('from bike.wrap: ', cmd)
     if separator == ' ':
         return str(os.popen(cmd).read())

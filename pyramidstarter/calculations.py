@@ -23,6 +23,7 @@ import openpyxl
 from Bio.Seq import Seq
 from pyramid.response import FileResponse
 from collections import Counter, defaultdict
+from warnings import warn
 
 from pyramidstarter import bike
 from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
@@ -35,10 +36,8 @@ pprint = PrettyPrinter().pprint
 from functools import reduce
 
 PATH = "/opt/app-root/src/pyramidstarter/"
-PLACE = "server"
 if not os.path.isdir(PATH):
     PATH = "pyramidstarter/"
-    PLACE = "localhost"
 
 
 class SeqEncoder(json.JSONEncoder):
@@ -211,33 +210,48 @@ def glueit(jsonreq):
     print(open(filename + '.dat', 'r').read())
 
 def pedelAA(jsonreq):
-    # Super hacky for now. I struggled with the maths in python mode.
-    filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
-    #sequence file
-    seq=re.sub('[^ATGC]','',jsonreq['sequence'].replace('U','T'))
-    assert not len(seq) % 3, 'Sequence is not a multiple of three.'
-    assert len(seq) < 50000, 'Sequence is longer than 50kb...'
-    assert len(seq) > 0, 'Sequence cannot be empty'
-    #TODO assert internal stop codons...
-    with open(filename + '.fasta', 'w') as f:
-        f.write('>inseq\n{}\n'.format(seq))
-    #setup file
-    with open(filename+'.setup','w') as f:
-        f.write(' \n'.join([filename+'.fasta',
-                      filename + '.nuc.dat',
-                      os.path.join(PATH, 'bikeshed','aa2codon.dat'),
-                      os.path.join(PATH, 'bikeshed', 'Acodon.dat'),
-                      filename+'.html',
-                      filename + 'matrix.html',
-                      filename + 'table.html',
-                      filename + '.seqstats.txt']))
-        f.write(' \n')
-        f.write(' \n'.join([str(jsonreq[k]) for k in ['nsubst','ninsert','ndelete','library_size','nucnorm','distr','ncycles','eff']]))
-    # Make nuc matrix: note pedel-AAc.cxx sets the diagonals = 0 anyway.
-    pbases='T','C','A','G'  # this differs from elsewhere here.
-    with open(filename + '.nuc.dat', 'w') as f:
-        f.write('\n'.join([' '.join([str(jsonreq[origin+'2'+destination]) if origin!=destination else '0' for destination in pbases]) for origin in pbases ]))
-    return json.dumps({'data': None, 'html': bike.pedelAA(filename+'.setup')})
+    if 1==0:
+        # Super hacky for now. I struggled with the maths in python mode.
+        filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
+        #sequence file
+        seq=re.sub('[^ATGC]','',jsonreq['sequence'].replace('U','T'))
+        assert not len(seq) % 3, 'Sequence is not a multiple of three.'
+        assert len(seq) < 50000, 'Sequence is longer than 50kb...'
+        assert len(seq) > 0, 'Sequence cannot be empty'
+        #TODO assert internal stop codons...
+        with open(filename + '.fasta', 'w') as f:
+            f.write('>inseq\n{}\n'.format(seq))
+        #setup file
+        with open(filename+'.setup','w') as f:
+            f.write(' \n'.join([filename+'.fasta',
+                          filename + '.nuc.dat',
+                          os.path.join(PATH, 'bikeshed','aa2codon.dat'),
+                          os.path.join(PATH, 'bikeshed', 'Acodon.dat'),
+                          filename+'.html',
+                          filename + 'matrix.html',
+                          filename + 'table.html',
+                          filename + '.seqstats.txt']))
+            f.write(' \n')
+            f.write(' \n'.join([str(jsonreq[k]) for k in ['nsubst','ninsert','ndelete','library_size','nucnorm','distr','ncycles','eff']]))
+        # Make nuc matrix: note pedel-AAc.cxx sets the diagonals = 0 anyway.
+        pbases='T','C','A','G'  # this differs from elsewhere here.
+        with open(filename + '.nuc.dat', 'w') as f:
+            f.write('\n'.join([' '.join([str(jsonreq[origin+'2'+destination]) if origin!=destination else '0' for destination in pbases]) for origin in pbases ]))
+        return None #altered
+    filename = 'pyramidstarter/tmp/56a80370-c6d3-4827-adbe-5cfbeecf39dc'
+    warn('To test, the wrapper is circumvented.')
+    data=bike.pedelAA(filename + '.setup')
+    html='''
+    Nucleotide tally: A={A}, T={T},G={G}, C={C}.
+    <h3>summary table</h3>
+    {summary_table}
+    <h3>Misc.</h3>
+    {middle}
+    <h3>Sub-library statistics</h3>
+    {sub_table}
+    '''.format(**data)
+    return json.dumps({'data': None, 'html': html})
+
 
 def pedel(jsonreq):
     pedel_out = bike.pedel(library_size=jsonreq['size'], sequence_length=jsonreq['len'],
@@ -482,4 +496,4 @@ if __name__ == "__main__":
     #bases='A','T','G','C'
     #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
     #glueit({'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'})
-    pedelAA({'library_size':10000,'ninsert': 0, 'ndelete': 0,'nsubst': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'GTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAG'})
+    print(pedelAA({'library_size':10000,'ninsert': 0, 'ndelete': 0,'nsubst': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':''}))
