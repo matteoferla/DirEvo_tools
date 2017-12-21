@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-os="linux"
-for i in $( ls /opt/app-root/src/pyramidstarter/bikeshed/*.cxx);
-do
-g++ -o "${i%.*}".$os "${i%.*}".cxx;
-echo "${i%.*}";
-done
+if [ "$1" != "" ]; then
+    os=$1
+    for i in $( ls *.cxx);
+    do
+        g++ -o "${i%.*}".$os "${i%.*}".cxx;
+        echo "${i%.*}";
+    done
+else
+    echo "Error in usage: bash compile.sh operating_sys_suffix"
+fi
