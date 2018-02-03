@@ -9,6 +9,7 @@ import uuid
 import markdown
 import pyramidstarter.calculations as calc
 from pyramid.view import view_config, notfound_view_config
+from warnings import warn
 
 pprinter = pprint.PrettyPrinter().pprint
 
@@ -55,6 +56,7 @@ def deepscanner(request):
         log_passing(request, str(request.json_body))
         return {'message': str(reply)}
     except Exception as err:
+        warn(err)
         log_passing(request, str(request.json_body), status='fail')
         return {
             'message': json.dumps({'data': '',
@@ -92,6 +94,7 @@ def file_ajacean(request, fun):
         log_passing(request, json.dumps(data))
         return {'message': str(reply)}
     except Exception as err:
+
         log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
         return {
             'message': json.dumps({'data': '',

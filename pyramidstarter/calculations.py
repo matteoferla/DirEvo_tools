@@ -347,7 +347,7 @@ def silico(jsonreq):
 (codonball, codontallyball)=json.load(open(os.path.join(PATH,'AAcalc.json'),'r'))
 AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tryptophan': 'W', 'Thr': 'T', 'I': 'I',
               'Cys': 'C', 'Gln': 'Q', 'Y': 'Y', 'Methionine': 'M', 'Proline': 'P', 'K': 'K', 'S': 'S', 'Valine': 'V',
-              'Glutamine': 'Q', 'Tyr': 'Y', 'Val': 'V', 'Histidine': 'H', 'Lysine': 'K', 'glutamate': 'E', 'L': 'L',
+              'Glutamine': 'Q', 'Tyr': 'Y', 'Val': 'V', 'Histidine': 'H', 'Lysine': 'K', 'Glutamate': 'E', 'L': 'L',
               'Alanine': 'A', 'N': 'N', 'Gly': 'G', 'D': 'D', 'Ala': 'A', 'Glu': 'E', 'Phenylalanine': 'F', 'Met': 'M',
               'V': 'V', 'Glycine': 'G', 'Arg': 'R', 'A': 'A', 'M': 'M', 'Q': 'Q', 'Lys': 'K', 'Asparagine': 'N',
               'Pro': 'P', 'Trp': 'W', 'E': 'E', 'H': 'H', 'Tyrosine': 'Y', 'P': 'P', 'Cysteine': 'C', 'aspartate': 'D',
@@ -355,7 +355,10 @@ AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tr
               'T': 'T', 'Ile': 'I', 'Arginine': 'R', 'Serine': 'S', 'Leu': 'L'}
 def codonAA(jsonreq):
     # parse
-    AAset = {AAnamemask[aa] for aa in jsonreq['list'].replace(',', ' ').replace(';', ' ').split()}
+    try:
+        AAset = {AAnamemask[aa] for aa in jsonreq['list'].replace(',', ' ').replace(';', ' ').split()}
+    except KeyError:  #the user did not space it...
+        AAset = {AAnamemask[aa] for a in jsonreq['list'].replace(',', ' ').replace(';', ' ') for aa in a}
     validcodon=[]
     for cd in codonball:
         if AAset.issubset(set(codonball[cd].keys())):

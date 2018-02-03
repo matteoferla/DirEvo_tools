@@ -81,6 +81,7 @@
                     </h3>
                 <div class="row collapse" id="codon_byAA">
                     <div class="col-md-4">
+                        <p>This section would be cool if it had a negative option and stuff like, hydrophobics use Z.</p>
                         <div class="input-group">
                           <span class="input-group-addon" id="codonAA_list_addon">AAs</span>
                           <input type="text" class="form-control" placeholder="G P S" aria-describedby="codonAA_list_addon" id="codonAA_list">
