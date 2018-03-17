@@ -298,8 +298,7 @@ def notfound_callable(request):
 def lumberjack(request):
     log_passing(request)
     '''to find what city the users are from...
-    http://ip-api.com/json/195.166.143.137
-    {"as":"AS6871 PlusNet","city":"Sheffield","country":"United Kingdom","countryCode":"GB","isp":"PlusNet Technologies Ltd","lat":53.3844,"lon":-1.47298,"org":"Hyper platform dial pool","query":"195.166.143.137","region":"ENG","regionName":"England","status":"success","timezone":"Europe/London","zip":""}
+    http://ip-api.com/json/xxx.xxx.xxx.xxx
     '''
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
     log_response = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \

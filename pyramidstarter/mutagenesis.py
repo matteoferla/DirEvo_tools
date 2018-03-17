@@ -481,7 +481,7 @@ class MutationDNASeq(Seq):
 
 class MutationTable:
     """ATGC^2 table. The values are accessed with a A>C notation.
-    Due to the fact that an argument name must be a valid variable name "A>C" cannot be given as MutationTable(A>C=1), but has to be given as MutationTable({A>C: 1})
+    Due to the fact that an argument name must be a valid variable name "A>C" cannot be given as MutationTable('A>C'=1), but has to be given as MutationTable({'A>C': 1})
     To access a frequency, use instance["A>C"] notation"""
     _bases = OrderedDict([("A", 0), ("T", 1), ("G", 2), ("C", 3)])
 

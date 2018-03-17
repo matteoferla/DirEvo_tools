@@ -131,7 +131,7 @@ $(function() {
     $('#codonAA_calculate').click(aminocodonist);
     function aminocodonist() {
     try {
-        var data={list: $('#codonAA_list').val()};
+        var data={list: $('#codonAA_list').val(), antilist: $('#codonAA_antilist').val()};
         $.ajax({
             url: '/ajax_codonAA',
             type: 'POST',

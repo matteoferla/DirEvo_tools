@@ -210,36 +210,44 @@ def glueit(jsonreq):
     print(open(filename + '.dat', 'r').read())
 
 def pedelAA(jsonreq):
-    if 1==0:
-        # Super hacky for now. I struggled with the maths in python mode.
-        filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
-        #sequence file
-        seq=re.sub('[^ATGC]','',jsonreq['sequence'].replace('U','T'))
-        assert not len(seq) % 3, 'Sequence is not a multiple of three.'
-        assert len(seq) < 50000, 'Sequence is longer than 50kb...'
-        assert len(seq) > 0, 'Sequence cannot be empty'
-        #TODO assert internal stop codons...
-        with open(filename + '.fasta', 'w') as f:
-            f.write('>inseq\n{}\n'.format(seq))
-        #setup file
-        with open(filename+'.setup','w') as f:
-            f.write(' \n'.join([filename+'.fasta',
-                          filename + '.nuc.dat',
-                          os.path.join(PATH, 'bikeshed','aa2codon.dat'),
-                          os.path.join(PATH, 'bikeshed', 'Acodon.dat'),
-                          filename+'.html',
-                          filename + 'matrix.html',
-                          filename + 'table.html',
-                          filename + '.seqstats.txt']))
-            f.write(' \n')
-            f.write(' \n'.join([str(jsonreq[k]) for k in ['nsubst','ninsert','ndelete','library_size','nucnorm','distr','ncycles','eff']]))
+    # Super hacky for now. I struggled with the maths in python mode.
+    filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
+    #sequence file
+    seq=re.sub('[^ATGC]','',jsonreq['sequence'].replace('U','T'))
+    assert not len(seq) % 3, 'Sequence is not a multiple of three.'
+    assert len(seq) < 50000, 'Sequence is longer than 50kb...'
+    assert len(seq) > 0, 'Sequence cannot be empty'
+    #TODO assert internal stop codons...
+    # fix naming issue!
+    jsonreq['nsubst']=jsonreq['load']
+    jsonreq['ninsert'] = 0
+    jsonreq['ndelete'] = 0
+    jsonreq['library_size']=jsonreq['size']
+    jsonreq['nucnorm'] = int(jsonreq['nucnorm'])
+    #TODO get values from JS!!!
+    jsonreq['ncycles'] = 30
+    jsonreq['eff'] = 0.8
+    with open(filename + '.fasta', 'w') as f:
+        f.write('>inseq\n{}\n'.format(seq))
+    #setup file
+    with open(filename+'.setup','w') as f:
+        f.write(' \n'.join([filename+'.fasta',
+                      filename + '.nuc.dat',
+                      os.path.join(PATH, 'bikeshed','aa2codon.dat'),
+                      os.path.join(PATH, 'bikeshed', 'Acodon.dat'),
+                      filename+'.html',
+                      filename + 'matrix.html',
+                      filename + 'table.html',
+                      filename + '.seqstats.txt']))
+        f.write(' \n')
+        f.write(' \n'.join([str(jsonreq[k]) for k in ['nsubst','ninsert','ndelete','library_size','nucnorm','distr','ncycles','eff']]))
         # Make nuc matrix: note pedel-AAc.cxx sets the diagonals = 0 anyway.
         pbases='T','C','A','G'  # this differs from elsewhere here.
         with open(filename + '.nuc.dat', 'w') as f:
             f.write('\n'.join([' '.join([str(jsonreq[origin+'2'+destination]) if origin!=destination else '0' for destination in pbases]) for origin in pbases ]))
-        return None #altered
-    filename = 'pyramidstarter/tmp/56a80370-c6d3-4827-adbe-5cfbeecf39dc'
-    warn('To test, the wrapper is circumvented.')
+    #test file...
+    #filename = 'pyramidstarter/tmp/56a80370-c6d3-4827-adbe-5cfbeecf39dc'
+    #warn('To test, the wrapper is circumvented.')
     data=bike.pedelAA(filename + '.setup')
     html='''
     Nucleotide tally: A={A}, T={T},G={G}, C={C}.
@@ -354,14 +362,19 @@ AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tr
               'G': 'G', 'F': 'F', 'Asn': 'N', 'Leucine': 'L', 'Asp': 'D', 'Threonine': 'T', 'C': 'C', 'Phe': 'F',
               'T': 'T', 'Ile': 'I', 'Arginine': 'R', 'Serine': 'S', 'Leu': 'L'}
 def codonAA(jsonreq):
+    print(jsonreq)
     # parse
-    try:
-        AAset = {AAnamemask[aa] for aa in jsonreq['list'].replace(',', ' ').replace(';', ' ').split()}
-    except KeyError:  #the user did not space it...
-        AAset = {AAnamemask[aa] for a in jsonreq['list'].replace(',', ' ').replace(';', ' ') for aa in a}
+    def codon_input_parser(text):
+        try:
+            cleanset = {AAnamemask[aa] for aa in text.replace(',', ' ').replace(';', ' ').split()}
+        except KeyError:  #the user did not space it...
+            cleanset = {AAnamemask[aa] for a in text.replace(',', ' ').replace(';', ' ') for aa in a}
+        return cleanset
+    AAset=codon_input_parser(jsonreq['list'])
+    antiAAset = codon_input_parser(jsonreq['antilist'])
     validcodon=[]
     for cd in codonball:
-        if AAset.issubset(set(codonball[cd].keys())):
+        if AAset.issubset(set(codonball[cd].keys())) and not antiAAset.issubset(set(codonball[cd].keys())):
             #detemrining number of correct hits
             validcodon.append({'codon': cd,
                         'N_codons': sum(codonball[cd].values()),

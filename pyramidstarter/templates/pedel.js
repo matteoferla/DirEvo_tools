@@ -147,44 +147,45 @@ $(function() {
         applyLoad(JSON.parse(window.sessionStorage.getItem('spectrum')));
     });
     $('#pedelAA_calculate').click(function() {
-    $("#pedelAA_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
-    $("#pedelAA_result").removeClass('hidden');
-    $("#pedelAA_result").show(); //weird combo.
-    window.sessionStorage.setItem('sequence', $('#pedelAA_sequence').val());
-        try {
-        var data = {};
-            pedelAA_formids=['sequence','load','A2T', 'A2G', 'A2C', 'T2A', 'T2G', 'T2C', 'G2A', 'G2T', 'G2C', 'C2A', 'C2T', 'C2G'];
-        for (i = 0; i < pedelAA_formids.length; i++) {
-            var v = $('#pedelAA_' + pedelAA_formids[i]).val();
-            if (!v) {
-                v = $('#pedelAA_' + pedelAA_formids[i]).attr("placeholder");
+        $("#pedelAA_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#pedelAA_result").removeClass('hidden');
+        $("#pedelAA_result").show(); //weird combo.
+        window.sessionStorage.setItem('sequence', $('#pedelAA_sequence').val());
+            try {
+            var data = {};
+                pedelAA_formids=['sequence','load','size','A2T', 'A2G', 'A2C', 'T2A', 'T2G', 'T2C', 'G2A', 'G2T', 'G2C', 'C2A', 'C2T', 'C2G'];
+            for (i = 0; i < pedelAA_formids.length; i++) {
+                var v = $('#pedelAA_' + pedelAA_formids[i]).val();
+                if (!v) {
+                    v = $('#pedelAA_' + pedelAA_formids[i]).attr("placeholder");
+                }
+                // fallback to no prefix...
+                if (!v) {v = $('#'+pedelAA_formids[i]).val();}
+                data[pedelAA_formids[i]] = v;
             }
-            // fallback to no prefix...
-            if (!v) {v = $('#'+pedelAA_formids[i]).val();}
-            data[pedelAA_formids[i]] = v;
-        }
-        window.sessionStorage.setItem('spectrum',  JSON.stringify(data));
-        $.ajax({
-            url: '/ajax_pedelAA',
-            type: 'POST',
-            dataType: 'json',
-            data: JSON.stringify(data),
-            success: function(result) {
-                reply = JSON.parse(result.message);
-                window.sessionStorage.setItem('pedelAA', JSON.stringify(reply['data']));
-                $("#pedelAA_result").html(reply['html']);
+            data['nucnorm']=$("#pedelAA_normal").bootstrapSwitch('state');
+            data['distr']=$("#pedelAA_PCR").bootstrapSwitch('state');
+            $.ajax({
+                url: '/ajax_pedelAA',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function(result) {
+                    reply = JSON.parse(result.message);
+                    window.sessionStorage.setItem('pedelAA', JSON.stringify(reply['data']));
+                    $("#pedelAA_result").html(reply['html']);
+                    },
+                error: function(xhr) {
+                    $("#pedelAA_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span>Oh Snap. Ajax error ({0})</h3><pre><code>{1}</pre><code></div>'.format(xhr.status,escapeHtml(xhr.responseText)));
                 },
-            error: function(xhr) {
-                $("#pedelAA_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span>Oh Snap. Ajax error ({0})</h3><pre><code>{1}</pre><code></div>'.format(xhr.status,escapeHtml(xhr.responseText)));
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-        }
-        catch(err) {
-        $("#pedelAA_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span> Client side error (<i>i.e.</i> something is wrong on your side)</h3><pre><code>{0}</pre><code></div>'.format(err.message));
-        }
-        return false;
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+            }
+            catch(err) {
+            $("#pedelAA_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span> Client side error (<i>i.e.</i> something is wrong on your side)</h3><pre><code>{0}</pre><code></div>'.format(err.message));
+            }
+            return false;
     });
 });

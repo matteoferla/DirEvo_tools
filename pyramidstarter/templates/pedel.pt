@@ -257,11 +257,6 @@
                 <div id="pedelAA_intro">
                     <h3>Description</h3>
                     <p>Short paragraph goes here.</p>
-                    <div class="bs-callout bs-callout-warning">
-                        <h4>Fix</h4>I cannot do this bit! I need the parser perl script to figure out how to hack the
-                        <code>pedel-AAc.cxx</code>
-                        file to not require a setup file.
-                    </div>
                     <h3>Overview (<a data-toggle="collapse" href="#pedelAA_overview"><i class="fa fa-caret-down"
                                                                                         aria-hidden="true"></i> show</a>)
                     </h3>
@@ -738,7 +733,7 @@
                         </span>
                                 <textarea class="form-control custom-control" rows="5" style="resize:none"
                                           id="pedelAA_sequence"
-                                              name="pedelAA_sequence"></textarea>
+                                              name="pedelAA_sequence">ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA</textarea>
                                     <span class="input-group-addon">Retrieve previous<br/>
             <button class="btn btn-default" type="button" id="pedelAA_sequence_retrieve" data-toggle="tooltip" data-placement="top"
                           title="In frame sequence that was mutagenised."><i class="fa fa-history"></i></button>

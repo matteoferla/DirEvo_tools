@@ -1,3 +1,4 @@
+<!--The JS is in static/sitewide.js-->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CodonScheme" id="scheme_modal">
     <div class="modal-dialog modal-lg" role="document">
 
@@ -80,14 +81,22 @@
                                                                                     aria-hidden="true"></i> show</a>)
                     </h3>
                 <div class="row collapse" id="codon_byAA">
+                    <p>This section would be cool if it had a negative option and stuff like, hydrophobics use Z.</p>
                     <div class="col-md-4">
-                        <p>This section would be cool if it had a negative option and stuff like, hydrophobics use Z.</p>
                         <div class="input-group">
-                          <span class="input-group-addon" id="codonAA_list_addon">AAs</span>
+                          <span class="input-group-addon" id="codonAA_list_addon">Wanted AAs</span>
                           <input type="text" class="form-control" placeholder="G P S" aria-describedby="codonAA_list_addon" id="codonAA_list">
-                            <span class="input-group-btn">
-                            <button class="btn btn-success" type="button" id="codonAA_calculate"><i class="fa fa-calculator"></i></button>
-                          </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="codonAA_antilist_addon">Unwanted AAs</span>
+                          <input type="text" class="form-control" placeholder="C" aria-describedby="codonAA_antilist_addon" id="codonAA_antilist">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="btn-group" role="group" aria-label="calculate">
+                            <button type="button" class="btn btn-success" id="codonAA_calculate"><i class="fa fa-calculator"></i></button>
                         </div>
                     </div>
                     <div class="col-md-12" id="codonAA_result"></div>
