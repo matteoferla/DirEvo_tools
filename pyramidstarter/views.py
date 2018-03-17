@@ -22,6 +22,8 @@ GMAIL_USER = 'squidonius.tango@gmail.com'
 GMAIL_PWD = '*******'
 GMAIL_SET = False
 STATUS = 'construction'
+FRAME='templates/frame.pt'
+FRAME='templates/frame_local.pt' #offline!
 
 
 def basedict(**kwargs):
@@ -240,13 +242,13 @@ def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_f
     return ddex
 
 
-@view_config(route_name='home', renderer='templates/frame.pt')
+@view_config(route_name='home', renderer=FRAME)
 def home_callable(request):
     log_passing(request)
     return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=True)
 
 
-@view_config(route_name='upcoming', renderer='templates/frame.pt')
+@view_config(route_name='upcoming', renderer=FRAME)
 def upcoming_callable(request):
     log_passing(request)
     if PLACE == "server":
@@ -256,7 +258,7 @@ def upcoming_callable(request):
         return ready_fields('m_upcoming', md, 'main.js')
 
 
-@view_config(route_name='admin', renderer='templates/frame.pt')
+@view_config(route_name='admin', renderer=FRAME)
 def admin_callable(request):
     return ready_fields('m_admin', 'admin.pt', 'admin.js')
 
@@ -278,14 +280,14 @@ def set_callable(request):
         return 'Password already set.'
 
 
-@view_config(route_name='main', renderer='templates/frame.pt')
+@view_config(route_name='main', renderer=FRAME)
 def main_callable(request):
     log_passing(request)
     page = request.matchdict['page']
     return ready_fields('m_'+page, page + '.pt', page + '.js',codon_flag=True)
 
 
-@notfound_view_config(renderer='templates/frame.pt')
+@notfound_view_config(renderer=FRAME)
 def notfound_callable(request):
     request.response.status = 404
     if request.method == 'POST':
@@ -294,7 +296,7 @@ def notfound_callable(request):
         log_passing(request, extra=str(request.GET), status='404')
     return ready_fields('m_404', open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request))
 
-@view_config(route_name='log', renderer='templates/frame.pt')
+@view_config(route_name='log', renderer=FRAME)
 def lumberjack(request):
     log_passing(request)
     '''to find what city the users are from...
