@@ -178,15 +178,14 @@ class Trace:
             setattr(trim, 'alignment', (match[0][i:j], match[1][i:j]))
         # case 2. The read is shorter...
         else:
-            print('case 2. The read is shorter than the CDS at the front.')
-            raise NotImplementedError
+            raise NotImplementedError('case 2. The read is shorter than the CDS at the front.')
         return trim
 
     def other_bases(self, base):
         other_bases = set(self.bases)
-        if isinstance(base,str):
+        if isinstance(base,str) and base in self.bases:
             other_bases.remove(base)
-        elif isinstance(base,int):
+        elif isinstance(base,int) and self.peak_id[base] in self.bases:
             other_bases.remove(self.peak_id[base])
         return other_bases
 
@@ -196,8 +195,13 @@ class Trace:
         minor_peaks = []
         for i in range(len(self.peak_index)):
             ii = self.peak_index[i]
-            main_peaks.append(getattr(self, self.peak_id[i])[ii])
-            minor_peaks.append(sum([getattr(self, b)[ii] for b in self.other_bases(i)]))
+            if self.peak_id[i] in self.bases:
+                id=self.peak_id[i]
+            else: # Degenerate...
+                k={b: getattr(self, b)[ii] for b in self.bases}
+                id=sorted(k, key=lambda x: k[x], reverse = True)[0]
+            main_peaks.append(getattr(self, id)[ii])
+            minor_peaks.append(sum([getattr(self, b)[ii] for b in self.other_bases(id)]))
         mainPeaks = np.array(main_peaks)  # why do I always call np varibles C++ style? oh well.
         minorPeaks = np.array(minor_peaks)
         SNR = np.divide(mainPeaks, minorPeaks)
