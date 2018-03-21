@@ -363,4 +363,4 @@ def carlos_submit(request):
     open('temp.gb','wb').write(request.POST['genbank'].value)
     open('vcf.csv', 'wb').write(request.POST['vcf'].value)
     notes=VCF_mapper.tabulator('temp.gb', 'vcf.csv', 'out.csv')
-    return notes+open('out.csv','r').read()
+    return notes+open('out.csv','r').read().replace('\n','<br/>')
