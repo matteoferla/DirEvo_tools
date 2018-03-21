@@ -11,6 +11,7 @@ import urllib.request
 import markdown
 import pyramidstarter.calculations as calc
 from pyramid.view import view_config, notfound_view_config
+from pyramid.response import FileResponse
 from warnings import warn
 
 pprinter = pprint.PrettyPrinter().pprint
@@ -358,9 +359,14 @@ def carlos(request): # serving static basically.
     return dict()
 
 from pyramidstarter import VCF_mapper
-@view_config(route_name='carlos_submit', renderer='json')
+@view_config(route_name='carlos_submit')
 def carlos_submit(request):
     open('temp.gb','wb').write(request.POST['genbank'].value)
     open('vcf.csv', 'wb').write(request.POST['vcf'].value)
     notes=VCF_mapper.tabulator('temp.gb', 'vcf.csv', 'out.csv')
-    return notes+open('out.csv','r').read()
+    response = FileResponse(
+        'out.csv',
+        request=request,
+        content_type='text/csv'
+        )
+    return response
