@@ -6,6 +6,8 @@ import smtplib
 import traceback
 import uuid
 
+import urllib.request
+
 import markdown
 import pyramidstarter.calculations as calc
 from pyramid.view import view_config, notfound_view_config
@@ -22,8 +24,14 @@ GMAIL_USER = 'squidonius.tango@gmail.com'
 GMAIL_PWD = '*******'
 GMAIL_SET = False
 STATUS = 'construction'
+
 FRAME='templates/frame.pt'
-FRAME='templates/frame_local.pt' #offline!
+try:
+    import urllib.request
+    urllib.request.urlopen('http://python.org/')
+except OSError:
+    warn('The server is running in OFFLINE mode as it cannot connect to the web.')
+    FRAME='templates/frame_local.pt' #offline!
 
 
 def basedict(**kwargs):
