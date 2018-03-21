@@ -203,11 +203,11 @@ def glueit(jsonreq):
     library_size=int(jsonreq['library_size']) #it will be stringified anyway. Not sure why I am converting it.
     filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
     with open(filename, 'w') as f:
-        for i in range(1,7):
+        for i in range(1,int(jsonreq['num_codons'])):
             f.write(jsonreq['codon{}'.format(i)]+'\n')
-    print('filename',filename)
-    print('data',bike.glueit(library_size=library_size, codonfile=filename))
-    print('dat',open(filename + '.dat', 'r').read())
+    #print('filename',filename)
+    html=bike.glueit(library_size=library_size, codonfile=filename)
+    return json.dumps({'data': None, 'html': html})
 
 def pedelAA(jsonreq):
     # Super hacky for now. I struggled with the maths in python mode.

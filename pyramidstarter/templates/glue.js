@@ -50,9 +50,6 @@ $(function() {
     }
     crappy_toggle('library_size');
 
-    $('#glue_calculate').click(glue_calculate());
-    $('#glueIT_calculate').click(glueIT_calculate());
-
     function glue_calculate() {
         $("#glue_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
         $("#glue_result").removeClass('hidden');
@@ -105,7 +102,7 @@ $(function() {
         return false;
     }
 
-
+    //##########################################################
     for (i=2; i<7; i++){
     $('#glueIT_overcodon'+ i.toString()).hide();
     }
@@ -120,12 +117,13 @@ $(function() {
     }
     });
 
+    var formidsIT=['library_size','num_codons','codon1','codon2','codon3','codon4','codon5','codon6'];
+
     function glueIT_calculate() {
         $("#glueIT_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
         $("#glueIT_result").removeClass('hidden');
         $("#glueIT_result").show(); //weird combo.
         var data = {};
-        formidsIT=['library_size','num_codons','codon1','codon2','codon3','codon4','codon5','codon6'];
         for (i = 0; i < formidsIT.length; i++) {
             var v = $('#glueIT_' + formidsIT[i]).val();
             if (!v) {
@@ -133,7 +131,6 @@ $(function() {
             }
             data[formidsIT[i]] = v;
         }
-        console.log(formidsIT);
         $.ajax({
             url: '/ajax_glueIT',
             type: 'POST',
@@ -154,4 +151,14 @@ $(function() {
         });
         return false;
     }
+
+    $('#glueIT_clear').click(function() {
+        for (i = 0; i < formidsIT.length; i++) {
+            $('#glue_' + formidsIT[i]).val('');
+        }
+        $("#glueIT_result").hide();
+    });
+
+    $('#glueIT_calculate').click(glueIT_calculate);
+    $('#glue_calculate').click(glue_calculate);
 });
