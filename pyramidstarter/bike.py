@@ -102,7 +102,7 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
     return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
 def glueit(library_size,codonfile):
-    cmd= " csh {aff}/glueIT.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile)
+    cmd= " csh {aff}/glueIT.{OS}.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile, OS=suffix)
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
