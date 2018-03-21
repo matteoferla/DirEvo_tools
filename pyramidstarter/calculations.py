@@ -205,9 +205,9 @@ def glueit(jsonreq):
     with open(filename, 'w') as f:
         for i in range(1,7):
             f.write(jsonreq['codon{}'.format(i)]+'\n')
-    print(filename)
-    print(bike.glueit(library_size=library_size, codonfile=filename))
-    print(open(filename + '.dat', 'r').read())
+    print('filename',filename)
+    print('data',bike.glueit(library_size=library_size, codonfile=filename))
+    print('dat',open(filename + '.dat', 'r').read())
 
 def pedelAA(jsonreq):
     # Super hacky for now. I struggled with the maths in python mode.

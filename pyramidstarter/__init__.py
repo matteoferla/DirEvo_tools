@@ -21,6 +21,7 @@ def main(global_config, **settings):
                   'ajax_QQC',
                   'ajax_pedel',
                   'ajax_glue',
+                  'ajax_glueIT',
                   'ajax_MC',
                   'ajax_facs',
                   'ajax_codon',
@@ -37,6 +38,10 @@ def main(global_config, **settings):
     config.set_session_factory(SignedCookieSessionFactory('methionine'))
     config.scan()
     config_logging()
+    #### TEMP
+    config.add_route('carlos', '/Carlos')
+    config.add_route('carlos_submit', '/Carlos_submit')
+    ####
     return config.make_wsgi_app()
 
 

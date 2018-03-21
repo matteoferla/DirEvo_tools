@@ -185,6 +185,10 @@ def aminocodonist(request):
 def gluer(request):
     return std_ajacean(request, calc.glue)
 
+@view_config(route_name='ajax_glueIT', renderer='json')
+def gluerIT(request):
+    return std_ajacean(request, calc.glueit)
+
 @view_config(route_name='ajax_probably', renderer='json')
 def probablier(request):
     return std_ajacean(request, calc.probably)
@@ -346,3 +350,17 @@ def log_passing(req, extra='—', status='—'):
 @view_config(route_name='status', renderer='string')
 def pinger(request):
     return 'OK'
+
+
+########### TEMPORARILY HERE #######
+@view_config(route_name='carlos', renderer='templates/Carlos.pt')
+def carlos(request): # serving static basically.
+    return dict()
+
+from pyramidstarter import VCF_mapper
+@view_config(route_name='carlos_submit', renderer='json')
+def carlos_submit(request):
+    open('temp.gb','wb').write(request.POST['genbank'].value)
+    open('vcf.csv', 'wb').write(request.POST['vcf'].value)
+    notes=VCF_mapper.tabulator('temp.gb', 'vcf.csv', 'out.csv')
+    return notes+open('out.csv','r').read()

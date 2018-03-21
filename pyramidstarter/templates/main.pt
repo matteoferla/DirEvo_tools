@@ -6,5 +6,14 @@
                 <h1>Introduction</h1>
             </div>
             Some kind of navigation...<br/>
+            Links to hidden pages:<br/>
+            <a class="btn btn-default" href="https://github.com/matteoferla/mutagenesis"><i
+                        class="fa fa-github" aria-hidden="true"></i> MF's Github</a>
+                <a href="/log" class="btn btn-info"><i
+                        class="fa fa-server" aria-hidden="true"></i> Server log</a>
+                <a class="btn btn-success" href="/upcoming"><i
+                        class="fa fa-sticky-note-o" aria-hidden="true"></i> To Do list</a>
+                <button type="button" class="btn btn-warning" data-dismiss="modal"><i
+                        class="fa fa-times" aria-hidden="true"></i> Close</button>
 </div>
 </div>
