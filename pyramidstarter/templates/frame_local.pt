@@ -85,6 +85,8 @@
     </div>
 </nav>
 <br/>
+<div class="bs-callout bs-callout-danger">
+                    <h4>OFFLINE MODE</h4>The server is running in full serving mode &mdash;no CDNs</div>
 <!--MODAL for scheme. not activated on all pages!-->
 ${structure: codon_modal}
 
