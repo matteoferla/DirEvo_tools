@@ -154,7 +154,7 @@ def tabulator(ref, strain, outname, subset=None, mode='CLC'):
             print('KEY ERROR! {e}'.format(e=e))
         except Exception as error:
             warn('Bugger! An error happened! This one: '+str(error)+'\n The line was this: '+'\t'.join(line))
-    genome = {chromo.name: chromo for chromo in SeqIO.parse(ref, 'genbank')}
+    return ''
 
 
 if __name__ == "__main__":  # and 1==0 taken away the impossible identity to make it work normal.
