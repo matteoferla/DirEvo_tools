@@ -29,29 +29,21 @@ from Bio.Seq import MutableSeq, Seq
 from warnings import warn
 
 upstream_cutoff = 100
-qual_cutoff = 100  # 228
+qual_cutoff = 25  # 228
 #marker='gene' #gene is gene symbol
 marker='protein_id'
 
 
-
 def tabulator(ref, strain, outname, subset=None, mode='CLC'):
-    notes=[]
     debugprint('Parsing genome... ')
-    genome = {chromo.name:chromo for chromo in SeqIO.parse(ref, 'genbank')}
+    genome = {'genome':chromo for chromo in SeqIO.parse(ref, 'genbank')}
+    #genome = {chromo.name: chromo for chromo in SeqIO.parse(ref, 'genbank')}
     geneball = {chromo: [gene for gene in genome[chromo].features if gene.type not in ('source','Contig')] for chromo in genome}
     debugprint('Starting outfile {0}... '.format(outname))
     out = csv.DictWriter(open(outname, 'w'),
                          fieldnames=['Chromosome', 'Position', 'Category', 'Symbol', 'Product', 'Effect', 'Mutation',
                                      'Type', 'Quality'])
     out.writeheader()
-    ''' DISABLED UNTIL FIXED.
-    geneball = genome.features[1:]
-    if subset:
-        print('ONLY SUBSET OF GENES SHOWN IN FINAL TABLE!')
-        geneball = [gene for gene in genome.features[1:] if
-                    'gene' in gene.qualifiers and gene.qualifiers['gene'][0] in subset]
-             '''
     file = open(strain)
     if mode=='SAM':
         modedex = {'QUAL': 'QUAL', 'CHROM': '#CHROM','POS':'POS','INFO':'INFO','ALT':'ALT'}
@@ -64,9 +56,6 @@ def tabulator(ref, strain, outname, subset=None, mode='CLC'):
     else:
         raise KeyError('Not a valid mode, CLC or SAM only')
     count = 0
-    debugprint(mode)
-    debugprint(modedex)
-    debugprint(list(csv.DictReader(file, delimiter=modedeli)))
     debugprint('Going through list...')
     # The headers differ in CLC:
     # "Reference Position","Type","Length","Reference","Allele","Linkage","Zygosity","Count","Coverage","Frequency","Forward/reverse balance","Average quality","Overlapping annotations","Coding region change","Amino acid change"
@@ -75,7 +64,7 @@ def tabulator(ref, strain, outname, subset=None, mode='CLC'):
         try:
             if float(line[modedex['QUAL']]) >= qual_cutoff: #QUAL
                 #chr_name='.'.join(list(line['#CHROM'].split())[:-1])
-                chr_name =line[modedex['CHROM']]
+                chr_name ='genome'
                 pastgene = genome[chr_name].features[0]
                 pastproduct = ''
                 pastsymbol = ''
@@ -109,7 +98,7 @@ def tabulator(ref, strain, outname, subset=None, mode='CLC'):
                         else:
                             loc = gene.location.end - pos
                             target = str(Seq(line[modedex['ALT']]).reverse_complement())
-                        if line['INFO'][0:2] == 'DP':
+                        if line[modedex['INFO']] == 'SNV': #[0:2] DP in SAM
                             mut = gs.tomutable()
                             mut[loc] = target
                             from_aa = gs.translate()[int(loc / 3)]
@@ -162,19 +151,10 @@ def tabulator(ref, strain, outname, subset=None, mode='CLC'):
                     pastproduct = product
                     pastsymbol = symbol
         except KeyError as e:
-            notes.append('KEY ERROR! {e}'.format(e=e))
+            print('KEY ERROR! {e}'.format(e=e))
         except Exception as error:
             warn('Bugger! An error happened! This one: '+str(error)+'\n The line was this: '+'\t'.join(line))
-        notes.append('There are {0} protein mutations!'.format(count))
     genome = {chromo.name: chromo for chromo in SeqIO.parse(ref, 'genbank')}
-    #notes.append('Elements in genbank:  '+', '.join(*genome.keys()))
-    file = open(strain)
-    if mode=='SAM':
-        while next(file)[0:22] != '##bcftools_callCommand':
-            pass
-    #notes.append('Elements in cvf:  '+', '.join(*{line[modedex['CHROM']] for line in csv.DictReader(file, delimiter=modedeli)}))
-    #return '#'+'\n#'.join(notes)+'\n'
-    return ''
 
 
 if __name__ == "__main__":  # and 1==0 taken away the impossible identity to make it work normal.
