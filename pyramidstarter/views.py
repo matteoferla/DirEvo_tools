@@ -253,7 +253,7 @@ def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_f
 @view_config(route_name='home', renderer=FRAME)
 def home_callable(request):
     log_passing(request)
-    return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=True)
+    return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=False) #I was sick of the welcome flag.
 
 
 @view_config(route_name='upcoming', renderer=FRAME)
