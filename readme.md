@@ -54,3 +54,33 @@ NB. Benchling API: Benchling API reqires a key. This seems to be issued on reque
 What nav is needed?
 * table?
 * clicable map (image)?
+
+## These are my notes on the pi config.
+#Added empty file called ssh to microSD card
+arp -a
+ssh pi@192.168.1.229
+passwd
+sudo apt-get update
+sudo apt-get upgrade
+
+wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh
+chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
+./Berryconda3-2.0.0-Linux-armv7l.sh
+# yes to echo 'export PATH=/home/pi/berryconda3/bin:$PATH' >> /home/pi/.bashrc
+source /home/pi/.bashrc
+rm Berryconda3-2.0.0-Linux-armv7l.sh
+# install the requirements that fail with conda install ...
+pip install -r  ~/Coding/pedel2/requirements.txt
+
+sudo apt-get install samba samba-common-bin
+sudo nano /etc/samba/smb.conf
+sudo smbpasswd -a pi
+sudo /etc/init.d/samba restart
+# make a /Coding/pedel2 folder...
+
+sudo apt-get install libapache2-mod-wsgi-py3
+sudo a2enmod wsgi
+sudo nano /etc/apache2/sites-available/000-default.conf
+# changed a few things...
+sudo apache2ctl configtest
+sudo systemctl restart apache2
