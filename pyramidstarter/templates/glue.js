@@ -2,6 +2,7 @@
 
 $(function() {
     $('#nucleotide_modal').modal('hide');
+
     formids = ['nvariants', 'library_size', 'completeness', 'prob_complete'];
     $('#glue_demo').click(function() {
         for (i = 0; i < formids.length; i++) {
@@ -50,6 +51,7 @@ $(function() {
     crappy_toggle('library_size');
 
     $('#glue_calculate').click(glue_calculate());
+    $('#glueIT_calculate').click(glueIT_calculate());
 
     function glue_calculate() {
         $("#glue_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
@@ -103,6 +105,7 @@ $(function() {
         return false;
     }
 
+
     for (i=2; i<7; i++){
     $('#glueIT_overcodon'+ i.toString()).hide();
     }
@@ -117,5 +120,38 @@ $(function() {
     }
     });
 
-    $('#glueIT_calculate').click(function () {alert('This does nothing atm.')})
+    function glueIT_calculate() {
+        $("#glueIT_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
+        $("#glueIT_result").removeClass('hidden');
+        $("#glueIT_result").show(); //weird combo.
+        var data = {};
+        formidsIT=['library_size','num_codons','codon1','codon2','codon3','codon4','codon5','codon6'];
+        for (i = 0; i < formidsIT.length; i++) {
+            var v = $('#glueIT_' + formidsIT[i]).val();
+            if (!v) {
+                v = $('#glueIT_' + formidsIT[i]).attr("placeholder");
+            }
+            data[formidsIT[i]] = v;
+        }
+        console.log(formidsIT);
+        $.ajax({
+            url: '/ajax_glueIT',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function(result) {
+                reply = JSON.parse(result.message);
+                //reply=result.message; //SO told me so. Why does it work fro pedel.
+                window.sessionStorage.setItem('glueIT', JSON.stringify(reply['data']));
+                $("#glueIT_result").html(reply['html']);
+            },
+            error: function() {
+                $("#glueIT_result").html('<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Nothing back.</div>');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    }
 });
