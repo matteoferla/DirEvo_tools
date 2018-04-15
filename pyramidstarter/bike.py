@@ -1,9 +1,9 @@
 import os, random, re, sys
 
 if sys.platform == 'darwin':
-    suffix = '.mac'
+    SUFFIX = '.mac'
 elif sys.platform == 'linux':
-    suffix = '.linux'
+    SUFFIX = '.linux'
 else:
     raise Exception("Unknown operating system, {}. This program does not run on Atari, Windows or Solaris or other junk".format(os.name))
 
@@ -102,12 +102,12 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
     return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
 def glueit(library_size,codonfile):
-    cmd= " csh {aff}/glueIT.{OS}.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile, OS=suffix)
+    cmd= " csh {aff}/glueIT{OS}.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile, OS=SUFFIX)
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
     html=wrap('pedel-AAc',' ',filename)
-    print(html)
+    #print(html)
     data={'html': html}
     # base freq
     rex=re.search('There are (\d+) T\'s, (\d+) C\'s, (\d+) A\'s and (\d+) G\'s in the input sequence.', html)
@@ -119,7 +119,29 @@ def pedelAA(filename):
     # indel
     data['middle']=re.search('table><br>(.*?)<br><b>Links to further information', html,re.DOTALL).group(1)
     with open(filename[:-6]+'table.html','r') as f:
-        data['sub_table']='<table>{}</table'.format(re.search('<table.*?>(.*?)</table',f.read(),re.DOTALL).group(1))
+        x='<table>{}</table>'.format(re.search('<table.*?>(.*?)</table',f.read(),re.DOTALL).group(1))
+        data['sub_table'] =x.replace('nan', '—').replace('<table>','<table class="table table-striped">')
+    # table to data...
+    table=[re.findall('<td.*?>(.*?)<\/td>', row) for row in re.findall('<tr.*?>(.*?)<\/tr>',data['sub_table'].replace('\n',''))]
+    table.pop(0)
+    table.pop(0)
+    for i, row in enumerate(table):
+        for j, entry in enumerate(row):
+            if len(entry) == 0:
+                pass
+            elif entry.find('<') == 0:
+                rex = re.search('>(.*?)<', entry)
+                if rex:
+                    table[i][j] = '<span class="pedelAA_note_{1}">{0}</span>'.format(rex.groups(1)[0],rex.groups(1)[0].replace(' ',''))
+                else:
+                    raise Exception(entry)
+            elif entry.find('—') == 0 or entry.find('-') == 0:
+                table[i][j] = '–'
+            elif entry.find('>20') == 0:
+                table[i][j] = 20
+            else:
+                table[i][j] = float(entry)
+    data['sub_table_data']=table
     return data
 
 def wrap(fun, separator, *args):
@@ -129,8 +151,8 @@ def wrap(fun, separator, *args):
     :param args:
     :return:
     """
-    cmd = os.path.join(PATH,fun + suffix)  + ' ' + ' '.join(args)
-    print('from bike.wrap: ', cmd)
+    cmd = os.path.join(PATH,fun + SUFFIX)  + ' ' + ' '.join(args)
+    #print('from bike.wrap: ', cmd)
     if separator == ' ':
         return str(os.popen(cmd).read())
     if separator == '=':

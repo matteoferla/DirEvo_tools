@@ -247,7 +247,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- AA -->
         <div class="panel panel-default" id="pedelAA">
             <div class="panel-heading">
                 <h1 class="panel-title">PedelAA</h1>
@@ -1064,6 +1064,64 @@
                 <li>Sun F. (1995). The polymerase chain reaction and branching
                     processes, <i>J. Comput. Biol.</i>, <b>2</b>, 63-86.
                 </li>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="pedel_Cx_note" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notes about Cx estimations</h4>
+            </div>
+            <div class="modal-body">
+                <h2 id="pedelAA_exact">PEDEL-AA x = 0, 1 and 2 sub-library statistics</h2>
+                <p>For x = 0, 1 and 2, we calculate the expected number of distinct
+variants, Cx, precisely.  This calculation includes variants with
+                    multiple nucleotide substitutions in the same codon.</p>
+<p>
+The total number of each of the 64 codon types in the input sequence
+is calculated.  The 64 x 20 matrix of probabilities for each codon
+type mutating to each amino acid type is calculated using the input
+nucleotide substitution matrix and the input substitution rate.</p>
+<p>For x = 0, 1 and 2 there are, respectively Vx_2 = 1, 19N and
+361N(N-1)/2 total possible <a href=pedel-AA_variants.html>variants</a>
+(i.e. N!/[x!(N-x)!] 19^x, where N is the length of the input sequence
+in codons).  The probability of the input sequence mutating to each of
+these possible variants is calculated and renormalized by the
+respective probability sum P0, P1 or P2 (where Px = Sum_{v_i in Vx_2}
+P(v_i)) to give the normalized probabilities Pn(v_i) of the different
+variants within the respective sub-libraries Lx, rather than within
+the whole library.  The probability of a particular variant v_i
+being present in the relevant sub-library Lx is given by 1 -
+exp(-Pn(v_i) x Lx).  These probabilities are quickly summed over all
+possible variants using the codon counts.  Computationally, this is
+very fast for x = 0, 1 and 2, but can take a few minutes for x = 3; hence
+the 'exact' calculation is not used on the webserver for x >= 3.  The
+sizes of the sub-libraries Lx are determined separately for the
+Poisson and PCR distributions as described in
+the <a href=pedel-AA-stats.html>notes on the PEDEL-AA algorithms</a>,
+thus resulting in separate Cx estimates for the different
+distributions.</p>
+<p>Ideally, for x >= 3, we will enter the <a href=pedel-AA_CxLx.html>Cx ~
+Lx</a> region.  In this case all the individual Cx estimates, and the
+estimated total number of distinct variants in the library C = C0 + C1
++ C2 + ..., will be fairly good.  A warning is printed in the 'notes'
+column if there are any x >= 3 values for which the Cx ~ Lx
+approximation may not apply, in which case Cx is estimated with the
+formula Cx ~ Vx_1(1-exp(-Lx/Vx_1)) (i.e. ignoring, in these particular
+sub-libraries, any <a href=pedel-AA_variants.html>variants</a> of type
+Vx_2).<br><br>
+
+See also <a href=pedel-AA-stats.html>notes on the PEDEL-AA
+algorithms</a>.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

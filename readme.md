@@ -11,9 +11,7 @@ It is currently hosted on a Raspberry pi in my flat.
 
 Sorted by urgency:
 
-* *Glue-it*. Not done yet.
 * *pedel* DNA/AA PCR not active
-* *Glue* works, but make it print a graph at different values.
 * *main* needs fixing. See below.
 * *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan.
 * *mutationprimer*. make more elegant the determination of server or localhost.
@@ -22,7 +20,9 @@ Sorted by urgency:
 * *mutationprimer* IDT does not accept lowercase degenrte nts.
 * *mutatcaller* does not check for terminal indels if set to local. Currently set to global.
 * *mutatcaller* silent mutations! Also ratio of these!
-* *Pedel*  range of conditions not doen yet, but pedel_batch wrapper made.
+* *Glue* works, but make it print a graph at different values.
+* *Pedel*  range of conditions not done yet, but pedel_batch wrapper made.
+* *PedelAA* links to modals in sub table.
 * *Pedel-AA* graphs
 * *QQC* wire reverse
 * *Mutanalyst* is using old JS still. Not Ajax and python.
@@ -38,9 +38,7 @@ returns mutations.
 * make size responsive.
 * https. switch to gnunicorn from waitress or let Apache server handle it.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
-* edit ajax views to specificy server side errors. Also edit js side to catch client side errors.
-* Talk to Wayne about conceptual issues with PCR efficiency
-* Lastly, ask Wayne where the server physically lives.
+* Also edit js side to catch client side errors.
 
 # Bullcrap area
 

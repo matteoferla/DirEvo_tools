@@ -258,7 +258,8 @@ def pedelAA(jsonreq):
     <h3>Sub-library statistics</h3>
     {sub_table}
     '''.format(**data)
-    return json.dumps({'data': None, 'html': html})
+    print(data['sub_table_data'])
+    return json.dumps({'data': data['sub_table_data'], 'html': html})
 
 
 def pedel(jsonreq):
