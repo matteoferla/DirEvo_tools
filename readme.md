@@ -7,6 +7,9 @@ Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but may 
 See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
 It is currently hosted on a Raspberry pi in my flat.
 
+# Currently working on
+copypasting stuff to make modal about Cx approximations in pedelAA
+
 # To Do list
 
 Sorted by urgency:

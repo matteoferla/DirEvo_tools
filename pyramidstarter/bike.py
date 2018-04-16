@@ -132,7 +132,7 @@ def pedelAA(filename):
             elif entry.find('<') == 0:
                 rex = re.search('>(.*?)<', entry)
                 if rex:
-                    table[i][j] = '<span class="pedelAA_note_{1}">{0}</span>'.format(rex.groups(1)[0],rex.groups(1)[0].replace(' ',''))
+                    table[i][j] = '<a href="#" data-toggle="modal" data-target="#pedel_Cx_note">{0}</a>'.format(rex.groups(1)[0])
                 else:
                     raise Exception(entry)
             elif entry.find('—') == 0 or entry.find('-') == 0:

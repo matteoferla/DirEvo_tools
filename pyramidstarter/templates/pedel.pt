@@ -1118,10 +1118,37 @@ column if there are any x >= 3 values for which the Cx ~ Lx
 approximation may not apply, in which case Cx is estimated with the
 formula Cx ~ Vx_1(1-exp(-Lx/Vx_1)) (i.e. ignoring, in these particular
 sub-libraries, any <a href=pedel-AA_variants.html>variants</a> of type
-Vx_2).<br><br>
-
-See also <a href=pedel-AA-stats.html>notes on the PEDEL-AA
+Vx_2).</p>
+<p>See also <a href=pedel-AA-stats.html>notes on the PEDEL-AA
 algorithms</a>.</p>
+
+<h2 id="pedelAA_CxLx">PEDEL-AA Cx ~ Lx region</h2>
+
+<p>When Lx << Vx then Cx ~ Lx.  For equiprobable variants this
+approximation is good to 5% for Lx < 0.1 Vx (see the mathematical
+<a href=../notes.pdf>notes</a> on PEDEL).  For PEDEL-AA, we use this
+approximation when Lx < 0.1 Vx_1 (the number of 'easy-to-reach'
+    variants).</p>
+                <p>See also <a href=pedel-AA_exact.html>notes on the 'exact'
+calculations</a> and <a href=pedel-AA-stats.html>notes on the PEDEL-AA
+algorithms</a>.</p>
+
+<h2 id="pedelAA_warningRx">PEDEL-AA Rx warning</h2>
+<p>
+For x = 0, 1 and 2, we calculate the expected number of distinct
+variants, Cx, <a href=pedel-AA_exact.html>precisely</a>.  When Lx <
+0.1 Vx_1 (i.e. for large x values), we use
+the <a href=pedel-AA_CxLx.html>Cx ~ Lx</a> approximation.  Sometimes
+using the criterion 'Lx < 0.1 Vx_1' to determine whether or not we are
+in the 'Cx ~ Lx' region is not sufficient.  This is indicated by the
+corresponding Rx value not being < 0.1.  In this case the
+corresponding Cx value may be an overestimate.</p><p>
+See also <a href=pedel-AA_Rx.html>notes on the 'Rx < 0.1'
+criterion</a> and
+<a href=pedel-AA-stats.html>notes on the PEDEL-AA
+algorithms</a>.
+</p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

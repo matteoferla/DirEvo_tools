@@ -234,8 +234,15 @@ $(function() {
             }
             return false;
     });
+
+
+    // To do make modal appear
+    /*
     $(".pedelAA_note_Exact").bind( "click", function() {});
     $(".pedelAA_note_Rx_warning").bind( "click", function() {});
     $(".pedelAA_note_Cx_~_Lx").bind( "click", function() {});
+
+    //pedel_Cx_note
+    */
 
 });
