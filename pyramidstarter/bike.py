@@ -103,6 +103,7 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
 
 def glueit(library_size,codonfile):
     cmd= " csh {aff}/glueIT{OS}.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile, OS=SUFFIX)
+
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
@@ -117,7 +118,7 @@ def pedelAA(filename):
     # summary table
     data['summary_table']='<table class="table table-striped">'+re.search('\<table.*?\>(.*?)\<\/table',html,re.DOTALL).group(1)+'</table>'
     # indel
-    data['middle']=re.search('table><br>(.*?)<br><b>Links to further information', html,re.DOTALL).group(1)
+    data['middle']=re.search('table><br>(.*?)<br><b>Links to further information', html,re.DOTALL | re.MULTILINE).group(1)
     with open(filename[:-6]+'table.html','r') as f:
         x='<table>{}</table>'.format(re.search('<table.*?>(.*?)</table',f.read(),re.DOTALL).group(1))
         data['sub_table'] =x.replace('nan', '—').replace('<table>','<table class="table table-striped">')

@@ -172,6 +172,13 @@ $(function() {
     $('#pedelAA_retrieve_spectrum').click(function () {
         applyLoad(JSON.parse(window.sessionStorage.getItem('spectrum')));
     });
+
+    $('#pedelAA_demo').click(function () {
+        //Mutazyme.
+        applyLoad([[0, 15, 9, 2],[15, 0, 2, 9],[13, 7, 0, 2],[7, 13, 2, 0]]);
+        $('#pedelAA_load').val(4.5);
+    });
+
     $('#pedelAA_calculate').click(function() {
         $("#pedelAA_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
         $("#pedelAA_result").removeClass('hidden');
@@ -200,18 +207,7 @@ $(function() {
                     reply = JSON.parse(result.message);
                     window.sessionStorage.setItem('pedelAA', JSON.stringify(reply['data']));
                     // copy paste!   x	Vx_1	Vx_2	Rx	Lx	Cx
-                    table = reply['html'];
-                    plot = '<br/><div class="radio" id="plotoptdiv"> Plot: &nbsp;&nbsp;' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=1>V<sub>x1</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=2>V<sub>x2</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=3>R<sub>x</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=4>L<sub>x</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=5 checked="checked">C<sub>x</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=7>L<sub>x</sub> &minus; C<sub>x</sub></label>' +
-                    '<label class="radio-inline"><input type="radio" name="plotopt" value=0>Combined</label>' +
-                    '&nbsp;&nbsp;&nbsp;y axis: <input type="checkbox" class="switch" id="pedelAA_plot_log" data-off-text="lin" data-on-text="log" data-on-color="warning" data-off-color="success" size="small">' +
-                    '</div><br/><div id="plot_pedelAA_stats"></div>';
-                $("#pedelAA_result").html(table + plot);
+                $("#pedelAA_result").html(reply['html']);
                 $("#pedelAA_plot_log").bootstrapSwitch();
                 replot(reply['data'],'pedelAA');
                 $('#plotoptdiv input').on('change', function() {
