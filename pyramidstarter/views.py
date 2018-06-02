@@ -278,7 +278,7 @@ def admin_callable(request):
 @view_config(route_name='update', renderer='string')
 def update_callable(request):
     #os.system('sh update.sh')
-    print(request.json_body)
+    print(request.__dict__)
     return 'OK'
 
 
