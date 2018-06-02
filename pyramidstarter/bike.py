@@ -143,8 +143,7 @@ def pedelAA(filename):
             else:
                 table[i][j] = float(entry)
     data['sub_table_data']=table
-    print(table)
-    exit(69)
+    return data
     th='<th>{}</th>'
     td='<td></td>'
     tr='<tr></tr>'
@@ -155,7 +154,7 @@ def pedelAA(filename):
     print(len(None))
     tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,b=b)
 
-    return data
+
 
 def wrap(fun, separator, *args):
     """
