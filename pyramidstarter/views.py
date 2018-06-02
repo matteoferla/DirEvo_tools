@@ -277,9 +277,11 @@ def admin_callable(request):
 
 @view_config(route_name='update', renderer='string')
 def update_callable(request):
-    #os.system('sh update.sh')
-    print(request.__dict__)
-    return 'OK'
+    if 'GitHub - Hookshot' in request.environ['HTTP_USER_AGENT']:
+        os.system('sh update.sh')
+        return 'OK'
+    else:
+        return 'Not Github webhook'
 
 
 @view_config(route_name='set', renderer='json')
