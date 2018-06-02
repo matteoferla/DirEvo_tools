@@ -3,7 +3,7 @@ if [ "$1" != "" ]; then
     os=$1
     for i in $( ls *.cxx);
     do
-        g++ -o "${i%.*}".$os "${i%.*}".cxx;
+        g++ -std=c++98 -o "${i%.*}".$os "${i%.*}".cxx;
         echo "${i%.*}";
     done
 else

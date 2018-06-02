@@ -153,8 +153,7 @@ def pedelAA(filename):
         raise NotImplementedError
         #THIS IS WHERE I AM AT
     print(len(None))
-    tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,
-                                                                                                       b=b)
+    tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,b=b)
 
     return data
 
