@@ -151,7 +151,7 @@ def pedelAA(filename):
     h=tr.format(''.join([th.format(x) for x in ['<i>x</i>','<i>V</i><sub><i>x</i>@1</sub>','<i>V</i><sub><i>x</i>@1</sub>','<i>R<sub>x</sub></i>','<i>R<sub>x</sub></i>','<i>L<sub>x</sub></i>','<i>C<sub>x</sub></i>','<i>L<sub>x</sub> &ndash; C<sub>x</sub></i>','Notes']]))
     for row in table[:-1]:
         raise NotImplementedError
-        THIS IS WHERE I AM AT
+        #THIS IS WHERE I AM AT
     print(len(None))
     tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,
                                                                                                        b=b)
