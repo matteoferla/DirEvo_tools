@@ -174,7 +174,7 @@ $(function() {
     });
 
     $('#pedelAA_demo').click(function () {
-        //Mutazyme.
+        //Mutazyme?
         applyLoad([[0, 15, 9, 2],[15, 0, 2, 9],[13, 7, 0, 2],[7, 13, 2, 0]]);
         $('#pedelAA_load').val(4.5);
     });

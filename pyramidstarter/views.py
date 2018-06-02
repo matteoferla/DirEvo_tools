@@ -316,7 +316,8 @@ def lumberjack(request):
     http://ip-api.com/json/xxx.xxx.xxx.xxx
     '''
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    log_response = '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
+    log_response = '<div class="alert alert-success" role="alert"><a href="static/bash_log.txt">download terminal log</a></div>'+\
+                   '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
                    '<tbody><tr>' + '</tr><tr>'.join(
         ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
                    '</tr></tbody></table>'
