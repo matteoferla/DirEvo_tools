@@ -275,6 +275,12 @@ def upcoming_callable(request):
 def admin_callable(request):
     return ready_fields('m_admin', 'admin.pt', 'admin.js')
 
+@view_config(route_name='update', renderer='string')
+def update_callable(request):
+    #os.system('sh update.sh')
+    print(request.json_body)
+    return 'OK'
+
 
 @view_config(route_name='set', renderer='json')
 def set_callable(request):

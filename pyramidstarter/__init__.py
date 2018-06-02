@@ -12,6 +12,7 @@ def main(global_config, **settings):
     for route in ['admin',
                   'set',
                   'upcoming',
+                  'update',
                   'log',
                   'status',
                   'ajax_test',
