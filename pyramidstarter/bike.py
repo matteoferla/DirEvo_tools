@@ -133,7 +133,7 @@ def pedelAA(filename):
             elif entry.find('<') == 0:
                 rex = re.search('>(.*?)<', entry)
                 if rex:
-                    table[i][j] = '<a href="#" data-toggle="modal" data-target="#pedel_Cx_note">{0}</a>'.format(rex.groups(1)[0])
+                    table[i][j] = '{0}'.format(rex.groups(1)[0])
                 else:
                     raise Exception(entry)
             elif entry.find('—') == 0 or entry.find('-') == 0:
@@ -143,6 +143,19 @@ def pedelAA(filename):
             else:
                 table[i][j] = float(entry)
     data['sub_table_data']=table
+    print(table)
+    exit(69)
+    th='<th>{}</th>'
+    td='<td></td>'
+    tr='<tr></tr>'
+    h=tr.format(''.join([th.format(x) for x in ['<i>x</i>','<i>V</i><sub><i>x</i>@1</sub>','<i>V</i><sub><i>x</i>@1</sub>','<i>R<sub>x</sub></i>','<i>R<sub>x</sub></i>','<i>L<sub>x</sub></i>','<i>C<sub>x</sub></i>','<i>L<sub>x</sub> &ndash; C<sub>x</sub></i>','Notes']]))
+    for row in table[:-1]:
+        raise NotImplementedError
+        THIS IS WHERE I AM AT
+    print(len(None))
+    tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,
+                                                                                                       b=b)
+
     return data
 
 def wrap(fun, separator, *args):
