@@ -27,10 +27,10 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <!---Intro-->
-            <div class="card">
-                <h2 class="card-header">
+            <div class="card p-2">
+                <h3 class="card-header">
                     Introduction
-                </h2>
+                </h3>
                 <div class="card-body">
                     <p>Lorem Ipsum</p>
 
@@ -38,49 +38,44 @@
             </div>
             <br/>
             <!--Form-->
-            <div class="card">
-                <h2 class="card-header">
-                    Input via file
-                </h2>
-                <div class="card-body">
-                    <p>Lorem Ipsum</p>
-
-
-                    <div class="card p-2">
-                        <h3 class="card-header">
+            <div class="card p-2">
+                <h3 class="card-header">
                     Create template
                 </h3>
                 <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="mutation_number-addon">mutation number</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
-                                           aria-describedby="mutation_number-addon" id="mutation_number">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="mutation_number-addon">mutation number</span>
                                 </div>
+                                <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
+                                       aria-describedby="mutation_number-addon" id="mutation_number">
                             </div>
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
                                         <span class="input-group-text"
                                               id="replicate_number-addon">replicate number</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="N"
-                                           aria-label="replicate_number" aria-describedby="replicate_number-addon"
-                                           id="replicate_number">
                                 </div>
+                                <input type="number" class="form-control" placeholder="N"
+                                       aria-label="replicate_number" aria-describedby="replicate_number-addon"
+                                       id="replicate_number">
                             </div>
-                            <div class="col-md-4">
-                                <a class="btn btn-primary" id="create" href="/create_epistasis" download="epistasis_template.xlsx">Create</a>
-                            </div>
-
-
                         </div>
-                </div></div>
-                    <div class="card p-2">
-                        <h3 class="card-header">
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" id="create" href="/create_epistasis"
+                               download="epistasis_template.xlsx">Create</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card p-2">
+                <h3 class="card-header">
                     Upload filled
                 </h3>
                 <div class="card-body">
@@ -94,7 +89,6 @@
                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
                         </div>
                         <div class="col-md-6 offset-md-2">
-
                             <br/>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-secondary" id="clear">Clear</button>
@@ -106,14 +100,76 @@
                 </div>
 
 
+            </div>
+            <br/>
+
+            <div class="card p-2">
+                <h3 class="card-header">
+                    Fill directly
+                </h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
+                            <input type="radio" name="your_study" value="C" checked/> Conversion
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="mutation_number2-addon">mutation number</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
+                                       aria-describedby="mutation_number-addon" id="mutation_number2">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"
+                                              id="replicate_number2-addon">replicate number</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="N"
+                                       aria-label="replicate_number2" aria-describedby="replicate_number-addon"
+                                       id="replicate_number2">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div clas="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <div class="alert alert-danger" role="alert">Dynamically generate N mutant name inputs
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <div class="alert alert-danger" role="alert">Dynamically generate permut value inputs
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 offset-md-2">
+
+                            <br/>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-secondary" id="clear2">Clear</button>
+                                <button type="button" class="btn btn-primary" id="demo2">Demo</button>
+                                <button type="button" class="btn btn-success" id="submit2">Submit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
             <br/>
             <!--Results-->
-            <div class="card">
-                <div class="card-header">
+            <div class="card p-2">
+                <h3 class="card-header">
                     Result
-                </div>
+                </h3>
                 <div class="card-body">
                     <div id="results"></div>
 
@@ -178,6 +234,11 @@ $( document ).ready(function() {
 
 
 });
+
+
+
+
+
 
 
 </script>
