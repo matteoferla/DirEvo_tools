@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Epistasis</title>
+    <!-- Bootstrap 4 core CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!--Fontawesome-->
+    <script src="https://use.fontawesome.com/50c6df77b5.js"></script>
+    <!--pyspinner-->
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script   src="http://code.jquery.com/jquery-3.3.1.js"   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="   crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    This navbar is empty. main, maths, github and about?
+</nav>
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <!---Intro-->
+        <div class="card">
+          <div class="card-header">
+            Introduction
+        </div>
+        <div class="card-body">
+            <p>Lorem Ipsum</p>
+
+         </div>
+        </div>
+        <br/>
+        <!--Form-->
+        <div class="card">
+          <div class="card-header">
+            Input via file
+        </div>
+        <div class="card-body">
+            <p>Lorem Ipsum</p>
+            <h3>Create template</h3>
+            <div class="row">
+                <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="mutation_number-addon">mutation number</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="N" aria-label="mutation_number" aria-describedby="mutation_number-addon" id="mutation_number">
+                    </div>
+                <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="replicate_number-addon">replicate number</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="N" aria-label="replicate_number" aria-describedby="replicate_number-addon" id="replicate_number">
+                    </div>
+            </div>
+            <div class="row"><button type="button" class="btn btn-primary" id="create">Create</button></div>
+            <h3>Upload filled</h3>
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                        <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
+                        <input type="radio" name="your_study" value="C" checked/> Conversion
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <input type="file" id="file_upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                </div>
+                <div class="col-md-6 offset-md-2">
+
+                    <br/>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-secondary" id="clear">Clear</button>
+                      <button type="button" class="btn btn-primary"   id="demo">Demo</button>
+                      <button type="button" class="btn btn-success"   id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+         </div>
+        </div>
+        <br/>
+        <!--Results-->
+        <div class="card">
+          <div class="card-header">
+            Result
+        </div>
+        <div class="card-body">
+            <div id="results"></div>
+
+         </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script>
+// Google Analytics
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-66652240-4', 'auto');
+ ga('send', 'pageview');
+
+//Upload
+$( document ).ready(function() {
+    $('#clear').click(function() {alert("This does nothing")});
+    $('#create').click(function() {alert("This does nothing")});
+    $('#demo').click(function() {alert("This does nothing")});
+
+    $('#submit').click(function() {
+        $("#results").html('RUNNING!');
+        var data = new FormData();
+        data.append("file", document.getElementById('file_upload').files[0]);
+        data.append("your_study",$('input[name=your_study]:checked').val());
+        try{
+            $.ajax({
+                url: "/ajax_epistasis",
+                type: "POST",
+                data: data,
+                processData: false,
+                cache: false,
+                contentType: false,
+                success: function(result) {
+                        //reply = JSON.parse(result.message);
+                        reply = result;
+                        $("#results").html(reply['html']);
+                        window.sessionStorage.setItem('data', reply);
+                        },
+                error: function(xhr,s) {$("#results").html(s);}
+            });
+        }
+        catch(err) {$("#results").html(err);}
+    });
+
+
+});
+
+</script>
+</body>
+</html>

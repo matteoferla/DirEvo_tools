@@ -144,6 +144,7 @@ def pedelAA(filename):
                 table[i][j] = float(entry)
     data['sub_table_data']=table
     return data
+    # TODO Figure out what was happening here! :(
     th='<th>{}</th>'
     td='<td></td>'
     tr='<tr></tr>'
@@ -151,7 +152,6 @@ def pedelAA(filename):
     for row in table[:-1]:
         raise NotImplementedError
         #THIS IS WHERE I AM AT
-    print(len(None))
     tablehtml='<table class="table table-striped"><thead>{h}</thead><tbody>{b}</tbody></table>'.format(h=h,b=b)
 
 

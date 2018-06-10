@@ -10,6 +10,7 @@ import urllib.request
 
 import markdown
 import pyramidstarter.calculations as calc
+from pyramidstarter.epistasis import Epistatic
 from pyramid.view import view_config, notfound_view_config
 from pyramid.response import FileResponse
 from warnings import warn
@@ -85,9 +86,9 @@ def IDT384(request):
     return calc.IDT(request, 384)
 
 
-def save_file(fileball):
+def save_file(fileball,ext='ab1'):
     input_file = fileball.file  # <class '_io.BufferedRandom'>
-    new_filename = '{0}.ab1'.format(uuid.uuid4())
+    new_filename = '{0}.{1}'.format(uuid.uuid4(),ext)
     file_path = os.path.join(PATH, 'tmp', new_filename)
     temp_file_path = file_path + '~'
     input_file.seek(0)
@@ -378,4 +379,47 @@ def carlos_submit(request):
         request=request,
         content_type='text/csv'
         )
+    return response
+
+@view_config(route_name='epistasis', renderer='templates/epistasis.pt')
+def epi(request): # serving static basically.
+    return dict()
+
+@view_config(route_name='ajax_epistasis', renderer='json')
+def epier(request):
+    try:
+        (new_filename, file_path) = save_file(request.POST['file'],'xlsx')
+        data=Epistatic.from_file(request.POST['your_study'], file_path).calculate()
+        session = request.session
+        session['epistasis']=data
+        suppinfo = ["Combinations", "Experimental average", "Experimental standard deviation", "Thoretical average",
+                    "Theoretical standard deviation", "Exp.avg - Theor.avg", "Epistasis type"]
+        raw={'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo, 'rows': data.comb_index},
+               'Empirical': {'data': data.foundment_values.tolist(), 'columns': data.mutations_list + ["Average", "Standard deviation"], 'rows': data.mutant_list}}
+
+        table='<div class="table-responsive"><table class="table table-striped"><thead class="thead-dark">{thead}</thead><tbody>{tbody}</tbody></table></div>'
+        td='<td>{}</td>'
+        th='<th>{}</th>'
+        tr='<tr>{}</tr>'
+        theo=table.format(thead=tr.format(''.join([th.format(x) for x in [''] + data.mutations_list + suppinfo])),
+                          tbody=''.join([tr.format(th.format(data.comb_index[i]+''.join([td.format(x) if isinstance(x,str) or isinstance(x,tuple) else td.format(round(x,1)) for x in data.all_of_it[i]]))) for i in range(len(data.comb_index))]))
+        emp=table.format(thead=tr.format(''.join([th.format(x) for x in [''] + data.mutations_list + ["Average", "Standard deviation"]])),
+                         tbody=''.join([tr.format(th.format(data.mutant_list[i]+''.join([td.format(x) if isinstance(x,str) or isinstance(x,tuple) else td.format(round(x,1)) for x in data.foundment_values[i]]))) for i in range(len(data.mutant_list))]))
+        html='<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a><br/><h3>Theoretical</h3>{theo}<h3>Empirical</h3>{emp}'.format(theo=theo,emp=emp)
+
+        return {'html': html, 'raw':raw}
+    except Exception as err:
+        print('error',err)
+        print(traceback.format_exc())
+        return {'html': 'ERROR: '+str(err)}
+
+@view_config(route_name='download_epistasis')
+def down_epi(request):
+    file=os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
+    request.session['epistasis'].save(file)
+    response = FileResponse(
+        file,
+        request=request,
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
     return response

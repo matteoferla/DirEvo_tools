@@ -14,6 +14,7 @@ copypasting stuff to make modal about Cx approximations in pedelAA
 
 Sorted by urgency:
 
+* *Cookies* GDPR compliance
 * *glueIT* in Linux causes a segFault not in Mac.
 * *pedel* DNA/AA PCR not active
 * *main* needs fixing. See below.
