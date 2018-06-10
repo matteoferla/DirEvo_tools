@@ -423,3 +423,15 @@ def down_epi(request):
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
     return response
+
+
+@view_config(route_name='create_epistasis')
+def create_epi(request):
+    file=os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
+    Epistatic.create_input_scheme(your_study='C',mutation_number=request.params['mutation_number'],replicate_number=request.params['replicate_number'],outfile=file)
+    response = FileResponse(
+        file,
+        request=request,
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    return response

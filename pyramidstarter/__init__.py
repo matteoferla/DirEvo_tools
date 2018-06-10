@@ -45,6 +45,7 @@ def main(global_config, **settings):
     config.add_route('epistasis', '/epistasis')
     config.add_route('ajax_epistasis', '/ajax_epistasis')
     config.add_route('download_epistasis', '/download_epistasis')
+    config.add_route('create_epistasis', '/create_epistasis')
     ####
     return config.make_wsgi_app()
 
