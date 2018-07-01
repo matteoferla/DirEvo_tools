@@ -383,35 +383,57 @@ def carlos_submit(request):
 
 @view_config(route_name='epistasis', renderer='templates/epistasis.pt')
 def epi(request): # serving static basically.
-    return dict()
+    return {'code': open(os.path.join(PATH, 'templates', 'epistasis.js')).read()}
 
 @view_config(route_name='ajax_epistasis', renderer='json')
 def epier(request):
     try:
-        (new_filename, file_path) = save_file(request.POST['file'],'xlsx')
-        data=Epistatic.from_file(request.POST['your_study'], file_path).calculate()
+        if 'file' not in request.POST: #JSON
+            data=epier_table(request.json_body)
+        else: #FormData
+            data = epier_file(request)
         session = request.session
-        session['epistasis']=data
+        session['epistasis'] = data
         suppinfo = ["Combinations", "Experimental average", "Experimental standard deviation", "Thoretical average",
                     "Theoretical standard deviation", "Exp.avg - Theor.avg", "Epistasis type"]
-        raw={'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo, 'rows': data.comb_index},
-               'Empirical': {'data': data.foundment_values.tolist(), 'columns': data.mutations_list + ["Average", "Standard deviation"], 'rows': data.mutant_list}}
+        raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
+                               'rows': data.comb_index},
+               'Empirical': {'data': data.foundment_values.tolist(),
+                             'columns': data.mutations_list + ["Average", "Standard deviation"],
+                             'rows': data.mutant_list}}
 
-        table='<div class="table-responsive"><table class="table table-striped"><thead class="thead-dark">{thead}</thead><tbody>{tbody}</tbody></table></div>'
-        td='<td>{}</td>'
-        th='<th>{}</th>'
-        tr='<tr>{}</tr>'
-        theo=table.format(thead=tr.format(''.join([th.format(x) for x in [''] + data.mutations_list + suppinfo])),
-                          tbody=''.join([tr.format(th.format(data.comb_index[i]+''.join([td.format(x) if isinstance(x,str) or isinstance(x,tuple) else td.format(round(x,1)) for x in data.all_of_it[i]]))) for i in range(len(data.comb_index))]))
-        emp=table.format(thead=tr.format(''.join([th.format(x) for x in [''] + data.mutations_list + ["Average", "Standard deviation"]])),
-                         tbody=''.join([tr.format(th.format(data.mutant_list[i]+''.join([td.format(x) if isinstance(x,str) or isinstance(x,tuple) else td.format(round(x,1)) for x in data.foundment_values[i]]))) for i in range(len(data.mutant_list))]))
-        html='<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a><br/><h3>Theoretical</h3>{theo}<h3>Empirical</h3>{emp}'.format(theo=theo,emp=emp)
+        table = '<div class="table-responsive"><table class="table table-striped"><thead class="thead-dark">{thead}</thead><tbody>{tbody}</tbody></table></div>'
+        td = '<td>{}</td>'
+        th = '<th>{}</th>'
+        tr = '<tr>{}</tr>'
+        theo = table.format(thead=tr.format(''.join([th.format(x) for x in [''] + data.mutations_list + suppinfo])),
+                            tbody=''.join([tr.format(th.format(data.comb_index[i] + ''.join(
+                                [td.format(x) if isinstance(x, str) or isinstance(x, tuple) else td.format(round(x, 1))
+                                 for
+                                 x in data.all_of_it[i]]))) for i in range(len(data.comb_index))]))
+        emp = table.format(thead=tr.format(
+            ''.join([th.format(x) for x in [''] + data.mutations_list + ["Average", "Standard deviation"]])),
+            tbody=''.join([tr.format(th.format(data.mutant_list[i] + ''.join(
+                [td.format(x) if isinstance(x, str) or isinstance(x, tuple) else td.format(round(x, 1)) for x
+                 in data.foundment_values[i]]))) for i in range(len(data.mutant_list))]))
+        html = '<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a><br/><h3>Theoretical</h3>{theo}<h3>Empirical</h3>{emp}'.format(
+            theo=theo, emp=emp)
 
-        return {'html': html, 'raw':raw}
+        return {'html': html, 'raw': raw}
     except Exception as err:
         print('error',err)
         print(traceback.format_exc())
         return {'html': 'ERROR: '+str(err)}
+
+def epier_table(jsonreq):
+    print(jsonreq)
+    return Epistatic(**jsonreq).calculate()
+
+def epier_file(request):
+    (new_filename, file_path) = save_file(request.POST['file'], 'xlsx')
+    return Epistatic.from_file(request.POST['your_study'], file_path).calculate()
+
+
 
 @view_config(route_name='download_epistasis')
 def down_epi(request):

@@ -17,6 +17,14 @@
     <![endif]-->
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
+    <style>
+        .table input{
+            display:block;
+            width:80%;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -109,44 +117,39 @@
                 </h3>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-md-3 col-sm-12">
                             <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
                             <input type="radio" name="your_study" value="C" checked/> Conversion
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-3 col-md-3">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="mutation_number2-addon">mutation number</span>
+                                    <span class="input-group-text" id="mutation_number2-addon">mutation N</span>
                                 </div>
                                 <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
-                                       aria-describedby="mutation_number-addon" id="mutation_number2">
+                                       aria-describedby="mutation_number2-addon" id="mutation_number2">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-5">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                         <span class="input-group-text"
-                                              id="replicate_number2-addon">replicate number</span>
+                                              id="replicate_number2-addon">replicate N</span>
                                 </div>
                                 <input type="number" class="form-control" placeholder="N"
-                                       aria-label="replicate_number2" aria-describedby="replicate_number-addon"
+                                       aria-label="replicate_number2" aria-describedby="replicate_number2-addon"
                                        id="replicate_number2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="button" id="make_table">Go</button>
+                                  </div>
                             </div>
                         </div>
                     </div>
                     <br/>
-                    <div clas="row">
+                    <div clas="row" id="mut_input_table">
                         <div class="col-lg-7 col-md-12 col-sm-12">
                             <div class="alert alert-danger" role="alert">Dynamically generate N mutant name inputs
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-7 col-md-12 col-sm-12">
-                            <div class="alert alert-danger" role="alert">Dynamically generate permut value inputs
-                            </div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -154,9 +157,9 @@
 
                             <br/>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-secondary" id="clear2">Clear</button>
-                                <button type="button" class="btn btn-primary" id="demo2">Demo</button>
-                                <button type="button" class="btn btn-success" id="submit2">Submit</button>
+                                <button type="button" class="btn btn-secondary" id="clear_table">Clear</button>
+                                <button type="button" class="btn btn-primary" id="demo_table">Demo</button>
+                                <button type="button" class="btn btn-success" id="submit_table">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -171,7 +174,8 @@
                     Result
                 </h3>
                 <div class="card-body">
-                    <div id="results"></div>
+                    <div id="results"></div><br/>
+                    <div id="heatmap"></div>
 
                 </div>
             </div>
@@ -186,61 +190,7 @@
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
 <script>
-// Google Analytics
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
- (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
- m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
- })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
- ga('create', 'UA-66652240-4', 'auto');
- ga('send', 'pageview');
-
-//Upload
-$( document ).ready(function() {
-
-    function update_create_url() {
-    $('#create').attr("href","/create_epistasis?replicate_number="+$("#replicate_number").val()+"&mutation_number="+$("#mutation_number").val());
-    }
-    $('#create').hover(function() {update_create_url()});
-    $('#replicate_number').change(function() {update_create_url()});
-    $('#mutation_number').change(function() {update_create_url()});
-    $('#clear').click(function() {alert("This does nothing")});
-    $('#demo').click(function() {alert("This does nothing")});
-
-    $('#submit').click(function() {
-        $("#results").html('RUNNING!');
-        var data = new FormData();
-        data.append("file", document.getElementById('file_upload').files[0]);
-        data.append("your_study",$('input[name=your_study]:checked').val());
-        try{
-            $.ajax({
-                url: "/ajax_epistasis",
-                type: "POST",
-                data: data,
-                processData: false,
-                cache: false,
-                contentType: false,
-                success: function(result) {
-                        //reply = JSON.parse(result.message);
-                        reply = result;
-                        $("#results").html(reply['html']);
-                        window.sessionStorage.setItem('data', reply);
-                        },
-                error: function(xhr,s) {$("#results").html(s);}
-            });
-        }
-        catch(err) {$("#results").html(err);}
-    });
-
-
-});
-
-
-
-
-
-
-
+${structure: code}
 </script>
 </body>
 </html>
