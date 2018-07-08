@@ -5,6 +5,7 @@ import shutil
 import smtplib
 import traceback
 import uuid
+import pickle
 
 import urllib.request
 
@@ -392,8 +393,9 @@ def epier(request):
             data=epier_table(request.json_body)
         else: #FormData
             data = epier_file(request)
-        session = request.session
-        session['epistasis'] = data
+        filename = os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
+        data.save(filename)
+        request.session['epistasis'] = filename
         suppinfo = ["Combinations", "Experimental average", "Experimental standard deviation", "Thoretical average",
                     "Theoretical standard deviation", "Exp.avg - Theor.avg", "Epistasis type"]
         raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
@@ -416,8 +418,15 @@ def epier(request):
             tbody=''.join([tr.format(th.format(data.mutant_list[i] + ''.join(
                 [td.format(x) if isinstance(x, str) or isinstance(x, tuple) else td.format(round(x, 1)) for x
                  in data.foundment_values[i]]))) for i in range(len(data.mutant_list))]))
-        html = '<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a><br/><h3>Theoretical</h3>{theo}<h3>Empirical</h3>{emp}'.format(
-            theo=theo, emp=emp)
+        tabs='<ul class="nav nav-tabs" id="myTab" role="tablist"><li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#{set}-table" role="tab">Table</a></li><li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{set}-graph" role="tab">Graph</a></li></ul><br/>'
+        tabcont='<div class="tab-content"><div class="tab-pane fade show active" id="{set}-table" role="tabpanel">{table}</div><div class="tab-pane fade" id="{set}-graph" role="tabpanel">{graph}</div></div>'
+        html = '{down}<br/><h3>Theoretical</h3>{theonav}{theotab}<h3>Empirical</h3>{empnav}{emptab}'.format(
+            down='<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a>',
+            theotab=tabcont.format(set='theo',table=theo,graph='<div id="theo-graph-plot">THROBBER</div>'),
+            theonav=tabs.format(set='theo'),
+            emptab=tabcont.format(set='emp', table=emp, graph='<div id="emp-graph-plot">THROBBER</div>'),
+            empnav=tabs.format(set='emp')
+        )
 
         return {'html': html, 'raw': raw}
     except Exception as err:
@@ -437,8 +446,7 @@ def epier_file(request):
 
 @view_config(route_name='download_epistasis')
 def down_epi(request):
-    file=os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
-    request.session['epistasis'].save(file)
+    file=request.session['epistasis']
     response = FileResponse(
         file,
         request=request,

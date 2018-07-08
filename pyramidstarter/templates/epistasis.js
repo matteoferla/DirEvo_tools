@@ -141,6 +141,15 @@ $(document).ready(function() {
                     reply = result;
                     $("#results").html(reply['html']);
                     window.sessionStorage.setItem('data', reply);
+
+                    /*
+                    From Pyramid
+                    raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
+                               'rows': data.comb_index},
+                           'Empirical': {'data': data.foundment_values.tolist(),
+                                         'columns': data.mutations_list + ["Average", "Standard deviation"],
+                                         'rows': data.mutant_list}}
+                    */
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
