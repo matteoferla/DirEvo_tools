@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     This navbar is empty. main, maths, github and about?
 </nav>
@@ -52,10 +52,10 @@
         <div class="col-md-10 offset-md-1">
             <!---Intro-->
             <div class="card p-2">
-                <h3 class="card-header">
-                    Introduction
+                <h3 class="card-header bg-dark">
+                    <a class="card-link text-light" data-toggle="collapse" href="#intro"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Introduction</a>
                 </h3>
-                <div class="card-body">
+                <div class="card-body" id="intro">
                     <p>Lorem Ipsum</p>
                     <p>This site accepts two ways of inputting the data. The default is by generating and filling out a table online, the second is by generating and filling out an excel sheet and uploading it.</p>
                 </div>
@@ -63,10 +63,10 @@
             <br/>
             <!--Form-->
             <div class="card p-2">
-                <h3 class="card-header">
-                    Fill directly
+                <h3 class="card-header bg-dark">
+                    <a class="card-link text-light" data-toggle="collapse" href="#directly"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Fill directly</a>
                 </h3>
-                <div class="card-body">
+                <div class="card-body" id="directly">
                     <div class="row">
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
@@ -120,10 +120,10 @@
             </div>
             <br/>
             <div class="card p-2">
-                <h3 class="card-header">
-                    Alt (part 1): Create template
+                <h3 class="card-header bg-dark">
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt1"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Alt (part 1): Create template</a>
                 </h3>
-                <div class="card-body">
+                <div class="card-body collapse" id="alt1">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="input-group">
@@ -156,10 +156,10 @@
             </div>
             <br/>
             <div class="card p-2">
-                <h3 class="card-header">
-                    Alt (part 2): Upload filled
+                <h3 class="card-header bg-dark">
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt1"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Alt (part 2): Upload filled</a>
                 </h3>
-                <div class="card-body">
+                <div class="card-body collapse" id="alt2">
                     <div class="row">
                         <div class="col-lg-5 col-md-12 col-sm-12">
                             <input type="radio" name="your_study2" value="S"/> Selectivity &nbsp;
@@ -185,10 +185,10 @@
             <br/>
             <!--Results-->
             <div class="card p-2">
-                <h3 class="card-header">
-                    Result
+                <h3 class="card-header bg-dark">
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#res"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Result</a>
                 </h3>
-                <div class="card-body">
+                <div class="card-body collapse" id="res">
                     <div id="results"></div><br/>
                     <div id="heatmap"></div>
 

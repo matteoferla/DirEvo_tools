@@ -113,6 +113,7 @@ $(document).ready(function() {
                     $("#results").html(reply['html']);
                     window.sessionStorage.setItem('data', reply);
                     make_graphs(reply,mutation_number);
+                    $('#res').collapse('show');
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
@@ -318,6 +319,7 @@ $(document).ready(function() {
                     $("#results").html(reply['html']);
                     window.sessionStorage.setItem('data', reply);
                     make_graphs(reply,mutation_number);
+                    $('#res').collapse('show');
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
