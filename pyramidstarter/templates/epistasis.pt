@@ -57,7 +57,7 @@
                 </h3>
                 <div class="card-body">
                     <p>Lorem Ipsum</p>
-
+                    <p>This site accepts two ways of inputting the data. The default is by generating and filling out a table online, the second is by generating and filling out an excel sheet and uploading it.</p>
                 </div>
             </div>
             <br/>
@@ -162,8 +162,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-5 col-md-12 col-sm-12">
-                            <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
-                            <input type="radio" name="your_study" value="C" checked/> Conversion
+                            <input type="radio" name="your_study2" value="S"/> Selectivity &nbsp;
+                            <input type="radio" name="your_study2" value="C" checked/> Conversion
                         </div>
                         <div class="col-lg-7 col-md-12 col-sm-12">
                             <input type="file" id="file_upload"

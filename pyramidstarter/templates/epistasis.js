@@ -98,7 +98,7 @@ $(document).ready(function() {
         $("#results").html('RUNNING!');
         var data = new FormData();
         data.append("file", document.getElementById('file_upload').files[0]);
-        data.append("your_study", $('input[name=your_study]:checked').val());
+        data.append("your_study", $('input[name=your_study2]:checked').val());
         try {
             $.ajax({
                 url: "/ajax_epistasis",
