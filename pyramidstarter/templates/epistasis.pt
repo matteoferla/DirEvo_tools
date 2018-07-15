@@ -27,6 +27,19 @@
             margin-left:auto;
             margin-right:auto;
         }
+
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -49,71 +62,6 @@
             </div>
             <br/>
             <!--Form-->
-            <div class="card p-2">
-                <h3 class="card-header">
-                    Create template
-                </h3>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="mutation_number-addon">mutation number</span>
-                                </div>
-                                <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
-                                       aria-describedby="mutation_number-addon" id="mutation_number">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                              id="replicate_number-addon">replicate number</span>
-                                </div>
-                                <input type="number" class="form-control" placeholder="N"
-                                       aria-label="replicate_number" aria-describedby="replicate_number-addon"
-                                       id="replicate_number">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <a class="btn btn-primary" id="create" href="/create_epistasis"
-                               download="epistasis_template.xlsx">Create</a>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="card p-2">
-                <h3 class="card-header">
-                    Upload filled
-                </h3>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-12 col-sm-12">
-                            <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
-                            <input type="radio" name="your_study" value="C" checked/> Conversion
-                        </div>
-                        <div class="col-lg-7 col-md-12 col-sm-12">
-                            <input type="file" id="file_upload"
-                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
-                        </div>
-                        <div class="col-md-6 offset-md-2">
-                            <br/>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-secondary" id="clear">Clear</button>
-                                <button type="button" class="btn btn-primary" id="demo">Demo</button>
-                                <button type="button" class="btn btn-success" id="submit">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <br/>
-
             <div class="card p-2">
                 <h3 class="card-header">
                     Fill directly
@@ -171,6 +119,70 @@
 
             </div>
             <br/>
+            <div class="card p-2">
+                <h3 class="card-header">
+                    Alt (part 1): Create template
+                </h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="mutation_number-addon">mutation number</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="N" aria-label="mutation_number"
+                                       aria-describedby="mutation_number-addon" id="mutation_number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"
+                                              id="replicate_number-addon">replicate number</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="N"
+                                       aria-label="replicate_number" aria-describedby="replicate_number-addon"
+                                       id="replicate_number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" id="create" href="/create_epistasis"
+                               download="epistasis_template.xlsx">Create</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card p-2">
+                <h3 class="card-header">
+                    Alt (part 2): Upload filled
+                </h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <input type="radio" name="your_study" value="S"/> Selectivity &nbsp;
+                            <input type="radio" name="your_study" value="C" checked/> Conversion
+                        </div>
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <input type="file" id="file_upload"
+                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+                        </div>
+                        <div class="col-md-6 offset-md-2">
+                            <br/>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-secondary" id="clear">Clear</button>
+                                <button type="button" class="btn btn-primary" id="demo">Demo</button>
+                                <button type="button" class="btn btn-success" id="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <br/>
             <!--Results-->
             <div class="card p-2">
                 <h3 class="card-header">
@@ -192,6 +204,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdn.rawgit.com/exupero/saveSvgAsPng/gh-pages/src/saveSvgAsPng.js"></script>
 <script>
 ${structure: code}
 </script>

@@ -14,7 +14,28 @@
 ga('create', 'UA-66652240-4', 'auto');
 ga('send', 'pageview');
 
-//Upload
+
+// Let's mod string python-style alla StackOverflow (.formatUnicorn)
+String.prototype.format = String.prototype.format ||
+    function() {
+        "use strict";
+        var str = this.toString();
+        if (arguments.length) {
+            var t = typeof arguments[0];
+            var key;
+            var args = ("string" === t || "number" === t) ?
+                Array.prototype.slice.call(arguments) :
+                arguments[0];
+
+            for (key in args) {
+                str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+            }
+        }
+
+        return str;
+    };
+
+
 $(document).ready(function() {
 
     function update_mut_names_div() {
@@ -66,6 +87,13 @@ $(document).ready(function() {
         alert("This does nothing")
     });
 
+    function make_graphs(reply, mutation_number) {
+        powersetplot("theo", reply['raw']['theoretical'],mutation_number);
+        powersetplot("emp", reply['raw']['empirical'],mutation_number);
+        $('#theo-down').click(function () {saveSvgAsPng(document.getElementById("theo-svg"), "theoretical.png")});
+        $('#emp-down').click(function () {saveSvgAsPng(document.getElementById("emp-svg"), "empirical.png")});
+    }
+
     $('#submit').click(function() {
         $("#results").html('RUNNING!');
         var data = new FormData();
@@ -84,6 +112,7 @@ $(document).ready(function() {
                     reply = result;
                     $("#results").html(reply['html']);
                     window.sessionStorage.setItem('data', reply);
+                    make_graphs(reply,mutation_number);
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
@@ -93,6 +122,103 @@ $(document).ready(function() {
             $("#results").html(err);
         }
     });
+
+    function add_datapoint(svg,tooltip,datapoint, layout) {
+    // datapoint is a dict with x y v(alue) color text and info
+        var group=svg.append("g");
+        group.append("text")
+            .attr("x", datapoint["x"])
+            .attr("y", datapoint["y"]+20)
+            .attr("text-anchor", "middle")
+            .style("fill", "black")
+            .text(datapoint["text"]); //.attr("dy", ".35em")
+        group.append("circle")
+            .attr("cx", datapoint["x"])
+            .attr("cy", datapoint["y"])
+            .attr("r", datapoint["v_sd"])
+            .style("fill", datapoint["color_sd"])
+        group.append("circle")
+            .attr("cx", datapoint["x"])
+            .attr("cy", datapoint["y"])
+            .attr("r", datapoint["v"])
+            .style("fill", datapoint["color"])
+        group.on("mouseover", function(d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html(datapoint["info"])
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+        }
+
+    function powersetplot(where, data,mutation_number) {
+        var chosen_index=mutation_number;
+        if (where == 'theo') {
+            chosen_index=mutation_number+3;
+        }
+        //quicker than a combinatorial..
+        var binomials = [
+            [1],
+            [1,1],
+            [1,2,1],
+            [1,3,3,1],
+            [1,4,6,4,1],
+            [1,5,10,10,5,1],
+            [1,6,15,20,15,6,1],
+            [1,7,21,35,35,21,7,1],
+            [1,8,28,56,70,56,28,8,1]
+          ];
+        var x_step=50;
+        var layout={mutation_number: mutation_number,
+                    x_step: x_step,
+                    y_step: 50,
+                    x_mid: Math.max(...binomials[mutation_number])/2*x_step,
+                    x_offset: Array(mutation_number+1).fill(0).map((v,index) => -(binomials[mutation_number][index]-1)/2*x_step),
+                    x_index: Array(mutation_number+1).fill(0),
+                    y_offset:50,
+                    chosen_index: chosen_index,
+                    bin: binomials[mutation_number]
+            };
+
+        // start canvas
+        var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+        var svg = d3.select("#"+where+"-graph-plot").append("svg:svg").attr("width", "100%").attr("height",(mutation_number+1)*layout["y_step"]+50).attr("id",where+"-svg");
+
+        // scale
+        layout["scale"]=(x_step/4)/Math.max(...data['data'].map(x =>parseFloat(x[layout["chosen_index"]])));
+
+        // make datapoints
+        //NB that '----' is absent in theo.
+        for (var i=0; i<data['data'].length; i++) {
+            var item=data['data'][i];
+            var id=item.slice(0,mutation_number).join('');
+            var tier=id.split("+").length - 1;
+            var datapoint={x: layout["x_mid"]+layout["x_offset"][tier]+layout["x_index"][tier]*layout["x_step"],
+                         y: layout["y_offset"]+(layout["mutation_number"]-tier)*layout["y_step"],
+                         v: layout["scale"]*parseFloat(item[layout["chosen_index"]]),
+                         v_sd: layout["scale"]*(parseFloat(item[layout["chosen_index"]])+parseFloat(item[layout["chosen_index"]+1])),
+                         color: "gray",
+                         color_sd: "lightGray",
+                         text:id,
+                         info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1]))
+                  };
+            layout["x_index"][tier]++;
+            add_datapoint(svg,tooltip,datapoint, layout);
+        }
+
+    }
+
+    function roundToSD(mean,sd) {
+        var d=Math.round(Math.pow(10,Math.log10(sd)));
+        return '{0}±{1}'.format(Math.round(mean/d)*d, Math.round(sd/d)*d);
+    }
+
 
     $('#submit_table').click(function() {
         $("#results").html('RUNNING!');
@@ -141,15 +267,7 @@ $(document).ready(function() {
                     reply = result;
                     $("#results").html(reply['html']);
                     window.sessionStorage.setItem('data', reply);
-
-                    /*
-                    From Pyramid
-                    raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
-                               'rows': data.comb_index},
-                           'Empirical': {'data': data.foundment_values.tolist(),
-                                         'columns': data.mutations_list + ["Average", "Standard deviation"],
-                                         'rows': data.mutant_list}}
-                    */
+                    make_graphs(reply,mutation_number);
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
@@ -164,20 +282,24 @@ $(document).ready(function() {
         $('#mutation_number2').val(3);
         $('#replicate_number2').val(3);
         update_mut_names_div();
-        demo=[[40.408327, 37.176372, 35.776619],
-        [37.383186,35.019421,42.932996],
-        [34.551186,34.033348,30.844536],
-        [43.913044,47.390555, 42.959925],
-        [31.102138,28.735591,29.401488],
-        [29.78191,24.641165,25.13452],
-        [79.956978,84.28502,74.090488],
-        [76.937329,69.938071,58.361839]];
-        for (var m=0; m<8; m++) {
-            for (var r=0; r<3; r++) {
+        demo = [
+            [40.408327, 37.176372, 35.776619],
+            [37.383186, 35.019421, 42.932996],
+            [34.551186, 34.033348, 30.844536],
+            [43.913044, 47.390555, 42.959925],
+            [31.102138, 28.735591, 29.401488],
+            [29.78191, 24.641165, 25.13452],
+            [79.956978, 84.28502, 74.090488],
+            [76.937329, 69.938071, 58.361839]
+        ];
+        for (var m = 0; m < 8; m++) {
+            for (var r = 0; r < 3; r++) {
                 $(`#M${m}R${r}`).val(demo[m][r]);
             }
         }
     });
+
+
 
 
 });

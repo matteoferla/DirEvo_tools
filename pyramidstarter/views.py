@@ -400,7 +400,7 @@ def epier(request):
                     "Theoretical standard deviation", "Exp.avg - Theor.avg", "Epistasis type"]
         raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
                                'rows': data.comb_index},
-               'Empirical': {'data': data.foundment_values.tolist(),
+               'empirical': {'data': data.foundment_values.tolist(),
                              'columns': data.mutations_list + ["Average", "Standard deviation"],
                              'rows': data.mutant_list}}
 
@@ -420,11 +420,12 @@ def epier(request):
                  in data.foundment_values[i]]))) for i in range(len(data.mutant_list))]))
         tabs='<ul class="nav nav-tabs" id="myTab" role="tablist"><li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#{set}-table" role="tab">Table</a></li><li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{set}-graph" role="tab">Graph</a></li></ul><br/>'
         tabcont='<div class="tab-content"><div class="tab-pane fade show active" id="{set}-table" role="tabpanel">{table}</div><div class="tab-pane fade" id="{set}-graph" role="tabpanel">{graph}</div></div>'
+        graph='<div id="{0}-graph-plot"><p>Circle size correlates to values (LightGray halo is std dev).</p><button type="button" class="btn btn-success" id="{0}-down"><i class="fa fa-download" style="margin-left:20px;"></i>Download</button></div>'
         html = '{down}<br/><h3>Theoretical</h3>{theonav}{theotab}<h3>Empirical</h3>{empnav}{emptab}'.format(
             down='<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a>',
-            theotab=tabcont.format(set='theo',table=theo,graph='<div id="theo-graph-plot">THROBBER</div>'),
+            theotab=tabcont.format(set='theo',table=theo,graph=graph.format('theo')),
             theonav=tabs.format(set='theo'),
-            emptab=tabcont.format(set='emp', table=emp, graph='<div id="emp-graph-plot">THROBBER</div>'),
+            emptab=tabcont.format(set='emp', table=emp, graph=graph.format('emp')),
             empnav=tabs.format(set='emp')
         )
 
@@ -435,7 +436,6 @@ def epier(request):
         return {'html': 'ERROR: '+str(err)}
 
 def epier_table(jsonreq):
-    print(jsonreq)
     return Epistatic(**jsonreq).calculate()
 
 def epier_file(request):
