@@ -88,8 +88,8 @@ $(document).ready(function() {
     });
 
     function make_graphs(reply, mutation_number) {
-        powersetplot("theo", reply['raw']['theoretical'],mutation_number);
-        powersetplot("emp", reply['raw']['empirical'],mutation_number);
+        powersetplot("theo", reply['raw'],mutation_number);
+        powersetplot("emp", reply['raw'],mutation_number);
         $('#theo-down').click(function () {saveSvgAsPng(document.getElementById("theo-svg"), "theoretical.png")});
         $('#emp-down').click(function () {saveSvgAsPng(document.getElementById("emp-svg"), "empirical.png")});
     }
@@ -142,6 +142,15 @@ $(document).ready(function() {
             .attr("cy", datapoint["y"])
             .attr("r", datapoint["v"])
             .style("fill", datapoint["color"])
+        if (layout["where"]=='theo') {
+            group.append("circle")
+                .attr("cx", datapoint["x"])
+                .attr("cy", datapoint["y"])
+                .attr("r", datapoint["v_e"])
+                .style("stroke","black")
+                .style("stroke-width","1")
+                .style("fill","none")
+        }
         group.on("mouseover", function(d) {
                 tooltip.transition()
                     .duration(200)
@@ -157,10 +166,12 @@ $(document).ready(function() {
             });
         }
 
-    function powersetplot(where, data,mutation_number) {
+    function powersetplot(where, alldata,mutation_number) {
+        var data=alldata['empirical'];
         var chosen_index=mutation_number;
         if (where == 'theo') {
             chosen_index=mutation_number+3;
+            data=alldata['theoretical'];
         }
         //quicker than a combinatorial..
         var binomials = [
@@ -174,17 +185,31 @@ $(document).ready(function() {
             [1,7,21,35,35,21,7,1],
             [1,8,28,56,70,56,28,8,1]
           ];
+        if (where == 'emp') {
+            places=binomials[mutation_number];
+        }
+        else {
+            places=Array(mutation_number+1).fill(0);
+            for (var i=0; i<data['data'].length; i++) {
+                var tier=data['data'][i].slice(0,mutation_number).join('').split("+").length - 1;
+                places[tier]++;
+            }
+            //add-ins for the emp data...
+            places[0]=1;
+            places[1]=mutation_number;
+        }
         var x_step=50;
         var layout={mutation_number: mutation_number,
                     x_step: x_step,
                     y_step: 50,
-                    x_mid: Math.max(...binomials[mutation_number])/2*x_step,
-                    x_offset: Array(mutation_number+1).fill(0).map((v,index) => -(binomials[mutation_number][index]-1)/2*x_step),
+                    x_mid: Math.max(...places)/2*x_step,
+                    x_offset: Array(mutation_number+1).fill(0).map((v,index) => -(places[index]-1)/2*x_step),
                     x_index: Array(mutation_number+1).fill(0),
                     y_offset:50,
                     chosen_index: chosen_index,
-                    bin: binomials[mutation_number]
+                    where: where
             };
+
 
         // start canvas
         var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
@@ -194,7 +219,6 @@ $(document).ready(function() {
         layout["scale"]=(x_step/4)/Math.max(...data['data'].map(x =>parseFloat(x[layout["chosen_index"]])));
 
         // make datapoints
-        //NB that '----' is absent in theo.
         for (var i=0; i<data['data'].length; i++) {
             var item=data['data'][i];
             var id=item.slice(0,mutation_number).join('');
@@ -209,9 +233,35 @@ $(document).ready(function() {
                          info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1]))
                   };
             layout["x_index"][tier]++;
+            if (where=="theo") {
+                datapoint['info']=item[mutation_number]+' '+datapoint['info'];
+                datapoint['v_e']=layout["scale"]*parseFloat(item[mutation_number+1]);
+            }
             add_datapoint(svg,tooltip,datapoint, layout);
         }
-
+        if (where=="theo") {
+            places=binomials[mutation_number];
+            var empdata=alldata['empirical'];
+            for (var i=0; i<empdata['data'].length; i++) {
+                var item=empdata['data'][i];
+                var id=item.slice(0,mutation_number).join('');
+                var tier=id.split("+").length - 1;
+                if (tier < 2) {
+                    var datapoint={x: layout["x_mid"]+layout["x_offset"][tier]+layout["x_index"][tier]*layout["x_step"],
+                         y: layout["y_offset"]+(layout["mutation_number"]-tier)*layout["y_step"],
+                         v: 0,
+                         v_sd: 0,
+                         v_e: layout["scale"]*parseFloat(item[mutation_number]),
+                         color: "none",
+                         color_sd: "none",
+                         text:id,
+                         info:'Value: '+roundToSD(parseFloat(item[mutation_number]),parseFloat(item[mutation_number+1]))
+                  };
+                  add_datapoint(svg,tooltip,datapoint, layout);
+                  layout["x_index"][tier]++;
+                }
+            }
+        }
     }
 
     function roundToSD(mean,sd) {
