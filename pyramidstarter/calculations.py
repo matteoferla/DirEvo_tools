@@ -213,7 +213,7 @@ def pedelAA(jsonreq):
     # Super hacky for now. I struggled with the maths in python mode.
     filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
     #sequence file
-    seq=re.sub('[^ATGC]','',jsonreq['sequence'].replace('U','T'))
+    seq=re.sub('[^ATGC]','',jsonreq['sequence'].upper().replace('U','T'))
     assert not len(seq) % 3, 'Sequence is not a multiple of three.'
     assert len(seq) < 50000, 'Sequence is longer than 50kb...'
     assert len(seq) > 0, 'Sequence cannot be empty'
