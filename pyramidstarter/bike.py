@@ -107,6 +107,7 @@ def glueit(library_size,codonfile):
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
+    print('The command to run is ./pedel-AAc {f}'.format(f=filename))
     html=wrap('pedel-AAc',' ',filename)
     #print(html)
     data={'html': html}
