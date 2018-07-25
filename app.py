@@ -11,11 +11,12 @@ if __name__ == '__main__':
     here = os.path.dirname(os.path.abspath(__file__))
     ip = '0.0.0.0'
     port = 8080
-    if os.path.isdir("/opt/app-root/src/pyramidstarter/"):
-        config = os.path.join(here, 'production.ini')
-    else:
-        config = os.path.join(here, 'development.ini')
-        print('RUNNING LOCALLY')
+    if os.path.isdir("/opt/app-root/src/pyramidstarter/"):  # openshift specific relic
+        os.chdir("/opt/app-root/src/")
+    elif os.path.join(os.getcwd(), 'app.py') != __file__:  # generic weird location fixer...
+        os.chdir(os.path.split(__file__)[0])
+    config = os.path.join(here, 'development.ini')
+    #config = os.path.join(here, 'production.ini')
 
     print('Binding to {ip}:{port}'.format(ip=ip, port=port))
     app = get_app(config, 'main')  # find 'main' method in __init__.py.  That is our wsgi app

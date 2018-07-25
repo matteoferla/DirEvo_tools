@@ -20,10 +20,6 @@ pprinter = pprint.PrettyPrinter().pprint
 
 #PLACE = "server"
 #PLACE = "localhost"
-if os.path.isdir("/opt/app-root/src/pyramidstarter/"): # openshift specific relic
-    os.chdir("/opt/app-root/src/")
-elif os.path.join(os.getcwd(),'pyramidstarter','views.py') != __file__:
-    os.chdir(__file__.replace('pyramidstarter/views.py'))
 PATH = 'pyramidstarter/'
 
 # formerly I set these variables each reboot using the route set. Now it is an external file.
