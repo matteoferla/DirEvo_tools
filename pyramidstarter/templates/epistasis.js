@@ -219,27 +219,7 @@ $(document).ready(function() {
         // scale
         layout["scale"]=(x_step/4)/Math.max(...data['data'].map(x =>parseFloat(x[layout["chosen_index"]])));
 
-        // make datapoints
-        for (var i=0; i<data['data'].length; i++) {
-            var item=data['data'][i];
-            var id=item.slice(0,mutation_number).join('');
-            var tier=id.split("+").length - 1;
-            var datapoint={x: layout["x_mid"]+layout["x_offset"][tier]+layout["x_index"][tier]*layout["x_step"],
-                         y: layout["y_offset"]+(layout["mutation_number"]-tier)*layout["y_step"],
-                         v: layout["scale"]*parseFloat(item[layout["chosen_index"]]),
-                         v_sd: layout["scale"]*(parseFloat(item[layout["chosen_index"]])+parseFloat(item[layout["chosen_index"]+1])),
-                         color: "gray",
-                         color_sd: "lightGray",
-                         text:id,
-                         info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1]))
-                  };
-            layout["x_index"][tier]++;
-            if (where=="theo") {
-                datapoint['info']=item[mutation_number]+' '+datapoint['info'];
-                datapoint['v_e']=layout["scale"]*parseFloat(item[mutation_number+1]);
-            }
-            add_datapoint(svg,tooltip,datapoint, layout);
-        }
+        // make datapoints weirdly (see below for normal).
         if (where=="theo") {
             places=binomials[mutation_number];
             var empdata=alldata['empirical'];
@@ -260,8 +240,33 @@ $(document).ready(function() {
                   };
                   add_datapoint(svg,tooltip,datapoint, layout);
                   layout["x_index"][tier]++;
+                  if (tier==1) {
+                    // log what they are so I can add arrows!!! TODO.
+                  }
                 }
             }
+        }
+
+        // make normally
+        for (var i=0; i<data['data'].length; i++) {
+            var item=data['data'][i];
+            var id=item.slice(0,mutation_number).join('');
+            var tier=id.split("+").length - 1;
+            var datapoint={x: layout["x_mid"]+layout["x_offset"][tier]+layout["x_index"][tier]*layout["x_step"],
+                         y: layout["y_offset"]+(layout["mutation_number"]-tier)*layout["y_step"],
+                         v: layout["scale"]*parseFloat(item[layout["chosen_index"]]),
+                         v_sd: layout["scale"]*(parseFloat(item[layout["chosen_index"]])+parseFloat(item[layout["chosen_index"]+1])),
+                         color: "gray",
+                         color_sd: "lightGray",
+                         text:id,
+                         info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1]))
+                  };
+            layout["x_index"][tier]++;
+            if (where=="theo") {
+                datapoint['info']=item[mutation_number]+' '+datapoint['info'];
+                datapoint['v_e']=layout["scale"]*parseFloat(item[mutation_number+1]);
+            }
+            add_datapoint(svg,tooltip,datapoint, layout);
         }
     }
 
