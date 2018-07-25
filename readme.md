@@ -15,7 +15,10 @@ copypasting stuff to make modal about Cx approximations in pedelAA
 Sorted by urgency:
 
 * *Cookies* GDPR compliance
-* *glueIT* in Linux causes a segFault not in Mac.
+* *glueIT* and *pedelAA* in Linux causes a segFault not in Mac.
+* password BS
+* interlink Mutanalyst with PedelAA
+* Rosetta point mutant ∆G suggester and parser/calculator
 * *pedel* DNA/AA PCR not active
 * *main* needs fixing. See below.
 * *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan.
