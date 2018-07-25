@@ -18,14 +18,21 @@ from warnings import warn
 
 pprinter = pprint.PrettyPrinter().pprint
 
-PATH = "/opt/app-root/src/pyramidstarter/"
-PLACE = "server"
-if not os.path.isdir(PATH):
-    PATH = "pyramidstarter/"
-    PLACE = "localhost"
-GMAIL_USER = 'squidonius.tango@gmail.com'
+#PLACE = "server"
+#PLACE = "localhost"
+if os.path.isdir("/opt/app-root/src/pyramidstarter/"): # openshift specific relic
+    os.chdir("/opt/app-root/src/")
+elif os.path.join(os.getcwd(),'pyramidstarter','views.py') != __file__:
+    os.chdir(__file__.replace('pyramidstarter/views.py'))
+PATH = 'pyramidstarter/'
+
+# formerly I set these variables each reboot using the route set. Now it is an external file.
+GMAIL_USER = '??????@gmail.com'
 GMAIL_PWD = '*******'
 GMAIL_SET = False
+if os.path.isfile('email_details.json'):
+    globals().update(**json.load(open('email_details.json')))  # Dangerous... but I am lazy
+
 STATUS = 'construction'
 
 FRAME='templates/frame.pt'
@@ -266,11 +273,8 @@ def home_callable(request):
 @view_config(route_name='upcoming', renderer=FRAME)
 def upcoming_callable(request):
     log_passing(request)
-    if PLACE == "server":
-        md = markdown.markdown(open(os.path.join(*PATH.split('/')[0:-1], 'README.md'), 'r').read())
-    else:
-        md = markdown.markdown(open('README.md').read())
-        return ready_fields('m_upcoming', md, 'main.js')
+    md = markdown.markdown(open('README.md').read())
+    return ready_fields('m_upcoming', md, 'main.js')
 
 
 @view_config(route_name='admin', renderer=FRAME)
