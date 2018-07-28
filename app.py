@@ -14,7 +14,8 @@ if __name__ == '__main__':
     if os.path.isdir("/opt/app-root/src/pyramidstarter/"):  # openshift specific relic
         os.chdir("/opt/app-root/src/")
     elif os.path.join(os.getcwd(), 'app.py') != __file__:  # generic weird location fixer...
-        os.chdir(os.path.split(__file__)[0])
+        if os.path.split(__file__)[0]: # no idea why it would fail...
+            os.chdir(os.path.split(__file__)[0])
     config = os.path.join(here, 'development.ini')
     #config = os.path.join(here, 'production.ini')
 
