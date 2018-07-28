@@ -269,7 +269,7 @@ def home_callable(request):
 @view_config(route_name='upcoming', renderer=FRAME)
 def upcoming_callable(request):
     log_passing(request)
-    md = markdown.markdown(open('README.md').read())
+    md = markdown.markdown(open('readme.md').read())
     return ready_fields('m_upcoming', md, 'main.js')
 
 
