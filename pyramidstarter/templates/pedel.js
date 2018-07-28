@@ -22,7 +22,7 @@ $(function() {
     function replot(data, ver='pedel') {
         var layout = {
                     yaxis: {
-                        title: 'xxx',
+                        title: 'Number of mutants in each bin',
                         type: 'lin',
                         autorange: true
                     },
