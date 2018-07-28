@@ -6,6 +6,7 @@ import smtplib
 import traceback
 import uuid
 import pickle
+#import csv
 
 import urllib.request
 
@@ -327,7 +328,7 @@ def lumberjack(request):
     '''
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
     log_response = '<div class="alert alert-success" role="alert"><a href="static/bash_log.txt">download terminal log</a></div>'+\
-                   '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>Address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
+                   '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>IP Address</th><th>Physical address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
                    '<tbody><tr>' + '</tr><tr>'.join(
         ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
                    '</tr></tbody></table>'
@@ -346,6 +347,16 @@ handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'
 log.addHandler(handler)
 '''
 
+addressbook={line.split('\t')[0]: line.split('\t')[1].replace('\n','') for line in open('addressbook.csv','r').readlines() if line.find('\t') !=-1}
+print(addressbook)
+def whois(ip):
+    if ip in addressbook:
+        return addressbook[ip]
+    else:
+        id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
+        where='{city} ({countryCode})'.format(**id)
+        open('addressbook.csv','a').write('{ip}\t{where}\n'.format(ip=ip,where=where))
+        return where
 
 def log_passing(req, extra='—', status='—'):
     if "HTTP_X_FORWARDED_FOR" in req.environ:
@@ -356,7 +367,9 @@ def log_passing(req, extra='—', status='—'):
         ip = req.environ["REMOTE_ADDR"]
     else:
         ip = '0.0.0.0'
-    logging.getLogger('pyramidstarter').info(ip + '\t' + req.upath_info + '\t' + extra + '\t' + status)
+    print(ip)
+    where=whois(ip)
+    logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
 
 ############### Other #####################
 @view_config(route_name='status', renderer='string')
