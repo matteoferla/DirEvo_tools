@@ -82,6 +82,8 @@
                     </h3>
                 <div class="row collapse" id="codon_byAA">
                     <p>This section would be cool if it had a negative option and stuff like, hydrophobics use Z.</p>
+                    <p>It sorts with a 2x penalty for stop and give precence to more equal distributions, in case of a tie to less degenerate codons.</p>
+                    <p>Accepts three letter code with first letter capital separated by a space, or one letter with spaces or not &mdash; corner case: SER is Ser + Asp + Arg while Ser is Serine.</p>
                     <div class="col-md-4">
                         <div class="input-group">
                           <span class="input-group-addon" id="codonAA_list_addon">Wanted AAs</span>

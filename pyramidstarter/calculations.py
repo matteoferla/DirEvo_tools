@@ -355,9 +355,10 @@ AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tr
               'G': 'G', 'F': 'F', 'Asn': 'N', 'Leucine': 'L', 'Asp': 'D', 'Threonine': 'T', 'C': 'C', 'Phe': 'F',
               'T': 'T', 'Ile': 'I', 'Arginine': 'R', 'Serine': 'S', 'Leu': 'L'}
 def codonAA(jsonreq):
-    print(jsonreq)
     # parse
     def codon_input_parser(text):
+        if not text:
+            return {'!'}  #not sure why there is a bug where if no anti-codon is given it crashes, but that is the case.
         try:
             cleanset = {AAnamemask[aa] for aa in text.replace(',', ' ').replace(';', ' ').split()}
         except KeyError:  #the user did not space it...
@@ -365,6 +366,9 @@ def codonAA(jsonreq):
         return cleanset
     AAset=codon_input_parser(jsonreq['list'])
     antiAAset = codon_input_parser(jsonreq['antilist'])
+    print(AAset,antiAAset)
+    if AAset.intersection(antiAAset):
+        return json.dumps({'data': None, 'html': '<div class="alert alert-danger" role="alert"><b>The Schr&ouml;dinger residue:</b> You cannot request both to have and not to have a residue at the same time...</div>'})
     validcodon=[]
     for cd in codonball:
         if AAset.issubset(set(codonball[cd].keys())) and not antiAAset.issubset(set(codonball[cd].keys())):
@@ -377,7 +381,7 @@ def codonAA(jsonreq):
                         'N_selected': {aa: codonball[cd][aa] for aa in AAset},
                         'N_all': codonball[cd]
                         })
-    # sort with a 2x penalty for stop and give precence to more equal distributions.
+    # sort with a 2x penalty for stop and give precence to more equal distributions, in case of a tie to less degenerate codons.
     def varmod(x):
         mu=sum(x.values())/len(x)
         return 0.001* sum([(x[i] - mu) ** 2 for i in x])/len(x)
@@ -505,4 +509,6 @@ if __name__ == "__main__":
     #bases='A','T','G','C'
     #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
     #glueit({'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'})
-    print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
+    #print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
+    print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
+    print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
