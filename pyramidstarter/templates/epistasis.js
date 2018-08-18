@@ -44,17 +44,19 @@ $(document).ready(function() {
         var mutation_number = $('#mutation_number2').val();
         var replicate_number = $('#replicate_number2').val();
         var header = '<tr><th>Mutant</th>';
-        for (var i = 1; i <= mutation_number; i++) {
+        for (var i = 1; i <= mutation_number; i++) { // HEADER row first half
             header += `<th><input placeholder="M${i}" data-toggle="tooltip" data-placement="top" title="Mutation number ${i}. Feel free to rename it something meaningful like D10N" id="M${i}"></th>`;
         }
-        for (var i = 1; i <= replicate_number; i++) {
+        for (var i = 1; i <= replicate_number; i++) { // HEADER row second half
             header += `<th data-toggle="tooltip" data-placement="top" title="Replicate number ${i}">R${i}</th>`;
         }
         var body = '';
-        for (var i = 0; i < Math.pow(2, mutation_number); i++) {
-            body += '<tr><td></td>';
+        var ordered_power_set=Array(Math.pow(2, mutation_number)).fill(' ').map((v,i)=>(i).toString(2).padStart(mutation_number,'0').split("")).reverse().sort(function(a, b){return a.reduce(function (accumulator, currentValue) {return accumulator + parseInt(currentValue)},0) - b.reduce(function (accumulator, currentValue) {return accumulator + parseInt(currentValue)},0)});
+        for (var i = 0; i < Math.pow(2, mutation_number); i++) { // tbody rows...
+            body += `<tr name='mutant' data-combo=${ordered_power_set[i].join('')}><td></td>`;
             for (var j = 0; j < mutation_number; j++) {
-                body += `<td>${(i).toString(2).padStart(mutation_number,'0').split("").map((v,i)=>v == "1" ? "+" : "-")[j]}</td>`;
+                //body += `<td>${(i).toString(2).padStart(mutation_number,'0').split("").map((v,i)=>v == "1" ? "+" : "-")[j]}</td>`;
+                body += `<td>${ordered_power_set[i].map((v,i)=>v == "1" ? "+" : "-")[j]}</td>`;
             }
             for (var j = 0; j < replicate_number; j++) {
                 body += `<td><input placeholder="xxx" type="number" data-toggle="tooltip" data-placement="top" title="Empirical value" id="M${i}R${j}"></td>`;
@@ -62,7 +64,7 @@ $(document).ready(function() {
             body += '</tr>';
         }
 
-        var txt = `<table class='table table-striped'><thead>${header}</thead><tbody>${body}</tbody></table`;
+        var txt = `<table class='table table-striped'><thead>${header}</thead><tbody>${body}</tbody></table>`;
         $("#mut_input_table").html(txt);
     }
 
@@ -215,7 +217,7 @@ $(document).ready(function() {
 
 
         // start canvas
-        var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+        var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0).style("min-width", "100px");
         var svg = d3.select("#"+where+"-graph-plot").append("svg:svg").attr("width", "100%").attr("height",(mutation_number+1)*layout["y_step"]+50).attr("id",where+"-svg");
 
         // scale
@@ -399,7 +401,9 @@ $(document).ready(function() {
         }
         var mpower = Math.pow(2, mutation_number);
         //var foundment_values = Array.apply(null, Array(mpower)).map((v, i) => (i).toString(2).padStart(mutation_number, '0').split("").map((v, i) => v == "1" ? "+" : "-"));
-        var foundment_values = Array.apply(null, Array(mpower)).map((v, i) => (i).toString(2).padStart(mutation_number, '0').split("").map((v, i) => parseFloat(v)));
+        //var foundment_values = Array.apply(null, Array(mpower)).map((v, i) => (i).toString(2).padStart(mutation_number, '0').split("").map((v, i) => parseFloat(v)));
+        var foundment_values = jQuery.makeArray($('[name=mutant]').map(function (v,i) {return $(this).data('combo').toString()})).map(function(v,i) {return v.split("").map((v, i) => parseFloat(v))});
+        console.log(foundment_values);
         var replicate_matrix = Array(mpower);
         for (var i = 0; i < mpower; i++) {
             replicate_matrix[i] = Array.apply(null, Array(replicate_number)).map((v, j) => parseFloat($("#M" + i.toString() + "R" + j.toString()).val()));
@@ -449,13 +453,13 @@ $(document).ready(function() {
         update_mut_names_div();
         demo = [
             [40.408327, 37.176372, 35.776619],
-            [37.383186, 35.019421, 42.932996],
-            [34.551186, 34.033348, 30.844536],
-            [43.913044, 47.390555, 42.959925],
-            [31.102138, 28.735591, 29.401488],
-            [29.78191, 24.641165, 25.13452],
-            [79.956978, 84.28502, 74.090488],
-            [76.937329, 69.938071, 58.361839]
+            [43.913044,	47.390555,	42.959925],
+            [34.551186,	34.033348,	30.844536],
+            [37.383186,	35.019421,	42.932996],
+            [31.102138,	28.735591,	29.401488],
+            [29.78191,	24.641165,	25.13452],
+            [79.956978,	84.28502,	74.090488],
+            [76.937329,	69.938071,	58.361839]
         ];
         for (var m = 0; m < 8; m++) {
             for (var r = 0; r < 3; r++) {
