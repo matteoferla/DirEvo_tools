@@ -366,7 +366,6 @@ def codonAA(jsonreq):
         return cleanset
     AAset=codon_input_parser(jsonreq['list'])
     antiAAset = codon_input_parser(jsonreq['antilist'])
-    print(AAset,antiAAset)
     if AAset.intersection(antiAAset):
         return json.dumps({'data': None, 'html': '<div class="alert alert-danger" role="alert"><b>The Schr&ouml;dinger residue:</b> You cannot request both to have and not to have a residue at the same time...</div>'})
     validcodon=[]

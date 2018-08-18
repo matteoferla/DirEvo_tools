@@ -268,6 +268,52 @@ $(document).ready(function() {
             }
             add_datapoint(svg,tooltip,datapoint, layout);
         }
+
+        // make legend
+        //x_offset: -(places[mutation_number]-1)/2*x_step)
+        widesttier=Math.round(mutation_number/2+0.5);
+        x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+1)*layout["x_step"]; //far right
+        /// theoretical values
+        var datapoint={x: x,
+                         y: layout["y_offset"]+(layout["mutation_number"]-0)*layout["y_step"], //bottom
+                         v: 4,
+                         v_sd: 0,
+                         v_e: 0,
+                         color: "gray",
+                         color_sd: "lightGray",
+                         text:'Theoretical',
+                         info:'Theoretical'
+        };
+        add_datapoint(svg,tooltip,datapoint, layout);
+
+        /// theoretical SD
+        var datapoint={x: x,
+                         y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
+                         v: 2,
+                         v_sd: 4,
+                         v_e: 0,
+                         color: "white",
+                         color_sd: "lightGray",
+                         text:'Theoretical SD',
+                         info:'theoretical SD'
+        };
+        add_datapoint(svg,tooltip,datapoint, layout);
+
+
+        /// emp
+        var datapoint={x: x,
+                         y: layout["y_offset"]+(layout["mutation_number"]-2)*layout["y_step"], //bottom
+                         v: 0,
+                         v_sd: 0,
+                         v_e: 4,
+                         color: "none",
+                         color_sd: "none",
+                         text:'Empirical',
+                         info:'Empirical'
+        };
+        add_datapoint(svg,tooltip,datapoint, layout);
+
+
     }
 
     function roundToSD(mean,sd) {
