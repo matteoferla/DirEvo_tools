@@ -273,6 +273,9 @@ $(document).ready(function() {
         //x_offset: -(places[mutation_number]-1)/2*x_step)
         widesttier=Math.round(mutation_number/2+0.5);
         x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+1)*layout["x_step"]; //far right
+
+        if (layout["where"] == "theo") {
+
         /// theoretical values
         var datapoint={x: x,
                          y: layout["y_offset"]+(layout["mutation_number"]-0)*layout["y_step"], //bottom
@@ -285,8 +288,7 @@ $(document).ready(function() {
                          info:'Theoretical'
         };
         add_datapoint(svg,tooltip,datapoint, layout);
-
-        /// theoretical SD
+            /// theoretical SD
         var datapoint={x: x,
                          y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
                          v: 2,
@@ -312,6 +314,34 @@ $(document).ready(function() {
                          info:'Empirical'
         };
         add_datapoint(svg,tooltip,datapoint, layout);
+        }
+        else {
+        /// theoretical values
+        var datapoint={x: x,
+                         y: layout["y_offset"]+(layout["mutation_number"]-0)*layout["y_step"], //bottom
+                         v: 4,
+                         v_sd: 0,
+                         v_e: 0,
+                         color: "gray",
+                         color_sd: "lightGray",
+                         text:'Empirical',
+                         info:'Empirical'
+        };
+        add_datapoint(svg,tooltip,datapoint, layout);
+        /// theoretical SD
+        var datapoint={x: x,
+                         y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
+                         v: 2,
+                         v_sd: 4,
+                         v_e: 0,
+                         color: "white",
+                         color_sd: "lightGray",
+                         text:'Empirical SD',
+                         info:'Empirical SD'
+        };
+        add_datapoint(svg,tooltip,datapoint, layout);
+        }
+
 
 
     }
