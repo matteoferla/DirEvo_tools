@@ -14,9 +14,6 @@
 ga('create', 'UA-66652240-4', 'auto');
 ga('send', 'pageview');
 
-
-console.log('Version 1.1');
-
 // Let's mod string python-style alla StackOverflow (.formatUnicorn)
 String.prototype.format = String.prototype.format ||
     function() {
@@ -168,9 +165,33 @@ $(document).ready(function() {
                 tooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
-            });
+                });
+
         }
 
+/*
+.call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        function dragstarted(d) {
+          d3.select(this).raise().classed("active", true);
+        }
+
+        function dragged(d) {
+            var children = d3.selectAll(this.childNodes);
+            for (var i=0; i<children.length; i++) {
+                d3.select(children[i]).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+            }
+
+        }
+
+        function dragended(d) {
+          d3.select(this).classed("active", false);
+        }
+
+*/
     function powersetplot(where, alldata,mutation_number) {
         var data=alldata['empirical'];
         var chosen_index=mutation_number;
@@ -223,6 +244,9 @@ $(document).ready(function() {
         // scale
         layout["scale"]=(x_step/4)/Math.max(...data['data'].map(x =>parseFloat(x[layout["chosen_index"]])));
 
+        // data for arrows!
+        var nodemap=new Array(Math.pow(2,mutation_number));
+
         // make datapoints weirdly (see below for normal).
         if (where=="theo") {
             places=binomials[mutation_number];
@@ -243,12 +267,11 @@ $(document).ready(function() {
                          info:'Value: '+roundToSD(parseFloat(item[mutation_number]),parseFloat(item[mutation_number+1]))
                   };
                   add_datapoint(svg,tooltip,datapoint, layout);
+                  nodemap[id.indexOf('+')+2]={'x':datapoint['x'],'y':datapoint['y'],'origin':[1]}; //x, y, origin_id
                   layout["x_index"][tier]++;
-                  if (tier==1) {
-                    // log what they are so I can add arrows!!! TODO.
-                  }
                 }
             }
+            nodemap[0]=nodemap[1]; //hack because of index from 1...
         }
 
         epiColors={'+ Sign epistasis':'springgreen',
@@ -278,11 +301,12 @@ $(document).ready(function() {
                 datapoint['info']=item[mutation_number]+' '+datapoint['info'];
                 datapoint['v_e']=layout["scale"]*parseFloat(item[mutation_number+1]);
                 if (tier >1) {
-                console.log(item);
                 datapoint['color']=epiColors[item[9]];
+                nodemap[i+mutation_number+2]={'x':datapoint['x'],'y':datapoint['y'],'origin':item[mutation_number]}; //already an array of int... no need for .slice(1,-1).split(",").map((v,i) => parseInt(v))
                 }
             }
             add_datapoint(svg,tooltip,datapoint, layout);
+
         }
 
         // make legend
@@ -377,8 +401,25 @@ $(document).ready(function() {
         add_datapoint(svg,tooltip,datapoint, layout);
         }
 
-
-
+    // make arrows
+    if (where=="theo") {
+        console.log(nodemap);
+        var group=svg.insert("g",":first-child");
+        for (var ni =0; ni < nodemap.length; ni++) {
+            var node=nodemap[ni];
+            for (var oi = 0; oi < node['origin'].length; oi++) {
+                var origin=node['origin'][oi];
+                group.append("line")
+                    .attr("x1", node['x'])
+                    .attr("y1", node['y'])
+                    .attr("x2", nodemap[origin]['x'])
+                    .attr("y2", nodemap[origin]['y'])
+                    .attr("stroke","lightgray")
+                    .attr("stroke-width",1);
+                    //.style("border", "gray");
+            }
+        }
+    }
     }
 
     function roundToSD(mean,sd) {
@@ -403,7 +444,6 @@ $(document).ready(function() {
         //var foundment_values = Array.apply(null, Array(mpower)).map((v, i) => (i).toString(2).padStart(mutation_number, '0').split("").map((v, i) => v == "1" ? "+" : "-"));
         //var foundment_values = Array.apply(null, Array(mpower)).map((v, i) => (i).toString(2).padStart(mutation_number, '0').split("").map((v, i) => parseFloat(v)));
         var foundment_values = jQuery.makeArray($('[name=mutant]').map(function (v,i) {return $(this).data('combo').toString()})).map(function(v,i) {return v.split("").map((v, i) => parseFloat(v))});
-        console.log(foundment_values);
         var replicate_matrix = Array(mpower);
         for (var i = 0; i < mpower; i++) {
             replicate_matrix[i] = Array.apply(null, Array(replicate_number)).map((v, j) => parseFloat($("#M" + i.toString() + "R" + j.toString()).val()));
