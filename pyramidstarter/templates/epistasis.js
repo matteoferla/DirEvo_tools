@@ -15,6 +15,8 @@ ga('create', 'UA-66652240-4', 'auto');
 ga('send', 'pageview');
 
 
+console.log('Version 1.1');
+
 // Let's mod string python-style alla StackOverflow (.formatUnicorn)
 String.prototype.format = String.prototype.format ||
     function() {
@@ -111,7 +113,7 @@ $(document).ready(function() {
                     //reply = JSON.parse(result.message);
                     reply = result;
                     $("#results").html(reply['html']);
-                    window.sessionStorage.setItem('data', reply);
+                    //window.sessionStorage.setItem('data', reply['raw']);
                     make_graphs(reply,mutation_number);
                     $('#res').collapse('show');
                 },
@@ -247,6 +249,14 @@ $(document).ready(function() {
             }
         }
 
+        epiColors={'+ Sign epistasis':'springgreen',
+                '- Sign epistasis':'salmon',
+                '+ Reciprocal sign epistasis':'teal',
+                '- Reciprocal sign epistasis':'pink',
+                '+ Magnitude epistasis':'forestgreen',
+                '- Magnitude epistasis':'firebrick'
+                }
+
         // make normally
         for (var i=0; i<data['data'].length; i++) {
             var item=data['data'][i];
@@ -265,6 +275,10 @@ $(document).ready(function() {
             if (where=="theo") {
                 datapoint['info']=item[mutation_number]+' '+datapoint['info'];
                 datapoint['v_e']=layout["scale"]*parseFloat(item[mutation_number+1]);
+                if (tier >1) {
+                console.log(item);
+                datapoint['color']=epiColors[item[9]];
+                }
             }
             add_datapoint(svg,tooltip,datapoint, layout);
         }
@@ -272,48 +286,67 @@ $(document).ready(function() {
         // make legend
         //x_offset: -(places[mutation_number]-1)/2*x_step)
         widesttier=Math.round(mutation_number/2+0.5);
-        x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+1)*layout["x_step"]; //far right
+        x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+1.5)*layout["x_step"]; //far right
 
         if (layout["where"] == "theo") {
 
-        /// theoretical values
-        var datapoint={x: x,
-                         y: layout["y_offset"]+(layout["mutation_number"]-0)*layout["y_step"], //bottom
-                         v: 4,
-                         v_sd: 0,
-                         v_e: 0,
-                         color: "gray",
-                         color_sd: "lightGray",
-                         text:'Theoretical',
-                         info:'Theoretical'
-        };
-        add_datapoint(svg,tooltip,datapoint, layout);
-            /// theoretical SD
-        var datapoint={x: x,
-                         y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
-                         v: 2,
-                         v_sd: 4,
-                         v_e: 0,
-                         color: "white",
-                         color_sd: "lightGray",
-                         text:'Theoretical SD',
-                         info:'theoretical SD'
-        };
-        add_datapoint(svg,tooltip,datapoint, layout);
+            /// theoretical values
+            var datapoint={x: x,
+                             y: layout["y_offset"]+(layout["mutation_number"]-0)*layout["y_step"], //bottom
+                             v: 4,
+                             v_sd: 0,
+                             v_e: 0,
+                             color: "gray",
+                             color_sd: "lightGray",
+                             text:'Theoretical',
+                             info:'Theoretical'
+            };
+            add_datapoint(svg,tooltip,datapoint, layout);
+                /// theoretical SD
+            var datapoint={x: x,
+                             y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
+                             v: 2,
+                             v_sd: 4,
+                             v_e: 0,
+                             color: "white",
+                             color_sd: "lightGray",
+                             text:'Theoretical SD',
+                             info:'theoretical SD'
+            };
+            add_datapoint(svg,tooltip,datapoint, layout);
 
 
-        /// emp
-        var datapoint={x: x,
-                         y: layout["y_offset"]+(layout["mutation_number"]-2)*layout["y_step"], //bottom
-                         v: 0,
-                         v_sd: 0,
-                         v_e: 4,
-                         color: "none",
-                         color_sd: "none",
-                         text:'Empirical',
-                         info:'Empirical'
-        };
-        add_datapoint(svg,tooltip,datapoint, layout);
+            /// emp
+            var datapoint={x: x,
+                             y: layout["y_offset"]+(layout["mutation_number"]-2)*layout["y_step"], //bottom
+                             v: 0,
+                             v_sd: 0,
+                             v_e: 4,
+                             color: "none",
+                             color_sd: "none",
+                             text:'Empirical',
+                             info:'Empirical'
+            };
+            add_datapoint(svg,tooltip,datapoint, layout);
+
+            x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+4)*layout["x_step"]; //uber far right
+
+            Object.keys(epiColors).forEach(function(key,index) {
+                var datapoint={x: x,
+                                 y: layout["y_offset"]+(layout["mutation_number"]-index/2)*layout["y_step"], //bottom
+                                 v: 4,
+                                 v_sd: 0,
+                                 v_e: 0,
+                                 color: epiColors[key],
+                                 color_sd: "none",
+                                 text:"",
+                                 info:key
+                };
+                add_datapoint(svg,tooltip,datapoint, layout);
+            });
+
+
+
         }
         else {
         /// theoretical values
@@ -383,7 +416,6 @@ $(document).ready(function() {
             replicate_matrix: replicate_matrix,
             data_array: data_array
         };
-        console.log(data);
 
         try {
             $.ajax({

@@ -409,7 +409,7 @@ def epier(request):
         filename = os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
         data.save(filename)
         request.session['epistasis'] = filename
-        suppinfo = ["Combinations", "Experimental average", "Experimental standard deviation", "Thoretical average",
+        suppinfo = ["Combinations", "Experimental average", "Experimental standard deviation", "Theoretical average",
                     "Theoretical standard deviation", "Exp.avg - Theor.avg", "Epistasis type"]
         raw = {'theoretical': {'data': data.all_of_it.tolist(), 'columns': data.mutations_list + suppinfo,
                                'rows': data.comb_index},
