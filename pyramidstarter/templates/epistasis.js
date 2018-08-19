@@ -125,9 +125,12 @@ $(document).ready(function() {
         }
     });
 
-    function add_datapoint(svg,tooltip,datapoint, layout) {
+    function add_datapoint(svg,tooltip,datapoint, layout,nodemap) {
     // datapoint is a dict with x y v(alue) color text and info
         var group=svg.append("g");
+        var data=[{x: 0, y: 0, node: datapoint['node']}];
+        group.data(data)
+            .style("cursor", "grab");
         group.append("text")
             .attr("x", datapoint["x"])
             .attr("y", datapoint["y"]+20)
@@ -166,32 +169,59 @@ $(document).ready(function() {
                     .duration(500)
                     .style("opacity", 0);
                 });
+        group.call(d3.drag()
+            .on('drag', function (d) {
+                    d.x += d3.event.dx;
+                    d.y += d3.event.dy;
+                    d3.select(this).attr('transform', 'translate(' + d.x + ',' + d.y + ')');
+                    if (d.node != undefined) {
+                        nodemap[d.node]['x']+= d3.event.dx;
+                        nodemap[d.node]['y']+= d3.event.dy;
+                        make_arrows(svg,nodemap)}
+                })
+            .on("start", function () {d3.select(this).style("cursor", "grabbing")})
+            .on("end", function () {d3.select(this).style("cursor", "pointer")})
+            );
+    }
 
-        }
-
-/*
-.call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
-
-        function dragstarted(d) {
+    function dragstarted(d) {
           d3.select(this).raise().classed("active", true);
         }
 
         function dragged(d) {
-            var children = d3.selectAll(this.childNodes);
-            for (var i=0; i<children.length; i++) {
-                d3.select(children[i]).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+              //d3.select(this).select("text")
+              //  .attr("x", d.x = d3.event.x)
+              //  .attr("y", d.y = d3.event.y);
+              d3.select(this).select("circle")
+                .attr("cx", d.x = d3.event.x)
+                .attr("cy", d.y = d3.event.y);
             }
-
-        }
 
         function dragended(d) {
           d3.select(this).classed("active", false);
         }
 
-*/
+
+    function make_arrows(svg,nodemap) {
+        if (! d3.select("#arrows").empty()) {d3.select("#arrows").remove()}
+        var group=svg.insert("g",":first-child").attr("id","arrows");
+        for (var ni =0; ni < nodemap.length; ni++) {
+            var node=nodemap[ni];
+            for (var oi = 0; oi < node['origin'].length; oi++) {
+                var origin=node['origin'][oi];
+                group.append("line")
+                    .attr("x1", node['x'])
+                    .attr("y1", node['y'])
+                    .attr("x2", nodemap[origin]['x'])
+                    .attr("y2", nodemap[origin]['y'])
+                    .attr("stroke","lightgray")
+                    .attr("stroke-width",1);
+                    //.attr("node","node-"+ni.toString());
+                    //.style("border", "gray");
+            }
+        }
+    }
+
     function powersetplot(where, alldata,mutation_number) {
         var data=alldata['empirical'];
         var chosen_index=mutation_number;
@@ -264,10 +294,11 @@ $(document).ready(function() {
                          color: "none",
                          color_sd: "none",
                          text:id,
-                         info:'Value: '+roundToSD(parseFloat(item[mutation_number]),parseFloat(item[mutation_number+1]))
+                         info:'Value: '+roundToSD(parseFloat(item[mutation_number]),parseFloat(item[mutation_number+1])),
+                         node: id.indexOf('+')+2
                   };
-                  add_datapoint(svg,tooltip,datapoint, layout);
                   nodemap[id.indexOf('+')+2]={'x':datapoint['x'],'y':datapoint['y'],'origin':[1]}; //x, y, origin_id
+                  add_datapoint(svg,tooltip,datapoint, layout,nodemap);
                   layout["x_index"][tier]++;
                 }
             }
@@ -294,7 +325,8 @@ $(document).ready(function() {
                          color: "gray",
                          color_sd: "lightGray",
                          text:id,
-                         info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1]))
+                         info:'Value: '+roundToSD(parseFloat(item[layout["chosen_index"]]),parseFloat(item[layout["chosen_index"]+1])),
+                         node: i+mutation_number+2
                   };
             layout["x_index"][tier]++;
             if (where=="theo") {
@@ -305,7 +337,7 @@ $(document).ready(function() {
                 nodemap[i+mutation_number+2]={'x':datapoint['x'],'y':datapoint['y'],'origin':item[mutation_number]}; //already an array of int... no need for .slice(1,-1).split(",").map((v,i) => parseInt(v))
                 }
             }
-            add_datapoint(svg,tooltip,datapoint, layout);
+            add_datapoint(svg,tooltip,datapoint, layout,nodemap);
 
         }
 
@@ -327,7 +359,7 @@ $(document).ready(function() {
                              text:'Theoretical',
                              info:'Theoretical'
             };
-            add_datapoint(svg,tooltip,datapoint, layout);
+            add_datapoint(svg,tooltip,datapoint, layout,nodemap);
                 /// theoretical SD
             var datapoint={x: x,
                              y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
@@ -339,7 +371,7 @@ $(document).ready(function() {
                              text:'Theoretical SD',
                              info:'theoretical SD'
             };
-            add_datapoint(svg,tooltip,datapoint, layout);
+            add_datapoint(svg,tooltip,datapoint, layout,nodemap);
 
 
             /// emp
@@ -353,7 +385,7 @@ $(document).ready(function() {
                              text:'Empirical',
                              info:'Empirical'
             };
-            add_datapoint(svg,tooltip,datapoint, layout);
+            add_datapoint(svg,tooltip,datapoint, layout,nodemap);
 
             x=layout["x_mid"]+layout["x_offset"][widesttier]+(layout["x_index"][widesttier]+4)*layout["x_step"]; //uber far right
 
@@ -368,7 +400,7 @@ $(document).ready(function() {
                                  text:"",
                                  info:key
                 };
-                add_datapoint(svg,tooltip,datapoint, layout);
+                add_datapoint(svg,tooltip,datapoint, layout,nodemap);
             });
 
 
@@ -386,7 +418,7 @@ $(document).ready(function() {
                          text:'Empirical',
                          info:'Empirical'
         };
-        add_datapoint(svg,tooltip,datapoint, layout);
+        add_datapoint(svg,tooltip,datapoint, layout,nodemap);
         /// theoretical SD
         var datapoint={x: x,
                          y: layout["y_offset"]+(layout["mutation_number"]-1)*layout["y_step"], //bottom
@@ -398,27 +430,13 @@ $(document).ready(function() {
                          text:'Empirical SD',
                          info:'Empirical SD'
         };
-        add_datapoint(svg,tooltip,datapoint, layout);
+        add_datapoint(svg,tooltip,datapoint, layout,nodemap);
         }
 
     // make arrows
     if (where=="theo") {
-        console.log(nodemap);
-        var group=svg.insert("g",":first-child");
-        for (var ni =0; ni < nodemap.length; ni++) {
-            var node=nodemap[ni];
-            for (var oi = 0; oi < node['origin'].length; oi++) {
-                var origin=node['origin'][oi];
-                group.append("line")
-                    .attr("x1", node['x'])
-                    .attr("y1", node['y'])
-                    .attr("x2", nodemap[origin]['x'])
-                    .attr("y2", nodemap[origin]['y'])
-                    .attr("stroke","lightgray")
-                    .attr("stroke-width",1);
-                    //.style("border", "gray");
-            }
-        }
+        //console.log(nodemap);
+        make_arrows(svg,nodemap);
     }
     }
 
