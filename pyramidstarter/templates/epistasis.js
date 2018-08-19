@@ -131,12 +131,23 @@ $(document).ready(function() {
         var data=[{x: 0, y: 0, node: datapoint['node']}];
         group.data(data)
             .style("cursor", "grab");
-        group.append("text")
+        if (datapoint['isLegend'] != undefined) {
+            group.append("text")
+            .attr("x", datapoint["x"]+20)
+            .attr("y", datapoint["y"]+6)
+            .attr("text-anchor", "left")
+            .style("fill", "black")
+            .text(datapoint["text"]); //.attr("dy", ".35em")
+        }
+        else {
+            group.append("text")
             .attr("x", datapoint["x"])
             .attr("y", datapoint["y"]+20)
             .attr("text-anchor", "middle")
             .style("fill", "black")
             .text(datapoint["text"]); //.attr("dy", ".35em")
+        }
+
         group.append("circle")
             .attr("cx", datapoint["x"])
             .attr("cy", datapoint["y"])
@@ -397,8 +408,9 @@ $(document).ready(function() {
                                  v_e: 0,
                                  color: epiColors[key],
                                  color_sd: "none",
-                                 text:"",
-                                 info:key
+                                 text:key,
+                                 info:key,
+                                 isLegend: 1
                 };
                 add_datapoint(svg,tooltip,datapoint, layout,nodemap);
             });
