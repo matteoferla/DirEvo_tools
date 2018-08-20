@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <!--Fontawesome-->
-    <script src="https://use.fontawesome.com/50c6df77b5.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/regular.css" integrity="sha384-g3XsWx0Sqi7JIjLKVnwUxEvqrxTMQPIf3PN+vTdWY2AhduP/rnj0rw89v0nbD4Ro" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/fontawesome.css" integrity="sha384-4eP+1rYQmuI3hxrmyE+GT/EIiNbF4R85ciN3jMpmIh+bU5Hz2IU7AdcVe+JS+AJz" crossorigin="anonymous">
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -44,8 +45,36 @@
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    This navbar is empty. main, maths, github and about?
+  <a class="navbar-brand" href="#">Epistasis calculator</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#" target="_blank"><i class="fas fa-book"></i> Underlying paper</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" target="_blank">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="mail"><i class="fas fa-envelope"></i> Contact us</a><!-- filled dynamically-->
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-feather-alt"></i> Authors Homepage
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#" target="_blank">Carlos</a>
+          <a class="dropdown-item" href="#" target="_blank">Paul</a>
+          <a class="dropdown-item" href="#" target="_blank">Prof. Reetz</a>
+        </div>
+      </li>
+    </ul>
+  </div>
 </nav>
+
+
 <br/>
 <div class="container">
     <div class="row">
@@ -53,7 +82,7 @@
             <!---Intro-->
             <div class="card p-2">
                 <h3 class="card-header bg-dark">
-                    <a class="card-link text-light" data-toggle="collapse" href="#intro"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Introduction</a>
+                    <a class="card-link text-light" data-toggle="collapse" href="#intro"><i class="fas fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Introduction</a>
                 </h3>
                 <div class="card-body" id="intro">
                     <p>Lorem Ipsum</p>
@@ -64,7 +93,7 @@
             <!--Form-->
             <div class="card p-2">
                 <h3 class="card-header bg-dark">
-                    <a class="card-link text-light" data-toggle="collapse" href="#directly"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Fill directly</a>
+                    <a class="card-link text-light" data-toggle="collapse" href="#directly"><i class="fas fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Fill directly</a>
                 </h3>
                 <div class="card-body" id="directly">
                     <div class="row">
@@ -121,7 +150,7 @@
             <br/>
             <div class="card p-2">
                 <h3 class="card-header bg-dark">
-                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt1"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Alt (part 1): Create template</a>
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt1"><i class="fas fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Alt (part 1): Create template</a>
                 </h3>
                 <div class="card-body collapse" id="alt1">
                     <div class="row">
@@ -157,7 +186,7 @@
             <br/>
             <div class="card p-2">
                 <h3 class="card-header bg-dark">
-                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt1"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Alt (part 2): Upload filled</a>
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#alt2"><i class="fas fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Alt (part 2): Upload filled</a>
                 </h3>
                 <div class="card-body collapse" id="alt2">
                     <div class="row">
@@ -186,7 +215,7 @@
             <!--Results-->
             <div class="card p-2">
                 <h3 class="card-header bg-dark">
-                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#res"><span class="fa fa-angle-down"></span>&nbsp;&nbsp;&nbsp;Result</a>
+                    <a class="collapsed card-link text-light" data-toggle="collapse" href="#res"><i class="fas fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Result</a>
                 </h3>
                 <div class="card-body collapse" id="res">
                     <div id="results"></div><br/>

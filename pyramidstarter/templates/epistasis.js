@@ -37,6 +37,13 @@ String.prototype.format = String.prototype.format ||
 
 $(document).ready(function() {
 
+    $('#mail').attr('href','alref.oettam:otliam'.split("").reverse().join("")+String.fromCharCode(2*2*2*2*2*2)+'moc.liamg'.split("").reverse().join(""));
+    $('#intro').collapse('show');
+    $('#directly').collapse('show');
+    $('#alt1').collapse('hide');
+    $('#alt2').collapse('hide');
+    $('#res').collapse('hide');
+
     function update_mut_names_div() {
         var mutation_number = $('#mutation_number2').val();
         var replicate_number = $('#replicate_number2').val();
@@ -115,6 +122,10 @@ $(document).ready(function() {
                     //window.sessionStorage.setItem('data', reply['raw']);
                     make_graphs(reply,mutation_number);
                     $('#res').collapse('show');
+                    $('#intro').collapse('hide');
+                    $('#directly').collapse('hide');
+                    $('#alt1').collapse('hide');
+                    $('#alt2').collapse('hide');
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);
@@ -507,6 +518,10 @@ $(document).ready(function() {
                     window.sessionStorage.setItem('data', reply);
                     make_graphs(reply,mutation_number);
                     $('#res').collapse('show');
+                    $('#intro').collapse('hide');
+                    $('#directly').collapse('hide');
+                    $('#alt1').collapse('hide');
+                    $('#alt2').collapse('hide');
                 },
                 error: function(xhr, s) {
                     $("#results").html(s);

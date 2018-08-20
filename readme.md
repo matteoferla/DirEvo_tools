@@ -3,7 +3,7 @@
 <a href="https://codeclimate.com/github/matteoferla/pedel2/"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/issue_count.svg" /></a>
 
 # Intro
-Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but may change name.
+Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but will change name when inspired.
 See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
 It is currently hosted on a Raspberry pi in my flat.
 
