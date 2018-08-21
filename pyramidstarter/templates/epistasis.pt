@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <!--Fontawesome-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
+    <!-- solid not working
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/solid.css"
           integrity="sha384-B/E/KxBX31kY/5sew+X4c8e6ErosbqOOsA3t4k6VVmx8Hrz//v0tEUtXmUVx9X6Q" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/fontawesome.css"
@@ -22,7 +24,7 @@
             crossorigin="anonymous"></script>
 
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>-->
     <style>
         .table input{
             display:block;
@@ -57,9 +59,6 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="#" target="_blank"><i class="fas fa-book"></i> Underlying paper</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" target="_blank">Features</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="mail"><i class="fas fa-envelope"></i> Contact us</a>

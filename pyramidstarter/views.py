@@ -214,6 +214,7 @@ def driverist(request):
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
     global GMAIL_PWD, GMAIL_USER
+    print(GMAIL_PWD, GMAIL_USER)
     reply = request.json_body
     subject = 'Comment from ' + reply['message']
     body = reply['name']
@@ -231,7 +232,7 @@ def send_email(request):
         server.close()
         return json.dumps({'msg': 'successfully sent the mail'})
     except Exception as e:
-        print(GMAIL_USER, GMAIL_PWD, str(e))
+        #print(GMAIL_USER, GMAIL_PWD, str(e))
         return json.dumps({'msg': str(e)})
 
 
@@ -347,7 +348,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'
 log.addHandler(handler)
 '''
 
-addressbook={line.split('\t')[0]: line.split('\t')[1].replace('\n','') for line in open('addressbook.csv','r').readlines() if line.find('\t') !=-1}
+addressbook={line.split(',')[0]: line.split(',')[1].replace('\n','') for line in open('addressbook.csv','r').readlines() if line.find(',') !=-1}
 print(addressbook)
 def whois(ip):
     if ip in addressbook:
@@ -355,7 +356,7 @@ def whois(ip):
     else:
         id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
         where='{city} ({countryCode})'.format(**id)
-        open('addressbook.csv','a').write('{ip}\t{where}\n'.format(ip=ip,where=where))
+        open('addressbook.csv','a').write('{ip},{where},'.format(ip=ip,where=where.replace(',',' ')))
         return where
 
 def log_passing(req, extra='—', status='—'):
@@ -436,9 +437,9 @@ def epier(request):
         graph='<div id="{0}-graph-plot"><p>{1}</p><button type="button" class="btn btn-success" id="{0}-down"><i class="fa fa-download" style="margin-left:20px;"></i>Download</button></div>'
         html = '{down}<br/><h3>Theoretical</h3>{theonav}{theotab}<h3>Empirical</h3>{empnav}{emptab}'.format(
             down='<a class="btn btn-primary" href="/download_epistasis" download="epistasis_results.xlsx">Download</a>',
-            theotab=tabcont.format(set='theo',table=theo,graph=graph.format('theo','Circle size correlates to theoretical values (LightGray halo is std dev). Black line is empirical value. Tooltip data (hover over box) is theoretical, except for single and no mutations.')),
+            theotab=tabcont.format(set='theo',table=theo,graph=graph.format('theo','Plot of the combinations of mutations. Note that the circles can be dragged, which is useful when the lines criss-cross under a circle.')),
             theonav=tabs.format(set='theo'),
-            emptab=tabcont.format(set='emp', table=emp, graph=graph.format('emp','Circle size correlates to empirical values (LightGray halo is std dev).')),
+            emptab=tabcont.format(set='emp', table=emp, graph=graph.format('emp','Graph of the powerset of combinations mutants with circle width correlated to intensity.')),
             empnav=tabs.format(set='emp')
         )
 

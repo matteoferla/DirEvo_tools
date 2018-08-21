@@ -3,8 +3,7 @@
 set library = $1 
 set id = $2
 
-set ncodons = `sed 's/-/@/g' $id | \
-  grep -v "@" | wc -l | awk '{print $1}'`
+set ncodons = `sed 's/-/@/g' $id | grep -v "@" | wc -l | awk '{print $1}'`
 
 echo $ncodons $library > $id.dat
 

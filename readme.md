@@ -14,7 +14,7 @@ copypasting stuff to make modal about Cx approximations in pedelAA
 
 Sorted by urgency:
 
-* *glueIT* and *pedelAA* in Linux causes a segFault not in Mac. When compiled with 98 flag, it does not run.
+* *glueIT* and *pedelAA* in Linux causes a segFault not in Mac. When compiled with 98 flag, it gets stuck.
 * interlink Mutanalyst with PedelAA
 * Rosetta point mutant ∆G suggester and parser/calculator
 * *pedel* DNA/AA PCR not active

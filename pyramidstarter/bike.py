@@ -99,13 +99,24 @@ def driver(library_size, sequence_length, mean_number_of_crossovers_per_sequence
     """
     return wrap('driver',' ',library_size, sequence_length, mean_number_of_crossovers_per_sequence, list_of_variable_positions_file, outfile, xtrue)
 
-def glueit(library_size,codonfile):
+def glueit_csh(library_size,codonfile):
+    """
+    This version runs the Cshell with has issues in Linux.
+    :param library_size:
+    :param codonfile:
+    :return:
+    """
     cmd= " csh {aff}/glueIT{OS}.csh {lib:f} {cf}".format(aff=PATH,lib=library_size,cf=codonfile, OS=SUFFIX)
+    print('The command to run is {f}'.format(f=cmd))
+    return str(os.popen(cmd).read())
 
+def glueit(library_size,datfile):
+    cmd= "pyramidstarter/bikeshed/glueITc{OS} {cf}".format(aff=PATH,cf=datfile, OS=SUFFIX)
+    #print('The command to run is {f}'.format(f=cmd))
     return str(os.popen(cmd).read())
 
 def pedelAA(filename):
-    print('The command to run is ./pedel-AAc {f}'.format(f=filename))
+    #print('The command to run is ./pedel-AAc {f}'.format(f=filename))
     html=wrap('pedel-AAc',' ',filename)
     #print(html)
     data={'html': html}

@@ -110,6 +110,8 @@ int main(int argc, char* argv[])
   setupfile.ignore(1000, '\n');
   setupfile.close();
 
+// KILL DISTR
+distr=1;
   //---------------------------------------------------------------------------
   // Read codon to amino acid table.
   ifstream aa2codonfile(aa2codon_file);

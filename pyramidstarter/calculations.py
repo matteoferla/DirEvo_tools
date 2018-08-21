@@ -199,7 +199,12 @@ def glue(jsonreq):
             return json.dumps({'data': glue_out, 'html': hreply})
 
 
-def glueit(jsonreq):
+def glueit_csh(jsonreq):
+    """
+    This version runs the cshell which does not work in Linux.
+    :param jsonreq:
+    :return:
+    """
     library_size=int(jsonreq['library_size']) #it will be stringified anyway. Not sure why I am converting it.
     filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
     with open(filename, 'w') as f:
@@ -207,6 +212,21 @@ def glueit(jsonreq):
             f.write(jsonreq['codon{}'.format(i)]+'\n')
     #print('filename',filename)
     html=bike.glueit(library_size=library_size, codonfile=filename)
+    return json.dumps({'data': None, 'html': html})
+
+def glueit(jsonreq):
+    filename = os.path.join(PATH, 'tmp', '{0}.dat'.format(uuid.uuid4()))
+    with open(filename, 'w') as f:
+        library_size=int(jsonreq['library_size'])
+        num_codon=int(jsonreq['num_codons'])
+        f.write('{nc} {ls}\n'.format(nc=num_codon,ls=library_size))
+        for ci in range(1,6):
+            if 'codon'+str(ci) in jsonreq and jsonreq['codon'+str(ci)] and jsonreq['codon'+str(ci)].find('-'):
+                codon=jsonreq['codon'+str(ci)]
+                # "NWH": {"V": 3, "*": 1, "H": 2, "I": 3, "E": 1, "N": 2, "Y": 2, "Q": 1, "K": 1, "L": 4, "D": 2, "F": 2}
+                counts=Counter([codonball[codon][a] for a in codonball[codon] if a != '*'])
+                f.write(' '.join([str(counts[i]) for i in range(1,7)])+'\n')
+    html=bike.glueit(library_size=library_size, datfile=filename)
     return json.dumps({'data': None, 'html': html})
 
 def pedelAA(jsonreq):
@@ -507,7 +527,7 @@ if __name__ == "__main__":
     #pprint(codonAA({'list':'G P S'}))
     #bases='A','T','G','C'
     #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
-    #glueit({'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'})
+    print(glueit({'num_codons': 6, 'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'}))
     #print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
-    print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
-    print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
+    #print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
+    #print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
