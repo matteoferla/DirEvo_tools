@@ -19,6 +19,7 @@ def main(global_config, **settings):
                   'ajax_deepscan',
                   'deepscan_IDT96',
                   'deepscan_IDT384',
+                  'landscape',
                   'ajax_QQC',
                   'ajax_pedel',
                   'ajax_glue',
@@ -32,7 +33,8 @@ def main(global_config, **settings):
                   'ajax_email',
                   'ajax_pedelAA',
                   'ajax_driver',
-                  'ajax_probably']:
+                  'ajax_probably',
+                  'ajax_land']:
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.add_route('main', '/main/{page}')

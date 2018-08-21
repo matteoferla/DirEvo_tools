@@ -4,4 +4,5 @@ kill $(ps aux | grep 'app.py' | awk '{print $2}');
 cd pyramidstarter/bikeshed
 sh compile.sh linux;
 cd ../..;
+chmod -R 777 .
 nohup python3 app.py > pyramidstarter/static/bash_log.txt &

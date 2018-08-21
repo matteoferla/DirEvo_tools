@@ -210,6 +210,23 @@ def codonist(request):
 def driverist(request):
     return std_ajacean(request, calc.driver)
 
+@view_config(route_name='ajax_land', renderer='json')
+def lander(request):
+    try:
+        if 'demo' not in request.POST: #JSON
+            return {'html': 'You pressed DEMO'}
+        else: #FormData
+            #(new_filename, file_path) = save_file(request.POST['file'], 'xlsx')
+            #data = Epistatic.from_file(request.POST['your_study'], file_path).calculate()
+        #filename = os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
+        #data.save(filename)
+        #request.session['epistasis'] = filename
+            return {'html': 'You pressed CALC'}
+    except Exception as err:
+        print('error',err)
+        print(traceback.format_exc())
+        return {'html': 'ERROR: '+str(err)}
+
 
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
