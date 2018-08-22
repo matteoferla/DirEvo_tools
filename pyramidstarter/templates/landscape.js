@@ -23,15 +23,30 @@ $(function() {
 
       });
   });
+  $('#land_demo').click(function() {
+    $("#land_results").show();
+    $("#land_results").removeClass('hidden');
+    $("#land_results").html('<div class="alert alert-info" role="alert">Calculating</div>');
+    var data = new FormData();
+    data.append("demo", 1);
+    land_calc(data);
 
-  $('#land_calculate').click(function() {
-        $("#land_results§").show();
-        $("#land_results§").removeClass('hidden');
-        $("#land_results_status").html('<div class="alert alert-info" role="alert">Calculating</div>');
-        var data = new FormData();
-        data.append("file", document.getElementById('land_upload').files);
-        //data.append("your_study", $('input[name=your_study2]:checked').val());
-        try {
+  });
+  var heat_dataset=[]; //to be filled.. lazy scoping.
+
+  function plot_heat(n, name) {
+    var data = [
+        {   y: reply['heat_data_xlabel'],
+            z: heat_dataset[n],
+            type: 'heatmap'
+            }
+        ];
+    var layout = {title: name, yaxis: {showticklabels: true, type: 'category', dtick: 1}};
+    Plotly.newPlot('land_heatmap',data,layout);
+  }
+
+  function land_calc(data) {
+    try {
             $.ajax({
                 url: "/ajax_land",
                 type: "POST",
@@ -42,18 +57,40 @@ $(function() {
                 success: function(result) {
                     //reply = JSON.parse(result.message);
                     reply = result;
+                    //window.sessionStorage.setItem('heatmap_data',reply['heatmap_data']);
+                    heat_dataset=reply['heatmap_data'];
                     $("#land_results").html(reply['html']);
-                    $("#land_results_status").html('');
+                    $('#myTabs a:first').tab('show');
+                    $('.dropdown-toggle').dropdown();
+                    $('#land_heat_options li').on('click', function(){
+                        console.log('DATA CHANGED'+$(this).data('name'));
+                        plot_heat($(this).data('n'),$(this).data('name'));
+                        $('#land_heat_chosen_label').html($(this).data('name'));
+                    });
+
+                    plot_heat(0,'First column');
                 },
                 error: function(xhr, s) {
-                    $("#land_results").html(s);
-                    $("#land_results_status").html('<div class="alert alert-danger" role="alert">Error — server side</div>');
+                    $("#land_results").html('<div class="alert alert-danger" role="alert">Error — server side'+s+'</div>');
                 }
             });
         } catch (err) {
-            $("#land_results").html(err);
-            $("#land_results_status").html('<div class="alert alert-danger" role="alert">Error — client side</div>');
+            $("#land_results").html('<div class="alert alert-danger" role="alert">Error — client side<br/>'+err+'</div>');
         }
+  }
+
+  $('#land_calculate').click(function() {
+        $("#land_results").show();
+        $("#land_results").removeClass('hidden');
+        $("#land_results").html('<div class="alert alert-info" role="alert">Calculating</div>');
+        var data = new FormData();
+        var files=document.getElementById('land_upload').files;
+        data.append('number_of_files',files.length);
+        for (var i=0; i<files.length; i++) {
+            data.append("file_"+i.toString(), files[i]);
+        }
+        //data.append("your_study", $('input[name=your_study2]:checked').val());
+        land_calc(data);
     });
 
 });

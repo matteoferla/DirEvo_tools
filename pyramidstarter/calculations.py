@@ -522,12 +522,83 @@ def probably(jsonreq):
     plib=1-(1-p)**lib
     return json.dumps({'data': {'p': p, 'mutations':muts}, 'html': '<p>overall probability of encountering a {v} genotype in a given variant is {p:2g}, amid the library {l:2g}.</p>'.format(p=p, v=mlist, l=plib)})
 
+def pmut_renumber(scores, AAlphabet='A C D E F G H I K L M N P Q R S T V W Y',delete=[], insert=None):
+    if isinstance(AAlphabet, str):
+        AAlphabet=AAlphabet.split()
+    first_delete=[]
+    last_delete=[]
+    if delete:
+        for d in delete:
+            first_delete.append(int(d.split(':')[0]))
+            last_delete.append(int(d.split(':')[1]))
+    if insert:
+        (first_insert, insert_amount)=[int(x) for x in insert.split('+')]
+    else:
+        (first_insert, insert_amount)= None, None
+
+    if isinstance(scores, str):
+        scores=scores.split('\n')
+    #headers='resi from_resn to_resn average_ddG average_total_energy'.split()
+
+    mutdex=defaultdict(dict)
+    seq=dict()
+    for line in scores:
+        if isinstance(line, bytes):
+            line=line.decode("utf-8")
+        parts=line.split()
+        #print('THIS IS A LINE',parts)
+        if len(parts) < 2 or len(parts[1]) < 2 or parts[1][1] != '-': #the hyphen after chain...
+            continue
+        resi=int(parts[2][3:-1]) # resi is from PDB numbering.
+        if resi and resi > 0 and resi < 1e3:
+            #mutdex[resi].append([parts[2][2],parts[2][-1], parts[3], parts[4]]) # resi from_resn to_resn average_ddG average_total_energy
+            mutdex[resi][parts[2][-1]]=float(parts[3])
+            seq[resi]=parts[2][2]
+            if parts[2][2] not in mutdex[resi]:
+                mutdex[resi][parts[2][2]] = 0 # no mutation case.
+    #fix missing
+    mutdex={resi: {resn: 999 if resn not in mutdex[resi] else mutdex[resi][resn]  for resn in AAlphabet} for resi in range(1,max(mutdex.keys())+1)}
+    seq={resi: 'X' if resi not in seq else seq[resi] for resi in range(1,max(mutdex.keys())+1)}
+    #print(mutdex)
+    #fix numbering.
+    delete_flag = False
+    current_offset = 0
+    outdex={}
+    outseq={}
+    for resi in range(1,9999):
+        if len(mutdex) < resi + current_offset:
+            break
+        elif delete_flag == True or resi in first_delete:
+            if resi in last_delete: # last one to skip...
+                delete_flag = False
+            else:
+                delete_flag = True
+            current_offset -= 1
+            #print('Deleting...', resi, mutdex[resi][0][0])
+            continue
+        elif resi == first_insert:
+            outdex[resi]=mutdex[resi+current_offset]
+            outseq[resi]=seq[resi+current_offset]
+            for n in range(insert_amount):
+                current_offset += 1
+                outdex[resi] ={resn: 0 for resn in AAlphabet}
+        elif not resi in mutdex: # no offsetting... just filling
+            outdex[resi] = {resn: 0 for resn in AAlphabet}
+            outseq[resi] = seq[resi + current_offset]
+        else:
+            outdex[resi] = mutdex[resi + current_offset]
+            outseq[resi] = seq[resi + current_offset]
+    return outdex, outseq
+
+
 if __name__ == "__main__":
     #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
     #pprint(codonAA({'list':'G P S'}))
     #bases='A','T','G','C'
     #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
-    print(glueit({'num_codons': 6, 'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'}))
+    #print(glueit({'num_codons': 6, 'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'}))
     #print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
     #print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
     #print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
+    #print(pmut_renumber(open('pyramidstarter/static/dog-intermediate_scores.txt','r').read()))
+    pass

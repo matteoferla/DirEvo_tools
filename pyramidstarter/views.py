@@ -213,19 +213,65 @@ def driverist(request):
 @view_config(route_name='ajax_land', renderer='json')
 def lander(request):
     try:
-        if 'demo' not in request.POST: #JSON
-            return {'html': 'You pressed DEMO'}
+        scores=[]
+        seqs=[] #checking!
+        headers=[]
+        AAlphabet = 'A C D E F G H I K L M N P Q R S T V W Y'#to be user supplied.
+        if isinstance(AAlphabet, str):
+            AAlphabet = AAlphabet.split()
+        if 'demo' in request.POST: #JSON
+            for file in ['unreact','intermediate','whole']:
+                s,q=calc.pmut_renumber(open('pyramidstarter/static/dog-{f}_scores.txt'.format(f=file),'r').readlines())
+                scores.append(s)
+                seqs.append(q)
+            headers=['Substrate','Transition','Product']
         else: #FormData
-            #(new_filename, file_path) = save_file(request.POST['file'], 'xlsx')
-            #data = Epistatic.from_file(request.POST['your_study'], file_path).calculate()
-        #filename = os.path.join(PATH, 'tmp', '{0}.{1}'.format(uuid.uuid4(), '.xlsx'))
-        #data.save(filename)
-        #request.session['epistasis'] = filename
-            return {'html': 'You pressed CALC'}
+            #print('N files...',int(request.POST['number_of_files']))
+            for fi in range(int(request.POST['number_of_files'])):
+                #print(fi,request.POST['file_'+str(fi)])
+                file=request.POST['file_'+str(fi)].file
+                data=[]
+                while 1:
+                    line = file.readline()
+                    if not line: break
+                    data.append(line)
+                s,q=calc.pmut_renumber(data)
+                scores.append(s)
+                seqs.append(q)
+                headers.append(str(request.POST['file_'+str(fi)].filename)) #hcange in future based on user submission
+        #print(headers)
+        table = '<div class="table-responsive"><table class="table table-striped"><thead class="thead-dark">{thead}</thead><tbody>{tbody}</tbody></table></div>'
+        td = '<td>{}</td>'
+        th = '<th>{}</th>'
+        tr = '<tr>{}</tr>'
+        #print(scores)
+        made_table = table.format(thead=tr.format(''.join([th.format(x) for x in ['Residue ID','From residue','To residue'] + headers])),
+                            tbody=''.join(
+                                [tr.format(''.join(
+                                    [td.format(str(x)) for x in [round(i/20+1),
+                                                                 seqs[0][round(i/20)+1],
+                                                                 AAlphabet[i % 20],
+                                                                 *[scores[j][round(i/20)+1][AAlphabet[i % 20]] for j in range(len(scores))]
+                                                                 ]
+                                     ]))
+                                for i in range(20*len(scores[0])-20)]))
+        def sc_norm(n):
+            if n > 10:
+                return 10
+            elif n < -10:
+                return -10
+            else:
+                return n
+        hdata=[[[sc_norm(sc[resi][resn]) for resi in range(1,len(sc)+1)] for resn in AAlphabet] for sc in scores]
+        hxlabel=AAlphabet
+        opt='<li class="fake-link" data-n={i} data-name={name}><span id="land_heat_option_{name}">{name}</span></li>'
+        html=open(os.path.join(PATH, 'templates', 'landscape_results.pt')).read()\
+            .format(table=made_table,heat_opt='\n'.join([opt.format(name=x,i=i) for i,x in enumerate(headers)]))
+        return {'html': html,'heatmap_data':hdata,'heat_option':opt,'heat_data_xlabel':hxlabel}
     except Exception as err:
         print('error',err)
         print(traceback.format_exc())
-        return {'html': 'ERROR: '+str(err)}
+        return {'html': '<div class="alert alert-danger" role="alert">Error — server side:<br/>{e}</div>'.format(e=str(err))}
 
 
 @view_config(route_name='ajax_email', renderer='json')
