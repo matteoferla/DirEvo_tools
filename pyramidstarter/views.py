@@ -56,8 +56,12 @@ def talk_to_user():
     outer='''<div class="row" id="warning"><div class="col-md-8 col-md-offset-2">{note}</div></div>'''
     if STATUS == 'normal':
         return '<!-- all nominal -->'
+    elif STATUS == 'beta':
+        return outer.format(note='<div class="bs-callout bs-callout-info"><h4>Info</h4>This is still in beta. This version may be unstable.</div>')
     elif STATUS == 'construction':
-        return outer.format(note='<div class="bs-callout bs-callout-warning"><h4>Warning</h4>Matteo is playing with the server. This version may be unstable.</div>')
+        return outer.format(note='<div class="bs-callout bs-callout-warning"><h4>Warning</h4>Matteo is actively working with the server. It may go down at any time.</div>')
+    elif STATUS == 'red':
+        return outer.format(note='<div class="bs-callout bs-callout-danger"><h4>Danger</h4>Somebody pressed the forbidden link.</div>')
     else:
         return '<!-- no warnings -->'
 
@@ -282,7 +286,7 @@ def lander(request):
                 p=scores[pair[0]]
                 n = scores[pair[1]]
                 hdata.append([[sc_norm(p[resi][resn]-n[resi][resn]) for resi in range(1,len(p)+1)] for resn in hylabel])
-                headers.append(headers[pair[0]]+' – '+headers[pair[1]])
+                headers.append(headers[pair[0]]+'&nbsp;&ndash;&nbsp;'+headers[pair[1]])
 
         opt='<li class="fake-link" data-n={i} data-name={name}><span id="land_heat_option_{name}">{name}</span></li>'
         opt_seq='<li role="separator" class="divider"></li>'
@@ -298,7 +302,6 @@ def lander(request):
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
     global GMAIL_PWD, GMAIL_USER
-    print(GMAIL_PWD, GMAIL_USER)
     reply = request.json_body
     subject = 'Comment from ' + reply['message']
     body = reply['name']
@@ -356,7 +359,8 @@ def home_callable(request):
 def upcoming_callable(request):
     log_passing(request)
     md = markdown.markdown(open('readme.md').read())
-    return ready_fields('m_upcoming', md, 'main.js')
+    wrap='<div class="row" id="§upcoming"><div class="col-lg-8  col-lg-offset-2"><div class="panel panel-default"><div class="panel-heading"><h1 class="panel-title">Upcoming</h1></div><div class="panel-body">{}</div></div></div></div>'
+    return ready_fields('m_upcoming', wrap.format(md), 'main.js')
 
 
 @view_config(route_name='admin', renderer=FRAME)
@@ -375,18 +379,24 @@ def update_callable(request):
 @view_config(route_name='set', renderer='json')
 def set_callable(request):
     """
-    For now the only setting changeable is /set?pwd=****
+    For now the only setting changeable is /set?pwd=**** and /set?status=construction
     :param request:
     :return:
     """
-    global GMAIL_SET, GMAIL_PWD
-    if not GMAIL_SET:
-        GMAIL_PWD = request.params['pwd']
-        GMAIL_SET = True
-        print('Password for gmail set')
+
+    if 'pwd' in request.params:
+        global GMAIL_SET, GMAIL_PWD
+        if not GMAIL_SET:
+            GMAIL_PWD = request.params['pwd']
+            GMAIL_SET = True
+            print('Password for gmail set')
+            return 'Sucess'
+        else:
+            return 'Password already set.'
+    elif 'status' in request.params:
+        global STATUS
+        STATUS = request.params['status']
         return 'Sucess'
-    else:
-        return 'Password already set.'
 
 
 @view_config(route_name='main', renderer=FRAME)

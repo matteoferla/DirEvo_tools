@@ -1,15 +1,24 @@
-<div class="row" id="§pedel">
+<div class="row" id="§admin">
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <h1>Admin page</h1>
-        <!--
         <div class="row">
-            <div class="input-group">
-      <input type="password" class="form-control" placeholder="****" id="admin_pwd">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="button" id="admin_set"><i class="fa fa-key" aria-hidden="true"></i></button>
-      </span>
+            <h1>Links</h1>
+            <a href="/log" class="btn btn-info"><i
+                        class="fa fa-server" aria-hidden="true"></i> Server log</a>
+                <a href="/static/bash_log.txt" class="btn btn-info"><i
+                        class="fa fa-server" aria-hidden="true"></i> Bash log</a>
+                <a class="btn btn-success" href="/upcoming"><i
+                        class="fa fa-sticky-note-o" aria-hidden="true"></i> To Do list</a>
+            <h1>Warnings</h1>
+            <a href="/set?status=normal" class="btn btn-info" target="_blank"><i
+                        class="fa fa-flag-checkered" aria-hidden="true"></i> None</a>
+            <a href="/set?status=construction" class="btn btn-info" target="_blank"><i
+                        class="fa fa-briefcase" aria-hidden="true"></i> under construction</a>
+            <a href="/set?status=beta" class="btn btn-info" target="_blank"><i
+                        class="fa fa-exclamation-triangle" aria-hidden="true"></i> Beta</a>
+            <a href="/set?status=red" class="btn btn-info" target="_blank"><i
+                        class="fa fa-fire-extinguisher" aria-hidden="true"></i> Don't press this.</a>
     </div>
-    </div> -->
-    </div>
+</div>
 </div>

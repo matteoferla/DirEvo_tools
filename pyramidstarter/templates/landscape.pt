@@ -47,7 +47,7 @@
                     <div class="col-lg-6 col-lg-offset-1">
                         <div class="input-group">
                           <span class="input-group-addon" id="land_AA_order_label">AA oder</span>
-                          <input type="text" class="form-control" value="A C D E F G H I K L M N P Q R S T V W Y" aria-describedby="land_AA_order_label" id="land_AA_order">
+                          <input type="text" class="form-control" value="I V L F C M A G T S W Y P H N D E Q K R" aria-describedby="land_AA_order_label" id="land_AA_order">
                         </div>
                     </div><br/>
                 </div><br/>

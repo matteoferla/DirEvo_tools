@@ -96,7 +96,21 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="${m_about}"><a href="/main/about">About</a></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Change theme <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="themeSelector">
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li class="${m_about}"><a href="/main/about">About</a></li>
+                    <li class="${m_about}"><a href="/admin">Admin</a></li>
+                    <li class="${m_about}"><a href="/upcoming">Upcoming</a></li>
+                  </ul>
+                </li>
+                <li> <a onclick="$('#comment_modal').modal('show');" style="cursor:pointer">Comment</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -129,24 +143,11 @@ ${structure: codon_modal}
 
 <!--footer-->
 <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
-<div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro;"> <!-- opacity: 0.95-->
+<div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro;" id="footer"> <!-- opacity: 0.95-->
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-4"><p class="text-muted">This is in beta. <b>GDPR statement</b>: Be aware that this site keeps the data you submit until system reset for debugging purposes &mdash;once live it will not.</p></div>
-            <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Change theme <i class="fa fa-paint-brush" aria-hidden="true"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="themeSelector">
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-default" onclick="$('#comment_modal').modal('show');">Comment <i
-                        class="fa fa-comment" aria-hidden="true"></i></button>
-            </div>
+            <div class="col-md-offset-1 col-md-10"><p class="text-muted"><b>GDPR statement</b>: Be aware that this site keeps the data you submit until system reset for debugging purposes &mdash;once live it will not probably. But for now, while I debug it I will kidnap your first born.</p></div>
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
     </div>
 </div>
@@ -212,6 +213,11 @@ ${structure: codon_modal}
 
  ga('create', 'UA-66652240-4', 'auto');
  ga('send', 'pageview');
+
+$(document).ready( function() {
+    if (window.localStorage.getItem('GDPR',1)) {$("#footer").hide();}
+    $("#footer").click(function () {$("#footer").hide(); window.localStorage.setItem('GDPR',1)});
+});
 
 ${structure: code}
 </script>

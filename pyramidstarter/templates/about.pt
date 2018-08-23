@@ -1,0 +1,24 @@
+<div class="row" id="§landscape">
+    <div class="col-lg-8  col-lg-offset-2">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+                <h1 class="panel-title">About</h1>
+            </div>
+            <div class="panel-body">
+                <h2>Background</h2>
+                Wayne and Andrew wrote this in the naughties. I rewrote a lot of it and added some more.
+                <h2>Links</h2>
+                The mutagenesis module is here:
+    <a class="btn btn-default" href="https://github.com/matteoferla/mutagenesis"><i
+                            class="fa fa-github" aria-hidden="true"></i> MF's Github: Mutagenesis</a>
+    <br/>
+    What to run this server locally or copy paste something? Then check out
+    <a class="btn btn-default" href="https://github.com/matteoferla/pedel2"><i
+                            class="fa fa-github" aria-hidden="true"></i> MF's Github: Pedel2</a><br/>
+                Looking for the admin page?
+    <a class="btn btn-default" href="/admin"><i
+                            class="fa fa-gamepad" aria-hidden="true"></i> Top Secret</a>
+            </div>
+</div>
+    </div>
+</div>
