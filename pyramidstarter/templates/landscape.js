@@ -15,6 +15,22 @@ $(function() {
           var input = $(this).parents('.input-group').find(':text'),
               log = numFiles > 1 ? numFiles + ' files selected' : label;
 
+          for (var fi=0; fi < numFiles; fi++) {
+              var opts='File '+(1+fi).toString()+' label: <div class="input-group"><div class="input-group-btn"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="land_type_label_drop_'+fi.toString()+'">Type </span><span class="caret"></span></button><ul class="dropdown-menu" data-n="'+fi.toString()+'"><li data-way="-" style="cursor:pointer">Unbound/Substrate</li><li data-way="+" style="cursor:pointer">Intermediate/Product</li></ul></div><!-- /btn-group --><input type="text" class="form-control" aria-label="label" data-n="'+fi.toString()+'" value="'+event.target.files[fi].name+'"></div><!-- /input-group -->';
+              $('#land_file_labels').append(opts);
+          }
+          $('#land_file_labels li').each(function(index) {
+            $(this).click(function() {
+                var t=$(this).data('way');
+                var n=$(this).parent().data('n');
+                $('#land_type_label_drop_'+n).html(t);
+                $('#land_type_label_drop_'+n).data('way',t);
+                $('#land_type_label_drop_'+n).data('n',n);
+            });
+            });
+
+          $('.dropdown-toggle').dropdown();
+
           if( input.length ) {
               input.val(log);
           } else {
@@ -36,7 +52,8 @@ $(function() {
 
   function plot_heat(n, name) {
     var data = [
-        {   y: reply['heat_data_xlabel'],
+        {   x: reply['heat_data_xlabel'],
+            y: reply['heat_data_ylabel'],
             z: heat_dataset[n],
             type: 'heatmap'
             }
@@ -86,8 +103,10 @@ $(function() {
         var data = new FormData();
         var files=document.getElementById('land_upload').files;
         data.append('number_of_files',files.length);
+        data.append('AAlphabet',$('#land_AA_order').val());
         for (var i=0; i<files.length; i++) {
             data.append("file_"+i.toString(), files[i]);
+            data.append("way_"+i.toString(), $('#land_type_label_drop_'+n).data('way'));
         }
         //data.append("your_study", $('input[name=your_study2]:checked').val());
         land_calc(data);

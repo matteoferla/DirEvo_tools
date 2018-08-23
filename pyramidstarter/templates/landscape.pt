@@ -32,7 +32,7 @@
                 <pre><code>pmut_scan_parallel -ex1 -ex1aro -ex2 -extrachi_cutoff 1 -DDG_cutoff 999 -mute basic core -s your_structure.pdb > scores.txt</code></pre>
                 The <code>-DDG_cutoff 999</code> flag is high because we want all mutants. Actually, despite the memory,
                 adding the <code>-output_mutant_structures true</code> flag is also rather handy for the analysis.
-                <br/>Provide one or more files (do not worry about header rows):
+                <br/>Provide one or more files (do not worry about header rows; the PDB numbering will be used. No negative positions):
                 <div class="row">
                     <div class="col-lg-5" id="Land_uploads">
                         <div class="input-group">
@@ -45,6 +45,15 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-lg-offset-1">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="land_AA_order_label">AA oder</span>
+                          <input type="text" class="form-control" value="A C D E F G H I K L M N P Q R S T V W Y" aria-describedby="land_AA_order_label" id="land_AA_order">
+                        </div>
+                    </div><br/>
+                </div><br/>
+                <div class="row" id="land_file_labels"></div><br/>
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" class="btn btn-warning" id="land_clear"><i class="fa fa-eraser"
                                                                                              aria-hidden="true"></i>

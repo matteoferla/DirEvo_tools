@@ -1,4 +1,6 @@
 <h3>Results</h3>
+<b>Remember:</b> a decrease in Gibbs energy of the system is stabilising, an increase is destabilising.<br/>
+
 <br/>
 <div>
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
@@ -13,6 +15,7 @@
         <div class="tab-pane fade in active" id="land_results_table" role="tabpanel">{table}</div>
         <div class="tab-pane fade" id="land_results_graph" role="tabpanel">
             <h4>Heatmap</h4>
+            REU greater or lower than ±10 have been made to ten. Don't trust proline mutations.
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="land_heat_chosen_label">
                 Dataset

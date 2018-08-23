@@ -12,6 +12,7 @@ import urllib.request
 
 import markdown
 import pyramidstarter.calculations as calc
+from itertools import product
 from pyramidstarter.epistasis import Epistatic
 from pyramid.view import view_config, notfound_view_config
 from pyramid.response import FileResponse
@@ -48,7 +49,8 @@ def basedict(**kwargs):
             'm_home': 'not-active',
             'm_deep': 'not-active',
             'm_about': 'not-active',
-            'm_QQC': 'not-active'}
+            'm_QQC': 'not-active',
+            'm_landscape': 'not-active'}
 
 def talk_to_user():
     outer='''<div class="row" id="warning"><div class="col-md-8 col-md-offset-2">{note}</div></div>'''
@@ -216,16 +218,19 @@ def lander(request):
         scores=[]
         seqs=[] #checking!
         headers=[]
-        AAlphabet = 'A C D E F G H I K L M N P Q R S T V W Y'#to be user supplied.
-        if isinstance(AAlphabet, str):
-            AAlphabet = AAlphabet.split()
+        ways=[]
+        AAlphabet = 'A C D E F G H I K L M N P Q R S T V W Y'.split()
         if 'demo' in request.POST: #JSON
             for file in ['unreact','intermediate','whole']:
                 s,q=calc.pmut_renumber(open('pyramidstarter/static/dog-{f}_scores.txt'.format(f=file),'r').readlines())
                 scores.append(s)
                 seqs.append(q)
             headers=['Substrate','Transition','Product']
+            ways=['-','+','+']
         else: #FormData
+            AAlphabet=request.POST['AAlphabet']
+            if isinstance(AAlphabet, str):
+                AAlphabet = AAlphabet.split()
             #print('N files...',int(request.POST['number_of_files']))
             for fi in range(int(request.POST['number_of_files'])):
                 #print(fi,request.POST['file_'+str(fi)])
@@ -238,6 +243,7 @@ def lander(request):
                 s,q=calc.pmut_renumber(data)
                 scores.append(s)
                 seqs.append(q)
+                ways.append(request.POST['way_'+str(fi)])
                 headers.append(str(request.POST['file_'+str(fi)].filename)) #hcange in future based on user submission
         #print(headers)
         table = '<div class="table-responsive"><table class="table table-striped"><thead class="thead-dark">{thead}</thead><tbody>{tbody}</tbody></table></div>'
@@ -262,12 +268,27 @@ def lander(request):
                 return -10
             else:
                 return n
-        hdata=[[[sc_norm(sc[resi][resn]) for resi in range(1,len(sc)+1)] for resn in AAlphabet] for sc in scores]
-        hxlabel=AAlphabet
+
+        # make basic heatplot data
+        hxlabel = [seqs[0][i] + str(i) for i in range(1, len(seqs[0]) + 1)]
+        hylabel = list(reversed(AAlphabet))
+        hdata=[[[sc_norm(sc[resi][resn]) for resi in range(1,len(sc)+1)] for resn in hylabel] for sc in scores]
+
+        #make substraction
+        pos=[i for i,w in enumerate(ways) if w == '+']
+        neg = [i for i, w in enumerate(ways) if w == '-']
+        if pos and neg:
+            for pair in product(pos,neg):
+                p=scores[pair[0]]
+                n = scores[pair[1]]
+                hdata.append([[sc_norm(p[resi][resn]-n[resi][resn]) for resi in range(1,len(p)+1)] for resn in hylabel])
+                headers.append(headers[pair[0]]+' – '+headers[pair[1]])
+
         opt='<li class="fake-link" data-n={i} data-name={name}><span id="land_heat_option_{name}">{name}</span></li>'
+        opt_seq='<li role="separator" class="divider"></li>'
         html=open(os.path.join(PATH, 'templates', 'landscape_results.pt')).read()\
             .format(table=made_table,heat_opt='\n'.join([opt.format(name=x,i=i) for i,x in enumerate(headers)]))
-        return {'html': html,'heatmap_data':hdata,'heat_option':opt,'heat_data_xlabel':hxlabel}
+        return {'html': html,'heatmap_data':hdata,'heat_option':opt,'heat_data_ylabel':hylabel,'heat_data_xlabel':hxlabel}
     except Exception as err:
         print('error',err)
         print(traceback.format_exc())
@@ -305,7 +326,7 @@ def ajacean_test(request):
 
 
 ############### Main views #####################
-barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc m_silico m_probably'.split()
+barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc m_silico m_probably m_landscape'.split()
 
 
 def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_flag=False):
