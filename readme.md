@@ -5,43 +5,36 @@
 # Intro
 Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but will change name when inspired.
 See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
-It is currently hosted on a Raspberry pi in my flat.
-
-# Currently working on
-copypasting stuff to make modal about Cx approximations in pedelAA
+It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
 # To Do list
 
 Sorted by urgency:
 
-* interlink Mutanalyst with PedelAA
-* *Mutanalyst* is using old JS still. Not Ajax and python.
-* *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan.
-* *mutationprimer*. make more elegant the determination of server or localhost.
-* *mutationprimer* code currently written until making a function in mutant_wrapper...
-* *mutationprimer* why is Y66 actually Y67? Does GFP not start from ATG??
-* *mutationprimer* IDT does not accept lowercase degenrte nts.
-* *mutatcaller* does not check for terminal indels if set to local. Currently set to global.
-* *mutatcaller* silent mutations! Also ratio of these!
 * *Glue* works, but make it print a graph at different values.
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made.
 * *PedelAA* links to modals in sub table.
 * *Pedel-AA* graphs
 * *QQC* wire reverse
 * *driver* output could be made into a nice table actually.
-* *mutatcaller* input penalty values for match. what the hell does this mean?
-returns mutations.    
+* *mutationprimer* why is Y66 actually Y67? Does GFP not start from ATG??
+* *mutationprimer* IDT does not accept lowercase degenrte nts.
+* *mutatcaller* does not check for terminal indels if set to local. Currently set to global.
+* *mutatcaller* silent mutations! Also ratio of these!
+* *mutatcaller* input penalty values for match returns mutations. what the hell does this mean?
 * Scheme 19c and 20c in QQC are incomplete!!
 * js of misc for codon has error due to staticmethod being called... changed the static methods fom QQC.
 * GlueIT in pt needs js to change the number of codons.
-* Glue needs a switch like Pedel
+* Glue needs a switch like Pedel —or does Pedel need two pages?
 * URL query string needs to be integrated
-* make size responsive.
+* make size responsive. —why would anyone use their mobile?
 * https. switch to gnunicorn from waitress or let Apache server handle it.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
-* Also edit js side to catch client side errors.
+* Also edit js side to catch client side errors. —Some do already...
 * Rosetta landscape. Add distribution of mutations and norm thinggy like my matlab script has.
-
+* *Mutanalyst* is using old JS still. Not Ajax and python. —Is this actually urgent??
+* *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan. —So?
+* *mutationprimer* code currently written until making a function in mutant_wrapper... —what does this mean?
 
 # Bullcrap area
 
@@ -52,6 +45,7 @@ returns mutations.
 Pipedream. fastq files are several GB big, thus they cannot be uploaded.
 However, a small simple custom alignment algorithm running with GPU.JS could do it quite fast.
 
+## Benchling integration
 NB. Benchling API: Benchling API reqires a key. This seems to be issued on request to devs. SO this is not an option.
 
 ## Main
