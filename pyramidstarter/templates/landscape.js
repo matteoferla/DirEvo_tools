@@ -26,6 +26,7 @@ $(function() {
                 $('#land_type_label_drop_'+n).html(t);
                 $('#land_type_label_drop_'+n).data('way',t);
                 $('#land_type_label_drop_'+n).data('n',n);
+                $(this).parent().parent().find('button').removeClass('btn-default').addClass('btn-success');
             });
             });
 
@@ -50,11 +51,32 @@ $(function() {
   });
   var heat_dataset=[]; //to be filled.. lazy scoping.
 
+  function plot_distro(n, name) {
+    var flatner =function (accumulator, currentValue) {return accumulator.concat(currentValue)};
+    var flat_data = reply['data'][n].reduce(flatner, []).reduce(flatner, []);
+    var data = [
+        {   x: flat_data,
+            type: 'histogram'
+            }
+        ];
+    var layout = {title: name, xaxis: {title: '∆∆G',autorange: 'reversed'},yaxis: {title: 'mutations in bin'}};
+    Plotly.newPlot('land_distro',data,layout);
+    var total= flat_data.length;
+    var dead=flat_data.reduce(function (accumulator,currentValue) {return (currentValue > 19 ? accumulator+1 : accumulator)},0);
+    var neg=flat_data.reduce(function (accumulator,currentValue) {return (currentValue > 1 && currentValue < 19 ? accumulator+1 : accumulator)},0);
+    var neutro=flat_data.reduce(function (accumulator,currentValue) {return (currentValue < 1 && currentValue > -1 ? accumulator+1 : accumulator)},0);
+    var pos=flat_data.reduce(function (accumulator,currentValue) {return (currentValue < -1 ? accumulator+1 : accumulator)},0);
+    $("#land_distro_dead").html(dead.toString()+' ('+Math.round(dead/total*100).toString()+'%)');
+    $("#land_distro_neg").html(neg.toString()+' ('+Math.round(neg/total*100).toString()+'%)');
+    $("#land_distro_neutro").html(neutro.toString()+' ('+Math.round(neutro/total*100).toString()+'%)');
+    $("#land_distro_pos").html(pos.toString()+' ('+Math.round(pos/total*100).toString()+'%)');
+  }
+
   function plot_heat(n, name) {
     var data = [
         {   x: reply['heat_data_xlabel'],
             y: reply['heat_data_ylabel'],
-            z: heat_dataset[n],
+            z: reply['data'][n],
             type: 'heatmap'
             }
         ];
@@ -73,19 +95,26 @@ $(function() {
                 contentType: false,
                 success: function(result) {
                     //reply = JSON.parse(result.message);
-                    reply = result;
+                    reply = result; //global!
                     //window.sessionStorage.setItem('heatmap_data',reply['heatmap_data']);
-                    heat_dataset=reply['heatmap_data'];
+                    //heat_dataset=reply['heatmap_data'];
                     $("#land_results").html(reply['html']);
                     $('#myTabs a:first').tab('show');
                     $('.dropdown-toggle').dropdown();
+
                     $('#land_heat_options li').on('click', function(){
-                        console.log('DATA CHANGED'+$(this).data('name'));
+                        //console.log('DATA CHANGED'+$(this).data('name'));
                         plot_heat($(this).data('n'),$(this).data('name'));
                         $('#land_heat_chosen_label').html($(this).data('name'));
                     });
-
                     plot_heat(0,'First column');
+
+                    $('#land_distro_options li').on('click', function(){
+                        //console.log('DATA CHANGED'+$(this).data('name'));
+                        plot_distro($(this).data('n'),$(this).data('name'));
+                        $('#land_distro_chosen_label').html($(this).data('name'));
+                    });
+                    plot_distro(0,'First column');
                 },
                 error: function(xhr, s) {
                     $("#land_results").html('<div class="alert alert-danger" role="alert">Error — server side'+s+'</div>');
@@ -106,7 +135,7 @@ $(function() {
         data.append('AAlphabet',$('#land_AA_order').val());
         for (var i=0; i<files.length; i++) {
             data.append("file_"+i.toString(), files[i]);
-            data.append("way_"+i.toString(), $('#land_type_label_drop_'+n).data('way'));
+            data.append("way_"+i.toString(), $('#land_type_label_drop_'+i).data('way'));
         }
         //data.append("your_study", $('input[name=your_study2]:checked').val());
         land_calc(data);

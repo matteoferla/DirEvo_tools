@@ -266,10 +266,10 @@ def lander(request):
                                      ]))
                                 for i in range(20*len(scores[0])-20)]))
         def sc_norm(n):
-            if n > 10:
-                return 10
-            elif n < -10:
-                return -10
+            if n > 20:
+                return 20
+            elif n < -20:
+                return -20
             else:
                 return n
 
@@ -288,11 +288,14 @@ def lander(request):
                 hdata.append([[sc_norm(p[resi][resn]-n[resi][resn]) for resi in range(1,len(p)+1)] for resn in hylabel])
                 headers.append(headers[pair[0]]+'&nbsp;&ndash;&nbsp;'+headers[pair[1]])
 
-        opt='<li class="fake-link" data-n={i} data-name={name}><span id="land_heat_option_{name}">{name}</span></li>'
+        opt='<li class="fake-link" data-n={i} data-name={name}><span id="land_{plot}_option_{name}">{name}</span></li>'
         opt_seq='<li role="separator" class="divider"></li>'
         html=open(os.path.join(PATH, 'templates', 'landscape_results.pt')).read()\
-            .format(table=made_table,heat_opt='\n'.join([opt.format(name=x,i=i) for i,x in enumerate(headers)]))
-        return {'html': html,'heatmap_data':hdata,'heat_option':opt,'heat_data_ylabel':hylabel,'heat_data_xlabel':hxlabel}
+            .format(table=made_table,
+                    heat_opt='\n'.join([opt.format(name=x,i=i,plot='heat') for i,x in enumerate(headers)]),
+                    distro_opt='\n'.join([opt.format(name=x, i=i,plot='distro') for i, x in enumerate(headers)])
+                    )
+        return {'html': html,'data':hdata,'heat_data_ylabel':hylabel,'heat_data_xlabel':hxlabel}
     except Exception as err:
         print('error',err)
         print(traceback.format_exc())

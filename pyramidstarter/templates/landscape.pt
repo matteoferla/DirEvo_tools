@@ -26,7 +26,6 @@
                     relevant David Baker paper in addition to us...
                 </div>
                 <h3>Input</h3>
-                <div class="alert alert-info" role="alert">Make user alter names somewhere...</div>
                 The input files for this tool are the outputs from a pmut_scan run launched along with relevant
                 constraints and params files thusly:<br/>
                 <pre><code>pmut_scan_parallel -ex1 -ex1aro -ex2 -extrachi_cutoff 1 -DDG_cutoff 999 -mute basic core -s your_structure.pdb > scores.txt</code></pre>
