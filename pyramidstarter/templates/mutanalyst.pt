@@ -5,20 +5,39 @@
                 <h1 class="panel-title">Mutanalyst — mutational load and spectrum calculator</h1>
             </div>
             <div class="panel-body">
-                <h2>Mutanalyst</h2>
+                <h2>Mutanalyst <img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h2>
                 <h3>Description</h3>
-                <div class="bs-callout bs-callout-info">
-                    <h4>Add</h4>Description</div>
+                    <p>An online tool for assessing the mutational spectrum of epPCR libraries with poor sampling.</p>
+                    <h3>Background</h3>
+                    <p>Error prone PCR is a method to create a pool of amplicons with some random errors. For the best results the number of mutations and the spectrum of the mutations needs to be controlled, hence the need for a test library. The calculations of a test libray are slightly laborious and are affected by the very small sample size. This calculator tries to overcome these two issues by computing the mutational biases given a starting sequence and list of mutant genotypes, by calculating the mutations per sequence by fitting it to a Poisson distribution and by estimating the errors in the values.
+                    In particular, the errors are
+                    calculated using the assumption that a mutation and its complementary are equally likely in light of the double helix
+                    nature of DNA (<i>e.g.</i> A to G on one strand will result in T to C on the other). For the specific formulae used see <a href="/static/variance_note.html" data-tooltip="walkthrough of variance calculations">	this note about propagating errors.</a><br/>
+                    The program can calculate mutation frequencies from the list of mutations found and the template sequence or it can also accept the frequencies directly. The <a href="javascript:Btn_demo();">'Demo'</a> values are from an actual experiment.</p>
                 <br/>
                 <div class="bs-callout bs-callout-warning">
                     <h4>Add</h4>It is still using the JS module. Recode to run off server.</div>
                 <!--section-->
                 <h3>Choose starting point</h3>
-                - start from wild type sequence and ab1 files of sampled naïve library
-                - start from wild type sequence and mutant genotype
-                - start from spectrum
+                <div class="bs-callout bs-callout-info">
+                    <h4>Hint</h4>What to start from wild type sequence and ab1 files of sampled naïve library? See mutantcaller.</div>
+                There are two possible starting points for mutanalysts.
+                <br/>One is proving a sequence and the mutations sampled, for which the mutational load, mutational spectrum and the mutational bias indicators will be calculated.
+                <br/>The other is more downstream, wherein one proves a mutational spectrum and mutational load and the mutational bias indicators will be calculated.<br/>
+                <div class="input-group">
+                <span class="input-group-addon" data-toggle="tooltip"
+                      title="Choose starting point"
+                      data-placement="top">Choose:</span>
+                <input type="checkbox" class="switch" id="mutanalyst_method" checked data-off-text="Spectrum"
+                       data-on-text="Mutations" data-off-color="warning" data-size="large" checked>
+            </div>
+                <br/>
+                <br/>If you want to know what mutations you have in a series of ab1 file check out out <a href="main/mutantcaller">Mutantcaller</a>.
+                <br/>If you want to know the library composition (<i>e.g.</i> redundancy) check out <a href="main/pedel">PedelAA</a> or go to the bottom of this page.
+
                 <!--section-->
-                <h3>Starting from a sequence and a mutant genotype list</h3>
+                <div class="row" id="mutanalyst_seq§">
+                    <h3>Starting from a sequence and a mutant genotype list</h3>
                 <!--section-->
                 <h4>Sequence</h4>
                 <p>In frame sequence that was mutagenised. Note that all symbols that aren't uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> '>T. maritima Cystathionine &beta;-lyase'), therefore for masked sequences use lowercase.</p>
@@ -40,6 +59,12 @@
                         </div>
                     </div>
                 <!--section-->
+                    <h4>Library size</h4>
+                    For Pedel-AA calculations, the library size is required.<br/>
+                    <div class="input-group">
+  <span class="input-group-addon" id="library_addon">Size</span>
+  <input type="number" class="form-control" placeholder="1000000" aria-describedby="library_addon" id="library_size">
+</div>
                 <h4>Mutations found</h4>
                 <p>This is the list of the mutations found. Identifying the mutations is best done with visual checks, but if the process needs speeding up the process, <a href="https://dl.dropboxusercontent.com/u/73404587/website/mutation_counter.html">this small
                     helper script</a> may help.
@@ -73,8 +98,9 @@
                         <button type="button" class="btn btn-default" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset
                         </button>
                     </div>
-                </div>
-                <!--section-->
+                </div></div>
+                <div class="row" id="mutanalyst_freq§">
+                    <!--section-->
                 <h3>Mutational frequency</h3>
                 <div class="bs-callout bs-callout-info">
                     <h4>Required coding change</h4>Copy <code>.marginless</code> CSS.</div>
@@ -95,8 +121,11 @@
                 </div>
                 <p class=marginless>
                     If the λ<sub>Poisson</sub> and average are very different and the plot is very poor, sequencing more variants from the test library may be reccomendable.
+
+                </div>
+                <div class="row" id="mutanalyst_freq_alt_in§">
                     <!--section-->
-                    <h2><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations</h2>
+                    <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations</h3>
                     <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
                     <table width="50%" border="0" id="mutTable_raw">
                         <thead>
@@ -221,6 +250,8 @@
                             </button>
                         </div>
                     </div>
+                </div>
+                <div class="row" id="mutanalyst_corrected§">
                     <!--section-->
                     <h2>Corrected mutation incidence</h2>
                     <table width="50%" class="clearless">
@@ -282,10 +313,9 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    <!--section-->
+<!--section-->
                     <h3>Graphical Representation</h3>
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve" style='stroke-width: 0px; background-color: white;'>
                         <text transform="matrix(1 0 0 1 27.1714 46.6031)" font-family="'Verdana'" font-size="36">A</text>
                         <text transform="matrix(1 0 0 1 25.5189 224.1352)" font-family="'Verdana'" font-size="36">G</text>
                         <text transform="matrix(1 0 0 1 194.2528 46.6032)" font-family="'Verdana'" font-size="36">C</text>
@@ -337,6 +367,8 @@
                     Download</a>
                     </p>
 
+                </div>
+                <div class="row" id="mutanalyst_bias§">
                     <!--section-->
                     <h2>Bias indicators</h2>
                     <table width="50%" id="biasTable" class="table-striped">
@@ -425,6 +457,16 @@
                     <br/>
                     <div id="biasChart" style="width: 80%; height:400px"></div>
                     <br/>
+                </div>
+
+                <div class="row" id="mutanalyst_more§">
+    <h2>Pedel-AA results</h2>
+    <p>For details about pedel-AA see <a href="/main/pedel" target="_blank">pedel-AA homepage</a>.</p>
+    <div id="pedelAA_result"></div>
+</div>
+
+
+
             </div>
         </div>
     </div>

@@ -462,7 +462,7 @@ def log_passing(req, extra='—', status='—'):
         ip = req.environ["REMOTE_ADDR"]
     else:
         ip = '0.0.0.0'
-    print(ip)
+    #print(ip)
     where=whois(ip)
     logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
 
@@ -539,8 +539,10 @@ def epier(request):
 
         return {'html': html, 'raw': raw}
     except Exception as err:
+        print('*'*10 +' ERROR '+'*'*10)
         print('error',err)
         print(traceback.format_exc())
+        print('*' * 10 + ' ERROR ' + '*' * 10)
         return {'html': 'ERROR: '+str(err)}
 
 def epier_table(jsonreq):

@@ -15,9 +15,7 @@ copypasting stuff to make modal about Cx approximations in pedelAA
 Sorted by urgency:
 
 * interlink Mutanalyst with PedelAA
-* Rosetta point mutant ∆G suggester and parser/calculator
-* *pedel* DNA/AA PCR not active
-* *main* needs fixing. See below.
+* *Mutanalyst* is using old JS still. Not Ajax and python.
 * *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan.
 * *mutationprimer*. make more elegant the determination of server or localhost.
 * *mutationprimer* code currently written until making a function in mutant_wrapper...
@@ -30,9 +28,7 @@ Sorted by urgency:
 * *PedelAA* links to modals in sub table.
 * *Pedel-AA* graphs
 * *QQC* wire reverse
-* *Mutanalyst* is using old JS still. Not Ajax and python.
 * *driver* output could be made into a nice table actually.
-* calc for PCR in Pedel not done.
 * *mutatcaller* input penalty values for match. what the hell does this mean?
 returns mutations.    
 * Scheme 19c and 20c in QQC are incomplete!!
@@ -44,8 +40,13 @@ returns mutations.
 * https. switch to gnunicorn from waitress or let Apache server handle it.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
 * Also edit js side to catch client side errors.
+* Rosetta landscape. Add distribution of mutations and norm thinggy like my matlab script has.
+
 
 # Bullcrap area
+
+## Seen.js
+* How can I use Seen.js for a landscape? And when is a 3d rotatable terrain better than a 2D plot? Aka. is it a load of pointless glitz?
 
 ## Next Gen mutantcaller
 Pipedream. fastq files are several GB big, thus they cannot be uploaded.
@@ -57,43 +58,3 @@ NB. Benchling API: Benchling API reqires a key. This seems to be issued on reque
 What nav is needed?
 * table?
 * clicable map (image)?
-
-## These are my notes on the pi config.
-First I installed raspian and added empty file called ssh on microSD card     
-Sort out the login and apt-get     
-
-    arp -a
-    ssh pi@192.168.1.229
-    passwd
-    sudo apt-get update
-    sudo apt-get upgrade
-
-Install berryconda
-
-    wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh
-    chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
-    ./Berryconda3-2.0.0-Linux-armv7l.sh
-    # yes to echo 'export PATH=/home/pi/berryconda3/bin:$PATH' >> /home/pi/.bashrc
-    source /home/pi/.bashrc
-    rm Berryconda3-2.0.0-Linux-armv7l.sh
-
-And install the requirements that fail with conda install ...
-
-    pip install -r  ~/Coding/pedel2/requirements.txt
-   
-Make a SAMBA drive —nothing to do with server.
-
-    sudo apt-get install samba samba-common-bin
-    sudo nano /etc/samba/smb.conf
-    sudo smbpasswd -a pi
-    sudo /etc/init.d/samba restart
-
-Make a /Coding/pedel2 folder and turn off Apache
-
-    git clone https://github.com/matteoferla/pedel2.git
-    sudo apt-get install libapache2-mod-wsgi-py3
-    sudo a2enmod wsgi
-    sudo nano /etc/apache2/sites-available/000-default.conf
-    # changed a few things...
-    sudo apache2ctl configtest
-    sudo systemctl restart apache2

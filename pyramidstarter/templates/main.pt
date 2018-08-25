@@ -20,6 +20,7 @@
                 <il class="list-group-item"><b>Driver:</b><br/> Calculates the probability of cross-over events</il>
                 <il class="list-group-item"><b>QQC (Quick quality control) calculator:</b><br/> Given an ab1 file of a sequence pool mutated at a codon, it gives the distribution of nucleotides and codons.</il>
                 <il class="list-group-item"><b>Landscape:</b><br/> Given a series of Rosetta pmut_scan outputs it shows the mutational landscape of that protein</il>
+                <il class="list-group-item"><b>Codon helper</b><br/> A tool to help you pick the best degenerate codons. Found in any page that requires codons as a sequence.</il>
 
             </ul>
             <br/>
