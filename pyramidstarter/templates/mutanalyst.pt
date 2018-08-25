@@ -15,12 +15,8 @@
                     nature of DNA (<i>e.g.</i> A to G on one strand will result in T to C on the other). For the specific formulae used see <a href="/static/variance_note.html" data-tooltip="walkthrough of variance calculations">	this note about propagating errors.</a><br/>
                     The program can calculate mutation frequencies from the list of mutations found and the template sequence or it can also accept the frequencies directly. The <a href="javascript:Btn_demo();">'Demo'</a> values are from an actual experiment.</p>
                 <br/>
-                <div class="bs-callout bs-callout-warning">
-                    <h4>Add</h4>It is still using the JS module. Recode to run off server.</div>
                 <!--section-->
                 <h3>Choose starting point</h3>
-                <div class="bs-callout bs-callout-info">
-                    <h4>Hint</h4>What to start from wild type sequence and ab1 files of sampled naïve library? See mutantcaller.</div>
                 There are two possible starting points for mutanalysts.
                 <br/>One is proving a sequence and the mutations sampled, for which the mutational load, mutational spectrum and the mutational bias indicators will be calculated.
                 <br/>The other is more downstream, wherein one proves a mutational spectrum and mutational load and the mutational bias indicators will be calculated.<br/>
@@ -66,8 +62,7 @@
   <input type="number" class="form-control" placeholder="1000000" aria-describedby="library_addon" id="library_size">
 </div>
                 <h4>Mutations found</h4>
-                <p>This is the list of the mutations found. Identifying the mutations is best done with visual checks, but if the process needs speeding up the process, <a href="https://dl.dropboxusercontent.com/u/73404587/website/mutation_counter.html">this small
-                    helper script</a> may help.
+                <p>This is the list of the mutations found. Identifying the mutations can be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
                     <br/>The format is as follows:
                 </p>
                 <ul>
@@ -102,8 +97,6 @@
                 <div class="row" id="mutanalyst_freq§">
                     <!--section-->
                 <h3>Mutational frequency</h3>
-                <div class="bs-callout bs-callout-info">
-                    <h4>Required coding change</h4>Copy <code>.marginless</code> CSS.</div>
                 <p>The simplest estimate of the frequency of mutations per sequence is the average of the point mutations per sequence (<i>m</i>), however due to the small sample size this may be off. The distribution of number of mutations per sequence follows a PCR distribution, which can <span class="note" data-toggle="tooltip" data-placement="bottom" title="converging as the number of PCR cycles tends to infinity">approximated</span> with a Poisson distribution (<span class="note" data-toggle="tooltip" data-placement="bottom" title="Sun F. (1995). The polymerase chain reaction and branching processes, J. Comput. Biol., 2, 63-86.">Sun, 1995</span>). In the <span class="note" data-toggle="tooltip" data-placement="bottom" title="and the former at number of cycles (<i>n</i><sub>PCR</sub>) = &#8734;  as the variance is equal to the mean <b>plus</b> the square of the mean divided by the <i>n</i><sub>PCR</sub> scaled by the PCR efficiency.">latter</span>, the mean and the variance are the same (λ &mdash;unrelated to PCR efficiency&mdash;). The
                     <em>sample</em> average and variance may differ, especially at low sampling. The number to trust the most is the λ<sub>Poisson</sub>.
                 </p>
@@ -115,8 +108,6 @@
                 <p class=marginless>
                     The λ<sub>Poisson</sub> is <strong><span id="freqλ">N/A</span></strong> mutations per sequence.</p>
                 <br/>
-                <div class="bs-callout bs-callout-info">
-                    <h4>Required coding change</h4>Change to plot.ly.</div>
                 <div id="disChart" style="width: 80%; height:400px">
                 </div>
                 <p class=marginless>
@@ -125,8 +116,9 @@
                 </div>
                 <div class="row" id="mutanalyst_freq_alt_in§">
                     <!--section-->
-                    <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations</h3>
-                    <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
+                    <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations &nbsp;<span id="altH_showing"><button type="button" class="btn btn-info" id="altH_showing_button_on">Show</button><button type="button" class="btn btn-warning" id="altH_showing_button_off">hide</button></span></h3>
+                    <div id="alt§">
+                        <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
                     <table width="50%" border="0" id="mutTable_raw">
                         <thead>
                             <tr>
@@ -250,11 +242,14 @@
                             </button>
                         </div>
                     </div>
+                    </div>
+
                 </div>
                 <div class="row" id="mutanalyst_corrected§">
                     <!--section-->
+                    <div class="col-lg-7">
                     <h2>Corrected mutation incidence</h2>
-                    <table width="50%" class="clearless">
+                    <table class="clearless">
                         <tr>
                             <th width="25%" class="clearless">Data display options</th>
                             <td width="5%" class="clearless">
@@ -272,7 +267,7 @@
                         </tr>
                     </table>
                     <p id="mutBlabla">Sequence-composition–corrected incidence of mutations (%):</p>
-                    <table width="50%" id="outTable">
+                    <table id="outTable" width="80%">
                         <thead>
                             <tr>
                                 <th width="20%">From/To</th>
@@ -312,9 +307,8 @@
                                 <td bgcolor="#CCCCCC"></td>
                             </tr>
                         </tbody>
-                    </table>
-<!--section-->
-                    <h3>Graphical Representation</h3>
+                    </table></div>
+                    <div class="col-lg-5"><h3>Graphical Representation</h3>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve" style='stroke-width: 0px; background-color: white;'>
                         <text transform="matrix(1 0 0 1 27.1714 46.6031)" font-family="'Verdana'" font-size="36">A</text>
                         <text transform="matrix(1 0 0 1 25.5189 224.1352)" font-family="'Verdana'" font-size="36">G</text>
@@ -366,12 +360,14 @@
                                                                                    style="margin-left:20px;"></i>
                     Download</a>
                     </p>
+</div>
+<!--section-->
 
                 </div>
                 <div class="row" id="mutanalyst_bias§">
                     <!--section-->
                     <h2>Bias indicators</h2>
-                    <table width="50%" id="biasTable" class="table-striped">
+                    <table id="biasTable" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Indicator</th>

@@ -2,10 +2,17 @@ $(document).ready(function() {
 
     $("#mutanalyst_seq§").show();
     $("#mutanalyst_freq§").hide();
+    $("#altH_showing_button").hide();
+    $("#altH_showing_button_off").hide();
     $("#mutanalyst_freq_alt_in§").hide();
     $("#mutanalyst_corrected§").hide();
     $("#mutanalyst_bias§").hide();
     $("#mutanalyst_more§").hide();
+
+    $("#altH_showing_button_on").click(function () {$("#alt§").show(); $("#altH_showing_button_on").hide(); $("#altH_showing_button_off").show();
+        });
+    $("#altH_showing_button_off").click(function () {$("#alt§").hide(); $("#altH_showing_button_off").hide(); $("#altH_showing_button_on").show();
+    });
 
     $('#mutanalyst_method').on('switchChange.bootstrapSwitch', function(event, state) {
         $('#mutanalyst_seq§').toggle(state);
@@ -66,6 +73,8 @@ function calc(mutball, n) {
         mutball = calcFreq(mutball);
         $("#mutanalyst_freq_alt_in§").show();
         $("#altH").html("(Optionally) editing the");
+        $("#alt§").hide();
+        $("#altH_showing_button_on").show();
         commit(mutball); //Not redundant due to the div show and hide.
         //if (google.visualization.arrayToDataTable) {
         //displot(mutball);} else {
