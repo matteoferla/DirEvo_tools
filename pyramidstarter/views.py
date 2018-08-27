@@ -453,7 +453,7 @@ def whois(ip):
     else:
         id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
         where='{city} ({countryCode})'.format(**id)
-        open('addressbook.csv','a').write('{ip},{where},'.format(ip=ip,where=where.replace(',',' ')))
+        open('addressbook.csv','a').write('{ip},{where},\n'.format(ip=ip,where=where.replace(',',' ')))
         return where
 
 def log_passing(req, extra='—', status='—'):
