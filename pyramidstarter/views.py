@@ -451,9 +451,12 @@ def whois(ip):
     if ip in addressbook:
         return addressbook[ip]
     else:
-        id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
-        where='{city} ({countryCode})'.format(**id)
-        open('addressbook.csv','a').write('{ip},{where},\n'.format(ip=ip,where=where.replace(',',' ')))
+        try:
+            id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
+            where='{city} ({countryCode})'.format(**id)
+            open('addressbook.csv','a').write('{ip},{where},\n'.format(ip=ip,where=where.replace(',',' ')))
+        except Exception:
+            where='Error'
         return where
 
 def log_passing(req, extra='—', status='—'):
