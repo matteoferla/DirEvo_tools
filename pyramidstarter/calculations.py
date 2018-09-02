@@ -395,8 +395,8 @@ def codonAA(jsonreq):
             validcodon.append({'codon': cd,
                         'N_codons': sum(codonball[cd].values()),
                         'N_AA': len(set(codonball[cd].keys())),
-                        '%_valid': sum([codonball[cd][aa] for aa in codonball[cd].keys() if aa in AAset])/sum(codonball[cd].values()),
-                        '%_stop': codonball[cd]['*']/sum(codonball[cd].values()) if '*' in codonball[cd] else 0,
+                        '%_valid': round(100*sum([codonball[cd][aa] for aa in codonball[cd].keys() if aa in AAset])/sum(codonball[cd].values())) ,
+                        '%_stop': round(100*codonball[cd]['*']/sum(codonball[cd].values()) if '*' in codonball[cd] else 0),
                         'N_selected': {aa: codonball[cd][aa] for aa in AAset},
                         'N_all': codonball[cd]
                         })
