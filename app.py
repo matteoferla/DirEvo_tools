@@ -10,7 +10,7 @@ pprinter = pprint.PrettyPrinter().pprint
 if __name__ == '__main__':
     here = os.path.dirname(os.path.abspath(__file__))
     ip = '0.0.0.0'
-    port = 8080
+    port = 80
     if os.path.isdir("/opt/app-root/src/pyramidstarter/"):  # openshift specific relic
         os.chdir("/opt/app-root/src/")
     elif os.path.join(os.getcwd(), 'app.py') != __file__:  # generic weird location fixer...
