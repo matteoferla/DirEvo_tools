@@ -28,4 +28,4 @@ if __name__ == '__main__':
 
     print("Starting Waitress.")
     print("working directory: ",os.getcwd())
-    serve(app, host=ip, port=port, threads=50)
+    serve(app, host=ip, port=port, threads=50, url_scheme='https')
