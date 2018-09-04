@@ -21,13 +21,7 @@ if __name__ == '__main__':
 
     print('Binding to {ip}:{port}'.format(ip=ip, port=port))
     app = get_app(config, 'main')  # find 'main' method in __init__.py.  That is our wsgi app
-    settings = get_appsettings(config,
-                               'main')  # don't really need this but is an example on how to get settings from the '.ini' files
-
-    # did I change the C++ scripts? Let's recompile anyway!
-    # No. run the update.sh script instead.
-    # os.system('bash '+os.path.join(here,'pyramidstarter/bikeshed/compile.sh'))
-    # print('C++ compiled')
+    settings = get_appsettings(config,'main')  # don't really need this but is an example on how to get settings from the '.ini' files
 
     # Waitress
     from waitress import serve
