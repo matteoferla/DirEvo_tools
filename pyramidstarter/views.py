@@ -9,14 +9,16 @@ import pickle
 #import csv
 
 import urllib.request
-
 import markdown
-import pyramidstarter.calculations as calc
 from itertools import product
-from pyramidstarter.epistasis import Epistatic
+
 from pyramid.view import view_config, notfound_view_config
 from pyramid.response import FileResponse
 from warnings import warn
+
+import pyramidstarter.calculations as calc
+from pyramidstarter.epistasis import Epistatic
+
 
 pprinter = pprint.PrettyPrinter().pprint
 
@@ -35,7 +37,6 @@ STATUS = 'construction'
 
 FRAME='templates/frame.pt'
 try:
-    import urllib.request
     urllib.request.urlopen('http://python.org/')
 except OSError:
     warn('The server is running in OFFLINE mode as it cannot connect to the web.')
@@ -354,8 +355,11 @@ def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_f
 
 @view_config(route_name='home', renderer=FRAME)
 def home_callable(request):
-    log_passing(request)
-    return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=False) #I was sick of the welcome flag.
+    try:
+        log_passing(request)
+        return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=False) #I was sick of the welcome flag.
+    except Exception:
+        return 'SOMETHING IS WRONG.'
 
 
 @view_config(route_name='upcoming', renderer=FRAME)
@@ -460,17 +464,20 @@ def whois(ip):
         return where
 
 def log_passing(req, extra='—', status='—'):
-    if "HTTP_X_FORWARDED_FOR" in req.environ:
-        # Virtual host
-        ip = req.environ["HTTP_X_FORWARDED_FOR"]
-    elif "HTTP_HOST" in req.environ:
-        # Non-virtualhost
-        ip = req.environ["REMOTE_ADDR"]
-    else:
-        ip = '0.0.0.0'
-    #print(ip)
-    where=whois(ip)
-    logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
+    try:
+        if "HTTP_X_FORWARDED_FOR" in req.environ:
+            # Virtual host
+            ip = req.environ["HTTP_X_FORWARDED_FOR"]
+        elif "HTTP_HOST" in req.environ:
+            # Non-virtualhost
+            ip = req.environ["REMOTE_ADDR"]
+        else:
+            ip = '0.0.0.0'
+        #print(ip)
+        where=whois(ip)
+        logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
+    except Exception as err:
+        print('MAJOR LOGGING ERROR: {}'.format(str(err)))
 
 ############### Other #####################
 @view_config(route_name='status', renderer='string')
