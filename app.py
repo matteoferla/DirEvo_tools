@@ -16,7 +16,7 @@ if __name__ == '__main__':
     elif os.path.join(os.getcwd(), 'app.py') != __file__:  # generic weird location fixer...
         if os.path.split(__file__)[0]: # no idea why it would fail...
             os.chdir(os.path.split(__file__)[0])
-    config = os.path.join(here, 'development.ini')
+    config = os.path.join(here, 'production.ini')
     #config = os.path.join(here, 'production.ini')
 
     print('Binding to {ip}:{port}'.format(ip=ip, port=port))

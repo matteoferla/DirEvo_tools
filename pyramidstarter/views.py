@@ -42,7 +42,6 @@ except OSError:
     warn('The server is running in OFFLINE mode as it cannot connect to the web.')
     FRAME='templates/frame_local.pt' #offline!
 
-
 def basedict(**kwargs):
     return {'project': 'Pyramidstarter',
             'main': '',
