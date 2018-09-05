@@ -36,6 +36,8 @@ GMAIL_SET = False
 if os.path.isfile('email_details.json'):
     globals().update(**json.load(open('email_details.json')))  # Dangerous... but I am lazy
 
+print('reporting from views.py')
+
 STATUS = 'construction'
 
 FRAME='templates/frame.pt'
@@ -405,6 +407,7 @@ def set_callable(request):
     elif 'status' in request.params:
         global STATUS
         STATUS = request.params['status']
+        debugprint(STATUS)
         return 'Sucess'
 
 
