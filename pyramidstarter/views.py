@@ -408,9 +408,14 @@ def set_callable(request):
 
 @view_config(route_name='main', renderer=FRAME)
 def main_callable(request):
-    log_passing(request)
-    page = request.matchdict['page']
-    return ready_fields('m_'+page, page + '.pt', page + '.js',codon_flag=True)
+    try:
+        log_passing(request)
+        page = request.matchdict['page']
+        return ready_fields('m_'+page, page + '.pt', page + '.js',codon_flag=True)
+    except Exception as err:
+        print('error',err)
+        print(traceback.format_exc())
+        return {'html':'ERROR'}
 
 
 @notfound_view_config(renderer=FRAME)
@@ -456,7 +461,8 @@ def whois(ip):
         return addressbook[ip]
     else:
         try:
-            id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
+            id={'city':'nowhere','countryCode':'neverland'}
+            #id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
             where='{city} ({countryCode})'.format(**id)
             open('addressbook.csv','a').write('{ip},{where},\n'.format(ip=ip,where=where.replace(',',' ')))
         except Exception:
@@ -475,7 +481,8 @@ def log_passing(req, extra='—', status='—'):
             ip = '0.0.0.0'
         #print(ip)
         where=whois(ip)
-        logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
+
+        #logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
     except Exception as err:
         print('MAJOR LOGGING ERROR: {}'.format(str(err)))
 
