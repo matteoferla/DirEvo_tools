@@ -26,6 +26,9 @@ pprinter = pprint.PrettyPrinter().pprint
 #PLACE = "localhost"
 PATH = 'pyramidstarter/'
 
+#debugprint=lambda x: None
+debugprint=print
+
 # formerly I set these variables each reboot using the route set. Now it is an external file.
 GMAIL_USER = '??????@gmail.com'
 GMAIL_PWD = '*******'
@@ -408,12 +411,14 @@ def set_callable(request):
 @view_config(route_name='main', renderer=FRAME)
 def main_callable(request):
     try:
+        debugprint('main called...')
         log_passing(request)
         page = request.matchdict['page']
+        debugprint('for page '+page)
         return ready_fields('m_'+page, page + '.pt', page + '.js',codon_flag=True)
     except Exception as err:
-        print('error',err)
-        print(traceback.format_exc())
+        debugprint('error',err)
+        debugprint(traceback.format_exc())
         return {'html':'ERROR'}
 
 
@@ -457,9 +462,11 @@ addressbook={line.split(',')[0]: line.split(',')[1].replace('\n','') for line in
 print(addressbook)
 def whois(ip):
     if ip in addressbook:
+        debugprint('seen before')
         return addressbook[ip]
     else:
         try:
+            debugprint('retriving...')
             id={'city':'nowhere','countryCode':'neverland'}
             #id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
             where='{city} ({countryCode})'.format(**id)
@@ -479,11 +486,12 @@ def log_passing(req, extra='—', status='—'):
         else:
             ip = '0.0.0.0'
         #print(ip)
+        debugprint('ip is '+ip)
         where=whois(ip)
 
         #logging.getLogger('pyramidstarter').info(ip + '\t'  + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
     except Exception as err:
-        print('MAJOR LOGGING ERROR: {}'.format(str(err)))
+        debugprint('MAJOR LOGGING ERROR: {}'.format(str(err)))
 
 ############### Other #####################
 @view_config(route_name='status', renderer='string')
