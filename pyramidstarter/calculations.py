@@ -10,7 +10,6 @@ __date__ = ""
 N = "\n"
 T = "\t"
 # N = "<br/>
-
 import json
 import os
 import re
@@ -30,10 +29,6 @@ from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
 from pyramidstarter.deep_mut_scanning import deep_mutation_scan
 from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 
-from pprint import PrettyPrinter
-pprint = PrettyPrinter().pprint
-
-from functools import reduce
 
 PATH = "/opt/app-root/src/pyramidstarter/"
 if not os.path.isdir(PATH):

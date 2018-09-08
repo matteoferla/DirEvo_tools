@@ -12,13 +12,27 @@ __license__ = "Cite me!"
 __version__ = "1.0"
 
 import os
+from bs4 import BeautifulSoup
+from docx import Document
 
 
-def parse_inwards(infile, outfile):
+def parse_inwards():
+    document = Document()
     for file in os.listdir('pyramidstarter/templates'):
-        if file.find('.pt'):
-            text=open(file).read()
+        if file.find('.pt') != -1:
+            soup=BeautifulSoup(open(os.path.join('pyramidstarter/templates',file)).read(),'html.parser')
+            document.add_heading('File: {}'.format(file.replace('.pt', '')), 0)  # title
+            for element in soup.find_all(recursive=True):
+                if element.has_attr('title'):
+                    document.add_heading(element.name, 1)
+                    document.add_heading('tooltip', 2)
+                    document.add_paragraph(element['title'])
+                    document.add_heading('text', 2)
+                    document.add_paragraph(element.string)
+    document.save('tooltips.docx')
+
+
 
 
 if __name__ == "__main__":
-    pass
+    parse_inwards()
