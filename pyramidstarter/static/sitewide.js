@@ -74,6 +74,7 @@ $(function() {
             processData: false
         });
         $("#comment_status").delay(2000).fadeOut();
+        $("#comment_modal").delay(3000).modal('hide');
     });
 
     //codons
