@@ -18,6 +18,10 @@
                 Looking for the admin page?
     <a class="btn btn-default" href="/admin"><i
                             class="fa fa-gamepad" aria-hidden="true"></i> Top Secret</a>
+                <br/>
+                Feeling lexicologically challenged?
+                <a class="btn btn-default" href="/main/glossary"><i
+                            class="fa fa-book" aria-hidden="true"></i> Top Secret</a>
             </div>
 </div>
     </div>

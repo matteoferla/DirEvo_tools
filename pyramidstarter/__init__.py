@@ -34,7 +34,8 @@ def main(global_config, **settings):
                   'ajax_pedelAA',
                   'ajax_driver',
                   'ajax_probably',
-                  'ajax_land']:
+                  'ajax_land',
+                  'glossary']:
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.add_route('main', '/main/{page}')
