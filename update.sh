@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 git pull https://github.com/matteoferla/pedel2.git;
-kill $(ps aux | grep 'app.py' | awk '{print $2}'); # sudo netstat -ltnp would be best...
+#kill $(ps aux | grep 'app.py' | awk '{print $2}'); # kill port 8080 only...
+kill $(sudo netstat -ltnp | grep ':8080' | awk '{split($7,a,"/"); print a[1]}')
 #cd pyramidstarter/bikeshed
 #sh compile.sh linux;
 #cd ../..;

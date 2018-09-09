@@ -23,7 +23,7 @@ from pyramidstarter.epistasis import Epistatic
 # PLACE = "localhost"
 PATH = 'pyramidstarter/'
 
-# debugprint=lambda x: None
+# debugprint=lambda *x: None
 debugprint = print
 
 # formerly I set these variables each reboot using the route set. Now it is an external file.
@@ -328,8 +328,8 @@ def lander(request):
 def send_email(request):
     global GMAIL_PWD, GMAIL_USER
     reply = request.json_body
-    subject = 'Comment from ' + reply['message']
-    body = reply['name']
+    subject = 'Comment from ' + reply['name']
+    body = reply['message']
     recipient = 'matteo.ferla@gmail.com'
     addressee = recipient if type(recipient) is list else [recipient]
     # Prepare actual message
