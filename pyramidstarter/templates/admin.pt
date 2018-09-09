@@ -2,6 +2,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <h1>Admin page</h1>
+        {data}
         <div class="row">
             <h1>Links</h1>
             <a href="/log" class="btn btn-info"><i

@@ -13,6 +13,6 @@ kill $(sudo netstat -ltnp | grep ':8080' | awk '{split($7,a,"/"); print a[1]}')
 #chmod -R 777 .;
 
 echo '********** RUN *****************';
-nohup python3 app.py > pyramidstarter/static/bash_log.txt &
+nohup python3 app.py >> pyramidstarter/static/bash_log.txt &
 echo 'All done!';
 echo 'Having trouble: cat pyramidstarter/static/bash_log.txt';

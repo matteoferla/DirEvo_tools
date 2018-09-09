@@ -9,6 +9,7 @@ import uuid
 import _thread as thread
 from itertools import product
 from warnings import warn
+import psutil
 
 import markdown
 from pyramid.response import FileResponse
@@ -393,7 +394,17 @@ def upcoming_callable(request):
 
 @view_config(route_name='admin', renderer=FRAME)
 def admin_callable(request):
-    return ready_fields('m_admin', 'admin.pt', 'admin.js')
+    pid = psutil.Process(os.getpid())
+    data='CPU use by this app: {pid_cpu}%<br/>System CPU usages: {tot_cpu}<br/>memory use by this app: {pid_mem} MB<br/>Full stats: {cpu}<br/>{virt}<br/>{swap}<br/>'.format(
+                    pid_cpu=pid.cpu_times().user,
+                    tot_cpu=' '.join([str(x) + '%' for x in psutil.cpu_percent(percpu=True)]),
+                    cpu=psutil.cpu_times(),
+                    pid_mem=pid.memory_info()[0] / 2. ** 20,
+                    virt=psutil.virtual_memory(),
+                    swap=psutil.swap_memory() )
+    fields=ready_fields('m_admin', 'admin.pt', 'admin.js')
+    fields['main']=fields['main'].format(data=data)
+    return fields
 
 
 @view_config(route_name='update', renderer='string')
