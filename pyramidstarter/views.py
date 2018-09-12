@@ -507,7 +507,10 @@ def whois(ip):
             debugprint('retriving...')
             #id = {'city': 'nowhere', 'countryCode': 'neverland'}
             ip=ip.split()[-1] # just in case.
-            id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
+            whois_response=urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))
+            if isinstance(whois_response, bytes):
+                whois_response=whois_response.decode('utf-8')
+            id=json.load(whois_response)
             where = '{city} ({countryCode})'.format(**id)
             open('addressbook.csv', 'a').write('{ip},{where},\n'.format(ip=ip, where=where.replace(',', ' ')))
         except Exception as err:
