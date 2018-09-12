@@ -380,7 +380,8 @@ def home_callable(request):
     try:
         log_passing(request)
         return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=False)  # I was sick of the welcome flag.
-    except Exception:
+    except Exception as err:
+        debugprint(traceback.format_exc())
         return 'SOMETHING IS WRONG.'
 
 
@@ -509,8 +510,9 @@ def whois(ip):
             id=json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))) #.read().decode('utf-8')
             where = '{city} ({countryCode})'.format(**id)
             open('addressbook.csv', 'a').write('{ip},{where},\n'.format(ip=ip, where=where.replace(',', ' ')))
-        except Exception:
+        except Exception as err:
             where = 'Error'
+            debugprint(traceback.format_exc())
         return where
 
 def log_passing(req, extra='—', status='—'):
