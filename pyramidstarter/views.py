@@ -510,7 +510,7 @@ def whois(ip):
             whois_response=urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))
             print(type(whois_response))
             if not isinstance(whois_response, str): #bytes!
-                whois_response=whois_response.decode('utf-8')
+                whois_response=whois_response.read().decode('utf-8')
             id=json.load(whois_response)
             where = '{city} ({countryCode})'.format(**id)
             open('addressbook.csv', 'a').write('{ip},{where},\n'.format(ip=ip, where=where.replace(',', ' ')))
