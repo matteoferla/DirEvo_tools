@@ -263,14 +263,14 @@
                     <div class="collapse" id="pedelAA_overview">
                         <p>PEDEL-AA is an extension to amino acid sequences of the original
                             nucleotide version of PEDEL (see links to publications and
-                            <a href="pedelAA_math_notes.pdf">mathematics notes</a> from the statistics
+                            <a href="/static/pedelAA_math_notes.pdf">mathematics notes</a> from the statistics
                             <a href="/">home</a> page). Due to the more complex problem
                             of estimating diversity and completeness at the amino acid level (as
                             opposed to nucleotides and codons), there are some major differences
                             in the algorithms and a few extra approximations. A brief description
                             of the procedure follows.</p>
                         <p>First, to recapitulate the nucleotide version of PEDEL: As discussed
-                            in the <a href="pedelAA_math_notes.pdf">mathematics notes</a>, for the nucleotide
+                            in the <a href="/static/pedelAA_math_notes.pdf">mathematics notes</a>, for the nucleotide
                             version, if the input library is conceptually divided into
                             sub-libraries Lx (x=0,1,2,...) where the sub-library Lx comprises all
                             variants in the library with exactly x nucleotide substitutions, then
@@ -396,7 +396,7 @@
                                 <li>Vx_2 is given by C(N,x) 19^x, where C(N,x) is the combinatorial
                                     function, i.e. C(N,x) = N!/[x!(N-x)!], and N is the length of
                                     the input sequence in codons. (Cf equation (5) of the
-                                    <a href="/pedelAA_math_notes.pdf">mathematical notes</a> for the nucleotide
+                                    <a href="/static/pedelAA_math_notes.pdf">mathematical notes</a> for the nucleotide
                                     version of PEDEL.)
                                 </li>
 
