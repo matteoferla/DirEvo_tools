@@ -512,7 +512,12 @@ def whois(ip):
                 id = json.load(whois_response)
             except TypeError: #python not 3.6!
                 id = json.loads(whois_response.read().decode('utf-8'))
-            where = '{city} ({countryCode})'.format(**id)
+            if id['status'] == 'success':
+                where = '{city} ({countryCode})'.format(**id)
+            elif 'message' in id:
+                where = id['message']
+            else:
+                raise Exception
             open('addressbook.csv', 'a').write('{ip},{where},\n'.format(ip=ip, where=where.replace(',', ' ')))
         except Exception as err:
             where = 'Error'
