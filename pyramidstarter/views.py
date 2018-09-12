@@ -507,11 +507,10 @@ def whois(ip):
             debugprint('retriving...')
             #id = {'city': 'nowhere', 'countryCode': 'neverland'}
             ip=ip.split()[-1] # just in case.
-            whois_response=urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))
             try:
-                id = json.load(whois_response)
+                id = json.load(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip)))
             except TypeError: #python not 3.6!
-                id = json.loads(whois_response.read().decode('utf-8'))
+                id = json.loads(urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip)).read().decode('utf-8'))
             if id['status'] == 'success':
                 where = '{city} ({countryCode})'.format(**id)
             elif 'message' in id:
