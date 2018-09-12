@@ -508,7 +508,8 @@ def whois(ip):
             #id = {'city': 'nowhere', 'countryCode': 'neverland'}
             ip=ip.split()[-1] # just in case.
             whois_response=urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))
-            if isinstance(whois_response, bytes):
+            print(type(whois_response))
+            if not isinstance(whois_response, str): #bytes!
                 whois_response=whois_response.decode('utf-8')
             id=json.load(whois_response)
             where = '{city} ({countryCode})'.format(**id)
