@@ -8,6 +8,7 @@ def main(global_config, **settings):
     config = Configurator(settings=settings)
     config.include('pyramid_chameleon')
     config.add_static_view('static', 'static', cache_max_age=3600)
+    config.add_static_view('robots.txt', 'robots.txt')
     config.add_route('home', '/')
     for route in ['admin',
                   'set',
@@ -39,6 +40,8 @@ def main(global_config, **settings):
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
     config.add_route('main', '/main/{page}')
+    config.add_route('favicon', '/favicon.ico')
+    config.add_route('robots', '/robots.txt')
     config.set_session_factory(SignedCookieSessionFactory('methionine'))
     config.scan()
     config_logging()

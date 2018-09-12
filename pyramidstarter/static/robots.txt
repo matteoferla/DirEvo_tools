@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /static/favicon.ico
+Allow: /static/pedelAA_math_notes.pdf
+Allow: /static/eq_QQC_black.svg
+Allow: /static/banner.jpg
+Disallow: /static/
+Sitemap: /static/sitemap.xml

@@ -542,6 +542,16 @@ def log_passing_para(req, extra, status):
 def pinger(request):
     return 'OK'
 
+@view_config(route_name='robots')
+def robots(request):
+    txt = os.path.join("pyramidstarter", "static", "robots.txt")
+    return FileResponse(txt, request=request)
+
+@view_config(route_name="favicon")
+def favicon_view(request):
+    icon = os.path.join("pyramidstarter", "static", "favicon.ico")
+    return FileResponse(icon, request=request)
+
 
 ########### TEMPORARILY HERE #######
 @view_config(route_name='carlos', renderer='templates/Carlos.pt')
