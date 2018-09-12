@@ -508,10 +508,10 @@ def whois(ip):
             #id = {'city': 'nowhere', 'countryCode': 'neverland'}
             ip=ip.split()[-1] # just in case.
             whois_response=urllib.request.urlopen('http://ip-api.com/json/{}'.format(ip))
-            print(type(whois_response))
-            if not isinstance(whois_response, str): #bytes!
-                whois_response=whois_response.read().decode('utf-8')
-            id=json.load(whois_response)
+            try:
+                id = json.load(whois_response)
+            except TypeError: #python not 3.6!
+                id = json.loads(whois_response.read().decode('utf-8'))
             where = '{city} ({countryCode})'.format(**id)
             open('addressbook.csv', 'a').write('{ip},{where},\n'.format(ip=ip, where=where.replace(',', ' ')))
         except Exception as err:
