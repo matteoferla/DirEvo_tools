@@ -210,6 +210,7 @@
                                   data-placement="top">Length</span>
                                 <input type="number" min="1" class="form-control" placeholder="1425"
                                        id="driver_length">
+                                <span class="input-group-addon">nt</span>
                             </div>
                             <br/>
                         </div>

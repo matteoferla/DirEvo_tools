@@ -50,6 +50,7 @@
                                       data-placement="top">Mutation rate</span>
                                     <input type="number" min="0" class="form-control" placeholder="0.9"
                                            id="estimate_rate">
+                                    <span class="input-group-addon">mut/kb/div</span>
                                 </div>
                                 <br/>
                             </div>
@@ -57,9 +58,10 @@
                                 <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="Yield of DNA from the PCR reaction (after purification) in ng. So multiply the nanodrop's ng/µl value by your volume in µl."
-                                      data-placement="top">ng PCR yield</span>
+                                      data-placement="top">PCR yield</span>
                                     <input type="number" min="0" class="form-control" placeholder="1000"
                                            id="estimate_yield">
+                                    <span class="input-group-addon">ng</span>
                                 </div>
                                 <br/>
                             </div>
@@ -67,18 +69,20 @@
                                 <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="Template of DNA in the PCR reaction. If using a plasmid this is the concentration of the actual insert not the whole plasmid. That is, get your ng/µl concentration of plasmid divide it by the plasmid size and times it by the insert size and then multiply it by the volume added to your epPCR reaction"
-                                      data-placement="top">ng PCR template</span>
+                                      data-placement="top">PCR template</span>
                                     <input type="number" min="0" class="form-control" placeholder="5"
                                            id="estimate_template">
+                                    <span class="input-group-addon">ng</span>
                                 </div>
                                 <br/>
                             </div>
                             <div class="col-lg-4">
                                 <div class="input-group">
                                 <span class="input-group-addon" data-toggle="tooltip" title="Size of amplicon in kb"
-                                      data-placement="top">Size in kb</span>
+                                      data-placement="top">Size</span>
                                     <input type="number" min="0" class="form-control" placeholder="1.0"
                                            id="estimate_size">
+                                    <span class="input-group-addon">kb</span>
                                 </div>
                                 <br/>
                             </div>
@@ -245,9 +249,10 @@
                             <div class="col-lg-4">
                                 <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="The reaction volume"
-                                  data-placement="top">µl reaction</span>
+                                  data-placement="top">Reaction</span>
                                     <input type="number" min="0" class="form-control" placeholder="25"
                                            id="yield_reaction">
+                                    <span class="input-group-addon">µL</span>
                                 </div>
                                 <br/>
                             </div>
@@ -257,6 +262,7 @@
                                   title="The size of the amplicon in bases. Preferably minus the length the primers, but really it does not matter, so within 100 bp will be all good."
                                   data-placement="top">Amplicon size</span>
                                     <input type="text" class="form-control" placeholder="1000" id="yield_size">
+                                    <span class="input-group-addon">bp</span>
                                 </div>
                                 <br/>
                             </div>
@@ -269,6 +275,7 @@
                                            data-off-text="Calc."
                                            data-on-text="Final" data-switch-value="large" data-off-color="warning"
                                            checked>
+                                    <span class="input-group-addon">µM</span>
                                 </div>
                                 <br/>
                             </div>
@@ -278,27 +285,30 @@
                             <div class="col-lg-4">
                                 <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                                  data-placement="top">Final µM primers</span>
+                                  data-placement="top">Final conc. primers</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="0.5"
                                            id="yield_final_primer_conc">
+                                    <span class="input-group-addon">µM</span>
                                 </div>
                                 <br/>
                             </div>
                             <div class="col-lg-4">
                                 <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                                  data-placement="top">µM primers</span>
+                                  data-placement="top">Conc. primers</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="10"
                                            id="yield_primer_conc">
+                                    <span class="input-group-addon">µM</span>
                                 </div>
                                 <br/>
                             </div>
                             <div class="col-lg-4">
                                 <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                                  data-placement="top">µl primers</span>
+                                  data-placement="top">Vol. primers</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="1.25"
                                            id="yield_primer_vol">
+                                    <span class="input-group-addon">µL</span>
                                 </div>
                                 <br/>
                             </div>
@@ -308,6 +318,7 @@
                                   title="The dNTP final concentration (all four together)" data-placement="top">final µM dNTP</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="800"
                                            id="yield_final_dNTP_conc">
+                                    <span class="input-group-addon">µM</span>
                                 </div>
                                 <br/>
                             </div>
@@ -317,6 +328,7 @@
                                   title="The dNTP concentration (all four together)" data-placement="top">µM dNTP</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="40"
                                            id="yield_dNTP_conc">
+                                    <span class="input-group-addon">µM</span>
                                 </div>
                                 <br/>
                             </div>
@@ -326,6 +338,7 @@
                                   data-placement="top">µl dNTP</span>
                                     <input type="number" min="0" step="1" class="form-control" placeholder="0.5"
                                            id="yield_dNTP_vol">
+                                    <span class="input-group-addon">µL</span>
                                 </div>
                                 <br/>
                             </div>

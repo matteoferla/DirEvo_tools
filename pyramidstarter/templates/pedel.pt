@@ -165,16 +165,18 @@
                     <div class="col-lg-4">
                         <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip" title="Sequence length N (nt)"
-                              data-placement="top">Seq. legth</span>
+                              data-placement="top">Seq. length</span>
                             <input type="number" min="0" class="form-control" placeholder="1000" id="pedel_len">
+                            <span class="input-group-addon">nt</span>
                         </div>
                         <br/>
                     </div>
                     <div class="col-lg-4">
                         <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip"
-                              title="Mean number of point mutations per sequence m" data-placement="top">Mutations per seq.</span>
+                              title="Mean number of point mutations per sequence m" data-placement="top">Load</span>
                             <input type="number" min="0" class="form-control" placeholder="4" id="pedel_mutload">
+                            <span class="input-group-addon">Mutations/seq</span>
                         </div>
                         <br/>
                     </div>
@@ -749,6 +751,7 @@
                               data-placement="top">Library size</span>
                                 <input type="number" min="0" class="form-control" placeholder="10000000"
                                        id="pedelAA_size">
+                                <span class="input-group-addon">nt</span>
                             </div>
                             <br/>
                         </div>
@@ -897,24 +900,18 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="input-group">
-                                Values are
                                 <input type="checkbox" class="switch" id="pedelAA_normal" data-off-text="Unnormalised"
                                        data-on-text="Normalised" data-off-color="warning">
+                                <span class="input-group-addon">values</span>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip"
                               title="Mean number of nucleotide substitutions per daughter sequence"
-                              data-placement="top">Mutation load</span>
+                              data-placement="top">Load</span>
                                 <input type="number" min="0" class="form-control" placeholder="4.5" id="pedelAA_load">
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group">
-                                Distribution
-                                <input type="checkbox" class="switch" id="pedelAA_PCR" data-off-text="Poisson"
-                                       data-on-text="+ PCR" data-off-color="warning">
+                                <span class="input-group-addon">mutations/seq</span>
                             </div>
                         </div>
                         <br/>

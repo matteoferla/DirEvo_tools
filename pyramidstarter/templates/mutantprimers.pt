@@ -126,6 +126,7 @@
                                 <span class="input-group-addon" data-toggle="tooltip" title="Target melting temperature"
                                       data-placement="top">Target T<sub>m</sub></span>
                                 <input type="text" class="form-control" placeholder="55" id="MP_targetTemp">
+                                <span class="input-group-addon">&deg;C</span>
                             </div>
                             <br/>
                         </div>
@@ -134,6 +135,7 @@
                                 <span class="input-group-addon" data-toggle="tooltip"
                                       title="&deg;C tollerance for GC clamp" data-placement="top">GC clamp bonus</span>
                                 <input type="text" class="form-control" placeholder="1" id="MP_GCclamp">
+                                <span class="input-group-addon">&deg;C</span>
                             </div>
                             <br/>
                         </div>
@@ -153,6 +155,7 @@
                                 <span class="input-group-addon" data-toggle="tooltip" title="The length of the overlap"
                                       data-placement="top">Overlap</span>
                                 <input type="text" class="form-control" placeholder="22" id="MP_overlap">
+                                <span class="input-group-addon">nt</span>
                             </div>
                             <br/>
                         </div>
