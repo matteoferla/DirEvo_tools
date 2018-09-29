@@ -1,6 +1,13 @@
-#include < iostream > #include < cmath > #include < fstream > #include < cstdlib > #include < iomanip > #include < cstring >
-  using namespace std;#
-define maxlength 50000# define maxx0 20# define maxx0nt 100
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>
+#include <cstring>
+using namespace std;
+#define maxlength 50000
+#define maxx0 20
+#define maxx0nt 100
 
 // Read in initial sequence (length N; reading frame begins at nt 1, no
 //   in-frame stop codons).
