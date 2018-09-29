@@ -1,0 +1,23 @@
+<div class="row" id="§forbidden">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- classic -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Log-in required</h1>
+            </div>
+            <div class="panel-body">
+            {status}
+                <form name="login" action="/admin" method="post">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Password</span>
+                    <input id="password" type="password" class="form-control" placeholder="amino acid"
+                           aria-describedby="name">
+                      <span class="input-group-btn">
+                      <button type="button" type="submit" class="btn btn-primary" id="password_send">Submit</button>
+                      </span>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

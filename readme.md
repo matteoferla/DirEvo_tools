@@ -11,12 +11,12 @@ It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
 Sorted by urgency:
 
-* *Glue* works, but make it print a graph at different values.
-* *Pedel*  range of conditions not done yet, but pedel_batch wrapper made.
+* *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
+* *Pedel-AA* graphs —original functionality
 * *PedelAA* links to modals in sub table.
-* *Pedel-AA* graphs
 * *QQC* wire reverse
-* *driver* output could be made into a nice table actually.
+* *Glue* works, but make it print a graph at different values. —extra functionality
+* *driver* output could be made into a nice table actually. —extra functionality
 * *mutationprimer* why is Y66 actually Y67? Does GFP not start from ATG??
 * *mutationprimer* IDT does not accept lowercase degenrte nts.
 * *mutatcaller* does not check for terminal indels if set to local. Currently set to global.
@@ -47,8 +47,3 @@ However, a small simple custom alignment algorithm running with GPU.JS could do 
 
 ## Benchling integration
 NB. Benchling API: Benchling API reqires a key. This seems to be issued on request to devs. SO this is not an option.
-
-## Main
-What nav is needed?
-* table?
-* clicable map (image)?

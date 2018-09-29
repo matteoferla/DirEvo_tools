@@ -217,9 +217,11 @@ ${structure: codon_modal}
 $(document).ready( function() {
     if (window.localStorage.getItem('GDPR',1)) {$("#footer").hide();}
     $("#footer").click(function () {$("#footer").hide(); window.localStorage.setItem('GDPR',1)});
+
+    ${structure: code}
 });
 
-${structure: code}
+
 </script>
 </body>
 </html>

@@ -419,9 +419,9 @@ def upcoming_callable(request):
     wrap = '<div class="row" id="§upcoming"><div class="col-lg-8  col-lg-offset-2"><div class="panel panel-default"><div class="panel-heading"><h1 class="panel-title">Upcoming</h1></div><div class="panel-body">{}</div></div></div></div>'
     return ready_fields('m_upcoming', wrap.format(md), 'main.js')
 
-
 @view_config(route_name='admin', renderer=FRAME)
 def admin_callable(request):
+    # get machine usage data...
     pid = psutil.Process(os.getpid())
     data='CPU use by this app: {pid_cpu}%<br/>System CPU usages: {tot_cpu}<br/>memory use by this app: {pid_mem} MB<br/>Full stats: {cpu}<br/>{virt}<br/>{swap}<br/>'.format(
                     pid_cpu=pid.cpu_times().user,
@@ -430,8 +430,18 @@ def admin_callable(request):
                     pid_mem=pid.memory_info()[0] / 2. ** 20,
                     virt=psutil.virtual_memory(),
                     swap=psutil.swap_memory() )
-    fields=ready_fields('m_admin', 'admin.pt', 'admin.js')
-    fields['main']=fields['main'].format(data=data)
+    status=''
+    if 'password' in request.POST:
+        if request.POST['password'] == 'norleucine':
+            request.session['admin'] = True
+        else:
+            status='<div class="alert alert-danger" role="alert">禁 Warning: Password wrong!</div>'
+    if 'admin' in request.session and request.session['admin']:
+        fields=ready_fields('m_admin', 'admin.pt', 'admin.js')
+        fields['main']=fields['main'].format(data=data)
+    else:
+        fields = ready_fields('m_admin', 'forbidden.pt', 'forbidden.js')
+        fields['main'] = fields['main'].format(status=status)
     return fields
 
 
