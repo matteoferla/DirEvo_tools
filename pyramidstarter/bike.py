@@ -131,7 +131,12 @@ def pedelAA(filename):
     data['middle']=re.search('table><br>(.*?)<br><b>Links to further information', html,re.DOTALL | re.MULTILINE).group(1)
     with open(filename[:-6]+'table.html','r') as f:
         x='<table>{}</table>'.format(re.search('<table.*?>(.*?)</table',f.read(),re.DOTALL).group(1))
-        data['sub_table'] =x.replace('nan', '—').replace('<table>','<table class="table table-striped">')
+        data['sub_table'] =x.replace('nan', '—')\
+            .replace('<table>','<table class="table table-striped">')\
+            .replace('<a href=/aef/STATS/FORM/pedel-AA_exact.html>Exact</a>','<a data-toggle="modal" data-target="#pedelAA_exact_modal">Exact</a>') \
+            .replace('<a href=/aef/STATS/FORM/pedel-AA_CxLx.html>Cx ~ Lx</a>', '<a data-toggle="modal" data-target="#pedelAA_CxLx_modal">C<sub>x</sub> ~ L<sub>x</sub></a>') \
+            .replace('<a href=/aef/STATS/FORM/pedel-AA_warningRx.html>Rx warning</a>', '<a data-toggle="modal" data-target="#pedelAA_warningRx_modal">Rx warning</a>') \
+            .replace('<a href=/aef/STATS/FORM/pedel-AA_warning.html>warning</a>', '<a data-toggle="modal" data-target="#pedelAA_warning_modal">warning</a>')
     # table to data...
     table=[re.findall('<td.*?>(.*?)<\/td>', row) for row in re.findall('<tr.*?>(.*?)<\/tr>',data['sub_table'].replace('\n',''))]
     table.pop(0)
@@ -153,8 +158,9 @@ def pedelAA(filename):
             else:
                 table[i][j] = float(entry)
     data['sub_table_data']=table
+    with open(filename[:-6] + 'matrix.html', 'r') as f:
+        data['matrix']='<table class="table table-striped">{}</table>'.format(re.search('<table.*?>(.*?)</table', f.read(), re.DOTALL).group(1))
     return data
-    # TODO Figure out what was happening here! :(
     th='<th>{}</th>'
     td='<td></td>'
     tr='<tr></tr>'

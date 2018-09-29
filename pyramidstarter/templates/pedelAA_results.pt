@@ -1,11 +1,17 @@
   <ul class="nav nav-tabs" role="tablist">
+      <!--main-->
     <li role="presentation" class="active"><a href="#pedelAA_result_main" aria-controls="pedelAA_result_main" role="tab" data-toggle="tab">Main</a></li>
+      <!--sub-->
     <li role="presentation"><a href="#pedelAA_result_sub" aria-controls="pedelAA_result_sub" role="tab" data-toggle="tab">Subtable</a></li>
+      <!--graph-->
     <li role="presentation"><a href="#pedelAA_result_graph" aria-controls="pedelAA_result_graph" role="tab" data-toggle="tab">Sub-graph</a></li>
+      <!--matrix-->
+    <li role="presentation"><a href="#pedelAA_result_matrix" aria-controls="pedelAA_result_matrix" role="tab" data-toggle="tab">Scaled matrix</a></li>
 </ul>
 
 
 <div class="tab-content">
+    <!--main-->
     <div role="tabpanel" class="tab-pane active" id="pedelAA_result_main">
     <h3>summary table</h3>
     {summary_table}
@@ -14,9 +20,11 @@
     <br/>
         Nucleotide tally: A={A}, T={T},G={G}, C={C}.
     </div>
+    <!--sub-->
     <div role="tabpanel" class="tab-pane" id="pedelAA_result_sub">
         <h3>Sub-library statistics</h3>
     {sub_table}</div>
+    <!--graph-->
     <div role="tabpanel" class="tab-pane" id="pedelAA_result_graph">
         <div class="radio" id="plotoptdiv">
             <label class="radio-inline"><input type="radio" name="plotopt" value=1>V<sub>x1</sub></label>
@@ -29,5 +37,10 @@
                 size="small">
         </div>
         <div id="plot_pedelAA_stats"></div>
+    </div>
+    <!--matrix-->
+    <div role="tabpanel" class="tab-pane" id="pedelAA_result_matrix">
+        <h3>Normalized and scaled nucleotide matrix</h3>
+        {matrix}
     </div>
 </div>

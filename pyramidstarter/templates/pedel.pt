@@ -180,7 +180,7 @@
                         </div>
                         <br/>
                     </div>
-
+                    <!--
                     <div class="col-lg-4">
                         <div class="input-group">
                             Distribution
@@ -190,7 +190,7 @@
                                    data-on-text="+ PCR" data-off-color="warning">
                         </div>
                         <br/>
-                    </div>
+                    </div>-->
                     <br/>
                 </div><!--row-->
                 <div class="row">
@@ -220,8 +220,9 @@
                     </div>
 
                 </div>
+                <!--
                 <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
-                                                                        data-target="#pedel_note">here</a>.</p>
+                                                                        data-target="#pedel_note">here</a>.</p>-->
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3">
                         <div class="btn-group" role="group" aria-label="...">
@@ -745,7 +746,7 @@
                         </div>
                         <br/></div>
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                             <div class="input-group">
                         <span class="input-group-addon" data-toggle="tooltip" title="Library size L"
                               data-placement="top">Library size</span>
@@ -947,8 +948,9 @@
                         </div>
 
                     </div>
+                    <!--
                     <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
-                                                                            data-target="#pedel_note">here</a>.</p>
+                                                                            data-target="#pedel_note">here</a>.</p>-->
                     <!--button row-->
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
@@ -1070,7 +1072,10 @@
 </div>
 
 
-<div id="pedel_Cx_note" class="modal fade" role="dialog">
+
+
+
+<div id="pedelAA_exact_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -1118,8 +1123,23 @@ sub-libraries, any <a href=pedel-AA_variants.html>variants</a> of type
 Vx_2).</p>
 <p>See also <a href=pedel-AA-stats.html>notes on the PEDEL-AA
 algorithms</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2 id="pedelAA_CxLx">PEDEL-AA Cx ~ Lx region</h2>
+
+
+<div id="pedelAA_CxLx_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notes about Cx estimations</h4>
+            </div>
+            <div class="modal-body">
+                <h2 id="pedelAA_CxLx">PEDEL-AA Cx ~ Lx region</h2>
 
 <p>When Lx << Vx then Cx ~ Lx.  For equiprobable variants this
 approximation is good to 5% for Lx < 0.1 Vx (see the mathematical
@@ -1129,8 +1149,22 @@ approximation when Lx < 0.1 Vx_1 (the number of 'easy-to-reach'
                 <p>See also <a href=pedel-AA_exact.html>notes on the 'exact'
 calculations</a> and <a href=pedel-AA-stats.html>notes on the PEDEL-AA
 algorithms</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2 id="pedelAA_warningRx">PEDEL-AA Rx warning</h2>
+
+<div id="pedelAA_warningRx_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notes about Cx estimations</h4>
+            </div>
+            <div class="modal-body">
+                <h2 id="pedelAA__warningRx">PEDEL-AA Rx warning</h2>
 <p>
 For x = 0, 1 and 2, we calculate the expected number of distinct
 variants, Cx, <a href=pedel-AA_exact.html>precisely</a>.  When Lx <
@@ -1145,10 +1179,6 @@ criterion</a> and
 <a href=pedel-AA-stats.html>notes on the PEDEL-AA
 algorithms</a>.
 </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

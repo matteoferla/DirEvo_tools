@@ -23,6 +23,7 @@ from Bio.Seq import Seq
 from pyramid.response import FileResponse
 from collections import Counter, defaultdict
 from warnings import warn
+from functools import reduce
 
 from pyramidstarter import bike
 from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
@@ -33,6 +34,8 @@ from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 PATH = "/opt/app-root/src/pyramidstarter/"
 if not os.path.isdir(PATH):
     PATH = "pyramidstarter/"
+if __name__ == '__main__':
+    PATH = ''
 
 
 class SeqEncoder(json.JSONEncoder):
@@ -515,7 +518,7 @@ def probably(jsonreq):
     singles=[spectra[m] for m in muts]
     p=reduce(operator.mul, singles, 1)*load/len(seq)
     plib=1-(1-p)**lib
-    return json.dumps({'data': {'p': p, 'mutations':muts}, 'html': '<p>overall probability of encountering a {v} genotype in a given variant is {p:2g}, amid the library {l:2g}.</p>'.format(p=p, v=mlist, l=plib)})
+    return json.dumps({'data': {'p': p, 'mutations':muts}, 'html': '<h3>Results</h3><p>overall probability of encountering a {v} genotype in a given variant is {p:2g}, amid the library {l:2g}.</p>'.format(p=p, v=mlist, l=plib)})
 
 def pmut_renumber(scores, AAlphabet='A C D E F G H I K L M N P Q R S T V W Y',delete=[], insert=None):
     if isinstance(AAlphabet, str):
@@ -585,15 +588,19 @@ def pmut_renumber(scores, AAlphabet='A C D E F G H I K L M N P Q R S T V W Y',de
             outseq[resi] = seq[resi + current_offset]
     return outdex, outseq
 
+def delete_temp():
+    for file in os.listdir(os.path.join(PATH,'tmp/')):
+        os.remove(os.path.join(PATH,'tmp',file))
 
 if __name__ == "__main__":
     #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
     #pprint(codonAA({'list':'G P S'}))
     #bases='A','T','G','C'
-    #print(probably({'sequence':'ATGGGCCCGAAATAG','mutant':'M1A','load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
+    #print(probably({'sequence':'ATGGGCCCGAAATAG','size':1e6,'list':['M1A'],'load':5, **{b1+'>'+b2:8.333333333 for b1 in bases for b2 in bases}}))
     #print(glueit({'num_codons': 6, 'library_size':1000,'codon1':'ATG','codon2':'NNT','codon3':'NNK','codon4':'NNK','codon5':'NNK','codon6':'ATG'}))
     #print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
     #print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
     #print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
     #print(pmut_renumber(open('pyramidstarter/static/dog-intermediate_scores.txt','r').read()))
+    #delete_temp()
     pass

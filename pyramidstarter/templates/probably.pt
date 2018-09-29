@@ -227,51 +227,6 @@
                                                id="probably_list">
                                     </div>
                                 </div>
-
-
-                                <div class="col-lg-4">
-                                    <div class="input-group">
-                                        Distribution
-                                        <input type="checkbox" class="switch" id="probably_PCR" data-off-text="Poisson"
-                                               data-on-text="+ PCR" data-off-color="warning">
-                                    </div>
-                                </div>
-                                <br/>
-                            </div>
-                            <div class="row">
-                                <div id="probably_§cycles" class="well well-lg">
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                            <span class="input-group-addon" data-toggle="tooltip" title="Number of PCR cycles"
-                                  data-placement="top">PCR cycles</span>
-                                            <input type="number" min="0" class="form-control" placeholder="4.5"
-                                                   id="probably_cycles">
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                            <span class="input-group-addon" data-toggle="tooltip" title="PCR efficiency"
-                                  data-placement="top">PCR efficiency</span>
-                                            <input type="number" min="0" max='1' class="form-control" placeholder="0.6"
-                                                   id="probably_efficiency">
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <button type="button" class="btn btn-info" data-toggle="modal"
-                                                data-target="#probably_calc_modal">
-                                            <i class="fa fa-calculator" aria-hidden="true"></i> Calculator
-                                        </button>
-                                        <br/>
-                                    </div>
-                                    <br/>
-                                </div>
-
-                            </div>
-                            <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
-                                                                                    data-target="#pedel_note">here</a>.
-                            </p>
                             <!--button row-->
                             <div class="row">
                                 <div class="col-lg-6 col-lg-offset-3">
