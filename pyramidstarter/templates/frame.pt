@@ -146,7 +146,7 @@ ${structure: codon_modal}
 <div class="navbar navbar-default navbar-fixed-bottom" style="backgound: gainsboro;" id="footer"> <!-- opacity: 0.95-->
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-1 col-md-10"><p class="text-muted"><b>GDPR statement</b>: Be aware that this site keeps the data you submit until system reset for debugging purposes &mdash;once live it will not probably. But for now, while I debug it I will kidnap your first born.</p></div>
+            <div class="col-md-offset-1 col-md-10"><p class="text-muted"><b>GDPR statement</b>: No marketing. No 3rd party. Data you submit is kept for debugging purposes.</p></div>
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
     </div>

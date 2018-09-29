@@ -324,13 +324,40 @@ def lander(request):
         return {'html': '<div class="alert alert-danger" role="alert">Error — server side:<br/>{e}</div>'.format(
             e=str(err))}
 
+def sanitize(inputstr): #from https://gist.github.com/dustyfresh/10d4e260499612c055f91f824ebd8a64
+    sanitized = inputstr
+    badstrings = [
+        ';',
+        '$',
+        '&&',
+        '../',
+        '<',
+        '>',
+        '%3C',
+        '%3E',
+        '\'',
+        '--',
+        '1,2',
+        '\x00',
+        '`',
+        '(',
+        ')',
+        'file://',
+        'input://'
+    ]
+    for badstr in badstrings:
+        if badstr in sanitized:
+            sanitized = sanitized.replace(badstr, '')
+    return sanitized
+
 
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
     global GMAIL_PWD, GMAIL_USER
     reply = request.json_body
-    subject = 'Comment from ' + reply['name']
-    body = reply['message']
+    subject = 'Comment from ' + sanitize(reply['name'])
+    ip, where = get_ip(request)
+    body = sanitize(reply['message']+'\n'+ip+' '+where)
     recipient = 'matteo.ferla@gmail.com'
     addressee = recipient if type(recipient) is list else [recipient]
     # Prepare actual message
@@ -526,20 +553,24 @@ def whois(ip):
 def log_passing(req, extra='—', status='—'):
     thread.start_new_thread(log_passing_para, (req, extra, status))
 
+def get_ip(req):
+    # pprinter(req.environ)
+    if "HTTP_X_FORWARDED_FOR" in req.environ:
+        # Virtual host
+        ip = req.environ["HTTP_X_FORWARDED_FOR"]
+    elif "HTTP_HOST" in req.environ:
+        # Non-virtualhost
+        ip = req.environ["REMOTE_ADDR"]  # 192.168.0.99 the pi apache
+    else:
+        ip = '0.0.0.0'
+    # print(ip)
+    debugprint('ip is ' + ip)
+    where = whois(ip)
+    return ip,where
+
 def log_passing_para(req, extra, status):
     try:
-        #pprinter(req.environ)
-        if "HTTP_X_FORWARDED_FOR" in req.environ:
-            # Virtual host
-            ip = req.environ["HTTP_X_FORWARDED_FOR"]
-        elif "HTTP_HOST" in req.environ:
-            # Non-virtualhost
-            ip = req.environ["REMOTE_ADDR"]  # 192.168.0.99 the pi apache
-        else:
-            ip = '0.0.0.0'
-        # print(ip)
-        debugprint('ip is ' + ip)
-        where = whois(ip)
+        ip,where=get_ip(req)
         logging.getLogger('pyramidstarter').info(
             ip + '\t' + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
     except Exception as err:
