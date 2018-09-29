@@ -1493,20 +1493,20 @@ int main(int argc, char * argv[]) {
         libtable << RxPois[i] << "</td><td>" <<
           LxPois[i] << "</td><td>" << CxCombPois[i] << "</td><td>" <<
           "<a href=/aef/STATS/FORM/pedel-AA_warning.html>warning</a>" <<
-          "</td><td>" << LxCxCombPois[i] << "</td><td>\n";
+          "</td><td>" << LxCxCombPois[i] << "</td></tr>\n";
         Poiswarning = 1;
       } else {
         if (RxPois[i] < 0.1) {
           libtable << RxPois[i] << "</td><td>" <<
             LxPois[i] << "</td><td>" << CxCombPois[i] << "</td><td>" <<
             "<a href=/aef/STATS/FORM/pedel-AA_CxLx.html>Cx ~ Lx</a>" <<
-            "</td><td>" << LxCxCombPois[i] << "</td><td>\n";
+            "</td><td>" << LxCxCombPois[i] << "</td></tr>\n";
         } else {
           libtable << RxPois[i] << "</td><td>" <<
             LxPois[i] << "</td><td>" << CxCombPois[i] << "</td><td>" <<
             "<a href=/aef/STATS/FORM/pedel-AA_warningRx.html>" <<
             "Rx warning</a></td><td>" << LxCxCombPois[i] <<
-            "</td><td>\n";
+            "</td></tr>\n";
         }
       }
     } else {
@@ -1530,18 +1530,6 @@ int main(int argc, char * argv[]) {
       } else {
         libtable << "<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
       }
-      if (0 == distr) {
-        if (LxPCR[maxx] / Vx1[maxx] <= 0.1) {
-          libtable << "<td>-</td><td>" << L2 * PleftoverPCR <<
-            "</td><td>" << L2 * PleftoverPCR << "</td><td>" <<
-            "<a href=/aef/STATS/FORM/pedel-AA_CxLx.html>Cx ~ Lx</a>" <<
-            "</td><td>" << "0</td>";
-        } else {
-          libtable << "<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
-        }
-      } else {
-        libtable << "<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
-      }
       libtable << "</tr>\n";
     }
   }
@@ -1549,12 +1537,6 @@ int main(int argc, char * argv[]) {
   libtable << "<tr align=\"right\"><td><b>Totals</b></td><td></td><td></td>" <<
     "<td></td><td></td><td><b>" << CtotalCombPois <<
     "</b></td><td></td><td></td>";
-  if (0 == distr) {
-    libtable << "<td></td><td></td><td><b>" << CtotalCombPCR <<
-      "</b></td><td></td><td></td>";
-  } else {
-    libtable << "<td></td><td></td><td>-</td><td></td><td></td>";
-  }
   libtable << "</tr>\n";
   libtable << "</table><br>\n";
   libtable << "</body></html>\n";
