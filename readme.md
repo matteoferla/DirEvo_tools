@@ -11,6 +11,7 @@ It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
 Sorted by urgency:
 
+* *Pedel-AA* a-elements linkage is broken.
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
 * *Pedel-AA* graphs —original functionality
 * *PedelAA* links to modals in sub table.
@@ -28,7 +29,6 @@ Sorted by urgency:
 * Glue needs a switch like Pedel —or does Pedel need two pages?
 * URL query string needs to be integrated
 * make size responsive. —why would anyone use their mobile?
-* https. switch to gnunicorn from waitress or let Apache server handle it.
 * Make sure code supports badly formatted sequences. e.g. numbers and spaces and newlines.
 * Also edit js side to catch client side errors. —Some do already...
 * Rosetta landscape. Add distribution of mutations and norm thinggy like my matlab script has.
