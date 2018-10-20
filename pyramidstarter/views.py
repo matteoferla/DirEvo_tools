@@ -473,21 +473,31 @@ def set_callable(request):
     :param request:
     :return:
     """
-
-    if 'pwd' in request.params:
-        global GMAIL_SET, GMAIL_PWD
-        if not GMAIL_SET:
-            GMAIL_PWD = request.params['pwd']
-            GMAIL_SET = True
-            print('Password for gmail set')
+    if 'admin' in request.session and request.session['admin']:
+        if 'pwd' in request.params:
+            global GMAIL_SET, GMAIL_PWD
+            if not GMAIL_SET:
+                GMAIL_PWD = request.params['pwd']
+                GMAIL_SET = True
+                print('Password for gmail set')
+                return 'Sucess'
+            else:
+                return 'Password already set.'
+        elif 'status' in request.params:
+            global STATUS
+            STATUS = request.params['status']
+            debugprint(STATUS)
             return 'Sucess'
+        elif 'reset' in request.params:
+            os.system('echo "Hello world" > test.txt')
+            os.system('sudo echo "Hello world" > sudotest.txt')
+            os.system('sudo sh update.sh;');
+            return 'Resetting...'
         else:
-            return 'Password already set.'
-    elif 'status' in request.params:
-        global STATUS
-        STATUS = request.params['status']
-        debugprint(STATUS)
-        return 'Sucess'
+            return 'Unknown command'
+    else:
+        return 'You need to be admin'
+
 
 
 @view_config(route_name='main', renderer=FRAME)
