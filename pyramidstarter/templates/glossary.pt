@@ -1,6 +1,5 @@
 <div class="row" id="§glossary">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-md-offset-2">
         <h1>Glossary</h1>
         <div class="row">
             <ul class="list-group">
@@ -13,11 +12,9 @@
                 <il class="list-group-item"><b>...</b> ...</il>
             </ul>
         </div>
-    </div>
 
-    <div class="col-md-8">
-        <h1>FAQ</h1>
         <div class="row">
+            <h1>FAQ</h1>
             <ul class="list-group">
                 <il class="list-group-item"><h3>What about Sun's PCR distribution</h3> Due to the fact that the PCR efficiency is not a straightforward parameter to obtain and can be strongly misleading it was not ported to this project. For more see: <a href="http://blog.matteoferla.com/2018/08/pcr-distribution.html">Matteo's blogpost <i class="fa fa-external-link" aria-hidden="true"></i></a></il>
             </ul>

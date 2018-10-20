@@ -6,23 +6,23 @@
                 <h1>Introduction</h1>
             </div>
             Engineering better proteins is a multifaceted task. Here you will find an assortment of tools that will help you find a better variant at every step of the way:
-            <ul class="list-group">
-                <il class="list-group-item"><b>Primers — Mutant primers:</b><br/>Given a sequence and list of desired mutations it will return primers to make each of those mutations.</il>
-                <il class="list-group-item"><b>Primers — Deepscan:</b><br/> Given a sequence and a codon, say GCT for alanine scanning, it will return a list of all primers needed to scan the sequence with that mutation</il>
-                <il class="list-group-item"><b>epPCR — Mutantcaller:</b><br/> Given a sequence and an ab1 trace it will return all mutations present and also list heterozygous sites (say you have a mixed population or you pooled two or three variants to cut down on sequencing)</il>
-                <il class="list-group-item"><b>epPCR — Mutantanalyst:</b><br/> Given a sequence and a list of sampled variants, it will say how biased the library is.</il>
-                <il class="list-group-item"><b>epPCR — Pedel:</b><br/> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library.</il>
-                <il class="list-group-item"><b>epPCR — PedelAA:</b><br/> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library from an amino acid point of view.</il>
-                <il class="list-group-item"><b>epPCR — Chances:</b><br/> Given a sequence and a desired mutation, it will say what are the chances that mutation ought to have been seen.</il>
-                <il class="list-group-item"><b>epPCR — Generator:</b><br/> Given a sequence and mutational bias data, it generate mutations.</il>
-                <il class="list-group-item"><b>Glue — Glue:</b><br/> Calculates how complete a library is from a coupon collectors problem standpoint.</il>
-                <il class="list-group-item"><b>Glue — GlueIT:</b><br/> Calculates the completeness of a library mutated at 1–6 codons.</il>
-                <il class="list-group-item"><b>Driver:</b><br/> Calculates the probability of cross-over events</il>
-                <il class="list-group-item"><b>QQC (Quick quality control) calculator:</b><br/> Given an ab1 file of a sequence pool mutated at a codon, it gives the distribution of nucleotides and codons.</il>
-                <il class="list-group-item"><b>Landscape:</b><br/> Given a series of Rosetta pmut_scan outputs it shows the mutational landscape of that protein</il>
-                <il class="list-group-item"><b>Codon helper</b><br/> A tool to help you pick the best degenerate codons. Found in any page that requires codons as a sequence.</il>
+            <div class="list-group">
+                <a href="main/mutantprimers" class="list-group-item"><b>Primers — Mutant primers:</b><br/>Given a sequence and list of desired mutations it will return primers to make each of those mutations.</a>
+                <a href="main/deepscan" class="list-group-item"><b>Primers — Deepscan:</b><br/> Given a sequence and a codon, say GCT for alanine scanning, it will return a list of all primers needed to scan the sequence with that mutation</a>
+                <a href="main/mutantcaller" class="list-group-item"><b>epPCR — Mutantcaller:</b><br/> Given a sequence and an ab1 trace it will return all mutations present and also list heterozygous sites (say you have a mixed population or you pooled two or three variants to cut down on sequencing)</a>
+                <a href="main/mutanalyst" class="list-group-item"><b>epPCR — Mutantanalyst:</b><br/> Given a sequence and a list of sampled variants, it will say how biased the library is.</a>
+                <a href="main/pedel" class="list-group-item"><b>epPCR — Pedel:</b><br/> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library.</a>
+                <a href="main/pedel" class="list-group-item"><b>epPCR — PedelAA:</b><br/> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library from an amino acid point of view.</a>
+                <a href="main/probably" class="list-group-item"><b>epPCR — Chances:</b><br/> Given a sequence and a desired mutation, it will say what are the chances that mutation ought to have been seen.</a>
+                <a href="main/silico" class="list-group-item"><b>epPCR — Generator:</b><br/> Given a sequence and mutational bias data, it generate mutations.</a>
+                <a href="main/glue" class="list-group-item"><b>Glue — Glue:</b><br/> Calculates how complete a library is from a coupon collectors problem standpoint.</a>
+                <a href="main/glue" class="list-group-item"><b>Glue — GlueIT:</b><br/> Calculates the completeness of a library mutated at 1–6 codons.</a>
+                <a href="main/driver" class="list-group-item"><b>Driver:</b><br/> Calculates the probability of cross-over events</a>
+                <a href="main/QCC" class="list-group-item"><b>QQC (Quick quality control) calculator:</b><br/> Given an ab1 file of a sequence pool mutated at a codon, it gives the distribution of nucleotides and codons.</a>
+                <a href="main/landscape" class="list-group-item"><b>Landscape:</b><br/> Given a series of Rosetta pmut_scan outputs it shows the mutational landscape of that protein</a>
+                <a href="main/misc" class="list-group-item"><b>Codon helper</b><br/> A tool to help you pick the best degenerate codons. Found in any page that requires codons as a sequence.</a>
 
-            </ul>
+            </div>
             <br/>
             This is a revamp and expansion of the old server by Wayne Patrick and Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.
 

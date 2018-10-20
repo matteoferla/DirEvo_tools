@@ -129,7 +129,7 @@
                                 end result is a library with a Poisson distribution of mutations
                                 (e.g. Cadwell R.C., Joyce G.F., 1992, Randomization of genes by PCR
                                 mutagenesis, <i>PCR Methods Appl.</i>, <b>2</b>, 28-33). <b>But see
-                                    also this <a href=pedelpcrdist.html>note</a>.</b>
+                                    also this <a href=https://blog.matteoferla.com/2018/08/pcr-distribution.html target="_blank">note <i class="fa fa-external-link" aria-hidden="true"></i></a>.</b>
 
                             <li>Any biases in library construction will decrease the actual
                                 number of distinct variants represented in the library. In such
@@ -425,11 +425,11 @@
 
                             <li> When Lx << Vx then Cx ~ Lx. For equiprobable variants this
                                 approximation is good to 5% for Lx < 0.1 Vx (see the mathematical
-                                <a href=../notes.pdf>notes</a> on the nucleotide version of PEDEL).
+                                <a href=/static/notes.pdf>notes</a> on the nucleotide version of PEDEL).
                                 For PEDEL-AA, we use this approximation when Lx < 0.1 Vx_1 (the number
                                 of 'easy-to-reach' variants) or more rigorously, and optionally, when
                                 Rx < 0.1, where Rx is the mean frequency of the most common variant in
-                                the sub-library Lx (see <a href="pedelAA_Rx">note on Rx
+                                the sub-library Lx (see <a data-toggle="modal" data-target="#pedelAA_exact_modal">note on Rx
                                     statistic</a> for details). Lx < 0.1 Vx_1 is usually true for x
                                 >= 3 and almost always true for x >= 4. For example for N >= 40
                                 codons, V3_1 >= ~5.8^3 x C(40,3) = 1.9 x 10^6 and V4_1 >= ~5.8^4 x

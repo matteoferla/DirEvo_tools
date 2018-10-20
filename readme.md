@@ -1,9 +1,10 @@
-
+<!--
 <a href="https://codeclimate.com/github/matteoferla/pedel2"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/gpa.svg" /></a>
 <a href="https://codeclimate.com/github/matteoferla/pedel2/"><img src="https://codeclimate.com/github/matteoferla/pedel2/badges/issue_count.svg" /></a>
-
+-->
 # Intro
 Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but will change name when inspired.
+I assume that it will be hosted as pedel.enzymes.org.nz or similar in the future.
 See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
 It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
@@ -11,10 +12,12 @@ It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
 Sorted by urgency:
 
-* *Pedel-AA* a-elements linkage is broken.
+* *Theme* Get a word from Wayne and Matilda about the theme
+* *Index* The index is green when the theme is set to 'darkly'. Either changing the default theme or upgrading the whole site to BS 4. Before doing that, maybe fixing the Mako would be in order. Alt. A different navigation? I am lost about what though!
+* *Pedel-AA* a-elements linkage is broken in certain bits. :angry:
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
 * *Pedel-AA* graphs —original functionality
-* *PedelAA* links to modals in sub table.
+* *PedelAA* links to modals in sub table. &mdash; I thought this was done. :confused:
 * *QQC* wire reverse
 * *Glue* works, but make it print a graph at different values. —extra functionality
 * *driver* output could be made into a nice table actually. —extra functionality
@@ -35,6 +38,7 @@ Sorted by urgency:
 * *Mutanalyst* is using old JS still. Not Ajax and python. —Is this actually urgent??
 * *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan. —So?
 * *mutationprimer* code currently written until making a function in mutant_wrapper... —what does this mean?
+* *Mako* The templating is awful. But you are allowed to fix it when you have nothing left.
 
 # Bullcrap area
 
