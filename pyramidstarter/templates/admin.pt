@@ -20,6 +20,8 @@
                         class="fa fa-exclamation-triangle" aria-hidden="true"></i> Beta</a>
             <a href="/set?status=red" class="btn btn-info" target="_blank"><i
                         class="fa fa-fire-extinguisher" aria-hidden="true"></i> Don't press this.</a>
+            <h1>Reset</h1>
+            <a href="/set?reset=go" class="btn btn-warning" target="_blank"><i class="fa fa-bomb" aria-hidden="true"></i> Git-pull & reset</a>
     </div>
 </div>
 </div>

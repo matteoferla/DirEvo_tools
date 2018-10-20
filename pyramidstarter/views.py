@@ -489,8 +489,6 @@ def set_callable(request):
             debugprint(STATUS)
             return 'Sucess'
         elif 'reset' in request.params:
-            os.system('echo "Hello world" > test.txt')
-            os.system('sudo echo "Hello world" > sudotest.txt')
             os.system('sudo sh update.sh;');
             return 'Resetting...'
         else:
