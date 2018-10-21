@@ -15,11 +15,9 @@
     <title>Pedel revamp</title>
     <!-- Bootstrap core CSS-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="theme_CSS"/>
-    <!--<link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap/themes/darkly.min.css')}">-->
 
     <!--Fontawesome-->
-    <!--<link rel="stylesheet" href="${request.static_url('pyramidstarter:static/font-awesome/css/font-awesome.min.css')}">-->
-    <script src="https://use.fontawesome.com/50c6df77b5.js"></script>
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/web-fonts-with-css/css/fontawesome-all.min.css')}">
 
     <!-- Custom styles for this scaffold -->
     <!-- was bootstrap-theme-->

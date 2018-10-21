@@ -5,7 +5,11 @@
             <div class="page-header">
                 <h1>Introduction</h1>
             </div>
-            Engineering better proteins is a multifaceted task. Here you will find an assortment of tools that will help you find a better variant at every step of the way:
+            <h2>Aim</h2>
+            <p>Engineering better proteins is a multifaceted task. Here you will find an assortment of tools that will help you find a better variant at every step of the way.</p>
+            <p>There are many technical terms in protein design and engineering, so if you are struggling with terminology do check out <a href="main/glossary">the glossary and FAQ page</a>.</p>
+            <p></p>
+            <h1>Applications</h1>
             <div class="list-group">
                 <a href="main/mutantprimers" class="list-group-item"><b>Primers — Mutant primers:</b><br/>Given a sequence and list of desired mutations it will return primers to make each of those mutations.</a>
                 <a href="main/deepscan" class="list-group-item"><b>Primers — Deepscan:</b><br/> Given a sequence and a codon, say GCT for alanine scanning, it will return a list of all primers needed to scan the sequence with that mutation</a>
