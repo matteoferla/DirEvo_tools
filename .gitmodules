@@ -1,0 +1,9 @@
+[submodule "pyramidstarter/static/bootstrap"]
+	path = pyramidstarter/static/bootstrap
+	url = https://github.com/twbs/bootstrap.git
+[submodule "pyramidstarter/static/bootstrap-slider"]
+	path = pyramidstarter/static/bootstrap-slider
+	url = https://github.com/seiyria/bootstrap-slider.git
+[submodule "pyramidstarter/static/Font-Awesome-Pro"]
+	path = pyramidstarter/static/Font-Awesome-Pro
+	url = https://github.com/FortAwesome/Font-Awesome-Pro.git
