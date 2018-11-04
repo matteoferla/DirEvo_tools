@@ -36,43 +36,15 @@ if os.path.isfile('email_details.json'):
 
 print('reporting from views.py')
 
-STATUS = 'construction'
+STATUS = 'upgradetemp'
+FRAME = 'templates/frame.mako'
 
-FRAME = 'templates/frame.pt'
 try:
     urllib.request.urlopen('http://python.org/')
 except OSError:
     warn('The server is running in OFFLINE mode as it cannot connect to the web.')
     FRAME = 'templates/frame_local.pt'  # offline!
-
-
-def basedict(**kwargs):
-    return {'project': 'Pyramidstarter',
-            'main': '',
-            'welcome': '',
-            'm_home': 'not-active',
-            'm_deep': 'not-active',
-            'm_about': 'not-active',
-            'm_QQC': 'not-active',
-            'm_landscape': 'not-active'}
-
-
-def talk_to_user():
-    outer = '''<div class="row" id="warning"><div class="col-md-8 col-md-offset-2">{note}</div></div>'''
-    if STATUS == 'normal':
-        return '<!-- all nominal -->'
-    elif STATUS == 'beta':
-        return outer.format(
-            note='<div class="bs-callout bs-callout-info"><h4>Info</h4>This is still in beta. This version may be unstable.</div>')
-    elif STATUS == 'construction':
-        return outer.format(
-            note='<div class="bs-callout bs-callout-warning"><h4>Warning</h4>Matteo is actively working with the server. It may go down at any time.</div>')
-    elif STATUS == 'red':
-        return outer.format(
-            note='<div class="bs-callout bs-callout-danger"><h4>Danger</h4>Somebody pressed the forbidden link.</div>')
-    else:
-        return '<!-- no warnings -->'
-
+    raise Exception('OFFLINE TESTING NOT SUPPORTED ANYMORE')
 
 ############### Ajacean views #####################
 
@@ -312,7 +284,7 @@ def lander(request):
 
         opt = '<li class="fake-link" data-n={i} data-name={name}><span id="land_{plot}_option_{name}">{name}</span></li>'
         opt_seq = '<li role="separator" class="divider"></li>'
-        html = open(os.path.join(PATH, 'templates', 'landscape_results.pt')).read() \
+        html = open(os.path.join(PATH, 'templates', 'landscape_results.mako')).read() \
             .format(table=made_table,
                     heat_opt='\n'.join([opt.format(name=x, i=i, plot='heat') for i, x in enumerate(headers)]),
                     distro_opt='\n'.join([opt.format(name=x, i=i, plot='distro') for i, x in enumerate(headers)])
@@ -384,52 +356,69 @@ def ajacean_test(request):
 ############### Main views #####################
 barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc m_silico m_probably m_landscape'.split()
 
+class Fields():
+    # I think I need some methods... so better do this than a default dictionary
+    def __init__(self, **kwargs):
+        #deal with status.
+        self.status = STATUS
+        if 'status' in kwargs:
+            self.status = kwargs['status']
+        if STATUS == 'normal' or STATUS == 'none' or not STATUS:
+            self.status = None
+        elif STATUS == 'beta':
+            self.status_class='info'
+            self.status_msg='This is still in beta. This version may be unstable.'
+        elif STATUS == 'construction':
+            self.status_class = 'warning'
+            self.status_msg = 'Matteo is actively working with the server. It may go down at any time.'
+        elif STATUS == 'red':
+            self.status_class = 'danger'
+            self.status_msg = 'Somebody pressed the forbidden link.'
+        elif STATUS == 'upgradetemp':
+            self.status_class = 'warning'
+            self.status_msg = '<i class="fas fa-bat fa-spin"></i> Matteo just upgraded both Bootstrap and Font Awesome, and did a major change to the Mako templating so bugginess is a given.'
 
-def ready_fields(thisbar, main=None, code_file=None, codon_flag=False, welcome_flag=False):
-    ddex = {i: '' for i in barnames}
-    if thisbar in barnames:
-        ddex[thisbar] = 'active'
-    ddex['headsup'] = talk_to_user()
-    if os.path.isfile(os.path.join(PATH, 'templates', main)):  # it is a file name
-        ddex['main'] = open(os.path.join(PATH, 'templates', main)).read()
-    elif main:  # it is a str itself.
-        ddex['main'] = main
-    else:
-        ddex['main'] = '&nbsp;'
-    ddex['codon_modal'] = open(os.path.join(PATH, 'templates', 'codon_modal.pt')).read() if codon_flag else '&nbsp;'
-    ddex['welcome'] = open(os.path.join(PATH, 'templates', 'welcome.pt')).read() if welcome_flag else '&nbsp;'
-    ddex['code'] = open(os.path.join(PATH, 'templates', code_file)).read() if code_file else '&nbsp;'
-    return ddex
+        else: #'custom' there will be status_msg and class in kwargs
+            self.status_class='danger'
+            self.status_msg=STATUS
+        #write args
+        for k in kwargs:
+            setattr(self,k,kwargs[k])
+
+    def __setattr__(self, key, value):
+        self.__dict__[key] = value
+
+    def __getattr__(self, item):
+        if item in self.__dict__:
+            return self.__dict__[item]
+        else:
+            return ''
 
 
 @view_config(route_name='home', renderer=FRAME)
 def home_callable(request):
     try:
         log_passing(request)
-        return ready_fields('m_home', 'main.pt', 'main.js', welcome_flag=False)  # I was sick of the welcome flag.
+        return {'page': Fields(request=request, m_home='active', body='main.mako', code='main.js')}
     except Exception as err:
         debugprint(traceback.format_exc())
-        return 'SOMETHING IS WRONG.'
-
+        return {'page': Fields(request=request, m_home='active', error=traceback.format_exc())}
 
 @view_config(route_name='upcoming', renderer=FRAME)
 def upcoming_callable(request):
     log_passing(request)
-    md = markdown.markdown(open('readme.md').read())
-    wrap = '<div class="row" id="§upcoming"><div class="col-lg-8  col-lg-offset-2"><div class="panel panel-default"><div class="panel-heading"><h1 class="panel-title">Upcoming</h1></div><div class="panel-body">{}</div></div></div></div>'
-    return ready_fields('m_upcoming', wrap.format(md), 'main.js')
+    return {'page': Fields(request=request, m_upcoming='active', body='upcoming.mako', md=markdown.markdown(open('readme.md').read()))}
 
 @view_config(route_name='admin', renderer=FRAME, http_cache=0)
 def admin_callable(request):
     # get machine usage data...
     pid = psutil.Process(os.getpid())
-    data='CPU use by this app: {pid_cpu}%<br/>System CPU usages: {tot_cpu}<br/>memory use by this app: {pid_mem} MB<br/>Full stats: {cpu}<br/>{virt}<br/>{swap}<br/>'.format(
-                    pid_cpu=pid.cpu_times().user,
+    data=dict(pid_cpu=pid.cpu_times().user,
                     tot_cpu=' '.join([str(x) + '%' for x in psutil.cpu_percent(percpu=True)]),
                     cpu=psutil.cpu_times(),
                     pid_mem=pid.memory_info()[0] / 2. ** 20,
                     virt=psutil.virtual_memory(),
-                    swap=psutil.swap_memory() )
+                    swap=psutil.swap_memory())
     status=''
     if 'admin' in request.session and request.session['admin']:
         admin=True
@@ -440,22 +429,14 @@ def admin_callable(request):
             print('Granted')
             request.session['admin'] = True
             admin=True
-            status = '<div class="alert alert-info" role="alert">The password is right. How did you get this??</div>'
+            status = 'The password is right. How did you get this message?'
         else:
             print('wrong...{}'.format(request.POST['password']))
-            status='<div class="alert alert-danger" role="alert">禁 Warning: Password wrong!</div>'
+            status='禁 Warning: Password wrong!'
     if admin:
-        print('preparing admin')
-        fields=ready_fields('m_admin', 'admin.pt', 'admin.js')
-        fields['main']=fields['main'].format(data=data)
-        return fields
+        return {'page': Fields(request=request, m_admin='active', body='admin.mako', code='admin.js', data=data)}
     else:
-        print('preparing login')
-        fields = ready_fields('m_admin', 'forbidden.pt', 'forbidden.js')
-        fields['main'] = fields['main'].format(status=status)
-        return fields
-
-
+        return {'page': Fields(request=request, m_admin='active', body='forbidden.mako', code='forbidden.js', status='custom', status_msg=status, status_class='info')}
 
 @view_config(route_name='update', renderer='string')
 def update_callable(request):
@@ -489,7 +470,7 @@ def set_callable(request):
             debugprint(STATUS)
             return 'Sucess'
         elif 'reset' in request.params:
-            os.system('sudo sh update.sh;');
+            os.system('sudo sh update.sh;')
             return 'Resetting...'
         else:
             return 'Unknown command'
@@ -505,36 +486,33 @@ def main_callable(request):
         log_passing(request)
         page = request.matchdict['page']
         debugprint('for page ' + page)
-        return ready_fields('m_' + page, page + '.pt', page + '.js', codon_flag=True)
+        return {'page': Fields(request=request, body=page+'.mako', code=page+'.js', codon_flag=True, **{'m_'+page: 'active'})}
     except Exception as err:
-        debugprint('error', err)
         debugprint(traceback.format_exc())
-        return {'html': 'ERROR'}
+        return {'page': Fields(request=request, error=traceback.format_exc(),**{'m_'+page: 'active'})}
 
 
 @notfound_view_config(renderer=FRAME)
 def notfound_callable(request):
     request.response.status = 404
     if request.method == 'POST':
-        log_passing(request, extra=str(request.POST), status='404')
+        details = str(request.POST)
     else:
-        log_passing(request, extra=str(request.GET), status='404')
-    return ready_fields('m_404', open(os.path.join(PATH, 'templates', '404.pt')).read().format(address=request))
+        details=str(request.GET)
+    log_passing(request, extra=details, status='404')
+    return {'page': Fields(request=request, m_404='active', status=True, status_msg='404 Error! File not found!', status_class='danger',error=details)}
 
 
 @view_config(route_name='log', renderer=FRAME)
 def lumberjack(request):
     log_passing(request)
-    '''to find what city the users are from...
-    http://ip-api.com/json/xxx.xxx.xxx.xxx
-    '''
     log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
     log_response = '<div class="alert alert-success" role="alert"><a href="static/bash_log.txt">download terminal log</a></div>' + \
                    '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>IP Address</th><th>Physical address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
                    '<tbody><tr>' + '</tr><tr>'.join(
         ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
                    '</tr></tbody></table>'
-    return ready_fields('m_log', log_response, None)
+    return {'page': Fields(request=request, m_log='active', full_width_text=log_response)}
 
 
 ############### LOG! #####################
