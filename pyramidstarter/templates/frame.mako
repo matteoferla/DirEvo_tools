@@ -39,10 +39,10 @@
           rel="stylesheet">
     <!--main CSS-->
     <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
-<!--
-    <style>
-        div {border:1px solid black;}
-    </style> -->
+    <!--
+        <style>
+            div {border:1px solid black;}
+        </style> -->
 </head>
 
 <body style="padding-top: 60px;">
@@ -62,35 +62,38 @@
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                        role="button"
-                       aria-haspopup="true" aria-expanded="false">Primers <span
+                       aria-haspopup="true" aria-expanded="false">
+                        Primers <span
                             class="caret"></span></a>
-                    <ul
+                    <div
                             class="dropdown-menu">
-                        <li class="${page.m_mutantprimers} dropdown-item"><a
-                                href="/main/mutantprimers">Mutantprimers</a>
-                        </li>
-                        <li class="${page.m_deepscan} dropdown-item"><a href="/main/deepscan">Deepscan</a>
-                        </li>
-                    </ul>
+                        <a class="${page.m_mutantprimers} dropdown-item"
+                                href="/main/mutantprimers">
+                            Mutantprimers
+                        </a>
+                        <a class="${page.m_deepscan} dropdown-item" href="/main/deepscan">
+                            Deepscan
+                        </a>
+                    </div>
                 </li>
                 <li class="dropdown nav-item"><a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                                                  role="button"
                                                  aria-haspopup="true" aria-expanded="false">epPCR <span
                         class="caret"></span></a>
-                    <ul
+                    <div
                             class="dropdown-menu">
-                        <li class="${page.m_mutantcaller} dropdown-item"><a href="/main/mutantcaller">MutantCaller</a>
-                        </li>
-                        <li class="${page.m_mutanalyst} dropdown-item"><a href="/main/mutanalyst">Mutanalyst</a>
-                        </li>
-                        <li class="${page.m_pedel} dropdown-item"><a href="/main/pedel">Pedel</a>
-                        </li>
-                        <li class="${page.m_probably} dropdown-item"><a href="/main/probably">Chances</a>
-                        </li>
-                        <li role="separator" class="divider dropdown-item"></li>
-                        <li class="${page.m_silico} dropdown-item"><a href="/main/silico">Generator</a>
-                        </li>
-                    </ul>
+                        <a class="${page.m_mutantcaller} dropdown-item" href="/main/mutantcaller">MutantCaller
+                        </a>
+                        <a class="${page.m_mutanalyst} dropdown-item" href="/main/mutanalyst">Mutanalyst
+                        </a>
+                        <a class="${page.m_pedel} dropdown-item" href="/main/pedel">Pedel
+                        </a>
+                        <a class="${page.m_probably} dropdown-item" href="/main/probably">Chances
+                        </a>
+                        <a role="separator" class="divider dropdown-item"></a>
+                        <a class="${page.m_silico} dropdown-item" href="/main/silico">Generator
+                        </a>
+                    </div>
                 </li>
                 <li class="${page.m_glue} nav-item"><a href="/main/glue" class="nav-link">Glue</a>
                 </li>
@@ -104,26 +107,31 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li class="dropdown nav-item"><a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
+
+
+
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                                                  role="button"
-                                                 aria-haspopup="true" aria-expanded="false">Change theme <span
-                        class="caret"></span></a>
-                    <ul
-                            class="dropdown-menu" id="themeSelector"></ul>
+                                                 aria-haspopup="true" aria-expanded="false">
+                        Change theme <span class="caret"></span></a>
+                    <div class="dropdown-menu" id="themeSelector"></div>
                 </li>
-                <li class="dropdown nav-item"><a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
                                                  role="button"
                                                  aria-haspopup="true" aria-expanded="false">About <span
                         class="caret"></span></a>
-                    <ul
+                    <div
                             class="dropdown-menu">
-                        <li class="${page.m_about} dropdown-item"><a href="/main/about">About</a>
-                        </li>
-                        <li class="${page.m_about} dropdown-item"><a href="/admin">Admin</a>
-                        </li>
-                        <li class="${page.m_about} dropdown-item"><a href="/upcoming">Upcoming</a>
-                        </li>
-                    </ul>
+                        <a class="dropdown-item ${page.m_about}" href="/main/about">About
+                        </a>
+                        <a class="dropdown-item ${page.m_about}" href="/admin">Admin
+                        </a>
+                        <a class="dropdown-item ${page.m_about}" href="/upcoming">Upcoming
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item"><a onclick="$('#comment_modal').modal('show');" style="cursor:pointer"
                                         class="nav-link">Comment</a>
@@ -136,9 +144,9 @@
 <br>
 
 <!--MODAL for scheme. not activated on all pages!-->
-% if page.codon_flag:
-    <%include file="codon_modal.mako" args="page='page'"/>
-% endif
+    % if page.codon_flag:
+        <%include file="codon_modal.mako" args="page='page'"/>
+    % endif
 <!--Main -->
 <div class="container-fluid" id="fullpage">
     <!--welcome box-->
@@ -178,24 +186,24 @@
         % endif
     </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <!--footer-->
 <div class="navbar navbar-light bg-light navbar-fixed-bottom" id="footer">
-            <div class="nav navbar-nav navbar-center">
-                <p class="text-muted"><b>GDPR statement</b>: No marketing. No 3rd party. Data you submit is
-                    kept for debugging purposes.</p>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&#xD7;</span>
-                </button>
-            </div>
+    <div class="nav navbar-nav navbar-center">
+        <p class="text-muted"><b>GDPR statement</b>: No marketing. No 3rd party. Data you submit is
+            kept for debugging purposes.</p>
+    </div>
+    <div class="nav navbar-nav navbar-right">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&#xD7;</span>
+        </button>
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal" id="comment_modal" tabindex="-1" role="dialog">

@@ -419,7 +419,7 @@ def admin_callable(request):
                     pid_mem=pid.memory_info()[0] / 2. ** 20,
                     virt=psutil.virtual_memory(),
                     swap=psutil.swap_memory())
-    status=''
+    status='This area is not for users. Sorry.'
     if 'admin' in request.session and request.session['admin']:
         admin=True
     else:

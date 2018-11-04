@@ -39,16 +39,14 @@
             Don&apos;t press his.</a>
         <div class="btn-group" role="group" aria-label="Basic example">
             <input type="text" class="form-control" placeholder="Custom message!" id="custom_status">
-            <button type="button" class="btn btn-primary" onclick="window.open('/set?status='+encodeURI($('#custom_status').val()))"><i class="fas fa-alicorn"></i> Submit</button>
+            <button type="button" class="btn btn-primary" onclick="window.open('/set?status='+encodeURI($('#custom_status').val()))"><i class="fas fa-alicorn"></i>&nbsp;Set</button>
         </div>
-
-
-        set?status=
 
 
         <h2>Reset</h2>
         <a href="/set?reset=go" class="btn btn-warning" target="_blank">
             <i class="fas fa-bomb" aria-hidden="true"></i>
             Git-pull &amp; reset</a>
+        <p>NB. The server will not respond with a success. It will go down temporarily.</p>
     </div>
 </div>

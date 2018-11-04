@@ -13,7 +13,6 @@ It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 Sorted by urgency:
 
 * *Theme* Get a word from Wayne and Matilda about the theme
-* *Index* The index is green when the theme is set to 'darkly'. Either changing the default theme or upgrading the whole site to BS 4. Before doing that, maybe fixing the Mako would be in order. Alt. A different navigation? I am lost about what though!
 * *Pedel-AA* a-elements linkage is broken in certain bits. :angry:
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
 * *Pedel-AA* graphs —original functionality
@@ -38,7 +37,6 @@ Sorted by urgency:
 * *Mutanalyst* is using old JS still. Not Ajax and python. —Is this actually urgent??
 * *mutationprimer*. temporary name. Most functions are copypaste jobs of deepscan. —So?
 * *mutationprimer* code currently written until making a function in mutant_wrapper... —what does this mean?
-* *Mako* The templating is awful. But you are allowed to fix it when you have nothing left.
 
 # Bullcrap area
 

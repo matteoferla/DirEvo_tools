@@ -4,12 +4,12 @@
 [submodule "pyramidstarter/static/bootstrap-slider"]
 	path = pyramidstarter/static/bootstrap-slider
 	url = https://github.com/seiyria/bootstrap-slider.git
-[submodule "pyramidstarter/static/Font-Awesome-Pro"]
-	path = pyramidstarter/static/Font-Awesome-Pro
-	url = https://github.com/FortAwesome/Font-Awesome-Pro.git
 [submodule "pyramidstarter/static/bootswatch"]
 	path = pyramidstarter/static/bootswatch
 	url = https://github.com/thomaspark/bootswatch.git
 [submodule "pyramidstarter/static/bootstrap-switch"]
 	path = pyramidstarter/static/bootstrap-switch
 	url = https://github.com/Bttstrp/bootstrap-switch.git
+[submodule "pyramidstarter/static/Font-Awesome-Pro"]
+	path = pyramidstarter/static/Font-Awesome-Pro
+	url = https://github.com/FortAwesome/Font-Awesome-Pro.git

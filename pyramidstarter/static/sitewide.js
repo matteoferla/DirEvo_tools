@@ -17,8 +17,8 @@ var mytheme=sessionStorage.getItem('theme') ? sessionStorage.getItem('theme') : 
 for (i = 0; i < themeNames.length; i++) {
     themes[themeNames[i]] = "/static/bootswatch/dist/" + themeNames[i] + "/bootstrap.css";
     themes['default'] = "/static/bootstrap/dist/css/bootstrap.css";
-    if (themeNames[i] == mytheme) {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link"><b>' + themeNames[i] + '</b></a></li>');}
-    else {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link">' + themeNames[i] + '</a></li>');}
+    if (themeNames[i] == mytheme) {$('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item active  theme-link"><b>' + themeNames[i] + '</a>');}
+    else {$('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item theme-link">' + themeNames[i] + '</a>');}
 }
 var themesheet = $('#theme_CSS');
 themesheet.removeAttr('integrity');
