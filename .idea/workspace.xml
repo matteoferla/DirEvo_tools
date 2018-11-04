@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":confused: made a mess of submodulling...">
+      <change afterPath="$PROJECT_DIR$/pyramidstarter/static/Font-Awesome-Pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pyramidstarter/static/bootstrap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pyramidstarter/static/bootstrap-slider" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/static/demo/pyramid-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/static/demo/pyramid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/static/demo/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/static/demo/theme.min.css" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/pedel2$app.coverage" NAME="app Coverage Results" MODIFIED="1541332289627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1959132080">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="3" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="1" />
+          <entry key="gitmodules" value="2" />
+          <entry key="ini" value="3" />
+          <entry key="js" value="5" />
+          <entry key="mako" value="112" />
+          <entry key="md" value="2" />
+          <entry key="pt" value="26" />
+          <entry key="py" value="11" />
+          <entry key="sh" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="1" />
+          <entry key="Chameleon" value="17" />
+          <entry key="HTML" value="9" />
+          <entry key="Ini" value="3" />
+          <entry key="JavaScript" value="5" />
+          <entry key="Mako" value="112" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="118" />
+          <entry key="gitmodules" value="28" />
+          <entry key="ini" value="8" />
+          <entry key="js" value="193" />
+          <entry key="mako" value="1322" />
+          <entry key="md" value="460" />
+          <entry key="pt" value="1024" />
+          <entry key="py" value="2423" />
+          <entry key="txt" value="118" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Chameleon" value="95" />
+          <entry key="HTML" value="929" />
+          <entry key="Ini" value="8" />
+          <entry key="JavaScript" value="193" />
+          <entry key="Mako" value="1322" />
+          <entry key="Markdown" value="339" />
+          <entry key="PLAIN_TEXT" value="385" />
+          <entry key="Python" value="2423" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.vcs.git.usages" />
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="pedel2" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitmodules">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+              <folding>
+                <element signature="e#1699#2166#0" />
+                <element signature="e#2217#3191#0" />
+                <element signature="n#!!block;n#codonist#0" />
+                <element signature="e#5240#5850#0" />
+                <element signature="n#!!block;n#parse_query#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>include</find>
+      <find>talk</find>
+      <find>templa</find>
+      <find>bs-</find>
+      <find>stat</find>
+      <find>footer</find>
+      <find>templ</find>
+      <find>talk_to_user</find>
+      <find>body</find>
+      <find>{</find>
+      <find>md</find>
+      <find>codon</find>
+      <find>fields</find>
+      <find>page.body</find>
+      <find>onclik</find>
+      <find>fields(</find>
+      <find>fa</find>
+      <find>landsca</find>
+      <find>&quot;fas</find>
+      <find>&quot;fa</find>
+      <find>status</find>
+      <find>set</find>
+      <find>urlli</find>
+      <find>urllib</find>
+      <find>stats</find>
+      <find>fa-files-o&quot;</find>
+      <find>fa-file-o</find>
+      <find>STATUS</find>
+      <find>fa-files-o</find>
+      <find>Font</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>#mutanalyst_seq§</replace>
+      <replace>#mutanalyst_freq_alt_in§</replace>
+      <replace>mutanalyst_corrected§</replace>
+      <replace>mutanalyst_bias§</replace>
+      <replace>&lt;/code&gt;</replace>
+      <replace>'</replace>
+      <replace>${page.</replace>
+      <replace>Fields(request=request,</replace>
+      <replace>&quot;fas</replace>
+      <replace>fa-gift</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/forbidden.js" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/about.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/main.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/__init__.py" />
+        <option value="$PROJECT_DIR$/production.ini" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/Carlos.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/driver.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/epistasis.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/forbidden.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame_local.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/glossary.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/glue.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/landscape.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/landscape_results.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantcaller.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/probably.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/silico.pt" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
+        <option value="$PROJECT_DIR$/poo.py" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/upcoming.py" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/404.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/forbidden.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.mako" />
+        <option value="$PROJECT_DIR$/dumpyard.py" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/about.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/glossary.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/QQC.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/welcome.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/upcoming.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/views.py" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/facs2excel.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/glue.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/landscape.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/misc.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantcaller.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/probably.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/silico.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" />
+        <option value="$PROJECT_DIR$/.gitmodules" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-slider/package.json" />
+      <path value="$PROJECT_DIR$/pyramidstarter/static/fullPage/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="797" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="pedel2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedel2" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pyramidstarter/static" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pedel2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="calculations" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pedel2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyramidstarter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyramidstarter/calculations.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="templates_for_editing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pedel2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/templates_for_editing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="wsgi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pedel2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wsgi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.app" />
+      <item itemvalue="Python.wsgi" />
+      <item itemvalue="Python.templates_for_editing" />
+      <item itemvalue="Python.calculations" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app" />
+        <item itemvalue="Python.calculations" />
+        <item itemvalue="Python.templates_for_editing" />
+        <item itemvalue="Python.wsgi" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment="" />
+      <created>1535014035844</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1535014035844</updated>
+    </task>
+    <task id="LOCAL-00008" summary=":beetle: address book newline">
+      <created>1535379689653</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1535379689653</updated>
+    </task>
+    <task id="LOCAL-00009" summary=":beetle: address book still causing dramas...">
+      <created>1535742805378</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1535742805378</updated>
+    </task>
+    <task id="LOCAL-00010" summary=":new_moon_with_face: hidden entrance to codon">
+      <created>1535793694613</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1535793694613</updated>
+    </task>
+    <task id="LOCAL-00011" summary=":sparkler: missing image added">
+      <created>1535793747179</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535793747179</updated>
+    </task>
+    <task id="LOCAL-00012" summary=":bettle: percentages were fractions not percentages">
+      <created>1535882635854</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1535882635854</updated>
+    </task>
+    <task id="LOCAL-00013" summary=":bettle: no need to use odd openshift ports...">
+      <created>1536004717604</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536004717604</updated>
+    </task>
+    <task id="LOCAL-00014" summary=":bettle: nope.">
+      <created>1536004989408</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536004989408</updated>
+    </task>
+    <task id="LOCAL-00015" summary=":telephone_receiver: Apache2 server test...">
+      <created>1536082876810</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1536082876810</updated>
+    </task>
+    <task id="LOCAL-00016" summary=":telephone_receiver: Apache2 server testing...">
+      <created>1536083588392</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1536083588392</updated>
+    </task>
+    <task id="LOCAL-00017" summary=":telephone_receiver: Apache2 server testing...">
+      <created>1536086715620</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1536086715620</updated>
+    </task>
+    <task id="LOCAL-00018" summary=":telephone_receiver: Apache2 server drama...">
+      <created>1536132676358</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1536132676358</updated>
+    </task>
+    <task id="LOCAL-00019" summary=":telephone_receiver: Apache2 server drama is not apache after all.">
+      <created>1536183133068</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1536183133068</updated>
+    </task>
+    <task id="LOCAL-00020" summary=":globe_with_meridians: bug was the ip fetcher">
+      <created>1536186939207</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1536186939207</updated>
+    </task>
+    <task id="LOCAL-00021" summary=":globe_with_meridians: bug was the ip fetcher only locally">
+      <created>1536188063823</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1536188063823</updated>
+    </task>
+    <task id="LOCAL-00022" summary=":mouse2: pi issues...">
+      <created>1536189102624</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1536189102624</updated>
+    </task>
+    <task id="LOCAL-00023" summary=":mouse2: pi issues...">
+      <created>1536189576007</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1536189576007</updated>
+    </task>
+    <task id="LOCAL-00024" summary=":mouse2: pi issues...">
+      <created>1536189701300</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1536189701300</updated>
+    </task>
+    <task id="LOCAL-00025" summary=":penguin: linux compiled.">
+      <created>1536190761128</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1536190761128</updated>
+    </task>
+    <task id="LOCAL-00026" summary=":see_no_evil: and I made another muckup">
+      <created>1536432454934</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1536432454934</updated>
+    </task>
+    <task id="LOCAL-00027" summary=":u7981: No addressbook!">
+      <created>1536432766324</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1536432766324</updated>
+    </task>
+    <task id="LOCAL-00028" summary=":love_letter: the email message was being sent as title...">
+      <created>1536482615784</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1536482615784</updated>
+    </task>
+    <task id="LOCAL-00029" summary=":love_letter: the email message was being sent as title...">
+      <created>1536482971859</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1536482971859</updated>
+    </task>
+    <task id="LOCAL-00030" summary=":alien: tidyed up update script">
+      <created>1536491072935</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1536491072935</updated>
+    </task>
+    <task id="LOCAL-00031" summary=":pizza: server stats!">
+      <created>1536519936202</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1536519936202</updated>
+    </task>
+    <task id="LOCAL-00032" summary=":closed_book: glossary">
+      <created>1536520972387</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1536520972387</updated>
+    </task>
+    <task id="LOCAL-00033" summary=":robot: robots.txt">
+      <created>1536781519937</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1536781519937</updated>
+    </task>
+    <task id="LOCAL-00034" summary=":skull: fixed deadlink">
+      <created>1536781569775</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1536781569775</updated>
+    </task>
+    <task id="LOCAL-00035" summary=":confused: Still not sure why addressbook does not working in production">
+      <created>1536782021883</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1536782021883</updated>
+    </task>
+    <task id="LOCAL-00036" summary=":beetle: where is the production side bug??">
+      <created>1536782475201</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1536782475201</updated>
+    </task>
+    <task id="LOCAL-00037" summary=":ghost: Missing binaries from the last compile">
+      <created>1536782875153</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1536782875153</updated>
+    </task>
+    <task id="LOCAL-00038" summary=":beetle: hopefully no more IP issues...">
+      <created>1536783666349</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1536783666349</updated>
+    </task>
+    <task id="LOCAL-00039" summary=":scroll: the log is getting too big">
+      <created>1536783798102</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1536783798102</updated>
+    </task>
+    <task id="LOCAL-00040" summary=":beetle: debug test">
+      <created>1536785136435</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1536785136435</updated>
+    </task>
+    <task id="LOCAL-00041" summary=":beetle: debug test">
+      <created>1536785373391</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1536785373391</updated>
+    </task>
+    <task id="LOCAL-00042" summary=":beetle: debug test to get round this py3.6 vs. py 3.5">
+      <created>1536786399659</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1536786399659</updated>
+    </task>
+    <task id="LOCAL-00043" summary=":beetle: debug test to get round this py3.6 vs. py 3.5">
+      <created>1536787094716</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1536787094716</updated>
+    </task>
+    <task id="LOCAL-00044" summary=":beetle: debug test to get round this py3.6 vs. py 3.5">
+      <created>1536787260952</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1536787260952</updated>
+    </task>
+    <task id="LOCAL-00045" summary=":pencil: fixing input boxes.">
+      <created>1537293599829</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1537293599830</updated>
+    </task>
+    <task id="LOCAL-00046" summary=":wrench: tightened security.">
+      <created>1538215154910</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1538215154911</updated>
+    </task>
+    <task id="LOCAL-00047" summary=":wrench: tightened security.">
+      <created>1538218994759</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1538218994759</updated>
+    </task>
+    <task id="LOCAL-00048" summary=":art: tidy up">
+      <created>1538228029161</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1538228029161</updated>
+    </task>
+    <task id="LOCAL-00049" summary=":confused: 98 C++ is weird.">
+      <created>1538228595021</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1538228595021</updated>
+    </task>
+    <task id="LOCAL-00050" summary=":confused: 98 C++ is weird.">
+      <created>1538229140405</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1538229140407</updated>
+    </task>
+    <task id="LOCAL-00051" summary=":art: fixing about">
+      <created>1538340911420</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1538340911421</updated>
+    </task>
+    <task id="LOCAL-00052" summary=":art: fixing stuff">
+      <created>1540055643146</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1540055643147</updated>
+    </task>
+    <task id="LOCAL-00053" summary=":hammer: update switch">
+      <created>1540057265366</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1540057265366</updated>
+    </task>
+    <task id="LOCAL-00054" summary=":hammer: update switch">
+      <created>1540057862654</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1540057862654</updated>
+    </task>
+    <task id="LOCAL-00055" summary=":spanner: switch to FA5">
+      <created>1540137574596</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1540137574597</updated>
+    </task>
+    <task id="LOCAL-00056" summary=":spanner: switch to FA5 and BS4 and Mako">
+      <created>1541333473244</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1541333473245</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="797" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.19313304" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.5007153" side_tool="true" weight="0.19228555" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.27234042" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5003524" side_tool="true" weight="0.27311522" />
+      <window_info anchor="bottom" id="Docker" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.24606581" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.5007153" side_tool="true" weight="0.19228555" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.27234042" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5003524" side_tool="true" weight="0.27311522" />
+      <window_info anchor="bottom" id="Docker" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/pyramidstarter/static/Font-Awesome-Pro" />
+      <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap" />
+      <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
+      <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
+    </ignored-roots>
+    <MESSAGE value=":see_no_evil: and I made another muckup" />
+    <MESSAGE value=":u7981: No addressbook!" />
+    <MESSAGE value=":love_letter: the email message was being sent as title..." />
+    <MESSAGE value=":alien: tidyed up update script" />
+    <MESSAGE value=":pizza: server stats!" />
+    <MESSAGE value=":closed_book: glossary" />
+    <MESSAGE value=":robot: robots.txt" />
+    <MESSAGE value=":skull: fixed deadlink" />
+    <MESSAGE value=":confused: Still not sure why addressbook does not working in production" />
+    <MESSAGE value=":beetle: where is the production side bug??" />
+    <MESSAGE value=":ghost: Missing binaries from the last compile" />
+    <MESSAGE value=":beetle: hopefully no more IP issues..." />
+    <MESSAGE value=":scroll: the log is getting too big" />
+    <MESSAGE value=":beetle: debug test" />
+    <MESSAGE value=":beetle: debug test to get round this py3.6 vs. py 3.5" />
+    <MESSAGE value=":pencil: fixing input boxes." />
+    <MESSAGE value=":wrench: tightened security." />
+    <MESSAGE value=":art: tidy up" />
+    <MESSAGE value=":confused: 98 C++ is weird." />
+    <MESSAGE value=":art: fixing about" />
+    <MESSAGE value=":art: fixing stuff" />
+    <MESSAGE value=":hammer: update switch" />
+    <MESSAGE value=":spanner: switch to FA5" />
+    <MESSAGE value=":spanner: switch to FA5 and BS4 and Mako" />
+    <MESSAGE value=":confused: made a mess of submodulling..." />
+    <option name="LAST_COMMIT_MESSAGE" value=":confused: made a mess of submodulling..." />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/bikeshed/pedel-AAc.bk.cxx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/bikeshed/pedel-AAc.cxx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="1551" column="39" selection-start-line="1551" selection-start-column="39" selection-end-line="1551" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/bike.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/calculations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="604" column="5" selection-start-line="604" selection-start-column="5" selection-end-line="604" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="232" column="17" lean-forward="true" selection-start-line="232" selection-start-column="3" selection-end-line="232" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.pt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="51" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/index.pt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-15">
+            <caret line="15" column="252" selection-start-line="15" selection-start-column="252" selection-end-line="15" selection-end-column="252" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/forbidden.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/update.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poo.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/upcoming.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/404.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="90" lean-forward="true" selection-start-column="53" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dumpyard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame_local.pt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/landscape_results.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/admin.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/about.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="34" column="66" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="378" column="190" selection-start-line="378" selection-start-column="190" selection-end-line="378" selection-end-column="190" />
+          <folding>
+            <marker date="1541257309197" expanded="true" signature="14578:14720" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/Carlos.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="91" column="111" selection-start-line="91" selection-start-column="111" selection-end-line="91" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="180" column="87" selection-start-line="180" selection-start-column="87" selection-end-line="180" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/driver.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="40" column="99" selection-start-line="40" selection-start-column="99" selection-end-line="40" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/epistasis.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/experimental_codon_modal.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/facs2excel.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/forbidden.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/glossary.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/glue.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="264" column="1" selection-start-line="264" selection-start-column="1" selection-end-line="264" selection-end-column="1" />
+          <folding>
+            <element signature="e#9331#9337#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/landscape.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="74" column="96" selection-start-line="74" selection-start-column="96" selection-end-line="74" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-42">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/misc.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="217" column="89" selection-end-line="234" selection-end-column="6" />
+          <folding>
+            <element signature="e#6569#6575#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="522" column="10" selection-start-line="522" selection-start-column="10" selection-end-line="522" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantcaller.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="76" column="94" selection-start-line="76" selection-start-column="94" selection-end-line="76" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-387">
+          <caret line="181" column="90" selection-start-line="181" selection-start-column="90" selection-end-line="181" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2747">
+          <caret line="965" column="94" selection-start-line="965" selection-start-column="94" selection-end-line="965" selection-end-column="94" />
+          <folding>
+            <element signature="e#43560#43566#0#HTML" expanded="true" />
+            <element signature="e#43661#43667#0#HTML" expanded="true" />
+            <element signature="e#43667#43671#0#HTML" expanded="true" />
+            <element signature="e#43730#43736#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#2;n#!!top" expanded="true" />
+            <element signature="e#46375#46381#0#HTML" expanded="true" />
+            <element signature="e#46431#46437#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#label#0;n#div#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#1;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/probably.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="203" column="104" selection-start-line="203" selection-start-column="104" selection-end-line="203" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/QQC.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="112" column="107" selection-start-line="112" selection-start-column="107" selection-end-line="112" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/silico.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="187" column="90" selection-start-line="187" selection-start-column="90" selection-end-line="187" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/upcoming.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/welcome.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="80" column="59" lean-forward="true" selection-start-line="80" selection-start-column="59" selection-end-line="80" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+          <folding>
+            <element signature="e#1699#2166#0" />
+            <element signature="e#2217#3191#0" />
+            <element signature="n#!!block;n#codonist#0" />
+            <element signature="e#5240#5850#0" />
+            <element signature="n#!!block;n#parse_query#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitmodules">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
