@@ -24,10 +24,10 @@
     <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}"
           rel="stylesheet">
     <!--slider-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider.min.css')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/css/bootstrap-slider.css')}"
           rel="stylesheet">
     <!--switch-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap/css/bootstrap-switch.min.css')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}"
           rel="stylesheet">
     <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css')}"
           rel="stylesheet">
@@ -237,9 +237,9 @@
             integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
             crossorigin="anonymous"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-slider.min.js')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.js')}"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap/js/bootstrap-switch.min.js')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/js/bootstrap-switch.js')}"></script>
     <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
