@@ -11,15 +11,17 @@ window.setTimeout(function() {
 }, 300);
 
 //Themes!!!
-var themeNames = ["darkly", "default", "amelia", "cerulean", "cosmo", "cyborg", "flatly", "journal", "readable", "sandstone", "simplex", "slate", "solar", "spacelab", "superhero", "united", "lumen", "paper", "yeti"];
+var themeNames = ["default","cerulean","cosmo","cyborg","darkly","flatly","journal","litera","lumen","lux","materia","minty","pulse","sandstone","simplex","sketchy","slate","solar","spacelab","superhero","yeti","united"];
 var themes = {};
-var mytheme=sessionStorage.getItem('theme') ? sessionStorage.getItem('theme') : 'darkly';
+var mytheme=sessionStorage.getItem('theme') ? sessionStorage.getItem('theme') : 'default';
 for (i = 0; i < themeNames.length; i++) {
-    themes[themeNames[i]] = "/static/bootstrap/themes/" + themeNames[i] + ".min.css";
+    themes[themeNames[i]] = "/static/bootswatch/dist/" + themeNames[i] + "/bootstrap.css";
+    themes['default'] = "/static/bootstrap/dist/css/bootstrap.css";
     if (themeNames[i] == mytheme) {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link"><b>' + themeNames[i] + '</b></a></li>');}
     else {$('#themeSelector').append('<li><a href="#" data-theme=' + themeNames[i] + ' class="theme-link">' + themeNames[i] + '</a></li>');}
 }
 var themesheet = $('#theme_CSS');
+themesheet.removeAttr('integrity');
 themesheet.attr('href',themes[mytheme]); //The CDN is loaded first, then I override with the default because JS is done last.
 $('.theme-link').click(function() {
     var themeurl = themes[$(this).attr('data-theme')];
@@ -27,6 +29,7 @@ $('.theme-link').click(function() {
     $('#current_theme').html($(this).attr('data-theme'));
     sessionStorage.setItem('theme',$(this).attr('data-theme'));
 });
+
 
 // Let's mod string python-style alla StackOverflow (.formatUnicorn)
 String.prototype.format = String.prototype.format ||
