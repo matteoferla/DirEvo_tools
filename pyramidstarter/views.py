@@ -528,9 +528,12 @@ handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'
 log.addHandler(handler)
 '''
 
-addressbook = {line.split(',')[0]: line.split(',')[1].replace('\n', '') for line in
-               open('addressbook.csv', 'r').readlines() if line.find(',') != -1}
-print(addressbook)
+if os.path.isfile('addressbook.csv'):
+    addressbook = {line.split(',')[0]: line.split(',')[1].replace('\n', '') for line in
+                   open('addressbook.csv', 'r').readlines() if line.find(',') != -1}
+    print(addressbook)
+else:
+    addressbook = {}
 
 
 def whois(ip):
