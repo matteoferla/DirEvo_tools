@@ -1,14 +1,10 @@
 <div class="card">
             <div class="card-header">
-                 <h1 class="card-title">Generate
-
-
-
-                        mutants in silico</h1>
+                 <h1 class="card-title">Generator</h1>
+                <h4 class="card-subtitle mb-2 text-muted">Generate mutants in silico</h4>
             </div>
             <div>
                 <div class="card-body">
-                     <h2>In silico mutagenesis</h2>
                     <div id="silico_intro">
                         <p>You never know when you need a random sequence.</p>
                     </div>
@@ -20,22 +16,19 @@
                              <h4>Sequence</h4>
                             <p>In frame nt sequence that is to be mutagenised.</p>
                             <div class="col-xl-12">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
-                                    title="In frame sequence that was mutagenised.">Sequence
-
-
-
-                        </span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                                    title="In frame sequence that was mutagenised.">
+                                    <span class="input-group-text">Sequence</span>
+                        </div>
                                     <textarea class="form-control custom-control"
-                                    rows="5" style="resize:none" id="silico_sequence" name="silico_sequence"></textarea> <span class="input-group-addon">Retrieve previous<br>
+                                    rows="5" style="resize:none" id="silico_sequence" name="silico_sequence"></textarea>
+                                    <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" id="silico_sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fas fa-history"></i><br> Retrieve previous</button>
 
 
 
-            <button class="btn btn-secondary" type="button" id="silico_sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fas fa-history"></i></button>
-
-
-
-          </span>
+          </div>
                                 </div>
                                 <br>
                             </div>
@@ -170,8 +163,10 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-4">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Mean number of nucleotide substitutions per daughter sequence"
-                                    data-placement="top">Mutation load</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" title="Mean number of nucleotide substitutions per daughter sequence"
+                                    data-placement="top">
+                                        <span class="input-group-text">Mutation load</span></div>
                                     <input type="number" min="0" class="form-control"
                                     placeholder="4.5" id="silico_load">
                                 </div>

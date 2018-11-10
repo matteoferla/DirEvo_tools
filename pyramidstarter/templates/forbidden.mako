@@ -4,13 +4,14 @@
     </div>
     <div class="card-body">
         <form name="login" action="/admin" method="post">
-            <div class="input-group"> <span class="input-group-addon" id="basic-addon1">Password</span>
+            <div class="input-group"> <div class="input-group-prepend" id="basic-addon1">
+                <span class="input-group-text">Password</span></div>
                 <input
                 id="password" type="password" class="form-control" placeholder="amino acid"
                 aria-describedby="name"> <span class="input-group-btn">
-
-              <button type="button" class="btn btn-primary" id="password_send">Submit</button>
-
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-primary" id="password_send">Submit</button>
+                </div>
               </span>
             </div>
         </form>

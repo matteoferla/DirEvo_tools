@@ -1,12 +1,8 @@
 <div class="panel-group" id="accordion">
     <!--Menu-->
     <div class="card">
-        <div class="card-header">
-             <h1 class="card-title"><a data-toggle="collapse" data-parent="#accordion" href="#&#xA7;options">Note</a>
-
-
-
-            </h1>
+        <div class="card-header" data-toggle="collapse" data-parent="#accordion" data-target="#&#xA7;options" style="cursor:pointer;">
+             <h1 class="card-title">Note</h1>
         </div>
         <div id="&#xA7;options" class="panel-collapse collapse show">
             <div class="card-body">Herein are some small scripts of no value written main for style experimenting.</div>
@@ -14,12 +10,9 @@
     </div>
     <!--minipedel for PCR-->
     <div class="card">
-        <div class="card-header">
-             <h1 class="card-title"><a data-toggle="collapse" data-parent="#accordion" href="#&#xA7;estimate">Pedel
-
-
-
-                but from PCR data</a></h1>
+        <div class="card-header" data-toggle="collapse" data-parent="#accordion" data-target="#&#xA7;estimate" style="cursor:pointer;">
+             <h1 class="card-title">Pedel</h1>
+            <h4 class="card-subtitle mb-2 text-muted">Mini-Pedel from PCR: failure</h4>
         </div>
         <div id="&#xA7;estimate" class="panel-collapse collapse">
             <div class="card-body">
@@ -41,34 +34,43 @@
                 <!-- add switch?-->
                 <div class="row">
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Mutation rate of the enzyme per kb per doubling, the value is between 0.9&#x2013;1.6 for mutazyme (our figure is 0.9). For manganese it completely depends on your concentration and enzyme."
-                            data-placement="top">Mutation rate</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="Mutation rate of the enzyme per kb per doubling, the value is between 0.9&#x2013;1.6 for mutazyme (our figure is 0.9). For manganese it completely depends on your concentration and enzyme."
+                            data-placement="top">
+                            <span class="input-group-text">Mutation rate</span></div>
                             <input type="number" min="0" class="form-control"
-                            placeholder="0.9" id="estimate_rate"> <span class="input-group-addon">mut/kb/div</span>
+                            placeholder="0.9" id="estimate_rate"> <div class="input-group-append">
+                                <span class="input-group-text">mut/kb/div</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Yield of DNA from the PCR reaction (after purification) in ng. So multiply the nanodrop&apos;s ng/&#xB5;l value by your volume in &#xB5;l."
-                            data-placement="top">PCR yield</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="Yield of DNA from the PCR reaction (after purification) in ng. So multiply the nanodrop&apos;s ng/&#xB5;l value by your volume in &#xB5;l."
+                            data-placement="top">
+                                <span class="input-group-text">PCR yield</span></div>
                             <input type="number" min="0" class="form-control"
-                            placeholder="1000" id="estimate_yield"> <span class="input-group-addon">ng</span>
+                            placeholder="1000" id="estimate_yield"> <div class="input-group-append">
+                            <span class="input-group-text">ng</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Template of DNA in the PCR reaction. If using a plasmid this is the concentration of the actual insert not the whole plasmid. That is, get your ng/&#xB5;l concentration of plasmid divide it by the plasmid size and times it by the insert size and then multiply it by the volume added to your epPCR reaction"
-                            data-placement="top">PCR template</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="Template of DNA in the PCR reaction. If using a plasmid this is the concentration of the actual insert not the whole plasmid. That is, get your ng/&#xB5;l concentration of plasmid divide it by the plasmid size and times it by the insert size and then multiply it by the volume added to your epPCR reaction"
+                            data-placement="top">
+                            <span class="input-group-text">PCR template</span></div>
                             <input type="number" min="0" class="form-control"
-                            placeholder="5" id="estimate_template"> <span class="input-group-addon">ng</span>
+                                   placeholder="5" id="estimate_template">
+                            <div class="input-group-append"><span class="input-group-text">ng</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Size of amplicon in kb"
-                            data-placement="top">Size</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="Size of amplicon in kb"
+                            data-placement="top">
+                            <span class="input-group-text">Size</span></div>
                             <input type="number" min="0" class="form-control"
-                            placeholder="1.0" id="estimate_size"> <span class="input-group-addon">kb</span>
+                            placeholder="1.0" id="estimate_size"> <div class="input-group-append">
+                                <span class="input-group-text">kb</span></div>
                         </div>
                         <br>
                     </div>
@@ -101,12 +103,8 @@ Demo</button>
     </div>
     <!--PCR -->
     <div class="card">
-        <div class="card-header">
-             <h1 class="card-title"><a data-toggle="collapse" data-parent="#accordion" href="#&#xA7;yield">PCR
-
-
-
-                maths</a></h1>
+        <div class="card-header" data-toggle="collapse" data-parent="#accordion" data-target="#&#xA7;yield" style="cursor:pointer;">
+             <h1 class="card-title">PCR maths</h1>
         </div>
         <div id="&#xA7;yield" class="panel-collapse collapse">
             <div class="card-body">
@@ -134,24 +132,31 @@ isopropanol from QG buffer).</li>
                  <h3>Input</h3>
                 <div class="row">
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The reaction volume"
-                            data-placement="top">Reaction</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="The reaction volume"
+                            data-placement="top">
+                            <span class="input-group-text">Reaction</span></div>
                             <input type="number" min="0" class="form-control"
-                            placeholder="25" id="yield_reaction"> <span class="input-group-addon">&#xB5;L</span>
+                            placeholder="25" id="yield_reaction"> <div class="input-group-append">
+                                <span class="input-group-text">&#xB5;L</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The size of the amplicon in bases. Preferably minus the length the primers, but really it does not matter, so within 100 bp will be all good."
-                            data-placement="top">Amplicon size</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="The size of the amplicon in bases. Preferably minus the length the primers, but really it does not matter, so within 100 bp will be all good."
+                            data-placement="top">
+                                <span class="input-group-text">Amplicon size</span>
+                            </div>
                             <input type="text" class="form-control"
-                            placeholder="1000" id="yield_size"> <span class="input-group-addon">bp</span>
+                            placeholder="1000" id="yield_size">
+                            <div class="input-group-append"><span class="input-group-text">bp</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Method used: full overlap (traditional) of primers or staggered overlap"
-                            data-placement="top">Concentration</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="Method used: full overlap (traditional) of primers or staggered overlap"
+                            data-placement="top">
+                            <span class="input-group-text">Concentration</span></div>
                             <input type="checkbox" class="switch"
                             id="yield_calc_method" checked data-off-text="Calc." data-on-text="Final"
                             data-switch-value="large" data-off-color="warning"> <span class="input-group-addon">&#xB5;M</span>
@@ -161,26 +166,34 @@ isopropanol from QG buffer).</li>
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                            data-placement="top">Final conc. primers</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="The primer volume"
+                            data-placement="top">
+                                <span class="input-group-text">Final conc. primers</span></div>
                             <input type="number" min="0"
-                            step="1" class="form-control" placeholder="0.5" id="yield_final_primer_conc"> <span class="input-group-addon">&#xB5;M</span>
+                            step="1" class="form-control" placeholder="0.5" id="yield_final_primer_conc">
+                            <div class="input-group-append"><span class="input-group-text">&#xB5;M</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                            data-placement="top">Conc. primers</span>
+                        <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="The primer volume"
+                                                       data-placement="top"><span class="input-group-text">Conc. primers</span></div>
                             <input type="number" min="0" step="1"
-                            class="form-control" placeholder="10" id="yield_primer_conc"> <span class="input-group-addon">&#xB5;M</span>
+                            class="form-control" placeholder="10" id="yield_primer_conc">
+                            <div class="input-group-append"><span class="input-group-text">&#xB5;M</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The primer volume"
-                            data-placement="top">Vol. primers</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="The primer volume"
+                            data-placement="top">
+                                <span class="input-group-text">Vol. primers</span></div>
                             <input type="number" min="0" step="1"
-                            class="form-control" placeholder="1.25" id="yield_primer_vol"> <span class="input-group-addon">&#xB5;L</span>
+                            class="form-control" placeholder="1.25" id="yield_primer_vol">
+                            <div class="input-group-append">
+                                <span class="input-group-text">&#xB5;L</span></div>
                         </div>
                         <br>
                     </div>
@@ -188,23 +201,29 @@ isopropanol from QG buffer).</li>
                         <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The dNTP final concentration (all four together)"
                             data-placement="top">final &#xB5;M dNTP</span>
                             <input type="number" min="0"
-                            step="1" class="form-control" placeholder="800" id="yield_final_dNTP_conc"> <span class="input-group-addon">&#xB5;M</span>
+                            step="1" class="form-control" placeholder="800" id="yield_final_dNTP_conc">
+                            <div class="input-group-append"><span class="input-group-text">&#xB5;M</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The dNTP concentration (all four together)"
-                            data-placement="top">&#xB5;M dNTP</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="The dNTP concentration (all four together)"
+                                 data-placement="top"><span class="input-group-text">&#xB5;M dNTP</span></div>
                             <input type="number" min="0" step="1"
-                            class="form-control" placeholder="40" id="yield_dNTP_conc"> <span class="input-group-addon">&#xB5;M</span>
+                            class="form-control" placeholder="40" id="yield_dNTP_conc">
+                            <div class="input-group-append"><span class="input-group-text">&#xB5;M</span></div>
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The dNTP volume added"
-                            data-placement="top">&#xB5;l dNTP</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip" title="The dNTP volume added"
+                            data-placement="top">
+                                <span class="input-group-text">&#xB5;l dNTP</span></div>
                             <input type="number" min="0" step="1"
-                            class="form-control" placeholder="0.5" id="yield_dNTP_vol"> <span class="input-group-addon">&#xB5;L</span>
+                            class="form-control" placeholder="0.5" id="yield_dNTP_vol"> <div class="input-group-append">
+                            <span class="input-group-text">&#xB5;L</span></div>
                         </div>
                         <br>
                     </div>

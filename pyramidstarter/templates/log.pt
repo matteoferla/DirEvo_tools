@@ -1,10 +1,9 @@
-<div class="row" id="§log">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-
-            <div class="page-header">
-                <h1>Log</h1>
-            </div>
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">Log</h1>
+        <h4 class="card-subtitle mb-2 text-muted">The captain's log</h4>
+    </div>
+    <div class="card-body">
             ${structure: main}
-</div>
+    </div>
 </div>
