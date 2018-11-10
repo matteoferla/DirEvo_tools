@@ -1,9 +1,9 @@
 <div class="card" id="pedelbasic">
     <div class="card-header">
         <h1 class="card-title">Pedel</h1>
+        <h3 class="card-subtitle mb-2 text-muted">Programme for Estimating Diversity in Error-prone PCR Libraries</h3>
     </div>
     <div class="card-body">
-        <h2>Pedel</h2>
         <div id="pedel_intro">
             <h3>Description</h3>
             <p>Given a library of <i>L</i> sequences, comprising variants of a sequence
@@ -128,16 +128,16 @@
         <h3>Input</h3>
         <div class="row">
             <div class="col-xl-4">
-                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
-                                                title="Library size L"
-                                                data-placement="top">Library size</span>
+                <div class="input-group">
+                    <span class="input-group-prepend" data-toggle="tooltip" title="Library size L" data-placement="top">
+                        Library size</span>
                     <input type="number" min="0" class="form-control"
                            placeholder="10000000" id="pedel_size">
                 </div>
                 <br>
             </div>
             <div class="col-xl-4">
-                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip"
                                                 title="Sequence length N (nt)"
                                                 data-placement="top">Seq. length</span>
                     <input type="number" min="0" class="form-control"
@@ -146,7 +146,7 @@
                 <br>
             </div>
             <div class="col-xl-4">
-                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip"
                                                 title="Mean number of point mutations per sequence m"
                                                 data-placement="top">Load</span>
                     <input type="number" min="0" class="form-control"

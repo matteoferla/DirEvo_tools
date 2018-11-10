@@ -1,6 +1,7 @@
 <div class="card">
             <div class="card-header">
-                 <h1 class="card-title">QQCC &#x2014; Quick quality control calculator</h1>
+                 <h1 class="card-title">QQCC</h1>
+                <h4 class="card-subtitle mb-2 text-muted">Quick quality control calculator</h4>
             </div>
             <div class="card-body">
                  <h2>QQC</h2>
@@ -38,16 +39,19 @@ is the empirical proportions of bases (4x3
                         <br>
                     </div>
                     <div class="col-xl-5">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The upstream sequence of bases to help find where the mutation is."
-                            data-placement="top">Upstream seq.</span>
+                        <div class="input-group">
+                            <div class="input-group-append" data-toggle="tooltip" title="The upstream sequence of bases to help find where the mutation is."
+                            data-placement="top">
+                                <span class="input-group-text">Upstream seq.</span></div>
                             <input type="text" class="form-control"
                             placeholder="NNNNNNNNNN" id="QQC_preceding">
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. &apos;NNK&apos;) or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. &apos;12NDT 6VHA 1TGG 1ATG&apos;) or a special mix (e.g. &apos;Tang&apos;)."
-                            data-placement="top">Scheme</span>
+                        <div class="input-group"> <div class="input-group-append" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. &apos;NNK&apos;) or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. &apos;12NDT 6VHA 1TGG 1ATG&apos;) or a special mix (e.g. &apos;Tang&apos;)."
+                                                       data-placement="top">
+                            <span class="input-group-text">Scheme</span></div>
                             <input type="text" class="form-control"
                             placeholder="NNK" id="QQC_mutation"> <span class="input-group-btn">
 
@@ -58,8 +62,9 @@ is the empirical proportions of bases (4x3
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Read direction"
-                            data-placement="top">Direction </span>
+                        <div class="input-group"> <div class="input-group-append" data-toggle="tooltip" title="Read direction"
+                            data-placement="top">
+                            <span class="input-group-text">Direction</span></div>
                             <input type="checkbox" class="switch"
                             id="QQC_direction" checked data-off-text="rv" data-on-text="fw" data-off-color="warning"
                             data-size="large">

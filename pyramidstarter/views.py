@@ -354,7 +354,6 @@ def ajacean_test(request):
 
 
 ############### Main views #####################
-barnames = 'm_home m_mutantcaller m_pedel m_driver m_deepscan m_mutantprimers m_glue m_QQC m_mutanalyst m_about m_misc m_silico m_probably m_landscape'.split()
 
 class Fields():
     # I think I need some methods... so better do this than a default dictionary

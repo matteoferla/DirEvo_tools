@@ -1,6 +1,7 @@
 <div class="card">
             <div class="card-header">
                 <h1 class="card-title">Simulated Landscape</h1>
+                <h4 class="card-subtitle mb-2 text-muted">Generate in silico a mutational landscape of a protein</h4>
             </div>
             <div class="card-body">
                 <h2>Landscape</h2>
@@ -30,7 +31,7 @@
                     Baker paper in addition to us...
                 </div>
                 <h3>Input</h3>
-                The input files for this tool are the outputs from a pmut_scan run launched
+                <p>The input files for this tool are the outputs from a pmut_scan run launched
                 along with relevant constraints and params files thusly:
                 <br>
                 <pre><code>pmut_scan_parallel -ex1 -ex1aro -ex2 -extrachi_cutoff 1 -DDG_cutoff 999 -mute basic core -s your_structure.pdb &gt; scores.txt</code></pre>
@@ -39,7 +40,7 @@
                 the <code>-output_mutant_structures true</code> flag is also rather handy
                 for the analysis.
                 <br>Provide one or more files (do not worry about header rows; the PDB numbering
-                will be used. No negative positions):
+                will be used. No negative positions):</p>
                 <div class="row">
                     <div class="col-xl-5" id="Land_uploads">
                         <div class="input-group">
@@ -53,7 +54,8 @@
                         </div>
                     </div>
                     <div class="col-xl-6 offset-lg-1">
-                        <div class="input-group"><span class="input-group-addon" id="land_AA_order_label">AA oder</span>
+                        <div class="input-group"><div class="input-group-append" id="land_AA_order_label">
+                            <span class="input-group-text">AA oder</span></div>
                             <input
                                     type="text" class="form-control" value="I V L F C M A G T S W Y P H N D E Q K R"
                                     aria-describedby="land_AA_order_label" id="land_AA_order">

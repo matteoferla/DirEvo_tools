@@ -93,7 +93,7 @@ $('#pedel_calculate').click(function() {
         success: function(result) {
             reply = JSON.parse(result.message);
             window.sessionStorage.setItem('pedel', JSON.stringify(reply['data']));
-            var table = '<h3>Sublibrary composition:</h3><br/><table class="table-striped" width=100%>' +
+            var table = '<br/><h3>Sublibrary composition:</h3><br/><table class="table-striped" width=100%>' +
                 '<thead><tr><th><a href="#" data-toggle="tooltip" title="Exact number of mutations per sequence">x</th>' +
                 '<th><a href="#" data-toggle="tooltip" title="Poisson probability of x mutations, given m">P<sub>x</sub></th>' +
                 '<th><a href="#" data-toggle="tooltip" title="expected number of sequences in library with exactly x mutations">L<sub>x</sub></th>' +
@@ -110,7 +110,7 @@ $('#pedel_calculate').click(function() {
                 table += '</tr>'
             }
             table += '</tbody></table><br/>';
-            plot = '<br/><div class="radio" id="plotoptdiv"> Plot: &nbsp;&nbsp;' +
+            plot = '<br/><br/><div class="radio" id="plotoptdiv"> Plot: &nbsp;&nbsp;' +
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=1 checked>P<sub>x</sub></label>' +
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=2>L<sub>x</sub></label>' +
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=3>V<sub>x</sub></label>' +
@@ -118,8 +118,8 @@ $('#pedel_calculate').click(function() {
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=5>C<sub>x</sub>/V<sub>x</sub></label>' +
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=6>L<sub>x</sub> - C<sub>x</sub></label>' +
                 '<label class="radio-inline"><input type="radio" name="plotopt" value=0>Combined</label>' +
-                '&nbsp;&nbsp;&nbsp;y axis: <input type="checkbox" class="switch" id="pedel_plot_log" data-off-text="lin" data-on-text="log" data-on-color="warning" data-off-color="success" size="small">' +
-                '</div><br/><div id="plot_pedel_stats"></div>';
+                '&nbsp;&nbsp;&nbsp;y axis: <input type="checkbox" class="switch" id="pedel_plot_log" data-off-text="lin" data-on-text="log" data-on-color="warning" data-off-color="success" size="small"><br/>' +
+                '</div><br/><div id="plot_pedel_stats" style="min-height: 400px;"></div>';
             $("#pedel_result").html('<br/>' + reply['html'] + table + plot);
             $("#pedel_plot_log").bootstrapSwitch();
             replot(reply['data']);

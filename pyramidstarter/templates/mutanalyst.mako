@@ -1,9 +1,9 @@
 <div class="card">
             <div class="card-header">
-                 <h1 class="card-title">Mutanalyst &#x2014;&#xA0;mutational load and spectrum calculator</h1>
+                 <h1 class="card-title">Mutanalyst<img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
+                <h4 class="card-subtitle mb-2 text-muted">Mutational load and spectrum calculator</h4>
             </div>
             <div class="card-body">
-                 <h2>Mutanalyst <img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h2>
                  <h3>Description</h3>
                 <p>An online tool for assessing the mutational spectrum of epPCR libraries
                     with poor sampling.</p>
@@ -34,7 +34,7 @@ There are two possible starting points for mutanalysts.
                 <br>The other is more downstream, wherein one proves a mutational spectrum
                 and mutational load and the mutational bias indicators will be calculated.
                 <br>
-                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Choose starting point"
+                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
                     data-placement="top">Choose:</span>
                     <input type="checkbox" class="switch"
                     id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
@@ -56,12 +56,12 @@ There are two possible starting points for mutanalysts.
                         use lowercase.</p>
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                            <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" data-placement="top"
                                 title="In frame sequence that was mutagenised.">Sequence
 
                         </span>
                                 <textarea class="form-control custom-control"
-                                rows="5" style="resize:none" id="sequence" name="sequence"></textarea> <span class="input-group-addon">Retrieve previous<br>
+                                rows="5" style="resize:none" id="sequence" name="sequence"></textarea> <span class="input-group-append">Retrieve previous<br>
 
             <button class="btn btn-secondary" type="button" id="sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fa fa-history"></i></button>
 
@@ -74,7 +74,7 @@ There are two possible starting points for mutanalysts.
                      <h4>Library size</h4>
 For Pedel-AA calculations, the library size is required.
                     <br>
-                    <div class="input-group"> <span class="input-group-addon" id="library_addon">Size</span>
+                    <div class="input-group"> <span class="input-group-prepend" id="library_addon">Size</span>
                         <input type="number"
                         class="form-control" placeholder="1000000" aria-describedby="library_addon"
                         id="library_size">
@@ -97,7 +97,7 @@ For Pedel-AA calculations, the library size is required.
                             inversions, are not taken into account, but their frequency can be easily
                             calculated using the &apos;values for further analysis&apos; below.</li>
                     </ul>
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                    <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" data-placement="top"
                         title="List of the mutations found">Variants
 
                         </span>
@@ -236,21 +236,21 @@ For Pedel-AA calculations, the library size is required.
                             <br>
                             <div class="bs-callout bs-callout-warning">
                                  <h4>Required colour change</h4>These colours suck. Change around. Theme linked??</div>
-                            <div class="input-group"> <span class="input-group-addon" id="basic-addonA">Proportion of adenine</span>
+                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonA">Proportion of adenine</span>
                                 <input
-                                type="text" class="form-control" id="sumA" value="25" aria-describedby="basic-addonA"> <span class="input-group-addon">%</span>
+                                type="text" class="form-control" id="sumA" value="25" aria-describedby="basic-addonA"> <span class="input-group-append">%</span>
                             </div>
-                            <div class="input-group"> <span class="input-group-addon" id="basic-addonT">Proportion of thymine</span>
+                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonT">Proportion of thymine</span>
                                 <input
-                                type="text" class="form-control" id="sumT" value="25" aria-describedby="basic-addonT"> <span class="input-group-addon">%</span>
+                                type="text" class="form-control" id="sumT" value="25" aria-describedby="basic-addonT"> <span class="input-group-append">%</span>
                             </div>
-                            <div class="input-group"> <span class="input-group-addon" id="basic-addonG">Proportion of guanine</span>
+                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonG">Proportion of guanine</span>
                                 <input
-                                type="text" class="form-control" id="sumG" value="25" aria-describedby="basic-addonG"> <span class="input-group-addon">%</span>
+                                type="text" class="form-control" id="sumG" value="25" aria-describedby="basic-addonG"> <span class="input-group-append">%</span>
                             </div>
-                            <div class="input-group"> <span class="input-group-addon" id="basic-addonC">Proportion of cytosine</span>
+                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonC">Proportion of cytosine</span>
                                 <input
-                                type="text" class="form-control" id="sumC" value="25" aria-describedby="basic-addonC"> <span class="input-group-addon">%</span>
+                                type="text" class="form-control" id="sumC" value="25" aria-describedby="basic-addonC"> <span class="input-group-append">%</span>
                             </div>
                             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                 <div class="btn-group" role="group">

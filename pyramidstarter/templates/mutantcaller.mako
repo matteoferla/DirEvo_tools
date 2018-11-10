@@ -1,9 +1,9 @@
 <div class="card">
                 <div class="card-header">
-                     <h1 class="card-title">MutantCaller &#x2014; Quickly identify mutations</h1>
+                     <h1 class="card-title">MutantCaller</h1>
+                    <h4 class="card-subtitle mb-2 text-muted">Quickly identify mutations</h4>
                 </div>
                 <div class="card-body">
-                     <h2>MutantCaller</h2>
                      <h3>Description</h3>
                     <div class="bs-callout bs-callout-warning">Add description!</div>
                     <p></p>
@@ -11,16 +11,14 @@
                     <div id="MC_input">
                         <div class="row">
                             <div class="col-xl-12">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
-                                    title="In frame sequence that was mutagenised.">Sequence
+                                <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                                    title="In frame sequence that was mutagenised.">
+                                    <span class="input-group-text">Sequence</span>
 
-                        </span>
+                        </div>
                                     <textarea class="form-control custom-control"
-                                    rows="5" style="resize:none" id="MC_sequence" name="MC_sequence"></textarea> <span class="input-group-addon">Retrieve previous<br>
-
-            <button class="btn btn-secondary" type="button" id="MC_sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fas fa-history"></i></button>
-
-          </span>
+                                    rows="5" style="resize:none" id="MC_sequence" name="MC_sequence"></textarea>
+                                    <button class="btn btn-secondary" type="button" id="MC_sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fas fa-history"></i><br/>Retrieve previous</button>
                                 </div>
                                 <br>
                             </div>
@@ -34,8 +32,10 @@
                                 <br>
                             </div>
                             <div class="col-xl-4">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="Read direction"
-                                    data-placement="top">Direction </span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" title="Read direction"
+                                    data-placement="top">
+                                        <span class="input-group-text">Direction </span></div>
                                     <input type="checkbox" class="switch"
                                     id="MC_direction" checked data-off-text="rv" data-on-text="fw" data-off-color="warning"
                                     data-size="large">
@@ -43,16 +43,20 @@
                                 <br>
                             </div>
                             <div class="col-xl-3">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="N sigma background cutoff for minor peaks"
-                                    data-placement="top">Noise sigma</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" title="N sigma background cutoff for minor peaks"
+                                    data-placement="top">
+                                        <span class="input-group-text">Noise sigma</span></div>
                                     <input type="number" min="0" class="form-control"
                                     placeholder="5" id="MC_sigma">
                                 </div>
                                 <br>
                             </div>
                             <div class="col-xl-3">
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="N sigma background cutoff for minor peaks"
-                                    data-placement="top">PDB code (opt.)</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" title="N sigma background cutoff for minor peaks"
+                                    data-placement="top">
+                                        <span class="input-group-text">PDB code (opt.)</span></div>
                                     <input type="text" class="form-control"
                                     placeholder="XXXX" id="MC_pdb_code">
                                 </div>
