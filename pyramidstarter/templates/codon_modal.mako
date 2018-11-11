@@ -21,7 +21,8 @@ This helper allows you to pick the most ideal degenerate codons. It comes
                 <div class="row collapse" id="codon_bycodon">
                     <div class="col-lg-4">
                         <div class="row">
-                            <div class="input-group"><span class="input-group-addon">Codon</span>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">Codon</span></div>
                                 <select class="selectpicker"
                                 aria-labelledby="codon_drop" id="codon_drop" title="Choose...">
                                     <option value="NNN" data-def="Generic scheme. Unbalanced and with 3/64 stop codons.">NNN</option>
@@ -49,8 +50,11 @@ This helper allows you to pick the most ideal degenerate codons. It comes
                         <div class="row">
                             <br>
                             <div id="codon_manual" hidden>
-                                <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. &apos;NNK&apos;) or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. &apos;12NDT 6VHA 1TGG 1ATG&apos;) or a special mix (e.g. &apos;Tang&apos;)."
-                                    data-placement="top">Scheme</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend" data-toggle="tooltip" title="The mutation used. The input is a string which can be simply four bases (e.g. &apos;NNK&apos;) or multiple codons separated by a space and optionally prefixed with a interger number denoting their ratios (e.g. &apos;12NDT 6VHA 1TGG 1ATG&apos;) or a special mix (e.g. &apos;Tang&apos;)."
+                                    data-placement="top">
+                                        <span class="input-group-text">Scheme</span>
+                                    </div>
                                     <input type="text" class="form-control"
                                     placeholder="NNN" id="codon_mutation">
                                 </div>
@@ -74,14 +78,19 @@ This helper allows you to pick the most ideal degenerate codons. It comes
                         or one letter with spaces or not &#x2014; corner case: SER is Ser + Asp
                         + Arg while Ser is Serine.</p>
                     <div class="col-lg-4">
-                        <div class="input-group"> <span class="input-group-addon" id="codonAA_list_addon">Wanted AAs</span>
+                        <div class="input-group"> <div class="input-group-prepend" id="codonAA_list_addon">
+                            <span class="input-group-text">Wanted AAs</span>
+                        </div>
                             <input
                             type="text" class="form-control" placeholder="G P S" aria-describedby="codonAA_list_addon"
                             id="codonAA_list">
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="input-group"> <span class="input-group-addon" id="codonAA_antilist_addon">Unwanted AAs</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend" id="codonAA_antilist_addon">
+                                <span class="input-group-text">Unwanted AAs</span>
+                            </div>
                             <input
                             type="text" class="form-control" placeholder="C" aria-describedby="codonAA_antilist_addon"
                             id="codonAA_antilist">

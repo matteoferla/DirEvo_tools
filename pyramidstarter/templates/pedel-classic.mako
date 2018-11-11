@@ -129,29 +129,34 @@
         <div class="row">
             <div class="col-xl-4">
                 <div class="input-group">
-                    <span class="input-group-prepend" data-toggle="tooltip" title="Library size L" data-placement="top">
-                        Library size</span>
+                    <div class="input-group-prepend" data-toggle="tooltip" title="Library size L" data-placement="top">
+                        <span class="input-group-text">Library size</span></div>
                     <input type="number" min="0" class="form-control"
                            placeholder="10000000" id="pedel_size">
                 </div>
                 <br>
             </div>
             <div class="col-xl-4">
-                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip"
+                <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip"
                                                 title="Sequence length N (nt)"
-                                                data-placement="top">Seq. length</span>
+                                                data-placement="top">
+                    <span class="input-group-text">Seq. length</span></div>
                     <input type="number" min="0" class="form-control"
-                           placeholder="1000" id="pedel_len"> <span class="input-group-addon">nt</span>
+                           placeholder="1000" id="pedel_len">
+                    <div class="input-group-addon">
+                        <span class="input-group-text">nt</span></div>
                 </div>
                 <br>
             </div>
             <div class="col-xl-4">
-                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip"
+                <div class="input-group">
+                    <div class="input-group-prepend" data-toggle="tooltip"
                                                 title="Mean number of point mutations per sequence m"
-                                                data-placement="top">Load</span>
+                                                data-placement="top">
+                        <span class="input-group-text">Load</span></div>
                     <input type="number" min="0" class="form-control"
-                           placeholder="4" id="pedel_mutload"> <span
-                            class="input-group-addon">Mutations/seq</span>
+                           placeholder="4" id="pedel_mutload"> <div
+                        class="input-group-append"><span class="input-group-text">Mutations/seq</span></div>
                 </div>
                 <br>
             </div>
@@ -180,17 +185,22 @@
         <div class="row">
             <div id="pedel_&#xA7;cycles" class="card bg-light card-body mb-3 well-lg">
                 <div class="col-xl-4">
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip"
                                                     title="Number of PCR cycles"
-                                                    data-placement="top">PCR cycles</span>
+                                                    data-placement="top">
+                            <span class="input-group-text">PCR cycles</span>
+                        </div>
                         <input type="number" min="0" class="form-control"
                                placeholder="4.5" id="pedel_cycles">
                     </div>
                 </div>
                 <div class="col-xl-4">
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip"
                                                     title="PCR efficiency"
-                                                    data-placement="top">PCR efficiency</span>
+                                                    data-placement="top">
+                            <span class="input-group-text">PCR efficiency</span></div>
                         <input type="number" min="0"
                                max="1" class="form-control" placeholder="0.6" id="pedel_efficiency">
                     </div>

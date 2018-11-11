@@ -481,20 +481,19 @@
                     maritima Cystathionine &#x3B2;-lyase&apos;), therefore for masked sequences
                     use lowercase.</p>
                 <div class="col-xl-12">
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
-                                                    title="In frame sequence that was mutagenised.">Sequence
+                    <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                                                    title="In frame sequence that was mutagenised.">
+                        <span class="input-group-text">Sequence</span>
 
-                        </span>
+                        </div>
                         <textarea class="form-control custom-control"
                                   rows="5" style="resize:none" id="pedelAA_sequence" name="pedelAA_sequence">ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA</textarea>
-                        <span
-                                class="input-group-addon">Retrieve previous
-                    <br>
+                        <div class="input-group-append">
                     <button class="btn btn-secondary" type="button" id="pedelAA_sequence_retrieve"
                             data-toggle="tooltip" data-placement="top"
-                            title="In frame sequence that was mutagenised."><i class="fa fa-history"></i>
+                            title="In frame sequence that was mutagenised."><i class="fa fa-history"></i><br/>Retrieve previous
                     </button>
-                    </span>
+                    </div>
                     </div>
                     <br>
                 </div>
@@ -502,11 +501,14 @@
             </div>
             <div class="row">
                 <div class="col-xl-5">
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip"
                                                     title="Library size L"
-                                                    data-placement="top">Library size</span>
+                                                    data-placement="top">
+                            <span class="input-group-text">Library size</span>
                         <input type="number" min="0" class="form-control"
-                               placeholder="10000000" id="pedelAA_size"> <span class="input-group-addon">nt</span>
+                               placeholder="10000000" id="pedelAA_size">
+                            <div class="input-group-append"><span class="input-group-text">nt</span></div>
                     </div>
                     <br>
                 </div>
@@ -659,15 +661,22 @@
                 <div class="col-xl-4">
                     <div class="input-group">
                         <input type="checkbox" class="switch" id="pedelAA_normal" data-off-text="Unnormalised"
-                               data-on-text="Normalised" data-off-color="warning"> <span class="input-group-addon">values</span>
+                               data-on-text="Normalised" data-off-color="warning">
+                        <div class="input-group-append"><span class="input-group-text">values</span></div>
                     </div>
                 </div>
                 <div class="col-xl-4">
-                    <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip"
                                                     title="Mean number of nucleotide substitutions per daughter sequence"
-                                                    data-placement="top">Load</span>
+                                                    data-placement="top">
+                            <span class="input-group-text">Load</span>
+                        </div>
                         <input type="number" min="0" class="form-control"
-                               placeholder="4.5" id="pedelAA_load"> <span class="input-group-addon">mutations/seq</span>
+                               placeholder="4.5" id="pedelAA_load">
+                        <div class="input-group-append">
+                            <span class="input-group-text">mutations/seq</span>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -675,18 +684,24 @@
             <div class="row">
                 <div id="pedelAA_&#xA7;cycles" class="card bg-light card-body mb-3 well-lg">
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip"
                                                         title="Number of PCR cycles"
-                                                        data-placement="top">PCR cycles</span>
+                                                        data-placement="top">
+                                <span class="input-group-text">PCR cycles</span>
+                            </div>
                             <input type="number" min="0" class="form-control"
                                    placeholder="4.5" id="pedelAA_cycles">
                         </div>
                         <br>
                     </div>
                     <div class="col-xl-4">
-                        <div class="input-group"> <span class="input-group-addon" data-toggle="tooltip"
+                        <div class="input-group">
+                            <div class="input-group-prepend" data-toggle="tooltip"
                                                         title="PCR efficiency"
-                                                        data-placement="top">PCR efficiency</span>
+                                                        data-placement="top">
+                            <span class="input-group-text">PCR efficiency</span>
+                        </div>
                             <input type="number" min="0"
                                    max="1" class="form-control" placeholder="0.6" id="pedelAA_efficiency">
                         </div>

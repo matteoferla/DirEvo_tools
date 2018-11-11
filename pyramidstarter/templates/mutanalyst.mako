@@ -1,338 +1,390 @@
 <div class="card">
-            <div class="card-header">
-                 <h1 class="card-title">Mutanalyst<img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
-                <h4 class="card-subtitle mb-2 text-muted">Mutational load and spectrum calculator</h4>
-            </div>
-            <div class="card-body">
-                 <h3>Description</h3>
-                <p>An online tool for assessing the mutational spectrum of epPCR libraries
-                    with poor sampling.</p>
-                 <h3>Background</h3>
-                <p>Error prone PCR is a method to create a pool of amplicons with some random
-                    errors. For the best results the number of mutations and the spectrum of
-                    the mutations needs to be controlled, hence the need for a test library.
-                    The calculations of a test libray are slightly laborious and are affected
-                    by the very small sample size. This calculator tries to overcome these
-                    two issues by computing the mutational biases given a starting sequence
-                    and list of mutant genotypes, by calculating the mutations per sequence
-                    by fitting it to a Poisson distribution and by estimating the errors in
-                    the values. In particular, the errors are calculated using the assumption
-                    that a mutation and its complementary are equally likely in light of the
-                    double helix nature of DNA (<i>e.g.</i> A to G on one strand will result
-                    in T to C on the other). For the specific formulae used see <a href="/static/variance_note.html"
-                    data-tooltip="walkthrough of variance calculations">	this note about propagating errors.</a>
-                    <br>The program can calculate mutation frequencies from the list of mutations
-                    found and the template sequence or it can also accept the frequencies directly.
-                    The <a href="javascript:Btn_demo();">&apos;Demo&apos;</a> values are from
-                    an actual experiment.</p>
-                <br>
-                <!--section-->
-                 <h3>Choose starting point</h3>
-There are two possible starting points for mutanalysts.
-                <br>One is proving a sequence and the mutations sampled, for which the mutational
-                load, mutational spectrum and the mutational bias indicators will be calculated.
-                <br>The other is more downstream, wherein one proves a mutational spectrum
-                and mutational load and the mutational bias indicators will be calculated.
-                <br>
-                <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
-                    data-placement="top">Choose:</span>
-                    <input type="checkbox" class="switch"
-                    id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
-                    data-off-color="warning" data-size="large">
-                </div>
-                <br>
-                <br>If you want to know what mutations you have in a series of ab1 file check
-                out out <a href="main/mutantcaller">Mutantcaller</a>.
-                <br>If you want to know the library composition (<i>e.g.</i> redundancy) check
-                out <a href="main/pedel">PedelAA</a> or go to the bottom of this page.
-                <!--section-->
-                <div class="row" id="mutanalyst_seq&#xA7;">
-                     <h3>Starting from a sequence and a mutant genotype list</h3>
-                    <!--section-->
-                     <h4>Sequence</h4>
-                    <p>In frame sequence that was mutagenised. Note that all symbols that aren&apos;t
-                        uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> &apos;&gt;T.
-                        maritima Cystathionine &#x3B2;-lyase&apos;), therefore for masked sequences
-                        use lowercase.</p>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                                title="In frame sequence that was mutagenised.">Sequence
+    <div class="card-header">
+        <h1 class="card-title">Mutanalyst<img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
+        <h4 class="card-subtitle mb-2 text-muted">Mutational load and spectrum calculator</h4>
+    </div>
+    <div class="card-body">
+        <h3>Description</h3>
+        <p>An online tool for assessing the mutational spectrum of epPCR libraries
+            with poor sampling.</p>
+        <h3>Background</h3>
+        <p>Error prone PCR is a method to create a pool of amplicons with some random
+            errors. For the best results the number of mutations and the spectrum of
+            the mutations needs to be controlled, hence the need for a test library.
+            The calculations of a test libray are slightly laborious and are affected
+            by the very small sample size. This calculator tries to overcome these
+            two issues by computing the mutational biases given a starting sequence
+            and list of mutant genotypes, by calculating the mutations per sequence
+            by fitting it to a Poisson distribution and by estimating the errors in
+            the values. In particular, the errors are calculated using the assumption
+            that a mutation and its complementary are equally likely in light of the
+            double helix nature of DNA (<i>e.g.</i> A to G on one strand will result
+            in T to C on the other). For the specific formulae used see <a href="/static/variance_note.html"
+                                                                           data-tooltip="walkthrough of variance calculations"> this note about propagating
+                errors.</a>
+            <br>The program can calculate mutation frequencies from the list of mutations
+            found and the template sequence or it can also accept the frequencies directly.
+            The <a href="javascript:Btn_demo();">&apos;Demo&apos;</a> values are from
+            an actual experiment.</p>
+        <br>
+        <!--section-->
+        <h3>Choose starting point</h3>
+        There are two possible starting points for mutanalysts.
+        <br>One is proving a sequence and the mutations sampled, for which the mutational
+        load, mutational spectrum and the mutational bias indicators will be calculated.
+        <br>The other is more downstream, wherein one proves a mutational spectrum
+        and mutational load and the mutational bias indicators will be calculated.
+        <br>
+        <div class="input-group">
+            <div class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
+                 data-placement="top">
+                <span class="input-group-text">Choose:</span></div>
+            <input type="checkbox" class="switch"
+                   id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
+                   data-off-color="warning" data-size="large">
+        </div>
+        <br>
+        <br>If you want to know what mutations you have in a series of ab1 file check
+        out out <a href="main/mutantcaller">Mutantcaller</a>.
+        <br>If you want to know the library composition (<i>e.g.</i> redundancy) check
+        out <a href="main/pedel">PedelAA</a> or go to the bottom of this page.
+        <!--section-->
+        <div class="row" id="mutanalyst_seq&#xA7;">
+            <h3>Starting from a sequence and a mutant genotype list</h3>
+            <!--section-->
+            <h4>Sequence</h4>
+            <p>In frame sequence that was mutagenised. Note that all symbols that aren&apos;t
+                uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> &apos;&gt;T.
+                maritima Cystathionine &#x3B2;-lyase&apos;), therefore for masked sequences
+                use lowercase.</p>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                             title="In frame sequence that was mutagenised.">
+                            <span class="input-group-text">Sequence</span>
 
-                        </span>
-                                <textarea class="form-control custom-control"
-                                rows="5" style="resize:none" id="sequence" name="sequence"></textarea> <span class="input-group-append">Retrieve previous<br>
-
-            <button class="btn btn-secondary" type="button" id="sequence_retrieve" data-toggle="tooltip" data-placement="top" title="In frame sequence that was mutagenised."><i class="fa fa-history"></i></button>
-
-          </span>
-                            </div>
-                            <br>
                         </div>
-                    </div>
-                    <!--section-->
-                     <h4>Library size</h4>
-For Pedel-AA calculations, the library size is required.
-                    <br>
-                    <div class="input-group"> <span class="input-group-prepend" id="library_addon">Size</span>
-                        <input type="number"
-                        class="form-control" placeholder="1000000" aria-describedby="library_addon"
-                        id="library_size">
-                    </div>
-                     <h4>Mutations found</h4>
-                    <p>This is the list of the mutations found. Identifying the mutations can
-                        be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
-                        <br>The format is as follows:</p>
-                    <ul>
-                        <li>Each <span class="note" data-toggle="tooltip" data-placement="top" title="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span> contains
-                            <span
-                            class="note" data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations of a variant sampled.</li>
-                        <li>The mutations can only be in the forms A123C or 123A&gt;C, where the number
-                            is irrelevant (and can be omitted).</li>
-                        <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"
-                            data-placement="top" title="wt or WT or wild, but not an identity 123A&gt;A as that will count as a mutation (roundtrip)">&apos;wt&apos;</span>,
-                            it is not needed for the main calculations and it is used solely for the
-                            mutational frequency &#x2014;and useful for Pedel.</li>
-                        <li>Rarer events such as insertions, deletion, duplications, frameshifts and
-                            inversions, are not taken into account, but their frequency can be easily
-                            calculated using the &apos;values for further analysis&apos; below.</li>
-                    </ul>
-                    <div class="input-group"> <span class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                        title="List of the mutations found">Variants
-
-                        </span>
                         <textarea class="form-control custom-control"
-                        name="baseList" rows="5" id="baseList" style="resize:none"></textarea>
-                    </div>
-                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary" onclick="Btn_calcFreq()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
+                                  rows="5" style="resize:none; min-width=60%;" id="sequence" name="sequence"></textarea>
+                        <div class="input-group-append">
+
+                            <button class="btn btn-secondary" type="button" id="sequence_retrieve" data-toggle="tooltip" data-placement="top"
+                                    title="In frame sequence that was mutagenised."><i class="fa fa-history"></i><br/>Retrieve previous
+                            </button>
+
                         </div>
                     </div>
+                    <br>
                 </div>
-                <div class="row" id="mutanalyst_freq&#xA7;">
-                    <!--section-->
-                     <h3>Mutational frequency</h3>
-                    <p>The simplest estimate of the frequency of mutations per sequence is the
-                        average of the point mutations per sequence (<i>m</i>), however due to
-                        the small sample size this may be off. The distribution of number of mutations
-                        per sequence follows a PCR distribution, which can <span class="note" data-toggle="tooltip"
-                        data-placement="bottom" title="converging as the number of PCR cycles tends to infinity">approximated</span> with
-                        a Poisson distribution (<span class="note" data-toggle="tooltip" data-placement="bottom"
-                        title="Sun F. (1995). The polymerase chain reaction and branching processes, J. Comput. Biol., 2, 63-86.">Sun, 1995</span>).
-                        In the <span class="note" data-toggle="tooltip" data-placement="bottom"
-                        title="and the former at number of cycles (&lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt;) = &#x221E;  as the variance is equal to the mean &lt;b&gt;plus&lt;/b&gt; the square of the mean divided by the &lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt; scaled by the PCR efficiency.">latter</span>,
-                        the mean and the variance are the same (&#x3BB; &#x2014;unrelated to PCR
-                        efficiency&#x2014;). The <em>sample</em> average and variance may differ,
-                        especially at low sampling. The number to trust the most is the &#x3BB;<sub>Poisson</sub>.</p>
-                    <p
+            </div>
+            <br/>
+            <!--section-->
+            <h4>Library size</h4>
+            <p>For Pedel-AA calculations, the library size is required.</p>
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend" id="library_addon">
+                    <span class="input-group-text">Size</span></div>
+                <input type="number"
+                       class="form-control" placeholder="1000000" aria-describedby="library_addon"
+                       id="library_size">
+            </div>
+            <h4>Mutations found</h4>
+            <p>This is the list of the mutations found. Identifying the mutations can
+                be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
+                <br>The format is as follows:</p>
+            <ul>
+                <li>Each <span class="note" data-toggle="tooltip" data-placement="top"
+                               title="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span>
+                    contains
+                    <span
+                            class="note"
+                            data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations
+                    of a variant sampled.
+                </li>
+                <li>The mutations can only be in the forms A123C or 123A&gt;C, where the number
+                    is irrelevant (and can be omitted).
+                </li>
+                <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"
+                                                                     data-placement="top"
+                                                                     title="wt or WT or wild, but not an identity 123A&gt;A as that will count as a mutation (roundtrip)">&apos;wt&apos;</span>,
+                    it is not needed for the main calculations and it is used solely for the
+                    mutational frequency &#x2014;and useful for Pedel.
+                </li>
+                <li>Rarer events such as insertions, deletion, duplications, frameshifts and
+                    inversions, are not taken into account, but their frequency can be easily
+                    calculated using the &apos;values for further analysis&apos; below.
+                </li>
+            </ul>
+            <div class="input-group">
+                <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                     title="List of the mutations found">
+                    <span class="input-group-text">Variants</span>
+
+                </div>
+                <textarea class="form-control custom-control"
+                          name="baseList" rows="5" id="baseList" style="resize:none"></textarea>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary" onclick="Btn_calcFreq()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="mutanalyst_freq&#xA7;">
+            <!--section-->
+            <h3>Mutational frequency</h3>
+            <p>The simplest estimate of the frequency of mutations per sequence is the
+                average of the point mutations per sequence (<i>m</i>), however due to
+                the small sample size this may be off. The distribution of number of mutations
+                per sequence follows a PCR distribution, which can <span class="note" data-toggle="tooltip"
+                                                                         data-placement="bottom"
+                                                                         title="converging as the number of PCR cycles tends to infinity">approximated</span>
+                with
+                a Poisson distribution (<span class="note" data-toggle="tooltip" data-placement="bottom"
+                                              title="Sun F. (1995). The polymerase chain reaction and branching processes, J. Comput. Biol., 2, 63-86.">Sun, 1995</span>).
+                In the <span class="note" data-toggle="tooltip" data-placement="bottom"
+                             title="and the former at number of cycles (&lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt;) = &#x221E;  as the variance is equal to the mean &lt;b&gt;plus&lt;/b&gt; the square of the mean divided by the &lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt; scaled by the PCR efficiency.">latter</span>,
+                the mean and the variance are the same (&#x3BB; &#x2014;unrelated to PCR
+                efficiency&#x2014;). The <em>sample</em> average and variance may differ,
+                especially at low sampling. The number to trust the most is the &#x3BB;<sub>Poisson</sub>.</p>
+            <p
                     class="marginless">The average is <strong><span id="freqMean">N/A</span></strong> mutations
-                        per sequence (<span id="size">N/A</span> kb).</p>
-                        <p class="marginless">The sample variance is <strong><span id="freqVar">N/A</span></strong> mutations
-                            per sequence.</p>
-                        <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;">N/A</span></strong> mutations
-                            per sequence.</p>
-                        <br>
-                        <div id="disChart" style="width: 80%; height:400px"></div>
-                        <p class="marginless">If the &#x3BB;<sub>Poisson</sub> and average are very different and the
-                            plot is very poor, sequencing more variants from the test library may be
-                            reccomendable.</p>
-                </div>
-                <div class="row" id="mutanalyst_freq_alt_in&#xA7;">
-                    <!--section-->
-                     <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations &#xA0;<span id="altH_showing"><button type="button" class="btn btn-info" id="altH_showing_button_on">Show</button><button type="button" class="btn btn-warning" id="altH_showing_button_off">hide</button></span></h3>
-                    <div id="alt&#xA7;">
-                        <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
-                        <table
+                per sequence (<span id="size">N/A</span> kb).</p>
+            <p class="marginless">The sample variance is <strong><span id="freqVar">N/A</span></strong> mutations
+                per sequence.</p>
+            <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;">N/A</span></strong> mutations
+                per sequence.</p>
+            <br>
+            <div id="disChart" style="width: 80%; height:400px"></div>
+            <p class="marginless">If the &#x3BB;<sub>Poisson</sub> and average are very different and the
+                plot is very poor, sequencing more variants from the test library may be
+                reccomendable.</p>
+        </div>
+        <div class="row" id="mutanalyst_freq_alt_in&#xA7;">
+            <!--section-->
+            <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations &#xA0;<span id="altH_showing"><button type="button"
+                                                                                                                                            class="btn btn-info"
+                                                                                                                                            id="altH_showing_button_on">Show</button><button
+                    type="button" class="btn btn-warning" id="altH_showing_button_off">hide</button></span></h3>
+            <div id="alt&#xA7;">
+                <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
+                <table
                         width="50%" border="0" id="mutTable_raw">
-                            <thead>
-                                <tr>
-                                    <th width="20%">From\To</th>
-                                    <th width="20%">A</th>
-                                    <th width="20%">T</th>
-                                    <th width="20%">G</th>
-                                    <th width="20%">C</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>A</th>
-                                    <td>
-                                        <input class="bg-info" type="text" disabled id="A2A" value="&#x2014;">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" type="text" id="A2T" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-success" id="A2G" type="text" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" id="A2C" type="text" value="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="20%">T</th>
-                                    <td width="20%">
-                                        <input class="bg-warning" type="text" id="T2A" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-info" type="text" disabled id="T2T" value="&#x2014;">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" id="T2G" type="text" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-danger" id="T2C" type="text" value="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="20%">G</th>
-                                    <td width="20%">
-                                        <input class="bg-success" type="text" id="G2A" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" type="text" id="G2T" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-info" disabled id="G2G" type="text" value="&#x2014;">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" id="G2C" type="text" value="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="20%">C</td>
-                                    <td width="20%" bgcolor="#FFFF99">
-                                        <input type="text" id="C2A" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-danger" type="text" id="C2T" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-warning" id="C2G" type="text" value="0">
-                                    </td>
-                                    <td>
-                                        <input class="bg-info" disabled id="C2C" type="text" value="&#x2014;">
-                                    </td>
-                                </tr>
-                            </tbody>
-                            </table>
-                            <br>
-                            <table width="50%" border="0">
-                                <tr>
-                                    <th width="20%">Colour codes</th>
-                                    <td width="20%" class="bg-info">Identity</td>
-                                    <td width="20%" class="bg-success">Purine transition</td>
-                                    <td width="20%" class="bg-danger">Pyrimine transition</td>
-                                    <td width="20%" class="bg-warning">Transversion</td>
-                                </tr>
-                            </table>
-                            <br>
-                            <div class="bs-callout bs-callout-warning">
-                                 <h4>Required colour change</h4>These colours suck. Change around. Theme linked??</div>
-                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonA">Proportion of adenine</span>
-                                <input
-                                type="text" class="form-control" id="sumA" value="25" aria-describedby="basic-addonA"> <span class="input-group-append">%</span>
-                            </div>
-                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonT">Proportion of thymine</span>
-                                <input
-                                type="text" class="form-control" id="sumT" value="25" aria-describedby="basic-addonT"> <span class="input-group-append">%</span>
-                            </div>
-                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonG">Proportion of guanine</span>
-                                <input
-                                type="text" class="form-control" id="sumG" value="25" aria-describedby="basic-addonG"> <span class="input-group-append">%</span>
-                            </div>
-                            <div class="input-group"> <span class="input-group-prepend" id="basic-addonC">Proportion of cytosine</span>
-                                <input
-                                type="text" class="form-control" id="sumC" value="25" aria-describedby="basic-addonC"> <span class="input-group-append">%</span>
-                            </div>
-                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary" onclick="Btn_calcBias()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate</button>
-                                </div>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
-                                </div>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
-                                </div>
-                            </div>
+                    <thead>
+                    <tr>
+                        <th width="20%">From\To</th>
+                        <th width="20%">A</th>
+                        <th width="20%">T</th>
+                        <th width="20%">G</th>
+                        <th width="20%">C</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>A</th>
+                        <td>
+                            <input class="bg-info" type="text" disabled id="A2A" value="&#x2014;">
+                        </td>
+                        <td>
+                            <input class="bg-warning" type="text" id="A2T" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-success" id="A2G" type="text" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-warning" id="A2C" type="text" value="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="20%">T</th>
+                        <td width="20%">
+                            <input class="bg-warning" type="text" id="T2A" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-info" type="text" disabled id="T2T" value="&#x2014;">
+                        </td>
+                        <td>
+                            <input class="bg-warning" id="T2G" type="text" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-danger" id="T2C" type="text" value="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="20%">G</th>
+                        <td width="20%">
+                            <input class="bg-success" type="text" id="G2A" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-warning" type="text" id="G2T" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-info" disabled id="G2G" type="text" value="&#x2014;">
+                        </td>
+                        <td>
+                            <input class="bg-warning" id="G2C" type="text" value="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">C</td>
+                        <td width="20%" bgcolor="#FFFF99">
+                            <input type="text" id="C2A" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-danger" type="text" id="C2T" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-warning" id="C2G" type="text" value="0">
+                        </td>
+                        <td>
+                            <input class="bg-info" disabled id="C2C" type="text" value="&#x2014;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table width="50%" border="0">
+                    <tr>
+                        <th width="20%">Colour codes</th>
+                        <td width="20%" class="bg-info">Identity</td>
+                        <td width="20%" class="bg-success">Purine transition</td>
+                        <td width="20%" class="bg-danger">Pyrimine transition</td>
+                        <td width="20%" class="bg-warning">Transversion</td>
+                    </tr>
+                </table>
+                <br>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>Required colour change</h4>These colours suck. Change around. Theme linked??
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend" id="basic-addonA">
+                        <span class="input-group-text">Proportion of adenine</span></div>
+                    <input
+                            type="text" class="form-control" id="sumA" value="25" aria-describedby="basic-addonA">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
                     </div>
                 </div>
-                <div class="row" id="mutanalyst_corrected&#xA7;">
-                    <!--section-->
-                    <div class="col-xl-7">
-                         <h2>Corrected mutation incidence</h2>
-                        <table class="clearless">
-                            <tr>
-                                <th width="25%" class="clearless">Data display options</th>
-                                <td width="5%" class="clearless">
-                                    <input type="radio" name="fig" value="1" onclick="svg();">
-                                </td>
-                                <td width="20%" class="clearless">Raw data</td>
-                                <td width="5%" class="clearless">
-                                    <input name="fig" type="radio" onclick="svg();" value="2" checked>
-                                </td>
-                                <td width="20%" class="clearless">Frequency normalised</td>
-                                <td width="5%" class="clearless">
-                                    <input type="radio" name="fig" value="3" onclick="svg();">
-                                </td>
-                                <td width="20%" class="clearless">Strand complimentary normalised</td>
-                            </tr>
-                        </table>
-                        <p id="mutBlabla">Sequence-composition&#x2013;corrected incidence of mutations (%):</p>
-                        <table
-                        id="outTable" width="80%">
-                            <thead>
-                                <tr>
-                                    <th width="20%">From/To</th>
-                                    <th width="20%">A</th>
-                                    <th width="20%">T</th>
-                                    <th width="20%">G</th>
-                                    <th width="20%">C</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>A</th>
-                                    <td bgcolor="#CCCCCC"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#99FFFF"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                </tr>
-                                <tr>
-                                    <th>T</th>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#CCCCCC"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#99FF99"></td>
-                                </tr>
-                                <tr>
-                                    <th>G</th>
-                                    <td bgcolor="#99FFFF"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#CCCCCC"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                </tr>
-                                <tr>
-                                    <th>C</th>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#99FF99"></td>
-                                    <td bgcolor="#FFFF99"></td>
-                                    <td bgcolor="#CCCCCC"></td>
-                                </tr>
-                            </tbody>
-                            </table>
+                <div class="input-group">
+                    <div class="input-group-prepend" id="basic-addonT">
+                        <span class="input-group-text">Proportion of thymine</span></div>
+                    <input
+                            type="text" class="form-control" id="sumT" value="25" aria-describedby="basic-addonT">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
                     </div>
-                    <div class="col-xl-5">
-                        <h3>Graphical Representation</h3>
-                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend" id="basic-addonG">
+                        <span class="input-group-text">Proportion of guanine</span>
+                    </div>
+                    <input
+                            type="text" class="form-control" id="sumG" value="25" aria-describedby="basic-addonG">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend" id="basic-addonC">
+                        <span class="input-group-text">Proportion of cytosine</span>
+                    </div>
+                    <input
+                            type="text" class="form-control" id="sumC" value="25" aria-describedby="basic-addonC">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_calcBias()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="mutanalyst_corrected&#xA7;">
+            <!--section-->
+            <div class="col-xl-7">
+                <h2>Corrected mutation incidence</h2>
+                <table class="clearless">
+                    <tr>
+                        <th width="25%" class="clearless">Data display options</th>
+                        <td width="5%" class="clearless">
+                            <input type="radio" name="fig" value="1" onclick="svg();">
+                        </td>
+                        <td width="20%" class="clearless">Raw data</td>
+                        <td width="5%" class="clearless">
+                            <input name="fig" type="radio" onclick="svg();" value="2" checked>
+                        </td>
+                        <td width="20%" class="clearless">Frequency normalised</td>
+                        <td width="5%" class="clearless">
+                            <input type="radio" name="fig" value="3" onclick="svg();">
+                        </td>
+                        <td width="20%" class="clearless">Strand complimentary normalised</td>
+                    </tr>
+                </table>
+                <p id="mutBlabla">Sequence-composition&#x2013;corrected incidence of mutations (%):</p>
+                <table
+                        id="outTable" width="80%">
+                    <thead>
+                    <tr>
+                        <th width="20%">From/To</th>
+                        <th width="20%">A</th>
+                        <th width="20%">T</th>
+                        <th width="20%">G</th>
+                        <th width="20%">C</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>A</th>
+                        <td bgcolor="#CCCCCC"></td>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#99FFFF"></td>
+                        <td bgcolor="#FFFF99"></td>
+                    </tr>
+                    <tr>
+                        <th>T</th>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#CCCCCC"></td>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#99FF99"></td>
+                    </tr>
+                    <tr>
+                        <th>G</th>
+                        <td bgcolor="#99FFFF"></td>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#CCCCCC"></td>
+                        <td bgcolor="#FFFF99"></td>
+                    </tr>
+                    <tr>
+                        <th>C</th>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#99FF99"></td>
+                        <td bgcolor="#FFFF99"></td>
+                        <td bgcolor="#CCCCCC"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xl-5">
+                <h3>Graphical Representation</h3>
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                         x="0px" y="0px" width="250px" height="250px" viewbox="0 0 250 250" enable-background="new 0 0 250 250"
                         xml:space="preserve" style="stroke-width: 0px; background-color: white;">
                             <text transform="matrix(1 0 0 1 27.1714 46.6031)" font-family="&apos;Verdana&apos;"
@@ -348,20 +400,20 @@ For Pedel-AA calculations, the library size is required.
                             />
                             <line id="AG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="34.476" y1="174.303" x2="34.476" y2="56.616" />
-                            <!--issue. seems right-->
+                    <!--issue. seems right-->
                             <line id="AT_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="57.354" y1="59.616" x2="178.576" y2="180.838" />
                             <line id="TA_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="73.889" y1="62.151" x2="195.111" y2="183.373" />
-                            <!--issue?? Appaers TA-->
+                    <!--issue?? Appaers TA-->
                             <line id="TC_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="214.821" y1="186.373" x2="214.821" y2="68.687" />
                             <line id="CG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="188.111" y1="52.616" x2="66.889" y2="173.838" />
-                            <!--issue-->
+                    <!--issue-->
                             <line id="CA_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="189.878" y1="31.518" x2="72.192" y2="31.518" />
-                            <!--CA? -->
+                    <!--CA? -->
                             <line id="TG_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
                             x1="189.878" y1="209.05" x2="72.192" y2="209.05" />
                             <line id="CT_line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
@@ -418,106 +470,106 @@ For Pedel-AA calculations, the library size is required.
                         C71.384,177.405,63.859,179.846,58.354,182.373z"
                             />
                         </svg>
-                        <p> <a id="down" href-lang="image/svg+xml" href="#" target="_blank"><i class="fa fa-download" style="margin-left:20px;"></i>
+                <p><a id="down" href-lang="image/svg+xml" href="#" target="_blank"><i class="fa fa-download" style="margin-left:20px;"></i>
 
                     Download</a>
-                        </p>
-                    </div>
-                    <!--section-->
-                </div>
-                <div class="row" id="mutanalyst_bias&#xA7;">
-                    <!--section-->
-                     <h2>Bias indicators</h2>
-                    <table id="biasTable" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Indicator</th>
-                                <th>Calculated</th>
-                                <th>Estimated error</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Ts/Tv</th>
-                                <td id="TsOverTv"></td>
-                                <td id="TsOverTv_error"></td>
-                            </tr>
-                            <tr>
-                                <th>AT&#x2192;GC/GC&#x2192;AT</th>
-                                <td id="W2SOverS2W"></td>
-                                <td id="W2SOverS2W_error"></td>
-                            </tr>
-                            <tr>
-                                <th>A&#x2192;N, T&#x2192;N (%)</th>
-                                <td id="W2N"></td>
-                                <td id="W2N_error"></td>
-                            </tr>
-                            <tr>
-                                <th>G&#x2192;N,C&#x2192;N (%)</th>
-                                <td id="S2N"></td>
-                                <td id="S2N_error"></td>
-                            </tr>
-                            <tr>
-                                <th>AT&#x2192;GC (%)</th>
-                                <td id="W2S"></td>
-                                <td id="W2S_error"></td>
-                            </tr>
-                            <tr>
-                                <th>GC&#x2192;AT (%)</th>
-                                <td id="S2W"></td>
-                                <td id="S2W_error"></td>
-                            </tr>
-                            <tr>
-                                <th>Transitions (%) total</th>
-                                <td id="&#x3A3;Ts"></td>
-                                <td id="&#x3A3;Ts_error"></td>
-                            </tr>
-                            <tr>
-                                <th>A&#x2192;G, T&#x2192;C (%)</th>
-                                <td id="Ts1"></td>
-                                <td id="Ts1_error"></td>
-                            </tr>
-                            <tr>
-                                <th>G&#x2192;A, C&#x2192;T (%)</th>
-                                <td id="Ts2"></td>
-                                <td id="Ts2_error"></td>
-                            </tr>
-                            <tr>
-                                <th>transversions (%) Total</th>
-                                <td id="&#x3A3;Tv"></td>
-                                <td id="&#x3A3;Tv_error"></td>
-                            </tr>
-                            <tr>
-                                <th>A&#x2192;T, T&#x2192;A (%)</th>
-                                <td id="TvW"></td>
-                                <td id="TvW_error"></td>
-                            </tr>
-                            <tr>
-                                <th>A&#x2192;C, T&#x2192;G (%)</th>
-                                <td id="TvN1"></td>
-                                <td id="TvN1_error"></td>
-                            </tr>
-                            <tr>
-                                <th>G&#x2192;C, C&#x2192;G (%)</th>
-                                <td id="TvS"></td>
-                                <td id="TvS_error"></td>
-                            </tr>
-                            <tr>
-                                <th>G&#x2192;T, C&#x2192;A (%)</th>
-                                <td id="TvN2"></td>
-                                <td id="TvN2_error"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div id="biasChart" style="width: 80%; height:400px"></div>
-                    <br>
-                </div>
-                <div class="row" id="mutanalyst_more&#xA7;">
-                     <h2>Pedel-AA results</h2>
-                    <p>For details about pedel-AA see <a href="/main/pedel" target="_blank">pedel-AA homepage</a>.</p>
-                    <div
-                    id="pedelAA_result"></div>
+                </p>
             </div>
+            <!--section-->
+        </div>
+        <div class="row" id="mutanalyst_bias&#xA7;">
+            <!--section-->
+            <h2>Bias indicators</h2>
+            <table id="biasTable" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Indicator</th>
+                    <th>Calculated</th>
+                    <th>Estimated error</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Ts/Tv</th>
+                    <td id="TsOverTv"></td>
+                    <td id="TsOverTv_error"></td>
+                </tr>
+                <tr>
+                    <th>AT&#x2192;GC/GC&#x2192;AT</th>
+                    <td id="W2SOverS2W"></td>
+                    <td id="W2SOverS2W_error"></td>
+                </tr>
+                <tr>
+                    <th>A&#x2192;N, T&#x2192;N (%)</th>
+                    <td id="W2N"></td>
+                    <td id="W2N_error"></td>
+                </tr>
+                <tr>
+                    <th>G&#x2192;N,C&#x2192;N (%)</th>
+                    <td id="S2N"></td>
+                    <td id="S2N_error"></td>
+                </tr>
+                <tr>
+                    <th>AT&#x2192;GC (%)</th>
+                    <td id="W2S"></td>
+                    <td id="W2S_error"></td>
+                </tr>
+                <tr>
+                    <th>GC&#x2192;AT (%)</th>
+                    <td id="S2W"></td>
+                    <td id="S2W_error"></td>
+                </tr>
+                <tr>
+                    <th>Transitions (%) total</th>
+                    <td id="&#x3A3;Ts"></td>
+                    <td id="&#x3A3;Ts_error"></td>
+                </tr>
+                <tr>
+                    <th>A&#x2192;G, T&#x2192;C (%)</th>
+                    <td id="Ts1"></td>
+                    <td id="Ts1_error"></td>
+                </tr>
+                <tr>
+                    <th>G&#x2192;A, C&#x2192;T (%)</th>
+                    <td id="Ts2"></td>
+                    <td id="Ts2_error"></td>
+                </tr>
+                <tr>
+                    <th>transversions (%) Total</th>
+                    <td id="&#x3A3;Tv"></td>
+                    <td id="&#x3A3;Tv_error"></td>
+                </tr>
+                <tr>
+                    <th>A&#x2192;T, T&#x2192;A (%)</th>
+                    <td id="TvW"></td>
+                    <td id="TvW_error"></td>
+                </tr>
+                <tr>
+                    <th>A&#x2192;C, T&#x2192;G (%)</th>
+                    <td id="TvN1"></td>
+                    <td id="TvN1_error"></td>
+                </tr>
+                <tr>
+                    <th>G&#x2192;C, C&#x2192;G (%)</th>
+                    <td id="TvS"></td>
+                    <td id="TvS_error"></td>
+                </tr>
+                <tr>
+                    <th>G&#x2192;T, C&#x2192;A (%)</th>
+                    <td id="TvN2"></td>
+                    <td id="TvN2_error"></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <div id="biasChart" style="width: 80%; height:400px"></div>
+            <br>
+        </div>
+        <div class="row" id="mutanalyst_more&#xA7;">
+            <h2>Pedel-AA results</h2>
+            <p>For details about pedel-AA see <a href="/main/pedel" target="_blank">pedel-AA homepage</a>.</p>
+            <div
+                    id="pedelAA_result"></div>
         </div>
     </div>
+</div>
