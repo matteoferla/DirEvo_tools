@@ -23,7 +23,7 @@ This helper allows you to pick the most ideal degenerate codons. It comes
                         <div class="row">
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text">Codon</span></div>
-                                <select class="selectpicker"
+                                <select class="selectpicker form-control"
                                 aria-labelledby="codon_drop" id="codon_drop" title="Choose...">
                                     <option value="NNN" data-def="Generic scheme. Unbalanced and with 3/64 stop codons.">NNN</option>
                                     <option value="NNK" data-def="Common scheme, identical to NNS. Cuts the number of stop codons while still making tryptophan.">NNK</option>

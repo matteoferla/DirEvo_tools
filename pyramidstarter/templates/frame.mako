@@ -38,7 +38,7 @@
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}"
           rel="stylesheet">
     <!--main CSS-->
-    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/pedel.css')}">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/sitewide.css')}">
     <!--
         <style>
             div {border:1px solid black;}
@@ -254,7 +254,6 @@
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/sitewide.js')}"></script>
     <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
     <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
 
     <script>
@@ -291,8 +290,6 @@
 
 
     </script>
-
-
 </js_code>
 </body>
 

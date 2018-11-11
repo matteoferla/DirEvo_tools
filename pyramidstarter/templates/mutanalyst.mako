@@ -29,27 +29,30 @@
         <br>
         <!--section-->
         <h3>Choose starting point</h3>
-        There are two possible starting points for mutanalysts.
-        <br>One is proving a sequence and the mutations sampled, for which the mutational
-        load, mutational spectrum and the mutational bias indicators will be calculated.
-        <br>The other is more downstream, wherein one proves a mutational spectrum
-        and mutational load and the mutational bias indicators will be calculated.
+        <p>There are two possible starting points for mutanalysts.
+            <br>One is proving a sequence and the mutations sampled, for which the mutational
+            load, mutational spectrum and the mutational bias indicators will be calculated.
+            <br>The other is more downstream, wherein one proves a mutational spectrum
+            and mutational load and the mutational bias indicators will be calculated.</p>
         <br>
-        <div class="input-group">
-            <div class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
-                 data-placement="top">
-                <span class="input-group-text">Choose:</span></div>
-            <input type="checkbox" class="switch"
-                   id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
-                   data-off-color="warning" data-size="large">
+        <div class="row">
+
+            <div class="input-group">
+                <div class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
+                     data-placement="top">
+                    <span class="input-group-text">Choose:</span></div>
+                <input type="checkbox" class="switch"
+                       id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
+                       data-off-color="warning" data-size="large">
+            </div>
         </div>
         <br>
         <br>If you want to know what mutations you have in a series of ab1 file check
-        out out <a href="main/mutantcaller">Mutantcaller</a>.
+        out out <a href="mutantcaller">Mutantcaller</a>.
         <br>If you want to know the library composition (<i>e.g.</i> redundancy) check
-        out <a href="main/pedel">PedelAA</a> or go to the bottom of this page.
+        out <a href="pedel">PedelAA</a> or go to the bottom of this page.
         <!--section-->
-        <div class="row" id="mutanalyst_seq&#xA7;">
+        <div id="mutanalyst_seq&#xA7;">
             <h3>Starting from a sequence and a mutant genotype list</h3>
             <!--section-->
             <h4>Sequence</h4>
@@ -66,7 +69,7 @@
 
                         </div>
                         <textarea class="form-control custom-control"
-                                  rows="5" style="resize:none; min-width=60%;" id="sequence" name="sequence"></textarea>
+                                  rows="5" style="resize:none; min-width: 60%;" id="sequence" name="sequence"></textarea>
                         <div class="input-group-append">
 
                             <button class="btn btn-secondary" type="button" id="sequence_retrieve" data-toggle="tooltip" data-placement="top"
@@ -75,71 +78,82 @@
 
                         </div>
                     </div>
-                    <br>
+                    <br/>
                 </div>
             </div>
             <br/>
             <!--section-->
-            <h4>Library size</h4>
-            <p>For Pedel-AA calculations, the library size is required.</p>
-            <br>
-            <div class="input-group">
-                <div class="input-group-prepend" id="library_addon">
-                    <span class="input-group-text">Size</span></div>
-                <input type="number"
-                       class="form-control" placeholder="1000000" aria-describedby="library_addon"
-                       id="library_size">
-            </div>
-            <h4>Mutations found</h4>
-            <p>This is the list of the mutations found. Identifying the mutations can
-                be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
-                <br>The format is as follows:</p>
-            <ul>
-                <li>Each <span class="note" data-toggle="tooltip" data-placement="top"
-                               title="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span>
-                    contains
-                    <span
-                            class="note"
-                            data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations
-                    of a variant sampled.
-                </li>
-                <li>The mutations can only be in the forms A123C or 123A&gt;C, where the number
-                    is irrelevant (and can be omitted).
-                </li>
-                <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"
-                                                                     data-placement="top"
-                                                                     title="wt or WT or wild, but not an identity 123A&gt;A as that will count as a mutation (roundtrip)">&apos;wt&apos;</span>,
-                    it is not needed for the main calculations and it is used solely for the
-                    mutational frequency &#x2014;and useful for Pedel.
-                </li>
-                <li>Rarer events such as insertions, deletion, duplications, frameshifts and
-                    inversions, are not taken into account, but their frequency can be easily
-                    calculated using the &apos;values for further analysis&apos; below.
-                </li>
-            </ul>
-            <div class="input-group">
-                <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                     title="List of the mutations found">
-                    <span class="input-group-text">Variants</span>
 
-                </div>
-                <textarea class="form-control custom-control"
-                          name="baseList" rows="5" id="baseList" style="resize:none"></textarea>
+            <h4>Library size</h4>
+            <div class="row">
+                <p>For Pedel-AA calculations, the library size is required.</p>
+                <br/>
             </div>
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-secondary" onclick="Btn_calcFreq()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
+            <div class="row">
+
+                <div class="input-group">
+                    <div class="input-group-prepend" id="library_addon">
+                        <span class="input-group-text">Size</span></div>
+                    <input type="number"
+                           class="form-control" placeholder="1000000" aria-describedby="library_addon"
+                           id="library_size">
                 </div>
             </div>
+
+                <h4>Mutations found</h4>
+                <p>This is the list of the mutations found. Identifying the mutations can
+                    be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
+                    <br>The format is as follows:</p>
+
+                <ul>
+                    <li>Each <span class="note" data-toggle="tooltip" data-placement="top"
+                                   title="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span>
+                        contains
+                        <span
+                                class="note"
+                                data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations
+                        of a variant sampled.
+                    </li>
+                    <li>The mutations can only be in the forms A123C or 123A&gt;C, where the number
+                        is irrelevant (and can be omitted).
+                    </li>
+                    <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"
+                                                                         data-placement="top"
+                                                                         title="wt or WT or wild, but not an identity 123A&gt;A as that will count as a mutation (roundtrip)">&apos;wt&apos;</span>,
+                        it is not needed for the main calculations and it is used solely for the
+                        mutational frequency &#x2014;and useful for Pedel.
+                    </li>
+                    <li>Rarer events such as insertions, deletion, duplications, frameshifts and
+                        inversions, are not taken into account, but their frequency can be easily
+                        calculated using the &apos;values for further analysis&apos; below.
+                    </li>
+                </ul>
+            <div class="row pb-4">
+                <div class="input-group">
+                    <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                         title="List of the mutations found">
+                        <span class="input-group-text">Variants</span>
+
+                    </div>
+                    <textarea class="form-control custom-control"
+                              name="baseList" rows="5" id="baseList" style="resize:none"></textarea>
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_calcFreq()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="row" id="mutanalyst_freq&#xA7;">
+        <div id="mutanalyst_freq&#xA7;">
             <!--section-->
             <h3>Mutational frequency</h3>
             <p>The simplest estimate of the frequency of mutations per sequence is the
@@ -169,7 +183,7 @@
                 plot is very poor, sequencing more variants from the test library may be
                 reccomendable.</p>
         </div>
-        <div class="row" id="mutanalyst_freq_alt_in&#xA7;">
+        <div id="mutanalyst_freq_alt_in&#xA7;">
             <!--section-->
             <h3><span id="altH">Starting from a</span> table of tallied nucleotide specific mutations &#xA0;<span id="altH_showing"><button type="button"
                                                                                                                                             class="btn btn-info"
@@ -317,7 +331,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" id="mutanalyst_corrected&#xA7;">
+        <div id="mutanalyst_corrected&#xA7;">
             <!--section-->
             <div class="col-xl-7">
                 <h2>Corrected mutation incidence</h2>
@@ -477,7 +491,7 @@
             </div>
             <!--section-->
         </div>
-        <div class="row" id="mutanalyst_bias&#xA7;">
+        <div id="mutanalyst_bias&#xA7;">
             <!--section-->
             <h2>Bias indicators</h2>
             <table id="biasTable" class="table table-striped">
@@ -565,7 +579,7 @@
             <div id="biasChart" style="width: 80%; height:400px"></div>
             <br>
         </div>
-        <div class="row" id="mutanalyst_more&#xA7;">
+        <div id="mutanalyst_more&#xA7;">
             <h2>Pedel-AA results</h2>
             <p>For details about pedel-AA see <a href="/main/pedel" target="_blank">pedel-AA homepage</a>.</p>
             <div
@@ -573,3 +587,4 @@
         </div>
     </div>
 </div>
+
