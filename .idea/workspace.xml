@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":hammer: BS4 upgrade was a suicidally bad idea...">
-      <change afterPath="$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.html" afterDir="false" />
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":hammer: BS4 upgrade was a Trump-level bad idea...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/calculations.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/calculations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/pedel.js" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/pedel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/pedel.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/pedel.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +36,7 @@
           <entry key="gitmodules" value="3" />
           <entry key="ini" value="4" />
           <entry key="js" value="14" />
-          <entry key="mako" value="161" />
+          <entry key="mako" value="164" />
           <entry key="md" value="3" />
           <entry key="pt" value="30" />
           <entry key="py" value="16" />
@@ -56,7 +51,7 @@
           <entry key="HTML" value="9" />
           <entry key="Ini" value="4" />
           <entry key="JavaScript" value="14" />
-          <entry key="Mako" value="161" />
+          <entry key="Mako" value="164" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Python" value="16" />
@@ -67,26 +62,26 @@
           <entry key="css" value="4" />
           <entry key="dummy" value="126" />
           <entry key="gitmodules" value="30" />
-          <entry key="html" value="97" />
+          <entry key="html" value="127" />
           <entry key="ini" value="12" />
           <entry key="js" value="661" />
-          <entry key="mako" value="4950" />
+          <entry key="mako" value="5187" />
           <entry key="md" value="460" />
           <entry key="pt" value="1066" />
           <entry key="py" value="2554" />
-          <entry key="txt" value="370" />
+          <entry key="txt" value="381" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="4" />
           <entry key="Chameleon" value="137" />
-          <entry key="HTML" value="1026" />
+          <entry key="HTML" value="1056" />
           <entry key="Ini" value="12" />
           <entry key="JavaScript" value="661" />
-          <entry key="Mako" value="4950" />
+          <entry key="Mako" value="5187" />
           <entry key="Markdown" value="339" />
-          <entry key="PLAIN_TEXT" value="647" />
+          <entry key="PLAIN_TEXT" value="658" />
           <entry key="Python" value="2554" />
         </counts>
       </usages-collector>
@@ -99,16 +94,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+            <state relative-caret-position="102">
+              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#!!top" />
                 <element signature="n#div#1;n#div#0;n#!!top" />
                 <element signature="n#div#2;n#div#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
+              <folding>
+                <element signature="n#div#2;n#div#1;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#1;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="180" column="84" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -154,7 +183,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>in</find>
       <find>append</find>
       <find>addon</find>
       <find>mutation</find>
@@ -184,6 +212,7 @@
       <find>codon_down</find>
       <find>load</find>
       <find>.pt</find>
+      <find>mutantp</find>
     </findStrings>
     <replaceStrings>
       <replace>#mutanalyst_seq§</replace>
@@ -238,7 +267,6 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/forbidden.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/log.pt" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/silico.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/pedel.css" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.css" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
@@ -246,7 +274,6 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.js" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
         <option value="$PROJECT_DIR$/production.ini" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" />
@@ -257,6 +284,8 @@
         <option value="$PROJECT_DIR$/pyramidstarter/calculations.py" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.html" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
       </list>
     </option>
   </component>
@@ -455,20 +484,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535014035844</updated>
-    </task>
-    <task id="LOCAL-00021" summary=":globe_with_meridians: bug was the ip fetcher only locally">
-      <created>1536188063823</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1536188063823</updated>
-    </task>
-    <task id="LOCAL-00022" summary=":mouse2: pi issues...">
-      <created>1536189102624</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1536189102624</updated>
     </task>
     <task id="LOCAL-00023" summary=":mouse2: pi issues...">
       <created>1536189576007</created>
@@ -799,7 +814,21 @@
       <option name="project" value="LOCAL" />
       <updated>1542229883614</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary=":hammer: BS4 upgrade was a Trump-level bad idea...">
+      <created>1542234124395</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1542234124395</updated>
+    </task>
+    <task id="LOCAL-00071" summary=":hammer: BS4 upgrade was a Trump-level bad idea...">
+      <created>1542234318527</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1542234318527</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TodoView">
@@ -874,7 +903,6 @@
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
     </ignored-roots>
-    <MESSAGE value=":beetle: where is the production side bug??" />
     <MESSAGE value=":ghost: Missing binaries from the last compile" />
     <MESSAGE value=":beetle: hopefully no more IP issues..." />
     <MESSAGE value=":scroll: the log is getting too big" />
@@ -899,7 +927,8 @@
     <MESSAGE value=":hammer: BS4 upgrade was the worst idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was a diabolically bad idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was a suicidally bad idea..." />
-    <option name="LAST_COMMIT_MESSAGE" value=":hammer: BS4 upgrade was a suicidally bad idea..." />
+    <MESSAGE value=":hammer: BS4 upgrade was a Trump-level bad idea..." />
+    <option name="LAST_COMMIT_MESSAGE" value=":hammer: BS4 upgrade was a Trump-level bad idea..." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/404.mako" />
@@ -999,16 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="9" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="180" column="84" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="84" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#7;n#div#1;n#div#1;n#div#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1126,13 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1235,13 +1247,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="118" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1268,12 +1273,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        <state relative-caret-position="102">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#!!top" />
             <element signature="n#div#2;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
+          <folding>
+            <element signature="n#div#2;n#div#1;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="180" column="84" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
           </folding>
         </state>
       </provider>

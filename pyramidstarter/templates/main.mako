@@ -10,48 +10,85 @@
     you are struggling with terminology do check out <a href="main/glossary">the glossary and FAQ page</a>.</p>
 <p></p>
 <h1>Applications</h1>
-<div class="list-group"><a href="main/mutantprimers" class="list-group-item list-group-item-action"><b>Primers &#x2014; Mutant primers:</b><br>Given
-    a sequence and list of desired mutations it will return primers to make each of those mutations.</a>
+<p>Choose your desired tool to improve cloning, mutagenesis, and library construction.</p>
+<div class="row no-gutters">
+    <div class="col-md-6"><div class="list-group">
+    <a href="main/mutantprimers" class="list-group-item list-group-item-action"><b>Primers &#x2014; Mutant primers:</b><br>
+    Multiple mutagenic primer design for a desired input sequence</a>
     <a
             href="main/deepscan" class="list-group-item list-group-item-action"><b>Primers &#x2014; Deepscan:</b>
-        <br>Given a sequence and a codon, say GCT for alanine scanning, it will return
-        a list of all primers needed to scan the sequence with that mutation</a>
+        <br>Multiple mutagenic primer design to exhaustively scan an entire input sequence (<i>e.g.</i> for alanine scanning)</a>
     <a
             href="main/mutantcaller" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Mutantcaller:</b>
-        <br>Given a sequence and an ab1 trace it will return all mutations present
-        and also list heterozygous sites (say you have a mixed population or you
-        pooled two or three variants to cut down on sequencing)</a> <a href="main/mutanalyst"
+        <br>Analyse epPCR sequencing files to identify and list point mutations</a> <a href="main/mutanalyst"
                                                                        class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
-        Mutantanalyst:</b><br> Given a sequence and a list of sampled variants, it will say how biased the library
-        is.</a>
+        Mutantanalyst:</b><br> Determine the bias of the submitted sequences for a submitted epPCR library.</a>
     <a
             href="main/pedel" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Pedel:</b>
-        <br>Given a sequence, mutational spectrum and mutational load, it will say
-        how redundant is the library.</a> <a href="main/pedel" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
+        <br>GDetermine diversity of point mutations within an epPCR library</a>
+    <a href="main/pedel" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
         PedelAA:</b><br> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the
         library from an amino acid point of view.</a>
     <a
             href="main/probably" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Chances:</b>
-        <br>Given a sequence and a desired mutation, it will say what are the chances
-        that mutation ought to have been seen.</a> <a href="main/silico" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
-        Generator:</b><br> Given a sequence and mutational bias data, it generate mutations.</a>
+        <br>Determine the rough probability of having a desired point mutation in a library.</a>
+    <a href="main/silico" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
+        Generator:</b><br> Create random sequences with mutations based on a mutational load and bias.</a>
     <a
             href="main/glue" class="list-group-item list-group-item-action"><b>Glue&#xA0;&#x2014; Glue:</b>
-        <br>Calculates how complete a library is from a coupon collectors problem
-        standpoint.</a> <a href="main/glue" class="list-group-item list-group-item-action"><b>Glue&#xA0;&#x2014; GlueIT:</b><br> Calculates the
+        <br>Determine how well a library of randomised sequences covers its potential sequence complexity.</a>
+    <a href="main/glue" class="list-group-item list-group-item-action"><b>Glue&#xA0;&#x2014; GlueIT:</b><br> Calculate the
         completeness of a library mutated at 1&#x2013;6 codons.</a>
     <a
             href="main/driver" class="list-group-item list-group-item-action"><b>Driver:</b>
-        <br>Calculates the probability of cross-over events</a> <a href="main/QCC"
+        <br>Calculates the probability of cross-over events</a>
+    <a href="main/QCC"
                                                                    class="list-group-item list-group-item-action"><b>QQC (Quick quality
-        control) calculator:</b><br> Given an ab1 file of a sequence pool mutated at a codon, it gives the distribution
-        of nucleotides and codons.</a>
+        control) calculator:</b><br> Determine the diversity of a library randomised at a single codon from a single sequencing file</a>
     <a
             href="main/landscape" class="list-group-item list-group-item-action"><b>Landscape:</b>
-        <br>Given a series of Rosetta pmut_scan outputs it shows the mutational landscape
-        of that protein</a>
-    <a href="main/codon_autopop-up" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help you pick
-        the best degenerate codons. Also found in any page that requires codons as a sequence.</a>
+        <br>Determine the mutational landscape of a protein from a Rosetta pmut_scan output.</a>
+    <a href="main/codon_autopop-up" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help pick the ideal degenerate codons for site-saturation mutagenesis and library construction.</a>
+</div></div>
+    <div class="col-md-6"><div class="list-group">
+    <a href="main/mutantprimers" class="list-group-item list-group-item-action"><b>Primers &#x2014; Mutant primers:</b><br>
+    Multiple mutagenic primer design for a desired input sequence</a>
+    <a
+            href="main/deepscan" class="list-group-item list-group-item-action"><b>Primers &#x2014; Deepscan:</b>
+        <br>Multiple mutagenic primer design to exhaustively scan an entire input sequence (<i>e.g.</i> for alanine scanning)</a>
+    <a
+            href="main/mutantcaller" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Mutantcaller:</b>
+        <br>Analyse epPCR sequencing files to identify and list point mutations</a> <a href="main/mutanalyst"
+                                                                       class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
+        Mutantanalyst:</b><br> Determine the bias of the submitted sequences for a submitted epPCR library.</a>
+    <a
+            href="main/pedel" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Pedel:</b>
+        <br>GDetermine diversity of point mutations within an epPCR library</a>
+    <a href="main/pedel" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
+        PedelAA:</b><br> Given a sequence, mutational spectrum and mutational load, it will say how redundant is the
+        library from an amino acid point of view.</a>
+    <a
+            href="main/probably" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014; Chances:</b>
+        <br>Determine the rough probability of having a desired point mutation in a library.</a>
+    <a href="main/silico" class="list-group-item list-group-item-action"><b>epPCR&#xA0;&#x2014;
+        Generator:</b><br> Create random sequences with mutations based on a mutational load and bias.</a>
+    <a
+            href="main/glue" class="list-group-item list-group-item-action"><b>Glue&#xA0;&#x2014; Glue:</b>
+        <br>Determine how well a library of randomised sequences covers its potential sequence complexity.</a>
+    <a href="main/glue" class="list-group-item list-group-item-action"><b>Glue&#xA0;&#x2014; GlueIT:</b><br> Calculate the
+        completeness of a library mutated at 1&#x2013;6 codons.</a>
+    <a
+            href="main/driver" class="list-group-item list-group-item-action"><b>Driver:</b>
+        <br>Calculates the probability of cross-over events</a>
+    <a href="main/QCC"
+                                                                   class="list-group-item list-group-item-action"><b>QQC (Quick quality
+        control) calculator:</b><br> Determine the diversity of a library randomised at a single codon from a single sequencing file</a>
+    <a
+            href="main/landscape" class="list-group-item list-group-item-action"><b>Landscape:</b>
+        <br>Determine the mutational landscape of a protein from a Rosetta pmut_scan output.</a>
+    <a href="main/codon_autopop-up" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help pick the ideal degenerate codons for site-saturation mutagenesis and library construction.</a>
+</div></div>
 </div>
+
 <br>This is a revamp and expansion of the old server by Wayne Patrick and
 Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.

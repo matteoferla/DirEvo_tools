@@ -6,8 +6,7 @@
     <div class="card-body">
         <h3>Description</h3>
         <p>This tool designs QuickChange primers in bulk, either traditional or staggered,
-            like the Deepscan tool, except that the amino acid mutations required are
-            specified. This includes options for degerate codons (see <a href="#codon_scheme_descriptor">below</a>).</p>
+            based on specified amino acid mutations required. This includes options for degerate codons (see <a href="#codon_scheme_descriptor">below</a>).</p>
         <h3>Input</h3>
         <div class="col-xl-12">
             <p>To make primers at the ends of the coding sequence, the neighbouring noncoding
