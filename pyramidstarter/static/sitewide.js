@@ -86,7 +86,6 @@ function codonist(data) {
     $("#codon_result").removeClass('hidden');
     $("#codon_result").show(); //weird combo.
     if (data == 'other') {
-        $("#codon_manual").removeClass('hidden');
         $("#codon_manual").show();
         data = $('#codon_mutation').val();
         if (!data) {
@@ -94,7 +93,6 @@ function codonist(data) {
             $('#codon_mutation').val('NNN');
         }
     } else {
-        $("#codon_manual").addClass('hidden');
         $("#codon_manual").hide();
     }
     $.ajax({
@@ -130,7 +128,8 @@ function codonist(data) {
         processData: false
     });
 }
-$('#codon_down_choice button').click(function() {var data=$(this).attr('data-value'); codonist(data);});
+$('#codon_down_choice button').click(function() {var data=$(this).attr('data-value'); $('#codon_down').html(data); codonist(data);});
+$('#codon_manual button').click(function () {var data=$('#codon_mutation').val(); codonist(data); $('#codon_manual').show();});
 $('#codonAA_calculate').click(aminocodonist);
 function aminocodonist() {
 try {

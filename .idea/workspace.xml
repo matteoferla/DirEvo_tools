@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":hammer: BS4 upgrade was a diabolically bad idea...">
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":hammer: BS4 upgrade was a suicidally bad idea...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production.ini" beforeDir="false" afterPath="$PROJECT_DIR$/production.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.js" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +37,7 @@
           <entry key="gitmodules" value="3" />
           <entry key="ini" value="4" />
           <entry key="js" value="13" />
-          <entry key="mako" value="153" />
+          <entry key="mako" value="154" />
           <entry key="md" value="3" />
           <entry key="pt" value="29" />
           <entry key="py" value="14" />
@@ -55,7 +52,7 @@
           <entry key="HTML" value="9" />
           <entry key="Ini" value="4" />
           <entry key="JavaScript" value="13" />
-          <entry key="Mako" value="153" />
+          <entry key="Mako" value="154" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Python" value="14" />
@@ -67,12 +64,12 @@
           <entry key="dummy" value="118" />
           <entry key="gitmodules" value="30" />
           <entry key="ini" value="12" />
-          <entry key="js" value="574" />
-          <entry key="mako" value="4374" />
+          <entry key="js" value="660" />
+          <entry key="mako" value="4740" />
           <entry key="md" value="460" />
           <entry key="pt" value="1066" />
           <entry key="py" value="2543" />
-          <entry key="txt" value="360" />
+          <entry key="txt" value="370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -81,10 +78,10 @@
           <entry key="Chameleon" value="137" />
           <entry key="HTML" value="929" />
           <entry key="Ini" value="12" />
-          <entry key="JavaScript" value="574" />
-          <entry key="Mako" value="4374" />
+          <entry key="JavaScript" value="660" />
+          <entry key="Mako" value="4740" />
           <entry key="Markdown" value="339" />
-          <entry key="PLAIN_TEXT" value="629" />
+          <entry key="PLAIN_TEXT" value="639" />
           <entry key="Python" value="2543" />
         </counts>
       </usages-collector>
@@ -109,8 +106,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="51" column="49" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="49" />
+            <state relative-caret-position="213">
+              <caret line="58" column="73" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/admin.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -127,12 +133,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="132" column="64" selection-start-line="132" selection-start-column="64" selection-end-line="132" selection-end-column="64" />
+            <state relative-caret-position="62">
+              <caret line="85" column="45" lean-forward="true" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
               <folding>
                 <element signature="e#2288#3262#0" />
-                <element signature="n#!!block;n#codonist#0" />
-                <element signature="n#!!block;n#aminocodonist#0" />
               </folding>
             </state>
           </provider>
@@ -190,10 +194,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>slider</find>
-      <find>switch</find>
-      <find>themeSelector</find>
-      <find>theme_CSS</find>
       <find>&quot;list-group-item&quot;</find>
       <find>theme</find>
       <find>admin</find>
@@ -220,6 +220,10 @@
       <find>variants</find>
       <find>Btn_</find>
       <find>codon_manual</find>
+      <find>calc</find>
+      <find>codon_mutation</find>
+      <find>cust</find>
+      <find>codon_down</find>
     </findStrings>
     <replaceStrings>
       <replace>#mutanalyst_seq§</replace>
@@ -279,7 +283,6 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/log.pt" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/silico.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/pedel.css" />
@@ -291,6 +294,7 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
         <option value="$PROJECT_DIR$/production.ini" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" />
       </list>
@@ -497,20 +501,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535014035844</updated>
-    </task>
-    <task id="LOCAL-00017" summary=":telephone_receiver: Apache2 server testing...">
-      <created>1536086715620</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1536086715620</updated>
-    </task>
-    <task id="LOCAL-00018" summary=":telephone_receiver: Apache2 server drama...">
-      <created>1536132676358</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1536132676358</updated>
     </task>
     <task id="LOCAL-00019" summary=":telephone_receiver: Apache2 server drama is not apache after all.">
       <created>1536183133068</created>
@@ -841,7 +831,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541970524605</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary=":hammer: BS4 upgrade was a suicidally bad idea...">
+      <created>1542226502190</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1542226502190</updated>
+    </task>
+    <task id="LOCAL-00067" summary=":hammer: BS4 upgrade was a suicidally bad idea...">
+      <created>1542227398605</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1542227398605</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TodoView">
@@ -857,12 +861,12 @@
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.22317597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.22317597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5007153" side_tool="true" weight="0.19228555" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.2751773" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.2751773" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -916,7 +920,6 @@
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
     </ignored-roots>
-    <MESSAGE value=":confused: Still not sure why addressbook does not working in production" />
     <MESSAGE value=":beetle: where is the production side bug??" />
     <MESSAGE value=":ghost: Missing binaries from the last compile" />
     <MESSAGE value=":beetle: hopefully no more IP issues..." />
@@ -941,7 +944,8 @@
     <MESSAGE value=":hammer: BS4 upgrade was a mad idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was the worst idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was a diabolically bad idea..." />
-    <option name="LAST_COMMIT_MESSAGE" value=":hammer: BS4 upgrade was a diabolically bad idea..." />
+    <MESSAGE value=":hammer: BS4 upgrade was a suicidally bad idea..." />
+    <option name="LAST_COMMIT_MESSAGE" value=":hammer: BS4 upgrade was a suicidally bad idea..." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/404.mako" />
@@ -1184,16 +1188,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/admin.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="41" column="78" selection-start-line="41" selection-start-column="78" selection-end-line="41" selection-end-column="78" />
-          <folding>
-            <element signature="e#2369#2375#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-316">
@@ -1279,10 +1273,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/admin.mako">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="51" column="49" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="49" />
+        <state relative-caret-position="272">
+          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -1293,14 +1287,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="58" column="73" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="132" column="64" selection-start-line="132" selection-start-column="64" selection-end-line="132" selection-end-column="64" />
+        <state relative-caret-position="62">
+          <caret line="85" column="45" lean-forward="true" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
           <folding>
             <element signature="e#2288#3262#0" />
-            <element signature="n#!!block;n#codonist#0" />
-            <element signature="n#!!block;n#aminocodonist#0" />
           </folding>
         </state>
       </provider>

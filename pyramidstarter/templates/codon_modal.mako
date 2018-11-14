@@ -18,7 +18,7 @@ id="scheme_modal">
                         <div class="row">
                             <div class="input-group">
                                 <div class="dropdown">
-                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="codon_drown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="codon_down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Codon...
                                   </button>
                                   <div class="dropdown-menu" id="codon_down_choice">
@@ -57,6 +57,9 @@ id="scheme_modal">
                                     </div>
                                     <input type="text" class="form-control"
                                     placeholder="NNN" id="codon_mutation">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="button"><i class="fas fa-calculator"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
