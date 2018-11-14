@@ -237,7 +237,7 @@
             </div>
             <br>
         </div>
-        <div class="row hidden" id="pedel_result">
+        <div class="hidden" id="pedel_result">
             <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went
                 wrong
             </div>
