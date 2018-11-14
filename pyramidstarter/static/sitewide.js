@@ -80,17 +80,18 @@ $('#comment_send').click(function() {
 });
 
 //codons
-function codonist() {
+$('#codon_manual').hide();
+function codonist(data) {
     $("#codon_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
     $("#codon_result").removeClass('hidden');
     $("#codon_result").show(); //weird combo.
-    data = $('#codon_drop').val();
     if (data == 'other') {
         $("#codon_manual").removeClass('hidden');
         $("#codon_manual").show();
         data = $('#codon_mutation').val();
         if (!data) {
             data = 'NNN';
+            $('#codon_mutation').val('NNN');
         }
     } else {
         $("#codon_manual").addClass('hidden');
@@ -129,8 +130,7 @@ function codonist() {
         processData: false
     });
 }
-$('#codon_drop').change(codonist);
-$('#codon_mutation').change(codonist);
+$('#codon_down_choice button').click(function() {var data=$(this).attr('data-value'); codonist(data);});
 $('#codonAA_calculate').click(aminocodonist);
 function aminocodonist() {
 try {

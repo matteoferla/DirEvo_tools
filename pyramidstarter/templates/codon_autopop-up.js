@@ -3,5 +3,5 @@ $(document).ready( function() {
     var codon=$('#scheme_modal .modal-body').detach();
     codon.removeClass('.modal-body');
     //$('#scheme_modal').modal('hide');
-    $('.panel-body').append(codon);
+    $('.card-body').append(codon);
 });

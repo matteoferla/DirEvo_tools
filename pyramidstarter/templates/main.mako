@@ -49,8 +49,9 @@
     <a
             href="main/landscape" class="list-group-item list-group-item-action"><b>Landscape:</b>
         <br>Given a series of Rosetta pmut_scan outputs it shows the mutational landscape
-        of that protein</a> <a href="main/misc" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help you pick
-        the best degenerate codons. Found in any page that requires codons as a sequence.</a>
+        of that protein</a>
+    <a href="main/codon_autopop-up" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help you pick
+        the best degenerate codons. Also found in any page that requires codons as a sequence.</a>
 </div>
 <br>This is a revamp and expansion of the old server by Wayne Patrick and
 Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.
