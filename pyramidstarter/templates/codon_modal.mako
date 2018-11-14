@@ -3,7 +3,11 @@
 id="scheme_modal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header"></div>
+            <div class="modal-header">
+                <h1 class="modal-title">Codon choice</h1><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
             <div class="modal-body">
                 <div class="bs-callout bs-callout-warning">Under construction. The ones with question marks fail and this section.</div>
                 <h1>Description</h1>
