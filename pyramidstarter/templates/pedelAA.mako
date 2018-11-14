@@ -1,16 +1,15 @@
 <div class="card" id="pedelAA">
     <div class="card-header">
         <h1 class="card-title">PedelAA</h1>
+        <h3 class="card-subtitle mb-2 text-muted">Programme for Estimating Diversity in Error-prone PCR Libraries (amino acid version)</h3>
     </div>
     <div class="card-body">
-        <h2>PedelAA</h2>
         <div id="pedelAA_intro">
             <h3>Description</h3>
-            <p>Short paragraph goes here.</p>
-            <h3>Overview (<a data-toggle="collapse" href="#pedelAA_overview"><i class="fa fa-caret-down"
-                                                                                aria-hidden="true"></i> show</a>)
+            <h4>Overview (<a data-toggle="collapse" data-target="#pedelAA_overview" href="#pedelAA_overview"><i class="fa fa-caret-down"
+                                                                                                                aria-hidden="true"></i> show</a>)
 
-            </h3>
+            </h4>
             <div class="collapse" id="pedelAA_overview">
                 <p>PEDEL-AA is an extension to amino acid sequences of the original
                     nucleotide version of PEDEL (see links to publications and
@@ -321,616 +320,615 @@
             </div>
 
 
-            <h3 id="pedelAA_Rx">Note on R<sub>x</sub> statistics (<a data-toggle="collapse" href="#pedelAA_Rx_note"><i
+            <h4 id="pedelAA_Rx">Note on R<sub>x</sub> statistics (<a data-toggle="collapse" href="#pedelAA_Rx_note"><i
                     class="fa fa-caret-down" aria-hidden="true"></i> show</a>)
 
-            </h3>
-            <div class="collapse" id="pedelAA_Rx_note"></div>
+            </h4>
+            <div class="collapse" id="pedelAA_Rx_note">
 
 
-            <p>The 'Lx < 0.1 Vx_1' criterion for deciding when to use
-                the 'Cx ~ Lx'
-                approximation is sometimes inaccurate, and can be refined as
-                follows.</p>
-            <p>First consider a single nucleotide substitution in a single codon. There
-                are 9 possible mutated codons. An amino acid mutation that can only
-                be coded by a single codon out of the 9 and that requires a
-                transversion, has only a 1 in 15 probability (assuming a
-                transition:transversion ratio of 3), since if p is the probability of
-                a transversion, then 3p is the probability of a transition, and the
-                total probability of the 9 mutated codons is 6(p) + 3(3p) = 15p.</p>
-            <p>For example, if the parent codon is GGG (Gly), then the 9
-                single-nucleotide-substitution codons are</p>
-            <table class="table table-striped">
-                <tr>
-                    <th>codon</th>
-                    <th>amino acid</th>
-                    <th>relative probability</th>
-                </tr>
-                <tr>
-                    <td>AGG</td>
-                    <td>Arg</td>
-                    <td>3p</td>
-                </tr>
-                <tr>
-                    <td>CGG</td>
-                    <td>Arg</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>TGG</td>
-                    <td>Trp</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>GAG</td>
-                    <td>Glu</td>
-                    <td>3p</td>
-                </tr>
-                <tr>
-                    <td>GCG</td>
-                    <td>Ala</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>GCG</td>
-                    <td>Ala</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>GTG</td>
-                    <td>Val</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>GGA</td>
-                    <td>Gly</td>
-                    <td>3p</td>
-                </tr>
-                <tr>
-                    <td>GGC</td>
-                    <td>Gly</td>
-                    <td>p</td>
-                </tr>
-                <tr>
-                    <td>GGT</td>
-                    <td>Gly</td>
-                    <td>p</td>
-                </tr>
-            </table>
-            <br/>
+                <p>The 'Lx < 0.1 Vx_1' criterion for deciding when to use
+                    the 'Cx ~ Lx'
+                    approximation is sometimes inaccurate, and can be refined as
+                    follows.</p>
+                <p>First consider a single nucleotide substitution in a single codon. There
+                    are 9 possible mutated codons. An amino acid mutation that can only
+                    be coded by a single codon out of the 9 and that requires a
+                    transversion, has only a 1 in 15 probability (assuming a
+                    transition:transversion ratio of 3), since if p is the probability of
+                    a transversion, then 3p is the probability of a transition, and the
+                    total probability of the 9 mutated codons is 6(p) + 3(3p) = 15p.</p>
+                <p>For example, if the parent codon is GGG (Gly), then the 9
+                    single-nucleotide-substitution codons are</p>
+                <table class="table table-striped">
+                    <tr>
+                        <th>codon</th>
+                        <th>amino acid</th>
+                        <th>relative probability</th>
+                    </tr>
+                    <tr>
+                        <td>AGG</td>
+                        <td>Arg</td>
+                        <td>3p</td>
+                    </tr>
+                    <tr>
+                        <td>CGG</td>
+                        <td>Arg</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>TGG</td>
+                        <td>Trp</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>GAG</td>
+                        <td>Glu</td>
+                        <td>3p</td>
+                    </tr>
+                    <tr>
+                        <td>GCG</td>
+                        <td>Ala</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>GCG</td>
+                        <td>Ala</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>GTG</td>
+                        <td>Val</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>GGA</td>
+                        <td>Gly</td>
+                        <td>3p</td>
+                    </tr>
+                    <tr>
+                        <td>GGC</td>
+                        <td>Gly</td>
+                        <td>p</td>
+                    </tr>
+                    <tr>
+                        <td>GGT</td>
+                        <td>Gly</td>
+                        <td>p</td>
+                    </tr>
+                </table>
+                <br/>
 
-            <table table="table table-striped">
-                <tr>
-                    <th>AA</th>
-                    <th>Probabilities given the <i>codon</i> mutates</th>
-                    <th>Probabilities given the <i>amino acid</i> mutates</th>
-                </tr>
-                <tr>
-                    <td>Gly</td>
-                    <td>5/15</td>
-                    <td>(wild-type)</td>
-                </tr>
-                <tr>
-                    <td>Arg</td>
-                    <td>4/15</td>
-                    <td>4/10</td>
-                </tr>
-                <tr>
-                    <td>Glu</td>
-                    <td>3/15</td>
-                    <td>3/10</td>
-                </tr>
-                <tr>
-                    <td>Trp</td>
-                    <td>1/15</td>
-                    <td>1/10</td>
-                </tr>
-                <tr>
-                    <td>Ala</td>
-                    <td>1/15</td>
-                    <td>1/10</td>
-                </tr>
-                <tr>
-                    <td>Val</td>
-                    <td>1/15</td>
-                    <td>1/10</td>
-                </tr>
-            </table>
+                <table table="table table-striped">
+                    <tr>
+                        <th>AA</th>
+                        <th>Probabilities given the <i>codon</i> mutates</th>
+                        <th>Probabilities given the <i>amino acid</i> mutates</th>
+                    </tr>
+                    <tr>
+                        <td>Gly</td>
+                        <td>5/15</td>
+                        <td>(wild-type)</td>
+                    </tr>
+                    <tr>
+                        <td>Arg</td>
+                        <td>4/15</td>
+                        <td>4/10</td>
+                    </tr>
+                    <tr>
+                        <td>Glu</td>
+                        <td>3/15</td>
+                        <td>3/10</td>
+                    </tr>
+                    <tr>
+                        <td>Trp</td>
+                        <td>1/15</td>
+                        <td>1/10</td>
+                    </tr>
+                    <tr>
+                        <td>Ala</td>
+                        <td>1/15</td>
+                        <td>1/10</td>
+                    </tr>
+                    <tr>
+                        <td>Val</td>
+                        <td>1/15</td>
+                        <td>1/10</td>
+                    </tr>
+                </table>
 
-            <p>The 'Lx < 0.1 Vx_1' criterion assumes that all of the
-                single-nucleotide-substitution non-synonymous amino acid substitutions
-                are equiprobable - i.e. 1 in 5 in the above example, but in general
-                represented by the reciprocal of the 'A' factor described in
-                the above section,
-                where typically A ~ 5.8; whereas, in fact, the most common
-                single-nucleotide-substitution amino acid substitution (GGG -> Arg) is
-                4 x as likely as the rarest (GGG -> Trp or Ala or Val). In cases
-                where some nucleotide substitutions (as defined by the 4 x 4
-                nucleotide substitution matrix) are particularly rare, the probability
-                difference between the rarest and the most common
-                single-nucleotide-substitution amino acid substitutions at a given
-                site can be much greater.</p>
-            <p>The 'Lx < 0.1 Vx_1' criterion for being in the 'Cx ~ Lx' region
-                is
-                basically to make sure that there are enough variants in Vx to
-                'absorb' all Lx sub-library members so that (within a small error) at
-                most one sub-library member is equal to any given variant in Vx. In
-                practice, it doesn't matter what the probability of the rarest
-                variants is. What matters for the 'Cx ~ Lx' approximation is that the
-                mean frequency in Lx of the most common variant is < 0.1. In fact the
-                mean frequency of the most common variant in Lx, which we denote by
-                Rx, is easy to calculate for x = 0, 1, 2, ..., 20, ..., and is shown
-                in the PEDEL-AA output table of sub-library statistics.</p>
-            <p>Using these Rx values, the 'Lx < 0.1 Vx_1' criterion would be replaced
-                with the criterion 'Rx < 0.1'. In practice this means that if, in the
-                table of sub-library statistics, there are Rx values > 0.1, for which
-                the 'Cx ~ Lx' approximation has been used (i.e. x >= 3 and Lx < 0.1
-                Vx_1), then the particular corresponding Cx values may be
-                overestimates. A warning and html link are given in the table of
-                sub-library statistics whenever this occurs.</p></div>
+                <p>The 'Lx < 0.1 Vx_1' criterion assumes that all of the
+                    single-nucleotide-substitution non-synonymous amino acid substitutions
+                    are equiprobable - i.e. 1 in 5 in the above example, but in general
+                    represented by the reciprocal of the 'A' factor described in
+                    the above section,
+                    where typically A ~ 5.8; whereas, in fact, the most common
+                    single-nucleotide-substitution amino acid substitution (GGG -> Arg) is
+                    4 x as likely as the rarest (GGG -> Trp or Ala or Val). In cases
+                    where some nucleotide substitutions (as defined by the 4 x 4
+                    nucleotide substitution matrix) are particularly rare, the probability
+                    difference between the rarest and the most common
+                    single-nucleotide-substitution amino acid substitutions at a given
+                    site can be much greater.</p>
+                <p>The 'Lx < 0.1 Vx_1' criterion for being in the 'Cx ~ Lx' region
+                    is
+                    basically to make sure that there are enough variants in Vx to
+                    'absorb' all Lx sub-library members so that (within a small error) at
+                    most one sub-library member is equal to any given variant in Vx. In
+                    practice, it doesn't matter what the probability of the rarest
+                    variants is. What matters for the 'Cx ~ Lx' approximation is that the
+                    mean frequency in Lx of the most common variant is < 0.1. In fact the
+                    mean frequency of the most common variant in Lx, which we denote by
+                    Rx, is easy to calculate for x = 0, 1, 2, ..., 20, ..., and is shown
+                    in the PEDEL-AA output table of sub-library statistics.</p>
+                <p>Using these Rx values, the 'Lx < 0.1 Vx_1' criterion would be replaced
+                    with the criterion 'Rx < 0.1'. In practice this means that if, in the
+                    table of sub-library statistics, there are Rx values > 0.1, for which
+                    the 'Cx ~ Lx' approximation has been used (i.e. x >= 3 and Lx < 0.1
+                    Vx_1), then the particular corresponding Cx values may be
+                    overestimates. A warning and html link are given in the table of
+                    sub-library statistics whenever this occurs.</p>
+            </div>
+        </div>
 
 
         <div id="pedelAA_input">
             <h3>Input</h3>
-            <div class="row">
                 <!--section-->
                 <h4>Sequence</h4>
                 <p>In frame sequence that was mutagenised. Note that all symbols that aren&apos;t
                     uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> &apos;&gt;T.
                     maritima Cystathionine &#x3B2;-lyase&apos;), therefore for masked sequences
                     use lowercase.</p>
-                <div class="col-xl-12">
-                    <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                                                    title="In frame sequence that was mutagenised.">
-                        <span class="input-group-text">Sequence</span>
+
+            <div class="row">
+                <div class="col-xl-12 mb-1">
+                    <div class="input-group">
+                        <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
+                             title="In frame sequence that was mutagenised.">
+                            <span class="input-group-text">Sequence</span>
 
                         </div>
                         <textarea class="form-control custom-control"
                                   rows="5" style="resize:none" id="pedelAA_sequence" name="pedelAA_sequence">ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA</textarea>
                         <div class="input-group-append">
-                    <button class="btn btn-secondary" type="button" id="pedelAA_sequence_retrieve"
-                            data-toggle="tooltip" data-placement="top"
-                            title="In frame sequence that was mutagenised."><i class="fa fa-history"></i><br/>Retrieve previous
-                    </button>
-                    </div>
+                            <button class="btn btn-secondary" type="button" id="pedelAA_sequence_retrieve"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="In frame sequence that was mutagenised."><i class="fa fa-history"></i><br/>Retrieve previous
+                            </button>
+                        </div>
                     </div>
                     <br>
                 </div>
-                <br>
             </div>
             <div class="row">
-                <div class="col-xl-5">
+                <div class="col-xl-5 mb-1">
                     <div class="input-group">
                         <div class="input-group-prepend" data-toggle="tooltip"
-                                                    title="Library size L"
-                                                    data-placement="top">
+                             title="Library size L"
+                             data-placement="top">
                             <span class="input-group-text">Library size</span>
-                        <input type="number" min="0" class="form-control"
-                               placeholder="10000000" id="pedelAA_size">
+                            <input type="number" min="0" class="form-control"
+                                   placeholder="10000000" id="pedelAA_size">
                             <div class="input-group-append"><span class="input-group-text">nt</span></div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+                <h4>Nucleotide mutation matrix</h4>
+                <p>(non-negative numbers. Overall scaling is unimportant as this is taken
+                from the &apos;mean number of substitutions per daughter sequence&apos;
+                    parameter.)</p>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-3">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <label class="btn btn-secondary btn-file" id="pedelAA_load_group"> <i class="fa fa-upload"
+                                                                                                      aria-hidden="true"></i>
+                                    Load
+                                    <input type="file"
+                                           id="pedelAA_load_spectrum" style="display: none;">
+                                </label>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <label class="btn btn-secondary btn-file" id="pedelAA_save_spectrum"> <i
+                                        class="fa fa-download"
+                                        aria-hidden="true"></i>
+                                    Save</label>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <label class="btn btn-secondary btn-file" id="pedelAA_retrieve_spectrum"> <i
+                                        class="fa fa-history"
+                                        aria-hidden="true"></i>
+                                    Previous</label>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <label class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">Preset <span class="caret"></span>
+                                </label>
+                                <ul class="dropdown-menu">
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_mutazyme">Mutazyme II</span>
+                                    </li>
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_manganese">Mn Taq</span>
+                                    </li>
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_D473G">Pfu D215A D473G</span>
+                                    </li>
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_analogues">dNTP oxodGTP</span>
+                                    </li>
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_MP6">MP6</span>
+                                    </li>
+                                    <li class="fake-link dropdown-item"><span id="pedelAA_opt_uniform">Uniform</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td align="center"><b>To</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="middle"><b>From</b>&#xA0;&#xA0;</td>
+                                <td>
+                                    <table width="50%" border="0" id="mutTable_raw">
+                                        <thead>
+                                        <tr></tr>
+                                        <tr>
+                                            <th width="20%"></th>
+                                            <th width="20%">A</th>
+                                            <th width="20%">T</th>
+                                            <th width="20%">G</th>
+                                            <th width="20%">C</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>A</th>
+                                            <td>
+                                                <input class="mutation_identity" type="text" disabled id="A2A"
+                                                       value="&#x2014;">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" type="text" id="A2T" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_Rtransition" id="A2G" type="text" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" id="A2C" type="text" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="20%">T</th>
+                                            <td width="20%">
+                                                <input class="mutation_transversion" type="text" id="T2A" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_identity" type="text" disabled id="T2T"
+                                                       value="&#x2014;">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" id="T2G" type="text" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_Ytransition" id="T2C" type="text" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="20%">G</th>
+                                            <td width="20%">
+                                                <input class="mutation_Rtransition" type="text" id="G2A" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" type="text" id="G2T" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_identity" disabled id="G2G" type="text"
+                                                       value="&#x2014;">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" id="G2C" type="text" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%">C</td>
+                                            <td width="20%" bgcolor="#FFFF99">
+                                                <input type="text" id="C2A" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_Ytransition" type="text" id="C2T" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_transversion" id="C2G" type="text" value="0">
+                                            </td>
+                                            <td>
+                                                <input class="mutation_identity" disabled id="C2C" type="text"
+                                                       value="&#x2014;">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
                     </div>
                     <br>
                 </div>
-            </div>
-            <h4>Nucleotide mutation matrix</h4>
-            (non-negative numbers. Overall scaling is unimportant as this is taken
-            from the &apos;mean number of substitutions per daughter sequence&apos;
-            parameter.)
-            <div class="row">
-                <div class="col-xl-12">
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td align="center"><b>To</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td valign="middle"><b>From</b>&#xA0;&#xA0;</td>
-                            <td>
-                                <table width="50%" border="0" id="mutTable_raw">
-                                    <thead>
-                                    <tr></tr>
-                                    <tr>
-                                        <th width="20%"></th>
-                                        <th width="20%">A</th>
-                                        <th width="20%">T</th>
-                                        <th width="20%">G</th>
-                                        <th width="20%">C</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>A</th>
-                                        <td>
-                                            <input class="mutation_identity" type="text" disabled id="A2A"
-                                                   value="&#x2014;">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" type="text" id="A2T" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_Rtransition" id="A2G" type="text" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" id="A2C" type="text" value="0">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th width="20%">T</th>
-                                        <td width="20%">
-                                            <input class="mutation_transversion" type="text" id="T2A" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_identity" type="text" disabled id="T2T"
-                                                   value="&#x2014;">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" id="T2G" type="text" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_Ytransition" id="T2C" type="text" value="0">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th width="20%">G</th>
-                                        <td width="20%">
-                                            <input class="mutation_Rtransition" type="text" id="G2A" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" type="text" id="G2T" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_identity" disabled id="G2G" type="text"
-                                                   value="&#x2014;">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" id="G2C" type="text" value="0">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">C</td>
-                                        <td width="20%" bgcolor="#FFFF99">
-                                            <input type="text" id="C2A" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_Ytransition" type="text" id="C2T" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_transversion" id="C2G" type="text" value="0">
-                                        </td>
-                                        <td>
-                                            <input class="mutation_identity" disabled id="C2C" type="text"
-                                                   value="&#x2014;">
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                </div>
-                <div class="col-xl-6 offset-lg-2">
-                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <label class="btn btn-secondary btn-file" id="pedelAA_load_group"> <i class="fa fa-upload"
-                                                                                                  aria-hidden="true"></i>
-                                Load
-                                <input type="file"
-                                       id="pedelAA_load_spectrum" style="display: none;">
-                            </label>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <label class="btn btn-secondary btn-file" id="pedelAA_save_spectrum"> <i
-                                    class="fa fa-download"
-                                    aria-hidden="true"></i>
-                                Save</label>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <label class="btn btn-secondary btn-file" id="pedelAA_retrieve_spectrum"> <i
-                                    class="fa fa-history"
-                                    aria-hidden="true"></i>
-                                Previous</label>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <label class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">Preset <span class="caret"></span>
-                            </label>
-                            <ul class="dropdown-menu">
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_mutazyme">Mutazyme II</span>
-                                </li>
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_manganese">Mn Taq</span>
-                                </li>
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_D473G">Pfu D215A D473G</span>
-                                </li>
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_analogues">dNTP oxodGTP</span>
-                                </li>
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_MP6">MP6</span>
-                                </li>
-                                <li class="fake-link dropdown-item"><span id="pedelAA_opt_uniform">Uniform</span>
-                                </li>
-                            </ul>
+                <div class="row">
+                    <div class="col-xl-4 mb-1">
+                        <div class="input-group">
+                            <input type="checkbox" class="switch" id="pedelAA_normal" data-off-text="Unnormalised"
+                                   data-on-text="Normalised" data-off-color="warning">
+                            <div class="input-group-append"><span class="input-group-text">values</span></div>
                         </div>
                     </div>
-                    <br>
-                </div>
-                <br>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="input-group">
-                        <input type="checkbox" class="switch" id="pedelAA_normal" data-off-text="Unnormalised"
-                               data-on-text="Normalised" data-off-color="warning">
-                        <div class="input-group-append"><span class="input-group-text">values</span></div>
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <div class="input-group">
-                        <div class="input-group-prepend" data-toggle="tooltip"
-                                                    title="Mean number of nucleotide substitutions per daughter sequence"
-                                                    data-placement="top">
-                            <span class="input-group-text">Load</span>
-                        </div>
-                        <input type="number" min="0" class="form-control"
-                               placeholder="4.5" id="pedelAA_load">
-                        <div class="input-group-append">
-                            <span class="input-group-text">mutations/seq</span>
-                        </div>
-                    </div>
-                </div>
-                <br>
-            </div>
-            <div class="row">
-                <div id="pedelAA_&#xA7;cycles" class="card bg-light card-body mb-3 well-lg">
-                    <div class="col-xl-4">
+                    <div class="col-xl-4 mb-1">
                         <div class="input-group">
                             <div class="input-group-prepend" data-toggle="tooltip"
-                                                        title="Number of PCR cycles"
-                                                        data-placement="top">
-                                <span class="input-group-text">PCR cycles</span>
+                                 title="Mean number of nucleotide substitutions per daughter sequence"
+                                 data-placement="top">
+                                <span class="input-group-text">Load</span>
                             </div>
                             <input type="number" min="0" class="form-control"
-                                   placeholder="4.5" id="pedelAA_cycles">
+                                   placeholder="4.5" id="pedelAA_load">
+                            <div class="input-group-append">
+                                <span class="input-group-text">mutations/seq</span>
+                            </div>
                         </div>
-                        <br>
                     </div>
-                    <div class="col-xl-4">
-                        <div class="input-group">
-                            <div class="input-group-prepend" data-toggle="tooltip"
-                                                        title="PCR efficiency"
-                                                        data-placement="top">
-                            <span class="input-group-text">PCR efficiency</span>
+                    <br>
+                </div>
+                <div class="row">
+                    <div id="pedelAA_&#xA7;cycles" class="card bg-light card-body mb-3 well-lg">
+                        <div class="col-xl-4 mb-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend" data-toggle="tooltip"
+                                     title="Number of PCR cycles"
+                                     data-placement="top">
+                                    <span class="input-group-text">PCR cycles</span>
+                                </div>
+                                <input type="number" min="0" class="form-control"
+                                       placeholder="4.5" id="pedelAA_cycles">
+                            </div>
                         </div>
-                            <input type="number" min="0"
-                                   max="1" class="form-control" placeholder="0.6" id="pedelAA_efficiency">
+                        <div class="col-xl-4 mb-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend" data-toggle="tooltip"
+                                     title="PCR efficiency"
+                                     data-placement="top">
+                                    <span class="input-group-text">PCR efficiency</span>
+                                </div>
+                                <input type="number" min="0"
+                                       max="1" class="form-control" placeholder="0.6" id="pedelAA_efficiency">
+                            </div>
                         </div>
-                        <br>
+                        <div class="col-xl-2 mb-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#pedelAA_calc_modal"><i
+                                    class="fa fa-calculator" aria-hidden="true"></i> Calculator
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-xl-2">
-                        <button type="button" class="btn btn-info" data-toggle="modal"
-                                data-target="#pedelAA_calc_modal"><i
-                                class="fa fa-calculator" aria-hidden="true"></i> Calculator
-                        </button>
-                        <br>
+                </div>
+                <!-- <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
+
+                                                                                        data-target="#pedel_note">here</a>.</p>-->
+                <!--button row-->
+                <div class="row">
+                    <div class="col-xl-6 offset-lg-3 mt-1">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-warning" id="pedelAA_clear"><i class="fa fa-eraser"
+                                                                                                aria-hidden="true"></i>
+                                Clear
+                            </button>
+                            <button type="button"
+                                    class="btn btn-info" id="pedelAA_demo"><i class="fa fa-gift" aria-hidden="true"></i>
+                                Demo
+                            </button>
+                            <button type="button"
+                                    class="btn btn-success" id="pedelAA_calculate"><i class="fa fa-exchange"
+                                                                                      aria-hidden="true"></i>
+                                Calculate
+                            </button>
+                        </div>
                     </div>
                     <br>
                 </div>
             </div>
-            <!-- <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
-
-                                                                                    data-target="#pedel_note">here</a>.</p>-->
-            <!--button row-->
-            <div class="row">
-                <div class="col-xl-6 offset-lg-3">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-warning" id="pedelAA_clear"><i class="fa fa-eraser"
-                                                                                            aria-hidden="true"></i>
-                            Clear
-                        </button>
-                        <button type="button"
-                                class="btn btn-info" id="pedelAA_demo"><i class="fa fa-gift" aria-hidden="true"></i>
-                            Demo
-                        </button>
-                        <button type="button"
-                                class="btn btn-success" id="pedelAA_calculate"><i class="fa fa-exchange"
-                                                                                  aria-hidden="true"></i>
-                            Calculate
-                        </button>
-                    </div>
+            <div class="hidden" id="pedelAA_result">
+                <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
                 </div>
                 <br>
             </div>
-        </div>
-        <div class="row hidden" id="pedelAA_result">
-            <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong
-            </div>
-            <br>
-        </div>
-        <!-- Modals -->
-        <div id="pedelAA_calc_modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- Modals -->
+            <div id="pedelAA_calc_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Modals -->
-        <div id="pedel_note" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>In our paper (Firth &amp; Patrick, 2005), we assumed a Poisson distribution
-                            to determine the fraction of sequences in an epPCR library that contain
-                            exactly 0, 1, 2, 3, ... mutations, given the mean number of mutations, <i>m</i>,
-                            per sequence.</p>
-                        <p>Since publication of Firth &amp; Patrick (2005), however, Drummond et
-                            al. (2005) have revisited the pioneering work of Sun (1995) and provided
-                            experimental evidence in support of his more accurate equation describing
-                            the distribution of <i>m</i>. This &apos;PCR distribution&apos; takes into
-                            account the number of PCR thermal cycles <i>ncycles</i> and the PCR efficiency <i>eff</i>
-                            (i.e.
-                            the probability that any particular sequence is duplicated in a given PCR
-                            cycle). We have therefore now included the PCR distribution as an optional
-                            alternative to the Poisson distribution in PEDEL.</p>
-                        <p>For large <i>m</i>, small <i>ncycles</i>, or low <i>eff</i>, the PCR distribution
-                            is broader than the Poisson distribution. For low <i>m</i>, large <i>ncycles</i> and
-                            large <i>eff</i>, the PCR distribution approximates the Poisson distribution.
-                            In a &apos;typical&apos; epPCR (e.g. <i>ncycles</i> = 30, <i>eff</i> = 0.6, <i>m</i> =
-                            4), the estimated total number of distinct sequences in a library typically
-                            agrees to within 5% for the two distributions, though the sub-library statistics
-                            can show more variation.</p>
-                        <p>If you know <i>ncycles</i> and <i>eff</i>, then we recommend that you use
-                            the PCR distribution instead of the Poisson distribution. Drummond et al.
-                            (2005) use the formula <i>d</i> = <i>ncycles</i> &#xD7; <i>eff</i>, where <i>d</i> is
-                            the number of doublings. For example, if you start with 10^9 identical
-                            parent sequences and amplify them in an epPCR to 10^15 sequences, then
-                            you have had about <i>d</i> = 20 doublings (10^9 &#xD7; 2^20 ~= 10^15), and
-                            you can calculate <i>eff</i> = <i>d</i> &#xF7; <i>ncycles</i>. Actually the <i>d</i> =
-                            <i>ncycles</i> &#xD7; <i>eff</i> formula
-                            is wrong. The correct formula is 2^d = (1+eff)^ncycles, so that the efficiency
-                            is given by eff = 2^(d/ncycles) - 1 (<a href="/cgi-bin/aef/PCReff.pl">PCR efficiency
-                                calculator</a>).
-                        </p>
-                        <h3>References</h3>
-                        <li>Drummond D.A., Iverson B.L., Georgiou G., Arnold F.H. (2005). Why high-error-rate
-                            random mutagenesis libraries are enriched in functional and improved proteins, <i>J. Mol.
+            <!-- Modals -->
+            <div id="pedel_note" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>In our paper (Firth &amp; Patrick, 2005), we assumed a Poisson distribution
+                                to determine the fraction of sequences in an epPCR library that contain
+                                exactly 0, 1, 2, 3, ... mutations, given the mean number of mutations, <i>m</i>,
+                                per sequence.</p>
+                            <p>Since publication of Firth &amp; Patrick (2005), however, Drummond et
+                                al. (2005) have revisited the pioneering work of Sun (1995) and provided
+                                experimental evidence in support of his more accurate equation describing
+                                the distribution of <i>m</i>. This &apos;PCR distribution&apos; takes into
+                                account the number of PCR thermal cycles <i>ncycles</i> and the PCR efficiency <i>eff</i>
+                                (i.e.
+                                the probability that any particular sequence is duplicated in a given PCR
+                                cycle). We have therefore now included the PCR distribution as an optional
+                                alternative to the Poisson distribution in PEDEL.</p>
+                            <p>For large <i>m</i>, small <i>ncycles</i>, or low <i>eff</i>, the PCR distribution
+                                is broader than the Poisson distribution. For low <i>m</i>, large <i>ncycles</i> and
+                                large <i>eff</i>, the PCR distribution approximates the Poisson distribution.
+                                In a &apos;typical&apos; epPCR (e.g. <i>ncycles</i> = 30, <i>eff</i> = 0.6, <i>m</i> =
+                                4), the estimated total number of distinct sequences in a library typically
+                                agrees to within 5% for the two distributions, though the sub-library statistics
+                                can show more variation.</p>
+                            <p>If you know <i>ncycles</i> and <i>eff</i>, then we recommend that you use
+                                the PCR distribution instead of the Poisson distribution. Drummond et al.
+                                (2005) use the formula <i>d</i> = <i>ncycles</i> &#xD7; <i>eff</i>, where <i>d</i> is
+                                the number of doublings. For example, if you start with 10^9 identical
+                                parent sequences and amplify them in an epPCR to 10^15 sequences, then
+                                you have had about <i>d</i> = 20 doublings (10^9 &#xD7; 2^20 ~= 10^15), and
+                                you can calculate <i>eff</i> = <i>d</i> &#xF7; <i>ncycles</i>. Actually the <i>d</i> =
+                                <i>ncycles</i> &#xD7; <i>eff</i> formula
+                                is wrong. The correct formula is 2^d = (1+eff)^ncycles, so that the efficiency
+                                is given by eff = 2^(d/ncycles) - 1 (<a href="/cgi-bin/aef/PCReff.pl">PCR efficiency
+                                    calculator</a>).
+                            </p>
+                            <h3>References</h3>
+                            <li>Drummond D.A., Iverson B.L., Georgiou G., Arnold F.H. (2005). Why high-error-rate
+                                random mutagenesis libraries are enriched in functional and improved proteins, <i>J. Mol.
+                                    Biol.</i>,
+                                <b>350</b>,
+                                806-816.
+                            </li>
+                            <li>Firth A.E., Patrick W.M., (2005). Statistics of protein library construction, <i>Bioinformatics</i>,
+                                <b>21</b>,
+                                3314-3315.
+                            </li>
+                            <li>Sun F. (1995). The polymerase chain reaction and branching processes, <i>J. Comput.
                                 Biol.</i>,
-                            <b>350</b>,
-                            806-816.
-                        </li>
-                        <li>Firth A.E., Patrick W.M., (2005). Statistics of protein library construction, <i>Bioinformatics</i>,
-                            <b>21</b>,
-                            3314-3315.
-                        </li>
-                        <li>Sun F. (1995). The polymerase chain reaction and branching processes, <i>J. Comput.
-                            Biol.</i>,
-                            <b>2</b>,
-                            63-86.
-                        </li>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <b>2</b>,
+                                63-86.
+                            </li>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="pedelAA_exact_modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
-                        <h4 class="modal-title">Notes about Cx estimations</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="pedelAA_exact">PEDEL-AA x = 0, 1 and 2 sub-library statistics</h2>
-                        <p>For x = 0, 1 and 2, we calculate the expected number of distinct variants,
-                            Cx, precisely. This calculation includes variants with multiple nucleotide
-                            substitutions in the same codon.</p>
-                        <p>The total number of each of the 64 codon types in the input sequence is
-                            calculated. The 64 x 20 matrix of probabilities for each codon type mutating
-                            to each amino acid type is calculated using the input nucleotide substitution
-                            matrix and the input substitution rate.</p>
-                        <p>For x = 0, 1 and 2 there are, respectively Vx_2 = 1, 19N and 361N(N-1)/2
-                            total possible <a href="pedel-AA_variants.html">variants</a>
-                            (i.e. N!/[x!(N-x)!]
-                            19^x, where N is the length of the input sequence in codons). The probability
-                            of the input sequence mutating to each of these possible variants is calculated
-                            and renormalized by the respective probability sum P0, P1 or P2 (where
-                            Px = Sum_{v_i in Vx_2} P(v_i)) to give the normalized probabilities Pn(v_i)
-                            of the different variants within the respective sub-libraries Lx, rather
-                            than within the whole library. The probability of a particular variant
-                            v_i being present in the relevant sub-library Lx is given by 1 - exp(-Pn(v_i)
-                            x Lx). These probabilities are quickly summed over all possible variants
-                            using the codon counts. Computationally, this is very fast for x = 0, 1
-                            and 2, but can take a few minutes for x = 3; hence the &apos;exact&apos;
-                            calculation is not used on the webserver for x &gt;= 3. The sizes of the
-                            sub-libraries Lx are determined separately for the Poisson and PCR distributions
-                            as described in the <a href="pedel-AA-stats.html">notes on the PEDEL-AA algorithms</a>,
-                            thus resulting in separate Cx estimates for the different distributions.</p>
-                        <p>Ideally, for x &gt;= 3, we will enter the <a href="pedel-AA_CxLx.html">Cx ~
+            <div id="pedelAA_exact_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                            <h4 class="modal-title">Notes about Cx estimations</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2 id="pedelAA_exact">PEDEL-AA x = 0, 1 and 2 sub-library statistics</h2>
+                            <p>For x = 0, 1 and 2, we calculate the expected number of distinct variants,
+                                Cx, precisely. This calculation includes variants with multiple nucleotide
+                                substitutions in the same codon.</p>
+                            <p>The total number of each of the 64 codon types in the input sequence is
+                                calculated. The 64 x 20 matrix of probabilities for each codon type mutating
+                                to each amino acid type is calculated using the input nucleotide substitution
+                                matrix and the input substitution rate.</p>
+                            <p>For x = 0, 1 and 2 there are, respectively Vx_2 = 1, 19N and 361N(N-1)/2
+                                total possible <a href="pedel-AA_variants.html">variants</a>
+                                (i.e. N!/[x!(N-x)!]
+                                19^x, where N is the length of the input sequence in codons). The probability
+                                of the input sequence mutating to each of these possible variants is calculated
+                                and renormalized by the respective probability sum P0, P1 or P2 (where
+                                Px = Sum_{v_i in Vx_2} P(v_i)) to give the normalized probabilities Pn(v_i)
+                                of the different variants within the respective sub-libraries Lx, rather
+                                than within the whole library. The probability of a particular variant
+                                v_i being present in the relevant sub-library Lx is given by 1 - exp(-Pn(v_i)
+                                x Lx). These probabilities are quickly summed over all possible variants
+                                using the codon counts. Computationally, this is very fast for x = 0, 1
+                                and 2, but can take a few minutes for x = 3; hence the &apos;exact&apos;
+                                calculation is not used on the webserver for x &gt;= 3. The sizes of the
+                                sub-libraries Lx are determined separately for the Poisson and PCR distributions
+                                as described in the <a href="pedel-AA-stats.html">notes on the PEDEL-AA algorithms</a>,
+                                thus resulting in separate Cx estimates for the different distributions.</p>
+                            <p>Ideally, for x &gt;= 3, we will enter the <a href="pedel-AA_CxLx.html">Cx ~
 
-                            Lx</a> region. In this case all the individual Cx estimates, and the estimated
-                            total number of distinct variants in the library C = C0 + C1 + C2 + ...,
-                            will be fairly good. A warning is printed in the &apos;notes&apos; column
-                            if there are any x &gt;= 3 values for which the Cx ~ Lx approximation may
-                            not apply, in which case Cx is estimated with the formula Cx ~ Vx_1(1-exp(-Lx/Vx_1))
-                            (i.e. ignoring, in these particular sub-libraries, any <a href="pedel-AA_variants.html">variants</a>
-                            of
-                            type Vx_2).</p>
-                        <p>See also <a href="pedel-AA-stats.html">notes on the PEDEL-AA
-
-                            algorithms</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="pedelAA_CxLx_modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
-                        <h4 class="modal-title">Notes about Cx estimations</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="pedelAA_CxLx">PEDEL-AA Cx ~ Lx region</h2>
-                        <p>When Lx &lt;&lt; Vx then Cx ~ Lx. For equiprobable variants this approximation
-                            is good to 5% for Lx &lt; 0.1 Vx (see the mathematical
-                            <a href="../notes.pdf">notes</a> on
-                            PEDEL). For PEDEL-AA, we use this approximation when Lx &lt; 0.1 Vx_1 (the
-                            number of &apos;easy-to-reach&apos; variants).</p>
-                        <p>See also <a href="pedel-AA_exact.html">notes on the &apos;exact&apos;
-
-                            calculations</a> and <a href="pedel-AA-stats.html">notes on the PEDEL-AA
-
-                            algorithms</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="pedelAA_warningRx_modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
-                        <h4 class="modal-title">Notes about Cx estimations</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="pedelAA__warningRx">PEDEL-AA Rx warning</h2>
-                        <p>For x = 0, 1 and 2, we calculate the expected number of distinct variants,
-                            Cx, <a href="pedel-AA_exact.html">precisely</a>. When Lx &lt; 0.1 Vx_1 (i.e.
-                            for large x values), we use the <a href="pedel-AA_CxLx.html">Cx ~ Lx</a> approximation.
-                            Sometimes using the criterion &apos;Lx &lt; 0.1 Vx_1&apos; to determine
-                            whether or not we are in the &apos;Cx ~ Lx&apos; region is not sufficient.
-                            This is indicated by the corresponding Rx value not being &lt; 0.1. In
-                            this case the corresponding Cx value may be an overestimate.</p>
-                        <p>See also <a href="pedel-AA_Rx.html">notes on the &apos;Rx &lt; 0.1&apos;
-
-                            criterion</a> and
-                            <a href="pedel-AA-stats.html">notes on the PEDEL-AA
+                                Lx</a> region. In this case all the individual Cx estimates, and the estimated
+                                total number of distinct variants in the library C = C0 + C1 + C2 + ...,
+                                will be fairly good. A warning is printed in the &apos;notes&apos; column
+                                if there are any x &gt;= 3 values for which the Cx ~ Lx approximation may
+                                not apply, in which case Cx is estimated with the formula Cx ~ Vx_1(1-exp(-Lx/Vx_1))
+                                (i.e. ignoring, in these particular sub-libraries, any <a href="pedel-AA_variants.html">variants</a>
+                                of
+                                type Vx_2).</p>
+                            <p>See also <a href="pedel-AA-stats.html">notes on the PEDEL-AA
 
                                 algorithms</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pedelAA_CxLx_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                            <h4 class="modal-title">Notes about Cx estimations</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2 id="pedelAA_CxLx">PEDEL-AA Cx ~ Lx region</h2>
+                            <p>When Lx &lt;&lt; Vx then Cx ~ Lx. For equiprobable variants this approximation
+                                is good to 5% for Lx &lt; 0.1 Vx (see the mathematical
+                                <a href="../notes.pdf">notes</a> on
+                                PEDEL). For PEDEL-AA, we use this approximation when Lx &lt; 0.1 Vx_1 (the
+                                number of &apos;easy-to-reach&apos; variants).</p>
+                            <p>See also <a href="pedel-AA_exact.html">notes on the &apos;exact&apos;
+
+                                calculations</a> and <a href="pedel-AA-stats.html">notes on the PEDEL-AA
+
+                                algorithms</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pedelAA_warningRx_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                            <h4 class="modal-title">Notes about Cx estimations</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2 id="pedelAA__warningRx">PEDEL-AA Rx warning</h2>
+                            <p>For x = 0, 1 and 2, we calculate the expected number of distinct variants,
+                                Cx, <a href="pedel-AA_exact.html">precisely</a>. When Lx &lt; 0.1 Vx_1 (i.e.
+                                for large x values), we use the <a href="pedel-AA_CxLx.html">Cx ~ Lx</a> approximation.
+                                Sometimes using the criterion &apos;Lx &lt; 0.1 Vx_1&apos; to determine
+                                whether or not we are in the &apos;Cx ~ Lx&apos; region is not sufficient.
+                                This is indicated by the corresponding Rx value not being &lt; 0.1. In
+                                this case the corresponding Cx value may be an overestimate.</p>
+                            <p>See also <a href="pedel-AA_Rx.html">notes on the &apos;Rx &lt; 0.1&apos;
+
+                                criterion</a> and
+                                <a href="pedel-AA-stats.html">notes on the PEDEL-AA
+
+                                    algorithms</a>.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

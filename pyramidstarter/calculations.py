@@ -268,7 +268,7 @@ def pedelAA(jsonreq):
     #warn('To test, the wrapper is circumvented.')
     data=bike.pedelAA(filename + '.setup')
     #print(data['html'])
-    html=str(open(os.path.join(PATH,'templates','pedelAA_results.pt')).read()).format(**data)
+    html=str(open(os.path.join(PATH,'templates','pedelAA_results.html')).read()).format(**data)
     return json.dumps({'data': data['sub_table_data'], 'html': html})
 
 

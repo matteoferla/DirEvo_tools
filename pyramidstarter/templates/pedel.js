@@ -1,8 +1,8 @@
 $('#pedelAA').toggle(false);
 $('#pedel_note').modal('hide');
 $('#pedel_method').on('switchChange.bootstrapSwitch', function(event, state) {
-    $('#pedelbasic').toggle(state);
-    $('#pedelAA').toggle(!state);
+    $('#pedelbasic').toggle(!state);
+    $('#pedelAA').toggle(state);
 });
 formids = ['size', 'len', 'mutload', 'distribution', 'cycles', 'efficiency'];
 $('#pedel_demo').click(function() {
