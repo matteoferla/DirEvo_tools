@@ -12,7 +12,7 @@
 <h1>Applications</h1>
 <p>Choose your desired tool to improve cloning, mutagenesis, and library construction.</p>
 <div class="row no-gutters">
-    <div class="col-md-6"><div class="list-group">
+    <div class="col-lg-6 col-xs-12"><div class="list-group">
     <a href="main/mutantprimers" class="list-group-item list-group-item-action"><b>Primers &#x2014; Mutant primers:</b><br>
     Multiple mutagenic primer design for a desired input sequence</a>
     <a
@@ -50,7 +50,7 @@
         <br>Determine the mutational landscape of a protein from a Rosetta pmut_scan output.</a>
     <a href="main/codon_autopop-up" class="list-group-item list-group-item-action"><b>Codon helper</b><br> A tool to help pick the ideal degenerate codons for site-saturation mutagenesis and library construction.</a>
 </div></div>
-    <div class="col-md-6"><div class="list-group">
+    <div class="col-lg-6 col-xs-12"><div class="list-group">
     <a href="main/mutantprimers" class="list-group-item list-group-item-action"><b>Primers &#x2014; Mutant primers:</b><br>
     Multiple mutagenic primer design for a desired input sequence</a>
     <a

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":hammer: BS4 upgrade was a Trump-level bad idea...">
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":art: layout test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" afterDir="false" />
     </list>
@@ -36,7 +36,7 @@
           <entry key="gitmodules" value="3" />
           <entry key="ini" value="4" />
           <entry key="js" value="14" />
-          <entry key="mako" value="164" />
+          <entry key="mako" value="165" />
           <entry key="md" value="3" />
           <entry key="pt" value="30" />
           <entry key="py" value="16" />
@@ -51,7 +51,7 @@
           <entry key="HTML" value="9" />
           <entry key="Ini" value="4" />
           <entry key="JavaScript" value="14" />
-          <entry key="Mako" value="164" />
+          <entry key="Mako" value="165" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Python" value="16" />
@@ -65,11 +65,11 @@
           <entry key="html" value="127" />
           <entry key="ini" value="12" />
           <entry key="js" value="661" />
-          <entry key="mako" value="5187" />
+          <entry key="mako" value="5711" />
           <entry key="md" value="460" />
           <entry key="pt" value="1066" />
           <entry key="py" value="2554" />
-          <entry key="txt" value="381" />
+          <entry key="txt" value="404" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -79,9 +79,9 @@
           <entry key="HTML" value="1056" />
           <entry key="Ini" value="12" />
           <entry key="JavaScript" value="661" />
-          <entry key="Mako" value="5187" />
+          <entry key="Mako" value="5711" />
           <entry key="Markdown" value="339" />
-          <entry key="PLAIN_TEXT" value="658" />
+          <entry key="PLAIN_TEXT" value="681" />
           <entry key="Python" value="2554" />
         </counts>
       </usages-collector>
@@ -124,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+              <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#1;n#!!top" />
                 <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
@@ -136,8 +136,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="180" column="84" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="84" />
+            <state relative-caret-position="240">
+              <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="21" column="51" lean-forward="true" selection-start-line="9" selection-start-column="67" selection-end-line="21" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -183,7 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>append</find>
       <find>addon</find>
       <find>mutation</find>
       <find>length</find>
@@ -213,6 +221,7 @@
       <find>load</find>
       <find>.pt</find>
       <find>mutantp</find>
+      <find>stagger</find>
     </findStrings>
     <replaceStrings>
       <replace>#mutanalyst_seq§</replace>
@@ -256,7 +265,6 @@
         <option value="$PROJECT_DIR$/.gitmodules" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/pyramidstarter/views.py" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantcaller.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/glue.mako" />
@@ -285,6 +293,7 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.html" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel-classic.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
       </list>
     </option>
@@ -484,20 +493,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535014035844</updated>
-    </task>
-    <task id="LOCAL-00023" summary=":mouse2: pi issues...">
-      <created>1536189576007</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1536189576007</updated>
-    </task>
-    <task id="LOCAL-00024" summary=":mouse2: pi issues...">
-      <created>1536189701300</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1536189701300</updated>
     </task>
     <task id="LOCAL-00025" summary=":penguin: linux compiled.">
       <created>1536190761128</created>
@@ -828,7 +823,21 @@
       <option name="project" value="LOCAL" />
       <updated>1542234318527</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary=":art: layout test">
+      <created>1542235253391</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1542235253391</updated>
+    </task>
+    <task id="LOCAL-00073" summary=":art: layout test">
+      <created>1542236084729</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1542236084730</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TodoView">
@@ -903,7 +912,6 @@
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
     </ignored-roots>
-    <MESSAGE value=":ghost: Missing binaries from the last compile" />
     <MESSAGE value=":beetle: hopefully no more IP issues..." />
     <MESSAGE value=":scroll: the log is getting too big" />
     <MESSAGE value=":beetle: debug test" />
@@ -928,7 +936,8 @@
     <MESSAGE value=":hammer: BS4 upgrade was a diabolically bad idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was a suicidally bad idea..." />
     <MESSAGE value=":hammer: BS4 upgrade was a Trump-level bad idea..." />
-    <option name="LAST_COMMIT_MESSAGE" value=":hammer: BS4 upgrade was a Trump-level bad idea..." />
+    <MESSAGE value=":art: layout test" />
+    <option name="LAST_COMMIT_MESSAGE" value=":art: layout test" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/404.mako" />
@@ -1038,13 +1047,6 @@
           <folding>
             <element signature="n#style#0;n#input#0;n#label#0;n#div#0;n#div#5;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1293,17 +1295,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="21" column="51" lean-forward="true" selection-start-line="9" selection-start-column="67" selection-end-line="21" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutantprimers.mako">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="180" column="84" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="84" />
+        <state relative-caret-position="240">
+          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#1;n#!!top" />
             <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
