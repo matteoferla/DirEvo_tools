@@ -1,38 +1,44 @@
-$(document).ready(function() {
+$('#mutanalyst_bias_calculate').click(Btn_calcBias);
+$('#mutanalyst_bias_demo').click(Btn_demo);
+$('#mutanalyst_bias_clear').click(function(){Btn_blank(1)});
+$('#mutanalyst_freq_calculate').click(Btn_calcFreq);
+$('#mutanalyst_freq_demo').click(Btn_demo);
+$('#mutanalyst_freq_clear').click(function(){Btn_blank(1)});
 
-    $("#mutanalyst_seq§").show();
-    $("#mutanalyst_freq§").hide();
-    $("#altH_showing_button").hide();
-    $("#altH_showing_button_off").hide();
-    $("#mutanalyst_freq_alt_in§").hide();
-    $("#mutanalyst_corrected§").hide();
-    $("#mutanalyst_bias§").hide();
-    $("#mutanalyst_more§").hide();
 
-    $("#altH_showing_button_on").click(function () {$("#alt§").show(); $("#altH_showing_button_on").hide(); $("#altH_showing_button_off").show();
-        });
-    $("#altH_showing_button_off").click(function () {$("#alt§").hide(); $("#altH_showing_button_off").hide(); $("#altH_showing_button_on").show();
+
+$("#mutanalyst_seq§").show();
+$("#mutanalyst_freq§").hide();
+$("#altH_showing_button").hide();
+$("#altH_showing_button_off").hide();
+$("#mutanalyst_freq_alt_in§").hide();
+$("#mutanalyst_corrected§").hide();
+$("#mutanalyst_bias§").hide();
+$("#mutanalyst_more§").hide();
+
+$("#altH_showing_button_on").click(function () {$("#alt§").show(); $("#altH_showing_button_on").hide(); $("#altH_showing_button_off").show();
     });
+$("#altH_showing_button_off").click(function () {$("#alt§").hide(); $("#altH_showing_button_off").hide(); $("#altH_showing_button_on").show();
+});
 
-    $('#mutanalyst_method').on('switchChange.bootstrapSwitch', function(event, state) {
-        $('#mutanalyst_seq§').toggle(state);
-        $('#mutanalyst_freq_alt_in§').toggle(!state);
-    });
+$('#mutanalyst_method').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('#mutanalyst_seq§').toggle(state);
+    $('#mutanalyst_freq_alt_in§').toggle(!state);
+});
 
-    var mutball = mutagen();
-    var queries = window.location.search.substring(1).split("&");
-    for (var i = 0; i < queries.length; i++) {
-        var pair = queries[i].split("=");
-        if (!!pair[1]) {
-            eval("mutball." + pair[0] + "='" + pair[1].replace("%20", " ").replace("%0A", "\\n") + "'");
-        }
+var mutball = mutagen();
+var queries = window.location.search.substring(1).split("&");
+for (var i = 0; i < queries.length; i++) {
+    var pair = queries[i].split("=");
+    if (!!pair[1]) {
+        eval("mutball." + pair[0] + "='" + pair[1].replace("%20", " ").replace("%0A", "\\n") + "'");
     }
-    commit(mutball);
-    //google.load('visualization', '1', {packages: ['corechart'],callback: function() {}}); //callback is stop it writing, but append
+}
+commit(mutball);
+//google.load('visualization', '1', {packages: ['corechart'],callback: function() {}}); //callback is stop it writing, but append
 
-    $('#sequence_retrieve').click(function() {
-        $('#sequence').val(window.sessionStorage.getItem('sequence'));
-    });
+$('#sequence_retrieve').click(function() {
+    $('#sequence').val(window.sessionStorage.getItem('sequence'));
 });
 
 

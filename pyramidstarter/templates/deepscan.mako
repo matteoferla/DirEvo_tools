@@ -173,7 +173,7 @@
                             </div>
                             <br>
                         </div>
-                        <div class="col-xl-5">
+                        <div class="col-xl-5 pb-3">
                             <div class="input-group"> <div class="input-group-prepend" data-toggle="tooltip" title="Total length range of the primers"
                                                            data-placement="top"><span class="input-group-text">Length</span></div>
                                 <input id="DS_primerRange" type="text"
@@ -183,19 +183,8 @@
                             <br>
                         </div>
                     </div>
-                    <div class="row pb-4">
-                        <div class="col-xl-6 offset-lg-3">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-warning" id="DS_clear"><i class="fas fa-eraser" aria-hidden="true"></i> Clear</button>
-                                <button type="button"
-                                class="btn btn-info" id="DS_demo"><i class="fas fa-gift" aria-hidden="true"></i> Demo</button>
-                                <button type="button"
-                                class="btn btn-success" id="DS_calculate"><i class="fas fa-exchange" aria-hidden="true"></i> Calculate</button>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="row hidden" id="DS_download">
+                    <%include file="calculate_btns.mako" args="tool='DS'"/>
+                    <div class="hidden" id="DS_download">
                         <h3>Downloads</h3>
                 <div class="row pb-4">
                 <div class="input-group">
@@ -220,7 +209,7 @@ JSON</button>
                 <br/>
             </div></div>
                 </div>
-                    <div class="row hidden" id="DS_result">
+                    <div class="hidden" id="DS_result">
                         <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong</div>
                         <br>
                     </div>

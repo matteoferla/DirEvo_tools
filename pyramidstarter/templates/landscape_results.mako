@@ -16,7 +16,7 @@ an increase is destabilising.
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="land_results_table" role="tabpanel">{table}</div>
+        <div class="tab-pane fade show active" id="land_results_table" role="tabpanel">{table}</div>
         <div class="tab-pane fade" id="land_results_graph" role="tabpanel">
             <h4>Heatmap</h4>
             REU greater or lower than &#xB1;20 have been made to twenty. Don&apos;t
@@ -42,20 +42,14 @@ an increase is destabilising.
                     {distro_opt}
                 </ul>
             </div>
-            <p>REU greater or lower than &#xB1;20 have been made to twenty.</p>
-            <p>Number of strongly deleterious mutations (&#x2206;G &gt;20 REU):
-                <span
-                        id="land_distro_dead"></span>
-                <br>Note that an increase in &#x2206;Gibbs of 20 kcal/mol for a protein with
+            <p>REU greater or lower than &#xB1;20 have been made to twenty. Note that an increase in &#x2206;Gibbs of 20 kcal/mol for a protein with
                 a very high melting temperature (&gt;60&#xB0;C) might be okay at 37&#xB0;C.</p>
-            <p>Number of deleterious mutations (20 REU &gt; &#x2206;G &gt;1 REU):
-                <span
-                        id="land_distro_neg"></span>
-            </p>
-            <p>Number of neutral mutations (-1 REU &lt; &#x2206;G &lt; 1 REU): <span id="land_distro_neutro"></span>
-            </p>
-            <p>Number of positive mutations (&#x2206;G &lt; -1 REU): <span id="land_distro_pos"></span>
-            </p>
+            <ul>
+                <li>Number of strongly deleterious mutations (&#x2206;G &gt;20 REU): <span id="land_distro_dead"></span></li>
+                <li>Number of deleterious mutations (20 REU &gt; &#x2206;G &gt;1 REU): <span id="land_distro_neg"></span></li>
+                <li>Number of neutral mutations (-1 REU &lt; &#x2206;G &lt; 1 REU): <span id="land_distro_neutro"></span></li>
+                <li>Number of positive mutations (&#x2206;G &lt; -1 REU): <span id="land_distro_pos"></span></li>
+            </ul>
             <div id="land_distro"></div>
         </div>
     </div>

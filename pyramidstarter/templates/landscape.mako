@@ -86,6 +86,6 @@
                     </div>
                     <br>
                 </div>
-                <div class="row" id="land_results"></div>
+                <div class="" id="land_results"></div>
             </div>
         </div>

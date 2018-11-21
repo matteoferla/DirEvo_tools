@@ -85,19 +85,15 @@
             <!--section-->
 
             <h4>Library size</h4>
-            <div class="row">
-                <p>For Pedel-AA calculations, the library size is required.</p>
-                <br/>
-            </div>
-            <div class="row">
-
-                <div class="input-group">
+            <div class="row mb-3">
+                <div class="col-12 col-lg-6">For Pedel-AA calculations, the library size is required.</div>
+                <div class="col-12 col-lg-6"><div class="input-group">
                     <div class="input-group-prepend" id="library_addon">
                         <span class="input-group-text">Size</span></div>
                     <input type="number"
                            class="form-control" placeholder="1000000" aria-describedby="library_addon"
                            id="library_size">
-                </div>
+                </div></div>
             </div>
 
                 <h4>Mutations found</h4>
@@ -138,19 +134,8 @@
                     <textarea class="form-control custom-control"
                               name="baseList" rows="5" id="baseList" style="resize:none"></textarea>
                 </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_calcFreq()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
-                    </div>
-                </div>
             </div>
+            <%include file="calculate_btns.mako" args="tool='mutanalyst_freq'"/>
 
         </div>
         <div id="mutanalyst_freq&#xA7;">
@@ -317,18 +302,7 @@
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_calcBias()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Calculate
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_demo()"><i class="fa fa-book" aria-hidden="true"></i> Demo values</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" onclick="Btn_blank(1)"><i class="fa fa-trash" aria-hidden="true"></i> Reset</button>
-                    </div>
-                </div>
+                <%include file="calculate_btns.mako" args="tool='mutanalyst_bias'"/>
             </div>
         </div>
         <div id="mutanalyst_corrected&#xA7;">

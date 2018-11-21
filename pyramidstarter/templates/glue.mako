@@ -279,25 +279,7 @@
             </div>
         </div>
         <!-- row-->
-        <div class="row">
-            <div class="col-xl-6 offset-lg-3">
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning" id="glueIT_clear"><i class="fas fa-eraser"
-                                                                                       aria-hidden="true"></i>
-                        Clear
-                    </button>
-                    <button type="button"
-                            class="btn btn-info" id="glueIT_demo"><i class="fas fa-gift"
-                                                                     aria-hidden="true"></i> Demo
-                    </button>
-                    <button type="button"
-                            class="btn btn-success" id="glueIT_calculate"><i class="fas fa-exchange"
-                                                                             aria-hidden="true"></i> Calculate
-                    </button>
-                </div>
-            </div>
-            <br>
-        </div>
+        <%include file="calculate_btns.mako" args="tool='glueIT'"/>
         <!-- The results -->
         <div class="row hidden" id="glueIT_result">
             <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went
