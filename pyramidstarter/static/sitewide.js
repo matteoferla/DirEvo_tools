@@ -134,7 +134,8 @@ $('#codonAA_calculate').click(aminocodonist);
 function aminocodonist() {
 try {
     var data={list: $('#codonAA_list').val(), antilist: $('#codonAA_antilist').val()};
-    $.ajax({
+    if (data['list'].length == 0) {client_error({'message': 'Please add at least one required amino acid.'},"#codonAA_result")}
+    else {$.ajax({
         url: '/ajax_codonAA',
         type: 'POST',
         dataType: 'json',
@@ -148,7 +149,7 @@ try {
         cache: false,
         contentType: false,
         processData: false
-    });
+    });}
     }
     catch(err) {client_error(err,"#codonAA_result")}
     return false;

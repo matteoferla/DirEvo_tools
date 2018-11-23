@@ -255,7 +255,6 @@
             src="${request.static_url('pyramidstarter:static/sitewide.js')}"></script>
     <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
-
     <script>
 
 

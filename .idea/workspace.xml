@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":art: layout test">
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":art: layout fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/bias_block.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/bias_block.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/QQC.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/QQC.mako" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/pedel2$app.coverage" NAME="app Coverage Results" MODIFIED="1542967128837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pedel2$app.coverage" NAME="app Coverage Results" MODIFIED="1542972213695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1959132080">
@@ -40,11 +40,11 @@
           <entry key="gitignore" value="1" />
           <entry key="gitmodules" value="3" />
           <entry key="ini" value="4" />
-          <entry key="js" value="16" />
-          <entry key="mako" value="186" />
+          <entry key="js" value="17" />
+          <entry key="mako" value="189" />
           <entry key="md" value="3" />
           <entry key="pt" value="30" />
-          <entry key="py" value="16" />
+          <entry key="py" value="17" />
           <entry key="sh" value="1" />
           <entry key="txt" value="1" />
         </counts>
@@ -55,11 +55,11 @@
           <entry key="Chameleon" value="21" />
           <entry key="HTML" value="9" />
           <entry key="Ini" value="4" />
-          <entry key="JavaScript" value="16" />
-          <entry key="Mako" value="186" />
+          <entry key="JavaScript" value="17" />
+          <entry key="Mako" value="189" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="16" />
+          <entry key="Python" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -69,12 +69,12 @@
           <entry key="gitmodules" value="30" />
           <entry key="html" value="127" />
           <entry key="ini" value="12" />
-          <entry key="js" value="687" />
-          <entry key="mako" value="6994" />
+          <entry key="js" value="830" />
+          <entry key="mako" value="7220" />
           <entry key="md" value="460" />
           <entry key="pt" value="1066" />
-          <entry key="py" value="2554" />
-          <entry key="txt" value="416" />
+          <entry key="py" value="2571" />
+          <entry key="txt" value="419" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -83,11 +83,11 @@
           <entry key="Chameleon" value="137" />
           <entry key="HTML" value="1056" />
           <entry key="Ini" value="12" />
-          <entry key="JavaScript" value="687" />
-          <entry key="Mako" value="6994" />
+          <entry key="JavaScript" value="830" />
+          <entry key="Mako" value="7220" />
           <entry key="Markdown" value="339" />
-          <entry key="PLAIN_TEXT" value="693" />
-          <entry key="Python" value="2554" />
+          <entry key="PLAIN_TEXT" value="696" />
+          <entry key="Python" value="2571" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -120,7 +120,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="226">
@@ -129,6 +129,182 @@
                 <element signature="n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
                 <element signature="n#div#1;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="136" column="33" selection-start-line="136" selection-start-column="33" selection-end-line="136" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/driver.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="58" lean-forward="true" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="446" lean-forward="true" selection-start-line="446" selection-end-line="446" />
+              <folding>
+                <element signature="e#421#433#0" />
+                <element signature="e#1014#1204#0" />
+                <element signature="e#1410#2109#0" />
+                <element signature="e#1423#1709#0" />
+                <element signature="e#1747#2109#0" />
+                <element signature="e#1840#2109#0" />
+                <element signature="e#1876#2107#0" />
+                <element signature="e#2178#2206#0" />
+                <element signature="e#2277#2306#0" />
+                <element signature="e#2349#2760#0" />
+                <element signature="e#2822#3360#0" />
+                <element signature="e#2849#2963#0" />
+                <element signature="e#3002#3360#0" />
+                <element signature="e#3091#3360#0" />
+                <element signature="e#3127#3358#0" />
+                <element signature="e#3391#4072#0" />
+                <element signature="e#3434#3751#0" />
+                <element signature="e#3441#3591#0" />
+                <element signature="e#3770#4017#0" />
+                <element signature="e#3845#4017#0" />
+                <element signature="e#4102#4745#0" />
+                <element signature="e#4145#4372#0" />
+                <element signature="e#4391#4550#0" />
+                <element signature="e#4829#4868#0" />
+                <element signature="e#4950#4988#0" />
+                <element signature="e#5079#5626#0" />
+                <element signature="e#5092#5214#0" />
+                <element signature="e#5252#5626#0" />
+                <element signature="e#5357#5626#0" />
+                <element signature="e#5393#5624#0" />
+                <element signature="e#5713#5753#0" />
+                <element signature="e#5838#5877#0" />
+                <element signature="e#6024#6065#0" />
+                <element signature="e#6157#6198#0" />
+                <element signature="e#6279#6317#0" />
+                <element signature="e#6402#6442#0" />
+                <element signature="e#6532#6574#0" />
+                <element signature="e#6659#6698#0" />
+                <element signature="e#6785#6825#0" />
+                <element signature="e#6907#11290#0" />
+                <element signature="e#6920#11056#0" />
+                <element signature="e#7127#7481#0" />
+                <element signature="e#7193#7385#0" />
+                <element signature="e#7520#8389#0" />
+                <element signature="e#7801#8389#0" />
+                <element signature="e#7974#8073#0" />
+                <element signature="e#8877#9426#0" />
+                <element signature="e#8917#9362#0" />
+                <element signature="e#8945#9339#0" />
+                <element signature="e#9160#9288#0" />
+                <element signature="e#9466#9598#0" />
+                <element signature="e#10053#10394#0" />
+                <element signature="e#10100#10394#0" />
+                <element signature="e#11094#11290#0" />
+                <element signature="e#11167#11290#0" />
+                <element signature="e#11394#11823#0" />
+                <element signature="e#11432#11686#0" />
+                <element signature="e#11725#11802#0" />
+                <element signature="e#11910#12780#0" />
+                <element signature="e#12267#12313#0" />
+                <element signature="e#12383#12663#0" />
+                <element signature="e#12699#12780#0" />
+                <element signature="e#12868#12958#0" />
+                <element signature="e#13031#14560#0" />
+                <element signature="e#13150#14342#0" />
+                <element signature="e#13411#13518#0" />
+                <element signature="e#13570#13703#0" />
+                <element signature="e#13746#13843#0" />
+                <element signature="e#13894#14115#0" />
+                <element signature="e#14198#14259#0" />
+                <element signature="e#14391#14417#0" />
+                <element signature="e#14460#14560#0" />
+                <element signature="e#14643#14944#0" />
+                <element signature="e#14656#14776#0" />
+                <element signature="e#14814#14944#0" />
+                <element signature="e#15034#15190#0" />
+                <element signature="e#15288#16548#0" />
+                <element signature="e#15899#16242#0" />
+                <element signature="e#15956#16115#0" />
+                <element signature="e#16142#16242#0" />
+                <element signature="e#16637#16798#0" />
+                <element signature="e#16707#16752#0" />
+                <element signature="e#16880#17797#0" />
+                <element signature="e#16880#17010#1" />
+                <element signature="e#17083#17749#0" />
+                <element signature="e#17123#17408#0" />
+                <element signature="e#17197#17343#0" />
+                <element signature="e#17462#17580#0" />
+                <element signature="e#17633#17698#0" />
+                <element signature="e#18196#18333#0" />
+                <element signature="e#18410#18757#0" />
+                <element signature="e#18836#19557#0" />
+                <element signature="e#19619#19886#1" />
+                <element signature="e#19930#20121#0" />
+                <element signature="e#19944#20098#0" />
+                <element signature="e#20170#21174#0" />
+                <element signature="e#20200#20256#0" />
+                <element signature="e#20275#21174#0" />
+                <element signature="e#20292#21045#0" />
+                <element signature="e#21091#21153#0" />
+                <element signature="e#21225#21288#0" />
+                <element signature="e#21311#21706#0" />
+                <element signature="e#21389#21452#0" />
+                <element signature="e#21498#21585#0" />
+                <element signature="e#21754#22058#0" />
+                <element signature="e#21767#21923#0" />
+                <element signature="e#21961#22058#0" />
+                <element signature="e#22183#22194#0" />
+                <element signature="e#22255#22361#0" />
+                <element signature="e#22429#22538#0" />
+                <element signature="e#22698#22711#0" />
+                <element signature="e#22827#23141#0" />
+                <element signature="e#23267#23344#0" />
+                <element signature="e#23430#27357#0" />
+                <element signature="e#23443#27122#0" />
+                <element signature="e#23778#23971#0" />
+                <element signature="e#23986#24357#0" />
+                <element signature="e#24002#24134#0" />
+                <element signature="e#24164#24356#0" />
+                <element signature="e#24760#25065#0" />
+                <element signature="e#24843#25024#0" />
+                <element signature="e#25248#25497#0" />
+                <element signature="e#25316#25455#0" />
+                <element signature="e#27160#27357#0" />
+                <element signature="e#27390#27429#0" />
+                <element signature="e#27461#27610#0" />
+                <element signature="e#27686#27904#0" />
+                <element signature="e#27980#28438#0" />
+                <marker date="1541342823457" expanded="false" signature="14418:14560" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-100">
+              <caret line="256" column="142" selection-start-line="256" selection-start-column="142" selection-end-line="256" selection-end-column="142" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/QQC.mako">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -149,55 +325,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/bias_block.mako">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
               <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/calculate_btns.mako">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/deepscan.mako">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2715">
-              <caret line="181" column="34" lean-forward="true" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedelAA.mako">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7830">
-              <caret line="522" column="72" lean-forward="true" selection-start-line="522" selection-start-column="16" selection-end-line="522" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -213,11 +344,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>retri</find>
-      <find>.js</find>
-      <find>pedel.c</find>
-      <find>Btn</find>
-      <find>Btn_demo</find>
       <find>Btn_</find>
       <find>codon_manual</find>
       <find>calc</find>
@@ -243,6 +369,11 @@
       <find>&lt;%</find>
       <find>reset</find>
       <find>&amp;#x2014;</find>
+      <find>client_error</find>
+      <find>acr</find>
+      <find>Fields</find>
+      <find>qqc</find>
+      <find>main</find>
     </findStrings>
     <replaceStrings>
       <replace>#mutanalyst_seq§</replace>
@@ -281,21 +412,16 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/facs2excel.mako" />
         <option value="$PROJECT_DIR$/.gitmodules" />
         <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/pyramidstarter/views.py" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/mutantcaller.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/QQC.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/misc.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/forbidden.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/log.pt" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/pedel.css" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.css" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/static/mutationalBias.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_autopop-up.js" />
         <option value="$PROJECT_DIR$/production.ini" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/admin.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedel.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/pedelAA_results.mako" />
@@ -317,6 +443,11 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/mutanalyst.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/static/sitewide.js" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/views.py" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/QQC.mako" />
       </list>
     </option>
   </component>
@@ -371,7 +502,7 @@
               <item name="pedel2" type="b2602c69:ProjectViewProjectNode" />
               <item name="pedel2" type="462c0819:PsiDirectoryNode" />
               <item name="pyramidstarter" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -515,13 +646,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535014035844</updated>
-    </task>
-    <task id="LOCAL-00027" summary=":u7981: No addressbook!">
-      <created>1536432766324</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1536432766324</updated>
     </task>
     <task id="LOCAL-00028" summary=":love_letter: the email message was being sent as title...">
       <created>1536482615784</created>
@@ -859,7 +983,14 @@
       <option name="project" value="LOCAL" />
       <updated>1542837487685</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary=":art: layout fix">
+      <created>1542971993439</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1542971993440</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TodoView">
@@ -873,6 +1004,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="803" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.22889842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -933,7 +1065,6 @@
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
     </ignored-roots>
-    <MESSAGE value=":scroll: the log is getting too big" />
     <MESSAGE value=":beetle: debug test" />
     <MESSAGE value=":beetle: debug test to get round this py3.6 vs. py 3.5" />
     <MESSAGE value=":pencil: fixing input boxes." />
@@ -958,7 +1089,8 @@
     <MESSAGE value=":hammer: BS4 upgrade was a Trump-level bad idea..." />
     <MESSAGE value=":art: layout test" />
     <MESSAGE value=":art: more fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value=":art: more fixes" />
+    <MESSAGE value=":art: layout fix" />
+    <option name="LAST_COMMIT_MESSAGE" value=":art: layout fix" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/welcome.mako">
@@ -1020,13 +1152,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/driver.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="166" column="44" selection-start-line="166" selection-start-column="44" selection-end-line="166" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/misc.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -1045,13 +1170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/QQC.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="95" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="95" />
         </state>
       </provider>
     </entry>
@@ -1126,13 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="85" column="45" lean-forward="true" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/pedel.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1158,16 +1269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3585">
           <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9150">
-          <caret line="628" column="69" selection-start-line="628" selection-start-column="66" selection-end-line="628" selection-end-column="69" />
-          <folding>
-            <marker date="1541342823457" expanded="true" signature="14418:14560" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1241,13 +1342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/calculate_btns.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1306,6 +1400,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/static/sitewide.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="136" column="33" selection-start-line="136" selection-start-column="33" selection-end-line="136" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/driver.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="58" lean-forward="true" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/codon_modal.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -1314,6 +1422,158 @@
             <element signature="n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="446" lean-forward="true" selection-start-line="446" selection-end-line="446" />
+          <folding>
+            <element signature="e#421#433#0" />
+            <element signature="e#1014#1204#0" />
+            <element signature="e#1410#2109#0" />
+            <element signature="e#1423#1709#0" />
+            <element signature="e#1747#2109#0" />
+            <element signature="e#1840#2109#0" />
+            <element signature="e#1876#2107#0" />
+            <element signature="e#2178#2206#0" />
+            <element signature="e#2277#2306#0" />
+            <element signature="e#2349#2760#0" />
+            <element signature="e#2822#3360#0" />
+            <element signature="e#2849#2963#0" />
+            <element signature="e#3002#3360#0" />
+            <element signature="e#3091#3360#0" />
+            <element signature="e#3127#3358#0" />
+            <element signature="e#3391#4072#0" />
+            <element signature="e#3434#3751#0" />
+            <element signature="e#3441#3591#0" />
+            <element signature="e#3770#4017#0" />
+            <element signature="e#3845#4017#0" />
+            <element signature="e#4102#4745#0" />
+            <element signature="e#4145#4372#0" />
+            <element signature="e#4391#4550#0" />
+            <element signature="e#4829#4868#0" />
+            <element signature="e#4950#4988#0" />
+            <element signature="e#5079#5626#0" />
+            <element signature="e#5092#5214#0" />
+            <element signature="e#5252#5626#0" />
+            <element signature="e#5357#5626#0" />
+            <element signature="e#5393#5624#0" />
+            <element signature="e#5713#5753#0" />
+            <element signature="e#5838#5877#0" />
+            <element signature="e#6024#6065#0" />
+            <element signature="e#6157#6198#0" />
+            <element signature="e#6279#6317#0" />
+            <element signature="e#6402#6442#0" />
+            <element signature="e#6532#6574#0" />
+            <element signature="e#6659#6698#0" />
+            <element signature="e#6785#6825#0" />
+            <element signature="e#6907#11290#0" />
+            <element signature="e#6920#11056#0" />
+            <element signature="e#7127#7481#0" />
+            <element signature="e#7193#7385#0" />
+            <element signature="e#7520#8389#0" />
+            <element signature="e#7801#8389#0" />
+            <element signature="e#7974#8073#0" />
+            <element signature="e#8877#9426#0" />
+            <element signature="e#8917#9362#0" />
+            <element signature="e#8945#9339#0" />
+            <element signature="e#9160#9288#0" />
+            <element signature="e#9466#9598#0" />
+            <element signature="e#10053#10394#0" />
+            <element signature="e#10100#10394#0" />
+            <element signature="e#11094#11290#0" />
+            <element signature="e#11167#11290#0" />
+            <element signature="e#11394#11823#0" />
+            <element signature="e#11432#11686#0" />
+            <element signature="e#11725#11802#0" />
+            <element signature="e#11910#12780#0" />
+            <element signature="e#12267#12313#0" />
+            <element signature="e#12383#12663#0" />
+            <element signature="e#12699#12780#0" />
+            <element signature="e#12868#12958#0" />
+            <element signature="e#13031#14560#0" />
+            <element signature="e#13150#14342#0" />
+            <element signature="e#13411#13518#0" />
+            <element signature="e#13570#13703#0" />
+            <element signature="e#13746#13843#0" />
+            <element signature="e#13894#14115#0" />
+            <element signature="e#14198#14259#0" />
+            <element signature="e#14391#14417#0" />
+            <element signature="e#14460#14560#0" />
+            <element signature="e#14643#14944#0" />
+            <element signature="e#14656#14776#0" />
+            <element signature="e#14814#14944#0" />
+            <element signature="e#15034#15190#0" />
+            <element signature="e#15288#16548#0" />
+            <element signature="e#15899#16242#0" />
+            <element signature="e#15956#16115#0" />
+            <element signature="e#16142#16242#0" />
+            <element signature="e#16637#16798#0" />
+            <element signature="e#16707#16752#0" />
+            <element signature="e#16880#17797#0" />
+            <element signature="e#16880#17010#1" />
+            <element signature="e#17083#17749#0" />
+            <element signature="e#17123#17408#0" />
+            <element signature="e#17197#17343#0" />
+            <element signature="e#17462#17580#0" />
+            <element signature="e#17633#17698#0" />
+            <element signature="e#18196#18333#0" />
+            <element signature="e#18410#18757#0" />
+            <element signature="e#18836#19557#0" />
+            <element signature="e#19619#19886#1" />
+            <element signature="e#19930#20121#0" />
+            <element signature="e#19944#20098#0" />
+            <element signature="e#20170#21174#0" />
+            <element signature="e#20200#20256#0" />
+            <element signature="e#20275#21174#0" />
+            <element signature="e#20292#21045#0" />
+            <element signature="e#21091#21153#0" />
+            <element signature="e#21225#21288#0" />
+            <element signature="e#21311#21706#0" />
+            <element signature="e#21389#21452#0" />
+            <element signature="e#21498#21585#0" />
+            <element signature="e#21754#22058#0" />
+            <element signature="e#21767#21923#0" />
+            <element signature="e#21961#22058#0" />
+            <element signature="e#22183#22194#0" />
+            <element signature="e#22255#22361#0" />
+            <element signature="e#22429#22538#0" />
+            <element signature="e#22698#22711#0" />
+            <element signature="e#22827#23141#0" />
+            <element signature="e#23267#23344#0" />
+            <element signature="e#23430#27357#0" />
+            <element signature="e#23443#27122#0" />
+            <element signature="e#23778#23971#0" />
+            <element signature="e#23986#24357#0" />
+            <element signature="e#24002#24134#0" />
+            <element signature="e#24164#24356#0" />
+            <element signature="e#24760#25065#0" />
+            <element signature="e#24843#25024#0" />
+            <element signature="e#25248#25497#0" />
+            <element signature="e#25316#25455#0" />
+            <element signature="e#27160#27357#0" />
+            <element signature="e#27390#27429#0" />
+            <element signature="e#27461#27610#0" />
+            <element signature="e#27686#27904#0" />
+            <element signature="e#27980#28438#0" />
+            <marker date="1541342823457" expanded="false" signature="14418:14560" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="256" column="142" selection-start-line="256" selection-start-column="142" selection-end-line="256" selection-end-column="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/QQC.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
         </state>
       </provider>
     </entry>

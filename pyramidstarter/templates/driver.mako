@@ -1,7 +1,7 @@
 <div class="card">
             <div class="card-header">
                  <h1 class="card-title">DRIVeR</h1>
-                <h4 class="card-subtitle mb-2 text-muted">(Acronymn means?)</h4>
+                <h4 class="card-subtitle mb-2 text-muted">Diversity Resulting from In Vitro Recombination</h4>
             </div>
             <div class="card-body">
                 <div id="diver_intro">
