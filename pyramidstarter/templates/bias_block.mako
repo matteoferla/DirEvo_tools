@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="order-1">
-                        <table>
+                        <table id="mutTable_raw">
                             <tr>
                                 <td></td>
                                 <td align="center"><b>To</b>

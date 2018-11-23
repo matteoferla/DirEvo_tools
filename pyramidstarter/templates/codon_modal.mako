@@ -9,7 +9,6 @@ id="scheme_modal">
         </button>
             </div>
             <div class="modal-body">
-                <div class="bs-callout bs-callout-warning">Under construction. The ones with question marks fail and this section.</div>
                 <h1>Description</h1>
                 <div class="row" id="codon_intro">
 
@@ -76,7 +75,7 @@ id="scheme_modal">
                  <h3>By amino acids (<a data-toggle="collapse" href="#codon_byAA"><i class="fas fa-caret-down" aria-hidden="true"></i> show</a>)
 
                     </h3>
-                <div class="row collapse" id="codon_byAA">
+                <div class="collapse" id="codon_byAA">
                     <p>This section would be cool if it had a negative option and stuff like,
                         hydrophobics use Z.</p>
                     <p>It sorts with a 2x penalty for stop and give precence to more equal distributions,
@@ -84,13 +83,15 @@ id="scheme_modal">
                     <p>Accepts three letter code with first letter capital separated by a space,
                         or one letter with spaces or not &#x2014; corner case: SER is Ser + Asp
                         + Arg while Ser is Serine.</p>
+                    <div class="row">
                     <div class="col-lg-4">
                         <div class="input-group"> <div class="input-group-prepend" id="codonAA_list_addon">
                             <span class="input-group-text">Wanted AAs</span>
                         </div>
                             <input
                             type="text" class="form-control" placeholder="G P S" aria-describedby="codonAA_list_addon"
-                            id="codonAA_list">
+                            id="codonAA_list" required>
+                            <div class="invalid-feedback">Please choose at least one amino acid</div>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -103,11 +104,12 @@ id="scheme_modal">
                             id="codonAA_antilist">
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3 offset-1">
                         <div class="btn-group" role="group" aria-label="calculate">
-                            <button type="button" class="btn btn-success" id="codonAA_calculate"><i class="fas fa-calculator"></i>
+                            <button type="button" class="btn btn-success" id="codonAA_calculate"><i class="fas fa-calculator"></i> Calculate
                             </button>
                         </div>
+                    </div>
                     </div>
                     <div class="col-lg-12" id="codonAA_result"></div>
                 </div>

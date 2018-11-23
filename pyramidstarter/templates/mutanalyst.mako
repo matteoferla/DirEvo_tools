@@ -176,95 +176,10 @@
                     type="button" class="btn btn-warning" id="altH_showing_button_off">hide</button></span></h3>
             <div id="alt&#xA7;">
                 <p>Rows represent the wildtype base, while columns the base in the mutant.</p>
-                <table
-                        width="50%" border="0" id="mutTable_raw">
-                    <thead>
-                    <tr>
-                        <th width="20%">From\To</th>
-                        <th width="20%">A</th>
-                        <th width="20%">T</th>
-                        <th width="20%">G</th>
-                        <th width="20%">C</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th>A</th>
-                        <td>
-                            <input class="bg-info" type="text" disabled id="A2A" value="&#x2014;">
-                        </td>
-                        <td>
-                            <input class="bg-warning" type="text" id="A2T" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-success" id="A2G" type="text" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-warning" id="A2C" type="text" value="0">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th width="20%">T</th>
-                        <td width="20%">
-                            <input class="bg-warning" type="text" id="T2A" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-info" type="text" disabled id="T2T" value="&#x2014;">
-                        </td>
-                        <td>
-                            <input class="bg-warning" id="T2G" type="text" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-danger" id="T2C" type="text" value="0">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th width="20%">G</th>
-                        <td width="20%">
-                            <input class="bg-success" type="text" id="G2A" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-warning" type="text" id="G2T" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-info" disabled id="G2G" type="text" value="&#x2014;">
-                        </td>
-                        <td>
-                            <input class="bg-warning" id="G2C" type="text" value="0">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="20%">C</td>
-                        <td width="20%" bgcolor="#FFFF99">
-                            <input type="text" id="C2A" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-danger" type="text" id="C2T" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-warning" id="C2G" type="text" value="0">
-                        </td>
-                        <td>
-                            <input class="bg-info" disabled id="C2C" type="text" value="&#x2014;">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <br>
-                <table width="50%" border="0">
-                    <tr>
-                        <th width="20%">Colour codes</th>
-                        <td width="20%" class="bg-info">Identity</td>
-                        <td width="20%" class="bg-success">Purine transition</td>
-                        <td width="20%" class="bg-danger">Pyrimine transition</td>
-                        <td width="20%" class="bg-warning">Transversion</td>
-                    </tr>
-                </table>
-                <br>
-                <div class="bs-callout bs-callout-warning">
-                    <h4>Required colour change</h4>These colours suck. Change around. Theme linked??
-                </div>
-                <div class="input-group">
+                <%include file="bias_block.mako" args="tool='mutanalyst'"/>
+                <br/>
+                <div class="row pb-3">
+                    <div class="col-12 col-md-6"><div class="input-group">
                     <div class="input-group-prepend" id="basic-addonA">
                         <span class="input-group-text">Proportion of adenine</span></div>
                     <input
@@ -272,8 +187,8 @@
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
-                </div>
-                <div class="input-group">
+                </div></div>
+                    <div class="col-12 col-md-6"><div class="input-group">
                     <div class="input-group-prepend" id="basic-addonT">
                         <span class="input-group-text">Proportion of thymine</span></div>
                     <input
@@ -281,8 +196,8 @@
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
-                </div>
-                <div class="input-group">
+                </div></div>
+                    <div class="col-12 col-md-6"><div class="input-group">
                     <div class="input-group-prepend" id="basic-addonG">
                         <span class="input-group-text">Proportion of guanine</span>
                     </div>
@@ -291,8 +206,8 @@
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
-                </div>
-                <div class="input-group">
+                </div></div>
+                    <div class="col-12 col-md-6"><div class="input-group">
                     <div class="input-group-prepend" id="basic-addonC">
                         <span class="input-group-text">Proportion of cytosine</span>
                     </div>
@@ -301,6 +216,7 @@
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
+                </div></div>
                 </div>
                 <%include file="calculate_btns.mako" args="tool='mutanalyst_bias'"/>
             </div>
