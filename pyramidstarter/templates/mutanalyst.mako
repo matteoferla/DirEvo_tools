@@ -1,3 +1,4 @@
+<%page args="page, collapse_section"/>
 <div class="card">
     <div class="card-header">
         <h1 class="card-title">Mutanalyst<img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
@@ -7,31 +8,12 @@
         <h3>Description</h3>
         <p>An online tool for assessing the mutational spectrum of epPCR libraries
             with poor sampling.</p>
-        <h3>Background</h3>
-        <p>Error prone PCR is a method to create a pool of amplicons with some random
-            errors. For the best results the number of mutations and the spectrum of
-            the mutations needs to be controlled, hence the need for a test library.
-            The calculations of a test libray are slightly laborious and are affected
-            by the very small sample size. This calculator tries to overcome these
-            two issues by computing the mutational biases given a starting sequence
-            and list of mutant genotypes, by calculating the mutations per sequence
-            by fitting it to a Poisson distribution and by estimating the errors in
-            the values. In particular, the errors are calculated using the assumption
-            that a mutation and its complementary are equally likely in light of the
-            double helix nature of DNA (<i>e.g.</i> A to G on one strand will result
-            in T to C on the other). For the specific formulae used see <a href="/static/variance_note.html"
-                                                                           data-tooltip="walkthrough of variance calculations"> this note about propagating
-                errors.</a>
-            <br>The program can calculate mutation frequencies from the list of mutations
-            found and the template sequence or it can also accept the frequencies directly.
-            The <a href="javascript:Btn_demo();">&apos;Demo&apos;</a> values are from
-            an actual experiment.</p>
-        <br>
+        ${collapse_section('mutanalyst_bg','Background', file='mutanalyst_bg.mako') |n}
         <!--section-->
         <h3>Choose starting point</h3>
         <p>There are two possible starting points for mutanalysts.
-            <br>One is proving a sequence and the mutations sampled, for which the mutational
-            load, mutational spectrum and the mutational bias indicators will be calculated.
+            <br>One is proving a sequence and the mutations sampled, for which the ${page.term_helper('load','mutational load')|n},
+            ${page.term_helper('spectrum','mutational spectrum')|n} and the ${page.term_helper('bias','mutational bias indicators')|n} will be calculated.
             <br>The other is more downstream, wherein one proves a mutational spectrum
             and mutational load and the mutational bias indicators will be calculated.</p>
         <br>
@@ -110,7 +92,7 @@
                                 data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations
                         of a variant sampled.
                     </li>
-                    <li>The mutations can only be in the forms A123C or 123A&gt;C, where the number
+                    <li>The mutations can only be in the forms A123C (technically non-standard for nucleotides) or 123A&gt;C, where the number
                         is irrelevant (and can be omitted).
                     </li>
                     <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"

@@ -1,3 +1,4 @@
+<%page args="page, collapse_section"/>
 <div class="card" id="pedelbasic">
     <div class="card-header">
         <h1 class="card-title">Pedel</h1>

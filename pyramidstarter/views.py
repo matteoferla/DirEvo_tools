@@ -357,6 +357,22 @@ def ajacean_test(request):
 
 class Fields():
     # I think I need some methods... so better do this than a default dictionary
+    terms={
+        'load':('Mutational load','Average number of mutations per variant in the library. This can be per gene or per kb.'),
+        'spectrum': ('Mutational spectrum','The distribution of mutation types (e.g. A to C)'),
+        'bias': ('Mutational bias','Various metrics to assess the divergence from the ideal situation where a nucleotide position has equiprobably change of mutating into any of the other three.'),
+        'rate':('Replicational mutational rate','The average number of <i>de novo</i> mutations per kb that happen during one PCR duplication cycle'),
+        'transversion':('Transversions','This is a mutation where a purine (adenine, guanine),  becomes a pyrimidine (thymine/uracil, cytosine) or <i>vice versa</i>.'),
+        'transition':('Transitions','This is a mutation where the class of nucleobase (purine or pyrimidine) is unchanged.'),
+        'doubling':('Doubling number','Number of duplications during PCR, which differs from PCR cycle number')
+    }
+
+    def term_helper(self, term, inner=None):
+        if inner:
+            return '<abbr data-toggle="tooltip" title="{t}">{i}</abbr>'.format(i=inner,t=self.terms[term][0]+': '+self.terms[term][1])
+        else:
+            return '<abbr data-toggle="tooltip" title="{t}">{i}</abbr>'.format(i=term, t=self.terms[term][0] + ': ' + self.terms[term][1])
+
     def __init__(self, **kwargs):
         #deal with status.
         self.status = STATUS

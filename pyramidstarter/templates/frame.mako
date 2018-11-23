@@ -44,8 +44,28 @@
             div {border:1px solid black;}
         </style> -->
 </head>
-
 <body style="padding-top: 60px;">
+<%def name='collapse_section(name,title, text=None, file=None)'>
+    <div id="${name}">
+                <h4>${title|n} (
+                <a data-toggle="collapse" href="#${name} .collapse">
+                    <span class="collapse show"><i class="fa fa-caret-down" aria-hidden="true"></i> show</span>
+                    <span class="collapse"><i class="fa fa-caret-up" aria-hidden="true"></i> hide</span>
+                </a>
+                )
+
+            </h4>
+            <div class="collapse">
+                % if file:
+                    <%include file="${file}" args="page=page"/>
+                % elif text:
+                    ${text|n}
+                % else:
+                    ERROR
+                % endif
+            </div>
+    </div>
+</%def>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
     <div class="container">
@@ -145,7 +165,7 @@
 
 <!--MODAL for scheme. not activated on all pages!-->
     % if page.codon_flag:
-        <%include file="codon_modal.mako" args="page='page'"/>
+        <%include file="codon_modal.mako" args="page=page, collapse_section=collapse_section"/>
     % endif
 <!--Main -->
 <div class="container-fluid" id="fullpage">
@@ -177,7 +197,7 @@
                     </div>
                 %endif
                 %if page.body:
-                    <%include file="${page.body}" args="page=page"/>
+                    <%include file="${page.body}" args="page=page, collapse_section=collapse_section "/>
                 %endif
             </div>
         </div>
