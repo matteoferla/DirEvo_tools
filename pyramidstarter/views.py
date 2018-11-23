@@ -504,14 +504,13 @@ def notfound_callable(request):
 
 @view_config(route_name='log', renderer=FRAME)
 def lumberjack(request):
+
     log_passing(request)
-    log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
-    log_response = '<div class="alert alert-success" role="alert"><a href="static/bash_log.txt">download terminal log</a></div>' + \
-                   '<br/><table class="table table-condensed"><thead><tr><th>Time</th><th>Code</th><th>IP Address</th><th>Physical address</th><th>Task</th><th>AJAX JSON</th><th>Status</th></tr></thead>' + \
-                   '<tbody><tr>' + '</tr><tr>'.join(
-        ['<td>' + '</td><td>'.join(line.split('\t')) + '</td>' for line in log.split('\n')]) + \
-                   '</tr></tbody></table>'
-    return {'page': Fields(request=request, m_log='active', full_width_text=log_response)}
+    if 'admin' in request.session and request.session['admin']:
+        log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
+        return {'page': Fields(request=request, m_log='active', body='log.mako', log=log)}
+    else:
+        return {'page': Fields(request=request, m_admin='active', body='forbidden.mako', code='forbidden.js', status='custom', status_msg='The log is admin only. Sorry', status_class='info')}
 
 
 ############### LOG! #####################

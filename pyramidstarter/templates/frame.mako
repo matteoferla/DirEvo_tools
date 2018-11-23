@@ -177,7 +177,7 @@
                     </div>
                 %endif
                 %if page.body:
-                    <%include file="${page.body}" args="page='page'"/>
+                    <%include file="${page.body}" args="page=page"/>
                 %endif
             </div>
         </div>
@@ -283,7 +283,7 @@
             });
 
             %if page.code:
-                <%include file="${page.code}" />
+                <%include file="${page.code}" args="page=page"/>
             %endif
         });
 
