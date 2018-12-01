@@ -364,7 +364,10 @@ class Fields():
         'rate':('Replicational mutational rate','The average number of <i>de novo</i> mutations per kb that happen during one PCR duplication cycle'),
         'transversion':('Transversions','This is a mutation where a purine (adenine, guanine),  becomes a pyrimidine (thymine/uracil, cytosine) or <i>vice versa</i>.'),
         'transition':('Transitions','This is a mutation where the class of nucleobase (purine or pyrimidine) is unchanged.'),
-        'doubling':('Doubling number','Number of duplications during PCR, which differs from PCR cycle number')
+        'doubling':('Doubling number','Number of duplications during PCR, which differs from PCR cycle number'),
+        'missense':('Missense mutation','A mutation that results in an amino acid change. These are good mutations for directed evolution.'),
+        'nonsense':('Nonsense mutation','A mutation that results in a premature stop. These are bad mutations for directed evolution.'),
+        'synonymous':('Synonymous mutation','A mutation that alters the codon into another that codes the same amino acid. one third of changes in a equiprobable scenario are synonymous.')
     }
 
     def term_helper(self, term, inner=None):
@@ -501,7 +504,14 @@ def main_callable(request):
         log_passing(request)
         page = request.matchdict['page']
         debugprint('for page ' + page)
-        return {'page': Fields(request=request, body=page+'.mako', code=page+'.js', codon_flag=True, **{'m_'+page: 'active'})}
+        if os.path.isfile(os.path.join(PATH,'templates',page+'.mako')):
+            if os.path.isfile(os.path.join(PATH,'templates',page+'.js')):
+                code = page + '.js'
+            else:
+                code = ''
+            return {'page': Fields(request=request, body=page+'.mako', code=code, codon_flag=True, **{'m_'+page: 'active'})}
+        else:
+            return {'page': Fields(request=request, m_404='active', status=True, status_msg='404 Error! File not found!', status_class='danger', error=page)}
     except Exception as err:
         debugprint(traceback.format_exc())
         return {'page': Fields(request=request, error=traceback.format_exc(),**{'m_'+page: 'active'})}

@@ -147,9 +147,11 @@
                             class="dropdown-menu">
                         <a class="dropdown-item ${page.m_about}" href="/main/about">About
                         </a>
-                        <a class="dropdown-item ${page.m_about}" href="/admin">Admin
+                        <a class="dropdown-item ${page.m_glossary}" href="/main/glossary">FAQ
                         </a>
-                        <a class="dropdown-item ${page.m_about}" href="/upcoming">Upcoming
+                        <a class="dropdown-item ${page.m_admin}" href="/admin">Admin
+                        </a>
+                        <a class="dropdown-item ${page.m_upcoming}" href="/upcoming">Upcoming
                         </a>
                     </div>
                 </li>
