@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":spanner: made planner">
+    <list default="true" id="1b6286f2-3057-44d1-953b-8897afbc719c" name="Default" comment=":pen: added the planenr">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" beforeDir="false" afterPath="$PROJECT_DIR$/pyramidstarter/templates/main.mako" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,11 +68,11 @@
           <entry key="html" value="127" />
           <entry key="ini" value="12" />
           <entry key="js" value="3474" />
-          <entry key="mako" value="17997" />
+          <entry key="mako" value="18022" />
           <entry key="md" value="460" />
           <entry key="pt" value="1066" />
           <entry key="py" value="3698" />
-          <entry key="txt" value="522" />
+          <entry key="txt" value="545" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -83,9 +82,9 @@
           <entry key="HTML" value="1056" />
           <entry key="Ini" value="12" />
           <entry key="JavaScript" value="3474" />
-          <entry key="Mako" value="17997" />
+          <entry key="Mako" value="18022" />
           <entry key="Markdown" value="339" />
-          <entry key="PLAIN_TEXT" value="806" />
+          <entry key="PLAIN_TEXT" value="829" />
           <entry key="Python" value="3698" />
         </counts>
       </usages-collector>
@@ -217,7 +216,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/main.mako">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="161">
@@ -259,11 +258,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2235">
-              <caret line="149" column="93" selection-start-line="149" selection-start-column="93" selection-end-line="149" selection-end-column="93" />
+            <state relative-caret-position="182">
+              <caret line="104" column="95" selection-start-line="104" selection-start-column="95" selection-end-line="104" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -379,12 +378,12 @@
         <option value="$PROJECT_DIR$/pyramidstarter/templates/driver_example.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/driver.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/driver_caveats.mako" />
-        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/views.py" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/glossary.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/planner.mako" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/planner.js" />
         <option value="$PROJECT_DIR$/pyramidstarter/templates/main.mako" />
+        <option value="$PROJECT_DIR$/pyramidstarter/templates/frame.mako" />
       </list>
     </option>
   </component>
@@ -607,13 +606,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535014035844</updated>
-    </task>
-    <task id="LOCAL-00033" summary=":robot: robots.txt">
-      <created>1536781519937</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1536781519937</updated>
     </task>
     <task id="LOCAL-00034" summary=":skull: fixed deadlink">
       <created>1536781569775</created>
@@ -951,7 +943,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543780477097</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary=":pen: added the planenr">
+      <created>1543780624686</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1543780624686</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TodoView">
@@ -964,7 +963,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="797" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="797" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49928468" visible="true" weight="0.23462088" />
@@ -1026,7 +1025,6 @@
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootstrap-switch" />
       <path value="$PROJECT_DIR$/pyramidstarter/static/bootswatch" />
     </ignored-roots>
-    <MESSAGE value=":confused: 98 C++ is weird." />
     <MESSAGE value=":art: fixing about" />
     <MESSAGE value=":art: fixing stuff" />
     <MESSAGE value=":hammer: update switch" />
@@ -1051,7 +1049,8 @@
     <MESSAGE value=":art: unform-izing" />
     <MESSAGE value=":pencil: writing more..." />
     <MESSAGE value=":spanner: made planner" />
-    <option name="LAST_COMMIT_MESSAGE" value=":spanner: made planner" />
+    <MESSAGE value=":pen: added the planenr" />
+    <option name="LAST_COMMIT_MESSAGE" value=":pen: added the planenr" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/forbidden.mako">
@@ -1375,13 +1374,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2235">
-          <caret line="149" column="93" selection-start-line="149" selection-start-column="93" selection-end-line="149" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/glossary.mako">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1462,6 +1454,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="16" column="108" selection-start-line="16" selection-start-column="108" selection-end-line="16" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyramidstarter/templates/frame.mako">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="104" column="95" selection-start-line="104" selection-start-column="95" selection-end-line="104" selection-end-column="95" />
         </state>
       </provider>
     </entry>

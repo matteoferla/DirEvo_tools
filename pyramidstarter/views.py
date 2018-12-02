@@ -43,7 +43,7 @@ try:
     urllib.request.urlopen('http://python.org/')
 except OSError:
     warn('The server is running in OFFLINE mode as it cannot connect to the web.')
-    FRAME = 'templates/frame_local.pt'  # offline!
+    FRAME = 'templates/frame_local.mako'  # offline!
     raise Exception('OFFLINE TESTING NOT SUPPORTED ANYMORE')
 
 ############### Ajacean views #####################
@@ -630,7 +630,7 @@ def favicon_view(request):
 
 
 ########### TEMPORARILY HERE #######
-@view_config(route_name='carlos', renderer='templates/Carlos.pt')
+@view_config(route_name='carlos', renderer='templates/Carlos.mako')
 def carlos(request):  # serving static basically.
     return dict()
 
@@ -651,7 +651,7 @@ def carlos_submit(request):
     return response
 
 
-@view_config(route_name='epistasis', renderer='templates/epistasis.pt')
+@view_config(route_name='epistasis', renderer='templates/epistasis.mako')
 def epi(request):  # serving static basically.
     return {'code': open(os.path.join(PATH, 'templates', 'epistasis.js')).read()}
 
