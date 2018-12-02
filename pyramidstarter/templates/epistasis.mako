@@ -22,13 +22,14 @@
         integrity="sha384-4eP+1rYQmuI3hxrmyE+GT/EIiNbF4R85ciN3jMpmIh+bU5Hz2IU7AdcVe+JS+AJz"
         crossorigin="anonymous">
         <!--pyspinner-->
-        <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}"
-        rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media
-        queries -->
-        <!--[if lt IE 9]>
-        <![endif]-->
-        <!---->
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
         <style>
             .table input {
                 display:block;
@@ -246,6 +247,20 @@
                 </div>
             </div>
         </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdn.rawgit.com/exupero/saveSvgAsPng/gh-pages/src/saveSvgAsPng.js"></script>
+<script>
+
+${code|n}
+
+</script>
+
     </body>
 
 </html>
