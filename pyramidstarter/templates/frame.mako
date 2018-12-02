@@ -102,6 +102,8 @@
                         class="caret"></span></a>
                     <div
                             class="dropdown-menu">
+                        <a class="${page.m_planner} dropdown-item" href="/main/planner">Planner
+                        </a>
                         <a class="${page.m_mutantcaller} dropdown-item" href="/main/mutantcaller">MutantCaller
                         </a>
                         <a class="${page.m_mutanalyst} dropdown-item" href="/main/mutanalyst">Mutanalyst

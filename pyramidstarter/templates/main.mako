@@ -14,6 +14,7 @@
 <div class="card-columns">
     <% elements = (("main/mutantprimers","Primers — Mutant primers","Multiple mutagenic primer design for a desired input sequence."),
                   ("main/deepscan","Primers — Deepscan","Multiple mutagenic primer design to exhaustively scan an entire input sequence (<i>e.g.</i> for alanine scanning)."),
+                  ("main/planner","epPCR — Planner","Plan or check epPCR reaction to predict mutational load."),
                   ("main/mutantcaller","epPCR — Mutantcaller","Analyse epPCR sequencing files to identify and list point mutations."),
                   ("main/mutanalyst","epPCR — Mutantanalyst","Determine the bias of the submitted sequences for a submitted epPCR library."),
                   ("main/pedel","epPCR — Pedel","Determine diversity of point mutations within an epPCR library."),
