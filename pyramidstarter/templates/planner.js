@@ -20,7 +20,6 @@ $('#planner_method').on('switchChange.bootstrapSwitch', function(event, state) {
 
 
 function validator (list) {
-
             console.log(list);
             console.log(list.map(function (value) {return data[value] != ''}));
             console.log(list.every(function (value) {return data[value]  != ''}));
@@ -105,18 +104,26 @@ $('#planner_calculate').click(function () {
         var mLoad=duplications*parseFloat(data['m_rate']);
         $('#planner_results').append(['<p>','<b>Template:</b>',template.toString(),'ng;',
                                             '<b>Yield:</b>',cProd.toString(),'ng;',
-                                            '<b>Duplications:</b>',(Math.round(duplications*10)/10).toString(),'times',
-                                            '<b>Mutational load:</b>',(Math.round(mLoad*10)/10).toString(),'mutations',
+                                            '<b>Duplications:</b>',(Math.round(duplications*10)/10).toString(),'times;',
+                                            '<b>Mutational load:</b>',(Math.round(mLoad*10)/10).toString(),'mutations.',
             '</p>'].join(' '));
     }
     else {
         // plan method
         validator(['p_conc', 't_size', 'p_size','m_load', 'loss','m_rate']);
-        var mLoad=parseFloat(data['m_load']);
-
-
-
-
+        var mLoad = parseFloat(data['m_load']);
+        var product = 2000; //ug
+        var duplication = mLoad / parseFloat(data['m_rate']);
+        var template = product /Math.pow(2,duplication);
+        var plasmid = template / parseFloat(data['t_size']) * parseFloat(data['p_size']);
+        var volume = plasmid/parseFloat(data['p_conc']);
+        $('#planner_results').append(['<p>','<b>Plasmid:</b>',(Math.round(plasmid*10)/10).toString(),'ng;',
+                                            '<b>Stock volume:</b>',(Math.round(volume*10)/10).toString(),'µL;',
+                                            '<b>Template:</b>',(Math.round(template*10)/10).toString(),'ng;',
+                                            '<b>Yield:</b>',product.toString(),'ng;',
+                                            '<b>Duplications:</b>',(Math.round(duplication*10)/10).toString(),'times;',
+                                            '<b>Mutational load:</b>',(Math.round(mLoad*10)/10).toString(),'mutations.',
+            '</p>'].join(' '));
     }
 });
 

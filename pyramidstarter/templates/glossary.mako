@@ -23,8 +23,8 @@
                     <h3>What makes a good library?</h3>
                     <p>A good library for directed evolution is a diverse targetted one.<br/>
                         The target of the library can focus from a few residues to a whole region: the former is done with degenerate primers, while the latter is done by error-prone PCR. Although some combinations of the two are sometimes done.</p>
-                    <p>In terms of degenerate primers (or more correctly primers with degenerate nucleotides, also called QuickChange primers after the original kit), the app <a href="main/glue">GlueIT</a> can help in determining which degenerate codons to use and how many to reasonably alter,
-                        while the app <a href="main/mutantprimers">MutantPrimers</a> can help by designing the primers. Unfortunately, the annealing temperature of the PCR reaction plays a large part, so the app <a href="main/glue">QCCC</a> was made to dermine the extent of randomisation.</p>
+                    <p>In terms of degenerate primers (or more correctly primers with degenerate nucleotides, also called QuickChange primers after the original kit), the app <a href="/main/glue">GlueIT</a> can help in determining which degenerate codons to use and how many to reasonably alter,
+                        while the app <a href="/main/mutantprimers">MutantPrimers</a> can help by designing the primers. Unfortunately, the annealing temperature of the PCR reaction plays a large part, so the app <a href="/main/glue">QCCC</a> was made to dermine the extent of randomisation.</p>
                     <p>In terms of error-prone PCR, the starting template and nucleotide balance can be altered to achieve different ${page.term_helper('load','mutational loads')|n} and ${page.term_helper('bias','biases')|n}.<br/>
                         First, the amount of starting template controls the average mutational load of the library.
                         If this is low, there will be a large redundancy in the library, including a significant fraction of wild type sequences, but
@@ -34,9 +34,12 @@
                 </li>
                 <li class="list-group-item" id="target">
                     <h3>How many mutations should I have?</h3>
-                    <p>Two thirds of nucleotide mutation are ${page.term_helper('missense','missense mutations')|n}.
-                        The often cited target value is 5 nucleotide mutations per gene.</p>
-A combination is sometimes done where degenerate primers are spiked into a epPCR reaction at a low concentration.</p>
+                    <p>Ideally, high enough that you have little redundancy, while low enough that you have most single amino acid variants accessible via a single mutation, which is somewhere around 5 mutations per kb (see <a href="/main/pedel">PedelAA</a> for your specific case).</p>
+                    <p>The thing to remember is that the number of mutations per sequence follows a Poisson <i>distribution</i>: if you had an <i>average</i> mutational load of 1.0, 36% of your library will have zero mutations and 36% with a single nucleotide mutations as opposed to all sequences with a single mutation.
+                        Also, two thirds of nucleotide mutation are ${page.term_helper('missense','missense mutations')|n}, so a load of 1 mutation per kb is just a bit less than half wild type at the amino acid level.</p>
+                    <p>There are several papers that explore the fraction of mutations that are beneficial, neutral or deleterious.
+                        It depends on the protein and whether one is looking at it from structural (&Delta;&Delta;G) or a catalytic (&Delta;&Delta;G&Dagger;) point of view. But roughly, 1-10% are beneficial, 10-20% are deleterious and the rest neutral (to see an example or calculate on your own protein see <a href="/main/landscape">landscape app</a>).
+                        Therefore for a protein, for every 1.3 mutations that the load increases, the fraction of non-dead protein decreases by 20% (or whatever the value is), so at an average 5 nucleotides mutations 57% of the library is dead (0.8^(5*0.7)). But the rest are neutral, or neutral with beneficial mutations!</p>
                 </li>
                 <li class="list-group-item" id="epPCR">
                     <h3>What error-prone PCR method should I use?</h3>

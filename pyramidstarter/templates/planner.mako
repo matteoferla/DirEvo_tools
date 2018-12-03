@@ -8,6 +8,7 @@
         <div id="planner_intro">
              <h3>Description</h3>
             <p>Plan your experiment to get a given amount of mutations or predict what you may get from your PCR yield.</p>
+            <p>For more information, visit the FAQ about <a href="/main/glossary#library">what makes a good library</a>, <a href="/main/glossary#epPCR">what epPCR methods to use</a> and <a href="/main/glossary#target">what is a good desired mutational load</a>.</p>
         </div>
         <div id="planner_input">
              <h3>Input</h3>
@@ -112,12 +113,12 @@
                       </li>
                   </ul>
             <!-- yield (p=plasmid, y=product)-->
-            <div class="planner-verify">
+            <div>
                 <h5>Yield</h5>
             <p>Data from PCR product quantification. Fill one of either row.</p>
                   <ul class="list-group mb-3">
                       <!-- final conc -->
-                      <li class="list-group-item">
+                      <li class="list-group-item planner-verify">
                           <div class="row">
                       <div class="col-6 p-1">
                           <div class="input-group" data-toggle="tooltip"
