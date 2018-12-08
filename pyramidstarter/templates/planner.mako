@@ -229,7 +229,19 @@
                                 </div>
                             </div>
                       </div>
+                <div class="col-6 p-1">
+                          <div class="input-group" data-toggle="tooltip"
+                                                            title="Expected library size. For a plasmid under 5 kb and a library made by restriction or user cloning with some a dozen electroporations expect 1,000,000 variants, but if your plasmid is bigger, you are using chemically competent cells, or are using Gibson cloning, lower the value accordingly."
+                                                            data-placement="top">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">Library size</span>
+                                </div>
+                                <input type="number" min="0" class="form-control"
+                                       id="size" value="1e6">
+                            </div>
+                      </div>
             </div>
+            <%include file="bias_block.mako" args="tool='planner'"/>
         </div>
         <%include file="calculate_btns.mako" args="tool='planner'"/>
         <div id="planner_results">

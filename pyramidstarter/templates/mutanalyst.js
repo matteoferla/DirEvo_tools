@@ -16,6 +16,29 @@ $("#mutanalyst_corrected§").hide();
 $("#mutanalyst_bias§").hide();
 $("#mutanalyst_more§").hide();
 
+
+//PedelAA
+function applyLoad(data) {
+var bases=['A','T','G','C'];
+    for (var fi=0; fi<4; fi++) { //from
+        for (var ti=0; ti<4; ti++) { //to
+            $("#{0}2{1}".format(bases[fi],bases[ti])).val(data[fi][ti]);
+        }
+    }
+}
+$("#mutanalyst_opt_mutazyme").click(function () {applyLoad([[0, 15, 9, 2],[15, 0, 2, 9],[13, 7, 0, 2],[7, 13, 2, 0]]);});
+$("#mutanalyst_opt_manganese").click(function () {applyLoad([[0, 20, 14, 4],[20, 0, 4, 14],[7, 2, 0, 1],[2, 7, 1, 0]]);});
+$("#mutanalyst_opt_MP6").click(function () {applyLoad([[0,3,,15,8],[3,0,8,16],[13,8,0,2],[7,17,0,0]]);});
+$("#mutanalyst_opt_D473G").click(function () {applyLoad([[0,5,8,5],[14,0,0,5],[9,4,0,2],[3,6,3,0]]);});
+$("#mutanalyst_opt_analogues").click(function () {applyLoad([[0,0,27,6],[0,0,2,54],[11,0,0,0],[0,6,0,0]]);});
+$("#mutanalyst_opt_uniform").click(function () {applyLoad([[0,8.3,8.3,8.3],[8.3,0,8.3,8.3],[8.3,8.3,0,8.3],[8.3,8.3,8.3,0]]);});
+$('#mutanalyst_sequence_retrieve').click(function () {
+    $('#mutanalyst_sequence').val(window.sessionStorage.getItem('sequence'));
+});
+$('#mutanalyst_retrieve_spectrum').click(function () {
+    applyLoad(JSON.parse(window.sessionStorage.getItem('spectrum')));
+});
+
 $("#altH_showing_button_on").click(function () {$("#alt§").show(); $("#altH_showing_button_on").hide(); $("#altH_showing_button_off").show();
     });
 $("#altH_showing_button_off").click(function () {$("#alt§").hide(); $("#altH_showing_button_off").hide(); $("#altH_showing_button_on").show();

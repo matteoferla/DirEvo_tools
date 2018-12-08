@@ -6,7 +6,7 @@
     <div class="row">
             <ul class="list-group">
                 % for enboldened, text in page.terms.values():
-                    <li class="list-group-item"><b>${enboldened}</b> ${text|n}</li
+                    <li class="list-group-item"><b>${enboldened}</b> ${text|n}</li>
                 % endfor
             </ul>
         </div>
@@ -54,7 +54,7 @@
                     <p>A recent development is getting a synthetic library which scan all mutations or similar. These completely circumvent the above issues, but are expensive and require a great deal of study into the detail of the final product to make sure that the limitations don't interfere. For example, in the case of a scanning library, where each variant will have only a single mutation, will not be able to find epistatic cases etc.).</p>
                 </li>
                 <li class="list-group-item" id="nothing">
-                    <h3>I go no mutations...</h3>
+                    <h3>I got no mutations...</h3>
                     <p>If you believe it is something wrong with our code, please <a href="http://www.matteoferla.com/email.html">contact us</a>. Here are some pointers:</p>
                     <ul>
                         <li>If the sequences were weird, you have some contaminant during your cloning steps.</li>

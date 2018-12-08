@@ -361,8 +361,8 @@ class Fields():
         'load':('Mutational load','Average number of mutations per variant in the library. This can be per gene or per kb.'),
         'spectrum': ('Mutational spectrum','The distribution of mutation types (e.g. A to C)'),
         'bias': ('Mutational bias','Various metrics to assess the divergence from the ideal situation where a nucleotide position has equiprobably change of mutating into any of the other three.'),
-        'rate':('Replicational mutational rate','The average number of <i>de novo</i> mutations per kb that happen during one PCR duplication cycle'),
-        'transversion':('Transversions','This is a mutation where a purine (adenine, guanine),  becomes a pyrimidine (thymine/uracil, cytosine) or <i>vice versa</i>.'),
+        'rate':('error rate per division','The average number of de novo mutations per kb that happen during one PCR duplication cycle'),
+        'transversion':('Transversions','This is a mutation where a purine (adenine, guanine),  becomes a pyrimidine (thymine/uracil, cytosine) or vice versa.'),
         'transition':('Transitions','This is a mutation where the class of nucleobase (purine or pyrimidine) is unchanged.'),
         'doubling':('Doubling number','Number of duplications during PCR, which differs from PCR cycle number'),
         'missense':('Missense mutation','A mutation that results in an amino acid change. These are good mutations for directed evolution.'),
@@ -634,6 +634,8 @@ def favicon_view(request):
 def carlos(request):  # serving static basically.
     return dict()
 
+
+### nagen???
 
 from pyramidstarter import VCF_mapper
 

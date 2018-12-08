@@ -125,7 +125,7 @@
                 </li>
                 <li class="${page.m_landscape} nav-item"><a href="/main/landscape" class="nav-link">Landscape</a>
                 </li>
-                <li class="${page.m_misc} nav-item"><a href="/main/misc" class="nav-link">Miscellaneous</a>
+                <!--<li class="${page.m_misc} nav-item"><a href="/main/misc" class="nav-link">Miscellaneous</a>-->
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
