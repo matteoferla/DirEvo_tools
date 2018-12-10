@@ -79,6 +79,7 @@
             <ul class="nav navbar-nav">
                 <li class="${page.m_home} nav-item"><a href="/" class="nav-link">Home</a>
                 </li>
+                <!--
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                        role="button"
@@ -95,7 +96,7 @@
                             Deepscan
                         </a>
                     </div>
-                </li>
+                </li>-->
                 <li class="dropdown nav-item"><a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                                                  role="button"
                                                  aria-haspopup="true" aria-expanded="false">epPCR <span
@@ -123,8 +124,8 @@
                 </li>
                 <li class="${page.m_QQC} nav-item"><a href="/main/QQC" class="nav-link">QQC</a>
                 </li>
-                <li class="${page.m_landscape} nav-item"><a href="/main/landscape" class="nav-link">Landscape</a>
-                </li>
+                <!--<li class="${page.m_landscape} nav-item"><a href="/main/landscape" class="nav-link">Landscape</a>
+                </li>-->
                 <!--<li class="${page.m_misc} nav-item"><a href="/main/misc" class="nav-link">Miscellaneous</a>-->
                 </li>
             </ul>
