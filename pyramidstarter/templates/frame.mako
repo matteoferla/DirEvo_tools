@@ -111,11 +111,12 @@
                         </a>
                         <a class="${page.m_pedel} dropdown-item" href="/main/pedel">Pedel
                         </a>
+                        <!--
                         <a class="${page.m_probably} dropdown-item" href="/main/probably">Chances
                         </a>
                         <a role="separator" class="divider dropdown-item"></a>
                         <a class="${page.m_silico} dropdown-item" href="/main/silico">Generator
-                        </a>
+                        </a>-->
                     </div>
                 </li>
                 <li class="${page.m_glue} nav-item"><a href="/main/glue" class="nav-link">Glue</a>
