@@ -82,13 +82,13 @@
                           </div>
                           <div class="col-6 p-1">
                               <div class="input-group" data-toggle="tooltip"
-                                                                title="Size of template in kb"
+                                                                title="Size of template in kb. Required only if sequence is not given."
                                                                 data-placement="top">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text">Template size</span>
                                     </div>
                                     <input type="number" min="0" class="form-control"
-                                           id="planner_t_size">
+                                           id="planner_t_size" placeholder="optional">
                                   <div class="input-group-append">
                                     <span class="input-group-text">kb</span>
                                     </div>
@@ -112,6 +112,24 @@
                   </div> <!--/row-->
                       </li>
                   </ul>
+            <div class="row">
+                <div class="col-xl-12 mb-1">
+                    <div class="input-group" data-toggle="tooltip" data-placement="top"
+                             title="In frame sequence that was mutagenised.">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Sequence</span>
+
+                        </div>
+                        <textarea class="form-control custom-control"
+                                  rows="5" style="resize:none" id="planner_sequence" name="planner_sequence">ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA</textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button" id="planner_sequence_retrieve"><i class="fa fa-history"></i><br/>Retrieve previous
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
             <!-- yield (p=plasmid, y=product)-->
             <div>
                 <h5>Yield</h5>
@@ -237,7 +255,7 @@
                                 <span class="input-group-text">Library size</span>
                                 </div>
                                 <input type="number" min="0" class="form-control"
-                                       id="size" value="1e6">
+                                       id="planner_size" value="1e6">
                             </div>
                       </div>
             </div>

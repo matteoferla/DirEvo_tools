@@ -239,6 +239,7 @@ def pedelAA(jsonreq):
     # fix naming issue!
     jsonreq['nsubst']=jsonreq['load']
     jsonreq['ninsert'] = 0
+    jsonreq['distr'] = 1 # 1 = Poisson, 0 = PCR
     jsonreq['ndelete'] = 0
     jsonreq['library_size']=jsonreq['size']
     jsonreq['nucnorm'] = int(jsonreq['nucnorm'])

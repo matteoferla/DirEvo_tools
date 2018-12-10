@@ -44,17 +44,84 @@ planner_toggle($('#planner_method').checked);
 $('#planner_method').on('switchChange.bootstrapSwitch', function(event, state) {planner_toggle(state)});
 
 
+// copied from pedelAA
+function replot(data) {
+    var ver = 'pedelAA'; // hardcoded.
+    var layout = {
+                yaxis: {
+                    title: 'Number of mutants in each bin',
+                    type: 'lin',
+                    autorange: true
+                },
+                xaxis: {
+                    title: 'x, Exact number of mutations per sequence',
+                    type: 'lin',
+                    autorange: true
+                },bargap:0,barmode: 'stack'
+            };
+    if ($("#"+ver+"_plot_log").is(":checked")) {
+            layout['yaxis']['type'] = 'log';
+        }
+    var m = $('input[name=plotopt]:radio:checked').val();
+    var x = data.map(function(x) {
+                return x[0]});
+    if (m == 0) {
+        //Combined.
+        if (ver == 'pedelAA') {
+        locs=[5, 7];}
+        else {
+        locs=[4, 6];}
+        var y1 = data.map(function(x) {
+                return x[locs[0]]});
+        var y2 = data.map(function(x) {
+                return x[locs[1]]});
+        Plotly.newPlot('plot_'+ver+'_stats', [{
+            x: x,
+            y: y1,
+            name: 'Unique diversity (Cx)',
+            type: 'bar'
+        },{
+            x: x,
+            y: y2,
+            name: 'Redundant diversity (Lx − Cx)',
+            type: 'bar'
+        },], layout);
+    }
+    else {
+        // individual
+        var y = data.map(function(x) {
+                return x[m]});
+        Plotly.newPlot('plot_'+ver+'_stats', [{
+            x: x,
+            y: y,
+            type: 'bar'
+        }], layout);
+    }
+
+}
+// end of copy
+
+function sanify_fasta(seq) {
+    console.log(seq);
+    // kill the >header if present.
+    if (seq.includes('>')) {var parts= seq.split("\n"); seq=parts.join();}
+    seq=seq.toUpperCase().replace('U','T').replace(/[^ATGC]/g, "");
+    console.log(seq);
+    return seq;
+}
+
 function validator (list) {
-            console.log(list);
-            console.log(list.map(function (value) {return data[value] != ''}));
-            console.log(list.every(function (value) {return data[value]  != ''}));
-        if (list.every(function (value) {return !! data[value]})) {
+        if (list.every(function (value) {return data[value] != ''})) {
             return true;
         }
         else {
             $(list.map(function (value) {return '#planner_'+value})).each(function (i,v) {
                     if ($(v).val()) {$(v).addClass('is-valid');}
-                    else {$(v).addClass('is-invalid'); $('#planner_results').append("<div class='alert alert-warning'>Incomplete input ("+v+")</div>");}
+                    else {
+                        $(v).addClass('is-invalid');
+                        $('#planner_results').append("<div class='alert alert-warning'>Incomplete input ("+v+")</div>");
+                        console.log(v+' has no data.');
+                    }
                 });
             throw "Incomplete ";
         }
@@ -96,23 +163,41 @@ $('#planner_calculate').click(function () {
                     data[m[1]] = parseFloat($(v).val());
                 }
     });
+    data['PCR_mode']='Poisson';
+    data['sequence']=$('#planner_sequence').val();
+    var bases=['A','T','G','C'];
+    for (var fi=0; fi<4; fi++) { //from
+        for (var ti=0; ti<4; ti++) { //to
+            var name="{0}2{1}".format(bases[fi],bases[ti]);
+            data[name]=$('#'+name).val();
+        }
+    }
+    console.log(data)
     // validation...
     $('#planner_p_conc,#planner_t_size,#planner_p_size').each(function (i,v) {
                     if ($(v).val()) {$(v).addClass('is-valid'); $(v).removeClass('is-invalid');}
                     else {$(v).removeClass('is-valid'); $(v).addClass('is-invalid');}
                 });
 
-    // determine state of switch for method (non=standard code)
-    if ($('#planner_method').attr('state') == 'on') {
-        // verify method
-        // parse template
-        if (! data['t_ng']) {
-            validator(['p_conc', 'p_vol', 't_size', 'p_size']);
+    // sanity sequence
+    if (! data['t_ng']) {
+            validator(['p_conc', 'p_vol', 'p_size']); //, 't_size'
+            if (! data['sequence']) {
+                data['sequence']=sanify_fasta(data['sequence']);
+                data['t_size'] = data['sequence'].length;
+            } else if (! data['t_size']) {
+                // pass. It will fail the pedelAA.
+            } else {validator(['sequence']);}
             template = parseFloat(data['p_conc']) * parseFloat(data['p_vol']) * parseFloat(data['t_size']) / parseFloat(data['p_size']);
         }
             else {
            template=parseFloat(data['t_ng']);
         }
+
+    // determine state of switch for method (non=standard code)
+    if ($('#planner_method').attr('state') == 'on') {
+        // verify method
+        // parse template
         // parse yield
         if (! data['y_ng']) {
             validator(['y_conc', 'y_vol']);
@@ -125,11 +210,11 @@ $('#planner_calculate').click(function () {
         validator(['r_vol', 'loss','m_rate']);
         // calc
         var cProd = product/(parseFloat(data['loss'])/100);
-        var duplications=Math.log2(cProd/template);
-        data['load']=duplications*parseFloat(data['m_rate']);
+        data['duplications']=Math.log2(cProd/template);
+        data['load']=data['duplications']*parseFloat(data['m_rate']);
         $('#planner_results').append(['<p>','<b>Template:</b>',template.toString(),'ng;',
                                             '<b>Yield:</b>',cProd.toString(),'ng;',
-                                            '<b>Duplications:</b>',(Math.round(duplications*10)/10).toString(),'times;',
+                                            '<b>Duplications:</b>',(Math.round(data['duplications']*10)/10).toString(),'times;',
                                             '<b>Mutational load:</b>',(Math.round(data['load']*10)/10).toString(),'mutations.',
             '</p>'].join(' '));
     }
@@ -138,8 +223,8 @@ $('#planner_calculate').click(function () {
         validator(['p_conc', 't_size', 'p_size','m_load', 'loss','m_rate']);
         data['load'] = parseFloat(data['m_load']);
         var product = 2000; //ug
-        var duplication = data['load'] / parseFloat(data['m_rate']);
-        var template = product /Math.pow(2,duplication);
+        data['duplications'] = data['load'] / parseFloat(data['m_rate']);
+        var template = product /Math.pow(2,data['duplications']);
         var plasmid = template / parseFloat(data['t_size']) * parseFloat(data['p_size']);
         var volume = plasmid/parseFloat(data['p_conc']);
         var library = parseInt(data['lib']);
@@ -148,12 +233,15 @@ $('#planner_calculate').click(function () {
                                             '<b>Template:</b>',(Math.round(template*10)/10).toString(),'ng;',
                                             '<b>Yield:</b> JS defined',product.toString(),'ng;',
                                             '<b>Library size:</b> JS defined',library.toString(),'ng;',
-                                            '<b>Duplications:</b>',(Math.round(duplication*10)/10).toString(),'times;',
+                                            '<b>Duplications:</b>',(Math.round(data['duplications']*10)/10).toString(),'times;',
                                             '<b>Mutational load:</b>',(Math.round(data['load']*10)/10).toString(),'mutations.',
             '</p>'].join(' '));
     }
+    if (!! data['p_size'] && data['p_size'] >5) {$('#planner_results').append('<div class="alert alert-warning" role="alert">Cell transformation efficiency decreases if the plasmid is over 5 kb. Reduce the library size accordingly.</div>');}
+    if (!! data['duplications'] && data['duplications'] >30) {$('#planner_results').append('<div class="alert alert-warning" role="alert">The number of duplications is close to the number of PCR cycles.</div>');}
+
     //pedelAA
-    try {
+    try {   $('#planner_results').append('<div id="pedelAA_result"></div>');
             data['nucnorm']=0;
             data['distr']='Poisson';
             $.ajax({
