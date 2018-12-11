@@ -18,7 +18,7 @@
           crossorigin="anonymous" id="theme_CSS">
     <!--Fontawesome-->
     <link rel="stylesheet"
-          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/web-fonts-with-css/css/fontawesome-all.min.css')}">
+          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.css')}">
     <!-- Custom styles for this scaffold -->
     <!-- was bootstrap-theme-->
     <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}"
