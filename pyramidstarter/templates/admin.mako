@@ -20,23 +20,24 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4 col-lg-3 mb-3"><a href="/log" class="btn btn-success"><i class="fas fa-server" aria-hidden="true"></i> Server log</a></div>
-            <div class="col-md-4 col-lg-3 mb-3"><a href="/static/bash_log.txt" class="btn btn-info">
-                <i class="fas fa-server" aria-hidden="true"></i> Bash log</a></div>
-            <div class="col-md-4 col-lg-3 mb-3"><a class="btn btn-success" href="/upcoming">
-                <i class="fas fa-sticky-note-o" aria-hidden="true"></i>
-                To Do list</a></div>
-            <div class="col-md-4 col-lg-3 mb-3"><a href="/set?status=normal" class="btn btn-warning" target="_blank"><i class="fas fa-flag-checkered"
-                                                                                                       aria-hidden="true"></i> Remove warning</a></div>
-            <div class="col-md-4 col-lg-3 mb-3"><a href="/set?status=construction" class="btn btn-warning" target="_blank">
-                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                under construction warning</a></div>
-            <div class="col-md-4 col-lg-3 mb-3"><a href="/set?status=beta" class="btn btn-warning" target="_blank">
-                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                Beta warning</a></div>
-            <div clas="col-md-4 col-lg-3 mb-3"><a href="/set?status=red" class="btn btn-warning" target="_blank">
-                <i class="fas fa-fire-extinguisher" aria-hidden="true"></i>
-                Don&apos;t press this</a></div>
+            <% options=[
+                ('/log',                    'success',  'fa-server',            'Server log'),
+                ('/static/bash_log.txt',    'info',     'fa-server',            'Bash log'),
+                ('/upcoming',               'success',  'fa-sticky-note',       'To Do list'),
+                ('/set?status=normal',      'warning',  'fa-flag-checkered',    'Remove warning'),
+                ('/set?status=construction','warning',  'fa-briefcase',         'Under-construction warning'),
+                ('/set?status=beta',        'warning',  'fa-exclamation-triangle','Beta warning'),
+                ('/set?status=xmas',        'info',     'fa-tree-christmas',    'Merry Christmas!'),
+                ('/set?status=red',         'warning',  'fa-fire-extinguisher', 'Don\'t press this')
+                ]
+            %>
+            % for URL, button_type, icon, text in options:
+                <div class="col-md-4 col-lg-3 mb-3 d-flex flex-column"><a href="${URL}" class="btn btn-${button_type}" target="_blank"><i class="fas ${icon}" aria-hidden="true"></i> ${text}</a></div>
+            % endfor
+
+            <div clas="col-md-4 col-lg-3 mb-3"><a href="" class="btn btn-" target="_blank">
+                <i class="fas " aria-hidden="true"></i>
+                </a></div>
             <div class="col-md-8  col-lg-6 mb-3">
                 <div class="input-group" role="group" aria-label="Basic example">
                     <input type="text" class="form-control" placeholder="Custom message!" id="custom_status">

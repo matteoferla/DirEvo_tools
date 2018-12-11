@@ -392,10 +392,12 @@ class Fields():
         elif STATUS == 'red':
             self.status_class = 'danger'
             self.status_msg = 'Somebody pressed the forbidden link.'
+        elif STATUS == 'xmas':
+            self.status_class = 'info'
+            self.status_msg = '<i class="fas fa-tree-christmas fa-spin"></i> Merry Christmas! (Aka testing the FA 5.6 upgrade, which is being buggy).'
         elif STATUS == 'upgradetemp':
             self.status_class = 'warning'
             self.status_msg = '<i class="fas fa-bat fa-spin"></i> Matteo just upgraded both Bootstrap and Font Awesome, and did a major change to the Mako templating so bugginess is a given.'
-
         else: #'custom' there will be status_msg and class in kwargs
             self.status_class='danger'
             self.status_msg=STATUS

@@ -160,7 +160,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a onclick="$('#comment_modal').modal('show');" style="cursor:pointer"
-                                        class="nav-link">Comment</a>
+                                        class="nav-link">Feedback</a>
                 </li>
             </ul>
         </div>
@@ -181,9 +181,11 @@
             <div class="col-lg-8 offset-lg-2">
 
                 %if page.status:
-                    <div class="bs-callout bs-callout-${page.status_class}">
-                        <h4>${page.status_class.capitalize()}</h4>
+                    <div class="alert alert-${page.status_class} alert-dismissible fade show" role="alert">
+                        <h4 class="alert-heading">${page.status_class.capitalize()}</h4>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         ${page.status_msg |n}
+
                     </div>
                 %endif
 
