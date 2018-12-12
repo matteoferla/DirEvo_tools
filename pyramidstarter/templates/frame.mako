@@ -16,20 +16,17 @@
     <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootswatch/dist/darkly/bootstrap.min.css')}" id="theme_CSS">
     <!--Fontawesome-->
     <link rel="stylesheet"
-          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.css')}">
+          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.min.css')}">
     <!-- was bootstrap-theme-->
     <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}"
           rel="stylesheet">
     <!--slider-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/css/bootstrap-slider.css')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/css/bootstrap-slider.min.css')}"
           rel="stylesheet">
     <!--switch-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css')}"
           rel="stylesheet">
     <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css')}"
-          rel="stylesheet">
-    <!--Extras-->
-    <link href="${request.static_url('pyramidstarter:static/sitewide.css')}"
           rel="stylesheet">
     <!--pyspinner-->
     <link href="${request.static_url('pyramidstarter:static/pyspinner.css')}"
@@ -273,11 +270,11 @@
             crossorigin="anonymous"></script>-->
     <!--
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.js')}"></script> -->
+            src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js')}"></script> -->
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.js')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.min.js')}"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/js/bootstrap-switch.js')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/js/bootstrap-switch.min.js')}"></script>
     <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js')}"></script>
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
