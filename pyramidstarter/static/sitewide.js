@@ -13,16 +13,18 @@ window.setTimeout(function() {
 //Themes!!!
 var themeNames = ["default","cerulean","cosmo","cyborg","darkly","flatly","journal","litera","lumen","lux","materia","minty","pulse","sandstone","simplex","sketchy","slate","solar","spacelab","superhero","yeti","united"];
 var themes = {};
-var mytheme=sessionStorage.getItem('theme') ? sessionStorage.getItem('theme') : 'default';
+var mytheme=sessionStorage.getItem('theme') ? sessionStorage.getItem('theme') : 'darkly';
 for (i = 0; i < themeNames.length; i++) {
-    themes[themeNames[i]] = "/static/bootswatch/dist/" + themeNames[i] + "/bootstrap.css";
-    themes['default'] = "/static/bootstrap/dist/css/bootstrap.css";
-    if (themeNames[i] == mytheme) {$('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item active  theme-link"><b>' + themeNames[i] + '</a>');}
-    else {$('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item theme-link">' + themeNames[i] + '</a>');}
+    themes[themeNames[i]] = "/static/bootswatch/dist/" + themeNames[i] + "/bootstrap.min.css";
+    themes['default'] = "/static/bootstrap/dist/css/bootstrap.min.css";
+    if (themeNames[i] == mytheme) {
+        $('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item active  theme-link"><b>' + themeNames[i] + '</a>');}
+    else {
+        $('#themeSelector').append('<a href="#" data-theme=' + themeNames[i] + ' class="dropdown-item theme-link">' + themeNames[i] + '</a>');}
 }
 var themesheet = $('#theme_CSS');
-themesheet.removeAttr('integrity');
-themesheet.attr('href',themes[mytheme]); //The CDN is loaded first, then I override with the default because JS is done last.
+//themesheet.removeAttr('integrity');
+//themesheet.attr('href',themes[mytheme]); //The CDN is loaded first, then I override with the default because JS is done last.
 $('.theme-link').click(function() {
     var themeurl = themes[$(this).attr('data-theme')];
     themesheet.attr('href', themeurl);
