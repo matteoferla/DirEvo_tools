@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="pyramid web application">
-    <meta name="author" content="Pylons Project">
+    <meta name="description" content="Mutagenesis tools">
+    <meta name="author" content="Matteo Ferla et al.">
     <link rel="icon" type="image/png" sizes="16x16"
           href="${request.static_url('pyramidstarter:static/favicon-16x16.png')}">
     <link rel="icon" type="image/png" sizes="96x96"

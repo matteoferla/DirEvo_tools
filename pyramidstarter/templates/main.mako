@@ -24,7 +24,7 @@
                   ("main/glue","Glue — Glue","Determine how well a library of randomised sequences covers its potential sequence complexity."),
                   ("main/glue","Glue — GlueIT","Calculate the completeness of a library mutated at 1–6 codons."),
                   ("main/driver","Driver","Calculates the probability of cross-over events"),
-                  ("main/QCC","QQC calculator","Determine the diversity of a library randomised at a single codon from a single sequencing file with the quick quality control method."),
+                  ("main/QQC","QQC calculator","Determine the diversity of a library randomised at a single codon from a single sequencing file with the quick quality control method."),
                   ("main/landscape","Landscape","Determine the mutational landscape of a protein from a Rosetta pmut_scan output."),
                   ("main/codon_autopop-up","Codon helper","A tool to help pick the ideal degenerate codons for site-saturation mutagenesis and library construction."),
                   )
