@@ -188,6 +188,9 @@ $('#planner_calculate').click(function () {
             } else if (! data['t_size']) {
                 // pass. It will fail the pedelAA.
             } else {validator(['sequence']);}
+            if (data['p_size'] < data['t_size']) {
+                $('#planner_results').append('<div class="alert alert-danger" role="alert">Your plasmid is smaller than your insert.</div>');
+            }
             template = parseFloat(data['p_conc']) * parseFloat(data['p_vol']) * parseFloat(data['t_size']) / parseFloat(data['p_size']);
         }
             else {
@@ -220,9 +223,12 @@ $('#planner_calculate').click(function () {
     }
     else {
         // plan method
-        validator(['p_conc', 't_size', 'p_size','m_load', 'loss','m_rate']);
+        validator(['p_conc', 't_size', 'p_size','y_ng', 'm_load', 'loss','m_rate']);
+        if (data['p_size'] < data['t_size']) {
+            $('#planner_results').append('<div class="alert alert-danger" role="alert">Your plasmid is smaller than your insert.</div>');
+        }
         data['load'] = parseFloat(data['m_load']);
-        var product = 2000; //ug
+        var product = data['y_ng']; //ug
         data['duplications'] = data['load'] / parseFloat(data['m_rate']);
         var template = product /Math.pow(2,data['duplications']);
         var plasmid = template / parseFloat(data['t_size']) * parseFloat(data['p_size']);

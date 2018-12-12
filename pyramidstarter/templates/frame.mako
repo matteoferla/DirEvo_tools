@@ -13,13 +13,10 @@
           href="${request.static_url('pyramidstarter:static/favicon-96x96.png')}">
     <title>Pedel revamp</title>
     <!-- Bootstrap core CSS-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" id="theme_CSS">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootswatch/dist/darkly/bootstrap.min.css')}" id="theme_CSS">
     <!--Fontawesome-->
     <link rel="stylesheet"
           href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.css')}">
-    <!-- Custom styles for this scaffold -->
     <!-- was bootstrap-theme-->
     <link href="${request.static_url('pyramidstarter:static/bs-callout.css')}"
           rel="stylesheet">
@@ -194,8 +191,9 @@
                         <div class="card-body">
                             <h2 class="card-title">Holy cow, Batman!</h2>
                             <h3 class="card-subtitle">We got a server-side error preparing your page!</h3>
-                            <p class="card-text">(If you are a user, I am sorry. This really should not have
-                                happened.)</p>
+                            <p class="card-text">If you are a user (and did not type a made up address), I am sorry. <br/>
+                                This really should not have happened.<br/>
+                            </p>
                             <pre>
                           <code>
                               ${page.error}
@@ -269,9 +267,13 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
             integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>-->
+    <!--
+    <script type='text/javascript'
+            src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.js')}"></script> -->
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.js')}"></script>
     <script type='text/javascript'
@@ -281,7 +283,6 @@
             src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js')}"></script>
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/sitewide.js')}"></script>
-    <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
     <script>
 
@@ -318,6 +319,7 @@
 
     </script>
 </js_code>
+<script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </body>
 
 </html>
