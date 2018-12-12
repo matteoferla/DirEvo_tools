@@ -267,7 +267,7 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
             integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
-            crossorigin="anonymous"></script>-->
+            crossorigin="anonymous"></script>
     <!--
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js')}"></script> -->
@@ -316,7 +316,12 @@
 
     </script>
 </js_code>
-<script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+% if 'plotly' in page.requirements:
+    <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+% endif
+% if 'math' in page.requirements:
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+% endif
 </body>
 
 </html>

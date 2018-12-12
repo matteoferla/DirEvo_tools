@@ -402,6 +402,7 @@ class Fields():
             self.status_class='danger'
             self.status_msg=STATUS
         #write args
+        self.requirements=[]
         for k in kwargs:
             setattr(self,k,kwargs[k])
 
@@ -511,7 +512,10 @@ def main_callable(request):
                 code = page + '.js'
             else:
                 code = ''
-            return {'page': Fields(request=request, body=page+'.mako', code=code, codon_flag=True, **{'m_'+page: 'active'})}
+            requirements=['plotly']
+            if page in ('QQC'):
+                requirements.append('math')
+            return {'page': Fields(request=request, requirements=requirements, body=page+'.mako', code=code, codon_flag=True, **{'m_'+page: 'active'})}
         else:
             return {'page': Fields(request=request, m_404='active', status=True, status_msg='404 Error! File not found!', status_class='danger', error=page)}
     except Exception as err:
