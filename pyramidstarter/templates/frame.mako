@@ -33,6 +33,10 @@
           rel="stylesheet">
     <!--main CSS-->
     <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/sitewide.css')}">
+    <!--tour-->
+    % if 'tour' in page.requirements:
+        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap-tour/build/css/bootstrap-tour.min.css')}"/>
+    % endif
     <!--
         <style>
             div {border:1px solid black;}
@@ -129,20 +133,22 @@
 
 
 
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
+
+                    % if page.admin:
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"
                                                  role="button"
                                                  aria-haspopup="true" aria-expanded="false">
                         Change theme <span class="caret"></span></a>
                     <div class="dropdown-menu" id="themeSelector"></div>
                 </li>
+                    % endif
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
                                                  role="button"
                                                  aria-haspopup="true" aria-expanded="false">About <span
                         class="caret"></span></a>
-                    <div
-                            class="dropdown-menu">
+                    <div class="dropdown-menu">
                         <a class="dropdown-item ${page.m_about}" href="/main/about">About
                         </a>
                         <a class="dropdown-item ${page.m_glossary}" href="/main/glossary">FAQ
@@ -152,9 +158,6 @@
                         <a class="dropdown-item ${page.m_upcoming}" href="/upcoming">Upcoming
                         </a>
                     </div>
-                </li>
-                <li class="nav-item"><a onclick="$('#comment_modal').modal('show');" style="cursor:pointer"
-                                        class="nav-link">Feedback</a>
                 </li>
             </ul>
         </div>
@@ -172,8 +175,7 @@
     <!--welcome box-->
     <div class="section">
         <div class="row" id="${page.page_name}">
-            <div class="col-lg-8 offset-lg-2">
-
+            <div class="col-lg-8 offset-lg-1">
                 %if page.status:
                     <div class="alert alert-${page.status_class} alert-dismissible fade show" role="alert">
                         <h4 class="alert-heading">${page.status_class.capitalize()}</h4>
@@ -203,6 +205,42 @@
                     <%include file="${page.body}" args="page=page, collapse_section=collapse_section "/>
                 %endif
             </div>
+            <div class="col-lg-2">
+                <div class="position-fixed vertical-center">
+                    <div class="card" style="min-height: 70vh">
+                        <div class="card-header">Navigation</div>
+                        <div class="card-body">
+                        <div class="d-flex flex-column">
+                            %if 'tour' in page.requirements:
+                                <a href='#' class="btn btn-success my-1" id="tour"><i class="far fa-compass"></i> Tutorial</a>
+                            %endif
+                            %if page.overview:
+                                <a data-toggle="modal" data-target="#overview_modal" style="cursor:pointer" class="btn btn-success my-1" id="overview"><i class="far fa-map"></i> Background</a>
+                            %endif
+                            %if page.notes:
+                                %for note_file,note_title in page.notes:
+                                    <a href='#' class="btn btn-success my-1" id="background"><i class="far fa-sticky-note"></i> Notes</a>
+                                %endfor
+                            %endif
+                            %if page.avanti:
+                                <a data-toggle="modal" data-target="#avanti_modal" style="cursor:pointer"  class="btn btn-success my-1" id="feedback"><i class="far fa-forward"></i> Next</a>
+                            %endif
+                            <hr/>
+                            <a data-toggle="modal" data-target="#comment_modal" style="cursor:pointer"  class="btn btn-warning my-1" id="feedback"><i class="far fa-comment"></i> Feedback</a>
+                            <hr/>
+                            <a href='#' class="btn btn-info my-1" id="twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href='#' class="btn btn-info my-1" id="blogger"><i class="fab fa-blogger-b"></i> Blog</a>
+                            <a href='#' class="btn btn-info my-1" id="github"><i class="fab fa-github"></i> Github</a>
+                </li>
+                        </div>
+
+
+
+
+                      </div>
+                    </div>
+                </div>
+            </div>
         </div>
         % if full_width_text:
             ${page.full_width_text |n}
@@ -228,12 +266,15 @@
         </button>
     </div>
 </div>
-<!-- Modal -->
+<!-- Modal for comment /feedback -->
 <div class="modal" id="comment_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="comment_title">Send Comment</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body" id="comment_body">
                 <div class="input-group"><span class="input-group-addon" id="basic-addon1">Name (optional)</span>
@@ -253,6 +294,46 @@
         </div>
     </div>
 </div>
+
+% if page.overview:
+    <!-- Modal for overview -->
+<div class="modal" id="overview_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="overview_title">Overview</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="overview_body">
+                <%include file="${page.overview}" args="page=page"/>
+            </div>
+        </div>
+    </div>
+</div>
+% endif
+
+% if page.overview:
+    <!-- Modal for next/avanti -->
+<div class="modal" id="avanti_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="avanti_title">Where to from here?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="overview_body">
+                <%include file="${page.avanti}" args="page=page"/>
+            </div>
+        </div>
+    </div>
+</div>
+% endif
+
+
 <js_code>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -268,9 +349,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
             integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
             crossorigin="anonymous"></script>
-    <!--
-    <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js')}"></script> -->
+    <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js')}"></script> -->
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.min.js')}"></script>
     <script type='text/javascript'
@@ -281,6 +360,16 @@
     <script type='text/javascript'
             src="${request.static_url('pyramidstarter:static/sitewide.js')}"></script>
     <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
+    % if 'plotly' in page.requirements:
+        <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    % endif
+    % if 'math' in page.requirements:
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    % endif
+    % if 'tour' in page.requirements:
+        <script src="${request.static_url('pyramidstarter:static/bootstrap-tour/build/js/bootstrap-tour.min.js')}"></script>
+    % endif
+
     <script>
 
 
@@ -311,17 +400,12 @@
             %if page.code:
                 <%include file="${page.code}" args="page=page"/>
             %endif
+            % if page.tour:
+                <%include file="${page.tour}" args="page=page"/>
+            % endif
         });
-
 
     </script>
 </js_code>
-% if 'plotly' in page.requirements:
-    <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-% endif
-% if 'math' in page.requirements:
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-% endif
 </body>
-
 </html>

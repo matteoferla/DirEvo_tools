@@ -131,7 +131,7 @@ function validator (list) {
 $('#planner_demo').click(function () {
     $('.is-valid').removeClass('is-valid');
     $('.is-invalid').removeClass('is-invalid');
-    data={'t_size':0.5,'p_size':5,'p_conc':50,'p_vol':1,'y_conc':1000,'y_vol':20,'r_vol':50,'loss':50,'m_rate':0.9,'m_load':5};
+    data={'t_size':0.5,'p_size':5,'p_conc':50,'p_vol':1,'y_conc':100,'y_vol':20,'r_vol':50,'loss':50,'m_rate':0.9,'m_load':5};
     for (var p in data) {
         $('#planner_'+p).val(data[p]);
     }
@@ -247,7 +247,8 @@ $('#planner_calculate').click(function () {
     if (!! data['duplications'] && data['duplications'] >30) {$('#planner_results').append('<div class="alert alert-warning" role="alert">The number of duplications is close to the number of PCR cycles.</div>');}
 
     //pedelAA
-    try {   $('#planner_results').append('<div id="pedelAA_result"></div>');
+    try {
+            $('#planner_results').append('<div id="pedelAA_result"></div>');
             data['nucnorm']=0;
             data['distr']='Poisson';
             $.ajax({
@@ -276,9 +277,13 @@ $('#planner_calculate').click(function () {
                 contentType: false,
                 processData: false
             });
+            if ($('#avanti_modal').length) {
+                $('#planner_results').append('<hr/><p><a data-toggle="modal" data-target="#avanti_modal" style="cursor:pointer"  class="btn btn-dark">Click for where to go next from here!</a></p>');
+            }
         } catch (err) {
             $("#pedelAA_result").html('<div class="alert alert-danger" role="alert"><h3><span class="pycorpse"></span> Client side error (<i>i.e.</i> something is wrong on your side)</h3><pre><code>{0}</pre><code></div>'.format(err.message));
         }
+
 });
 
 //input#planner_method.switch, input#planner_t_ng.form-control, input#planner_p_conc.form-control, input#planner_p_vol.form-control, input#planner_t_size.form-control, input#planner_p_size.form-control, input#planner_y_ng.form-control, input#planner_y_conc.form-control, input#planner_y_conc.form-control, input#planner_r_vol.form-control, input#planner_r_vol.form-control, input#planner_m_load.form-control, input#planner_m_rate.form-control, input#comment_name.form-control, prevObject: r.fn.init(1)]

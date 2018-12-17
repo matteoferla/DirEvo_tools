@@ -367,7 +367,8 @@ class Fields():
         'doubling':('Doubling number','Number of duplications during PCR, which differs from PCR cycle number'),
         'missense':('Missense mutation','A mutation that results in an amino acid change. These are good mutations for directed evolution.'),
         'nonsense':('Nonsense mutation','A mutation that results in a premature stop. These are bad mutations for directed evolution.'),
-        'synonymous':('Synonymous mutation','A mutation that alters the codon into another that codes the same amino acid. one third of changes in a equiprobable scenario are synonymous.')
+        'synonymous':('Synonymous mutation','A mutation that alters the codon into another that codes the same amino acid. one third of changes in a equiprobable scenario are synonymous.'),
+        'epPCR':('Error-prone PCR','A PCR reaction with a polymerase without proof-reading ability that may have lower fidelity due to amino acid changes (Mutazyme) or cofactor (manganese) or in the presence of wobbly dNTPs (oxodGTP and dPTP). This differs from PCR where the primers carry the variation (QuickChange-like).')
     }
 
     def term_helper(self, term, inner=None):
@@ -506,16 +507,26 @@ def main_callable(request):
         debugprint('main called...')
         log_passing(request)
         page = request.matchdict['page']
+        pager = Fields(request=request, codon_flag=True, **{'m_'+page: 'active'})
         debugprint('for page ' + page)
+
         if os.path.isfile(os.path.join(PATH,'templates',page+'.mako')):
+            pager.body = page+'.mako'
             if os.path.isfile(os.path.join(PATH,'templates',page+'.js')):
-                code = page + '.js'
-            else:
-                code = ''
-            requirements=['plotly']
-            if page in ('QQC'):
-                requirements.append('math')
-            return {'page': Fields(request=request, requirements=requirements, body=page+'.mako', code=code, codon_flag=True, **{'m_'+page: 'active'})}
+                pager.code = page + '.js'
+            pager.requirements=['plotly']
+            if page in ('QQC','planner'):
+                pager.requirements.append('math')
+            if os.path.isfile(os.path.join(PATH,'templates',page+'.tour.js')):
+                pager.tour=page+'.tour.js'
+                pager.requirements.append('tour')
+            if os.path.isfile(os.path.join(PATH,'templates',page+'_overview.mako')):
+                pager.overview=page+'_overview.mako'
+            if os.path.isfile(os.path.join(PATH,'templates',page+'_next.mako')):
+                pager.avanti=page+'_next.mako'
+            if 'admin' in request.session:
+                pager.admin = True
+            return {'page': pager}
         else:
             return {'page': Fields(request=request, m_404='active', status=True, status_msg='404 Error! File not found!', status_class='danger', error=page)}
     except Exception as err:

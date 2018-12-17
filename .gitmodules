@@ -13,3 +13,9 @@
 [submodule "pyramidstarter/static/Font-Awesome-Pro"]
 	path = pyramidstarter/static/Font-Awesome-Pro
 	url = https://github.com/FortAwesome/Font-Awesome-Pro.git
+[submodule "pyramidstarter/static/shepherd"]
+	path = pyramidstarter/static/shepherd
+	url = https://github.com/shipshapecode/shepherd.git
+[submodule "pyramidstarter/static/bootstrap-tour"]
+	path = pyramidstarter/static/bootstrap-tour
+	url = https://github.com/sorich87/bootstrap-tour.git

@@ -8,7 +8,7 @@
         <div id="planner_intro">
              <h3>Description</h3>
             <p>Plan your experiment to get a given amount of mutations or predict what you may get from your PCR yield.</p>
-            <p>For more information, visit the FAQ about <a href="/main/glossary#library">what makes a good library</a>, <a href="/main/glossary#epPCR">what epPCR methods to use</a> and <a href="/main/glossary#target">what is a good desired mutational load</a>.</p>
+            <!--<p>For more information, visit the FAQ about <a href="/main/glossary#library">what makes a good library</a>, <a href="/main/glossary#epPCR">what epPCR methods to use</a> and <a href="/main/glossary#target">what is a good desired mutational load</a>.</p>-->
         </div>
         <div id="planner_input">
              <h3>Input</h3>
@@ -25,8 +25,8 @@
             </div>
             <!-- template-->
             <h5>Template</h5>
-            <p>Herein, by "template" the span amplified is intendended, while by "plasmid" the full DNA element containing the template (be it aDNA, cDNA, plasmid or gDNA).<br/>
-                <span class="planner-verify">There are two ways to input the data. Please fill one of either of the following rows.</span></p>
+            <!--<p>Herein, by "template" the span amplified is intendended, while by "plasmid" the full DNA element containing the template (be it aDNA, cDNA, plasmid or gDNA).</p>-->
+                <p><span class="planner-verify">There are two ways to input the data. Please fill one of either of the following rows.</span></p>
             <ul class="list-group mb-3">
                       <!-- final conc -->
                       <li class="list-group-item planner-verify">

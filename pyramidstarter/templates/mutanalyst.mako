@@ -11,15 +11,16 @@
         ${collapse_section('mutanalyst_bg','Background', file='mutanalyst_bg.mako') |n}
         <!--section-->
         <h3>Choose starting point</h3>
-        <p>There are two possible starting points for mutanalysts.
-            <br>One is proving a sequence and the mutations sampled, for which the ${page.term_helper('load','mutational load')|n},
-            ${page.term_helper('spectrum','mutational spectrum')|n} and the ${page.term_helper('bias','mutational bias indicators')|n} will be calculated.
-            <br>The other is more downstream, wherein one proves a mutational spectrum
-            and mutational load and the mutational bias indicators will be calculated.</p>
-        <br>
         <div class="row">
-
-            <div class="input-group">
+            <div class="col-12 col-lg-8">
+                <p>There are two possible starting points for mutanalysts.
+            <br/>One is proving a sequence and the mutations sampled, for which the ${page.term_helper('load','mutational load')|n},
+            ${page.term_helper('spectrum','mutational spectrum')|n} and the ${page.term_helper('bias','mutational bias indicators')|n} will be calculated.
+            <br/>The other is more downstream, wherein one proves a mutational spectrum
+            and mutational load and the mutational bias indicators will be calculated.</p>
+            </div>
+            <div class="col-12 col-lg-4 py-4">
+                <div class="input-group">
                 <div class="input-group-prepend" data-toggle="tooltip" title="Choose starting point"
                      data-placement="top">
                     <span class="input-group-text">Choose:</span></div>
@@ -27,12 +28,13 @@
                        id="mutanalyst_method" checked data-off-text="Spectrum" data-on-text="Mutations"
                        data-off-color="warning" data-size="large">
             </div>
+            </div>
         </div>
-        <br>
-        <br>If you want to know what mutations you have in a series of ab1 file check
+        <p>If you want to know what mutations you have in a series of ab1 files check
         out out <a href="mutantcaller">Mutantcaller</a>.
-        <br>If you want to know the library composition (<i>e.g.</i> redundancy) check
-        out <a href="pedel">PedelAA</a> or go to the bottom of this page.
+        <br/>If you want to know the library composition (<i>e.g.</i> redundancy) check
+        out <a href="pedel">PedelAA</a> or go to the bottom of this page.</p>
+
         <!--section-->
         <div id="mutanalyst_seq&#xA7;">
             <h3>Starting from a sequence and a mutant genotype list</h3>
@@ -81,7 +83,7 @@
                 <h4>Mutations found</h4>
                 <p>This is the list of the mutations found. Identifying the mutations can
                     be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
-                    <br>The format is as follows:</p>
+                    <br/>The format is as follows:</p>
 
                 <ul>
                     <li>Each <span class="note" data-toggle="tooltip" data-placement="top"
@@ -144,7 +146,7 @@
                 per sequence.</p>
             <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;">N/A</span></strong> mutations
                 per sequence.</p>
-            <br>
+            <br/>
             <div id="disChart" style="width: 80%; height:400px"></div>
             <p class="marginless">If the &#x3BB;<sub>Poisson</sub> and average are very different and the
                 plot is very poor, sequencing more variants from the test library may be
@@ -447,9 +449,9 @@
                 </tr>
                 </tbody>
             </table>
-            <br>
+            <br/>
             <div id="biasChart" style="width: 80%; height:400px"></div>
-            <br>
+            <br/>
         </div>
         <div id="mutanalyst_more&#xA7;">
             <h2>Pedel-AA results</h2>
