@@ -89,7 +89,7 @@ Calculate</button>
                             <br>
                         </div>
                     </div>
-                    <div class="row hidden" id="MC_result">
+                    <div class="hidden" id="MC_result">
                         <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong</div>
                         <br>
                     </div>
