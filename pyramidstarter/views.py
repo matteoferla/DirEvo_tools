@@ -17,6 +17,7 @@ from pyramid.view import view_config, notfound_view_config
 
 import pyramidstarter.calculations as calc
 from pyramidstarter.epistasis import Epistatic
+from pyramidstarter.SynBio_press import Press
 
 # import csv
 
@@ -517,8 +518,10 @@ def main_callable(request):
             pager.requirements=['plotly']
             if page in ('QQC','planner'):
                 pager.requirements.append('math')
+            if page == 'press':
+                pager.garbage=Press(os.path.join(PATH,'abstracts.json')).generate(200,5000)
             if os.path.isfile(os.path.join(PATH,'templates',page+'.tour.js')):
-                pager.tour=page+'.tour.js'
+                pager.tour=page+'_tour.js'
                 pager.requirements.append('tour')
             if os.path.isfile(os.path.join(PATH,'templates',page+'_overview.mako')):
                 pager.overview=page+'_overview.mako'

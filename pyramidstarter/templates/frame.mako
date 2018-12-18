@@ -314,7 +314,7 @@
 </div>
 % endif
 
-% if page.overview:
+% if page.avanti:
     <!-- Modal for next/avanti -->
 <div class="modal" id="avanti_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">

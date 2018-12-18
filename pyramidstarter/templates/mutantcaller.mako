@@ -1,3 +1,4 @@
+<%page args="page"/>
 <div class="card">
                 <div class="card-header">
                      <h1 class="card-title">MutantCaller</h1>

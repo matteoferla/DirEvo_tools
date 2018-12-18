@@ -1,3 +1,4 @@
+<%page args="page"/>
 <p>PEDEL-AA is an extension to amino acid sequences of the original
     nucleotide version of PEDEL (see links to publications and
     <a href="/static/pedelAA_math_notes.pdf">mathematics notes</a> from the statistics

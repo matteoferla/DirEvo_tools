@@ -2,14 +2,10 @@
 <div class="card">
     <div class="card-header">
         <h1 class="card-title">Mutanalyst<img src="/static/mutanalyst logo-01.svg" alt="Mutanalyst logo" style="height:2em; vertical-align: -50%;"></h1>
-        <h4 class="card-subtitle mb-2 text-muted">Mutational load and spectrum calculator</h4>
+        <h4 class="card-subtitle mb-2 text-muted">Mutational load and spectrum calculator for epPCR libraries
+            with poor sampling</h4>
     </div>
     <div class="card-body">
-        <h3>Description</h3>
-        <p>An online tool for assessing the mutational spectrum of epPCR libraries
-            with poor sampling.</p>
-        ${collapse_section('mutanalyst_bg','Background', file='mutanalyst_bg.mako') |n}
-        <!--section-->
         <h3>Choose starting point</h3>
         <div class="row">
             <div class="col-12 col-lg-8">
