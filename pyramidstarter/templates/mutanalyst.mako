@@ -78,36 +78,22 @@
 
                 <h4>Mutations found</h4>
                 <p>This is the list of the mutations found. Identifying the mutations can
-                    be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.
-                    <br/>The format is as follows:</p>
-
-                <ul>
-                    <li>Each <span class="note" data-toggle="tooltip" data-placement="top"
-                                   title="separated by space, new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).">line</span>
-                        contains
-                        <span
-                                class="note"
-                                data-tooltip="separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots">one or more</span>mutations
-                        of a variant sampled.
-                    </li>
-                    <li>The mutations can only be in the forms A123C (technically non-standard for nucleotides) or 123A&gt;C, where the number
-                        is irrelevant (and can be omitted).
-                    </li>
-                    <li>A wild type sequence can be indicated with <span class="note" data-toggle="tooltip"
-                                                                         data-placement="top"
-                                                                         title="wt or WT or wild, but not an identity 123A&gt;A as that will count as a mutation (roundtrip)">&apos;wt&apos;</span>,
-                        it is not needed for the main calculations and it is used solely for the
-                        mutational frequency &#x2014;and useful for Pedel.
-                    </li>
+                    be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.</p>
+            <div class="row pb-4">
+                <div class="input-group" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="<b>List of the mutations found.</b>
+                     <ul>
+                     <li>Each line contains one or more mutations for each variant sampled.</li>
+                     <li></span>The 'lines' are separated by a new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).</li>
+                     <li>The mutations on each line are separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots.</li>
+                     <li>The mutations can only be in the forms A123C (technically non-standard for nucleotides) or 123A&gt;C, where the number is irrelevant (and can be omitted).</li>
+                    <li>A wild type sequence must be indicated &mdash;it is not needed for the mutational spectrum, but it is for the load.</li>
+                    <li>A wild type sequence is indicated with &apos;wt&apos; or &apos;WT&apos; or &apos;wild&apos;, but not as an identity 123A&gt;A as that will count as a mutation (roundtrip)</li>
                     <li>Rarer events such as insertions, deletion, duplications, frameshifts and
                         inversions, are not taken into account, but their frequency can be easily
                         calculated using the &apos;values for further analysis&apos; below.
-                    </li>
-                </ul>
-            <div class="row pb-4">
-                <div class="input-group">
-                    <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                         title="List of the mutations found">
+                    </li></ul>">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">Variants</span>
 
                     </div>

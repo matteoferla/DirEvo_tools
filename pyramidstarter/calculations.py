@@ -30,6 +30,7 @@ from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
 from pyramidstarter.deep_mut_scanning import deep_mutation_scan
 from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
 
+from mako.template import Template
 
 PATH = "/opt/app-root/src/pyramidstarter/"
 if not os.path.isdir(PATH):
@@ -166,6 +167,9 @@ def MC(file_path, stored_filename, tainted_filename, sequence, reverse=False, sh
                ref_AA[resi] != query_AA[resi]]
     noise = neochroma.noise_analysis(sigma=sigma)
     heteromutants = [(nti, '{0}{1}{2}'.format(ref_AA[int(nti/3)],int(nti/3)+1,query_AA[int(nti/3)])) for (nti, prop) in noise['outliers']]
+
+
+
     html = "<div class='row'><div class='col-lg-12'><p>There are {n} coding mutations ({l})</p></div></div>".format(n=len(mutants),
                                                                                 l=' '.join([x[1] for x in mutants])) + \
            "<div class='row'>" + \
@@ -269,7 +273,7 @@ def pedelAA(jsonreq):
     #warn('To test, the wrapper is circumvented.')
     data=bike.pedelAA(filename + '.setup')
     #print(data['html'])
-    html=str(open(os.path.join(PATH,'templates','pedelAA_results.html')).read()).format(**data)
+    html=str(open(os.path.join(PATH,'templates','pedelAA_results.mako')).read()).format(**data)
     return json.dumps({'data': data['sub_table_data'], 'html': html})
 
 

@@ -516,11 +516,7 @@ def main_callable(request):
             if os.path.isfile(os.path.join(PATH,'templates',page+'.js')):
                 pager.code = page + '.js'
             pager.requirements=['plotly']
-            if page in ('QQC','planner'):
-                pager.requirements.append('math')
-            if page == 'press':
-                pager.garbage=Press(os.path.join(PATH,'abstracts.json')).generate(200,5000)
-            if os.path.isfile(os.path.join(PATH,'templates',page+'.tour.js')):
+            if os.path.isfile(os.path.join(PATH,'templates',page+'_tour.js')):
                 pager.tour=page+'_tour.js'
                 pager.requirements.append('tour')
             if os.path.isfile(os.path.join(PATH,'templates',page+'_overview.mako')):
@@ -529,6 +525,10 @@ def main_callable(request):
                 pager.avanti=page+'_next.mako'
             if 'admin' in request.session:
                 pager.admin = True
+            if page in ('QQC','planner'):
+                pager.requirements.append('math')
+            if page == 'press':
+                pager.garbage=Press(os.path.join(PATH,'abstracts.json')).generate(200,5000)
             return {'page': pager}
         else:
             return {'page': Fields(request=request, m_404='active', status=True, status_msg='404 Error! File not found!', status_class='danger', error=page)}
