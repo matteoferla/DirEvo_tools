@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/pyramidstarter/static/Font-Awesome-Pro" />
+      <excludeFolder url="file://$MODULE_DIR$/pyramidstarter/static/bootstrap" />
+      <excludeFolder url="file://$MODULE_DIR$/pyramidstarter/static/bootstrap-slider" />
+      <excludeFolder url="file://$MODULE_DIR$/pyramidstarter/static/bootstrap-switch" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

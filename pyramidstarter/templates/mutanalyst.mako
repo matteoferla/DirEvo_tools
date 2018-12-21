@@ -80,9 +80,9 @@
                 <p>This is the list of the mutations found. Identifying the mutations can
                     be done using the <a href="/main/mutantcaller">Mutantcaller</a> tool.</p>
             <div class="row pb-4">
-                <div class="input-group" data-toggle="tooltip" data-placement="top" data-html="true"
+                <div class="input-group" data-toggle="tooltip" data-placement="bottom" data-html="true"
                      title="<b>List of the mutations found.</b>
-                     <ul>
+                     <ul class='text-left'>
                      <li>Each line contains one or more mutations for each variant sampled.</li>
                      <li></span>The 'lines' are separated by a new-line (Enter on Win), carriage return (Enter on Mac), both (Enter on Linux) or semicolon (MatLab style).</li>
                      <li>The mutations on each line are separated by a space, tab or comma, but not non-breaking space, hyphens, dashes or dots.</li>
@@ -92,7 +92,8 @@
                     <li>Rarer events such as insertions, deletion, duplications, frameshifts and
                         inversions, are not taken into account, but their frequency can be easily
                         calculated using the &apos;values for further analysis&apos; below.
-                    </li></ul>">
+                    </li></ul>"
+                data-template="<div class='tooltip' role='tooltip'><div class='arrow'></div><div class='tooltip-inner tooltip-wide'></div></div>">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Variants</span>
 
@@ -107,32 +108,19 @@
         <div id="mutanalyst_freq&#xA7;">
             <!--section-->
             <h3>Mutational frequency</h3>
-            <p>The simplest estimate of the frequency of mutations per sequence is the
-                average of the point mutations per sequence (<i>m</i>), however due to
-                the small sample size this may be off. The distribution of number of mutations
-                per sequence follows a PCR distribution, which can <span class="note" data-toggle="tooltip"
-                                                                         data-placement="bottom"
-                                                                         title="converging as the number of PCR cycles tends to infinity">approximated</span>
-                with
-                a Poisson distribution (<span class="note" data-toggle="tooltip" data-placement="bottom"
-                                              title="Sun F. (1995). The polymerase chain reaction and branching processes, J. Comput. Biol., 2, 63-86.">Sun, 1995</span>).
-                In the <span class="note" data-toggle="tooltip" data-placement="bottom"
-                             title="and the former at number of cycles (&lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt;) = &#x221E;  as the variance is equal to the mean &lt;b&gt;plus&lt;/b&gt; the square of the mean divided by the &lt;i&gt;n&lt;/i&gt;&lt;sub&gt;PCR&lt;/sub&gt; scaled by the PCR efficiency.">latter</span>,
-                the mean and the variance are the same (&#x3BB; &#x2014;unrelated to PCR
-                efficiency&#x2014;). The <em>sample</em> average and variance may differ,
-                especially at low sampling. The number to trust the most is the &#x3BB;<sub>Poisson</sub>.</p>
+            <div class="alert alert-warning fade show" role="alert" id="avg_advice">If the &#x3BB;<sub>Poisson</sub> and average are very different and the
+                plot is very poor, sequencing more variants from the test library may be
+                reccomendable.</div></div>
             <p
-                    class="marginless">The average is <strong><span id="freqMean">N/A</span></strong> mutations
+                    class="marginless">The average is <strong><span id="freqMean" data-toggle="tooltip" title="The simplest and most commonly employed estimate of the frequency of mutations per sequence is the
+average of the point mutations per sequence (<i>m</i>), however due to the small sample size this may be off. Hence why the number to look at is the Poisson &lambda;">N/A</span></strong> mutations
                 per sequence (<span id="size">N/A</span> kb).</p>
             <p class="marginless">The sample variance is <strong><span id="freqVar">N/A</span></strong> mutations
                 per sequence.</p>
-            <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;">N/A</span></strong> mutations
+            <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;" data-toggle="tooltip" title="The distribution of number of mutations per sequence follows a Poisson distribution.">N/A</span></strong> mutations
                 per sequence.</p>
             <br/>
             <div id="disChart" style="width: 80%; height:400px"></div>
-            <p class="marginless">If the &#x3BB;<sub>Poisson</sub> and average are very different and the
-                plot is very poor, sequencing more variants from the test library may be
-                reccomendable.</p>
         </div>
         <div id="mutanalyst_freq_alt_in&#xA7;">
             <!--section-->

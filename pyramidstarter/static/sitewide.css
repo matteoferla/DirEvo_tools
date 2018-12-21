@@ -83,3 +83,8 @@ th.th-rotated > div > span {
   display: flex;
   align-items: center;
 }
+
+.tooltip-wide {
+     max-width: 100%;
+     min-width: 80%;
+}

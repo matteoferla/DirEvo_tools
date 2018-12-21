@@ -641,6 +641,12 @@ function Btn_calcFreq() {
     var mutball = read(["sequence", "baseList"]);
     calc(mutball, 0);
     //return false;
+    console.log('here')
+    console.log(mutball.freqλ)
+    console.log(mutball.freqMean)
+    if ((mutball.freqλ/mutball.freqMean > 1.3) || (mutball.freqMean/mutball.freqλ > 1.3)) {
+        $('#avg_advice').addClass('show');
+    } else {$('#avg_advice').removeClass('show');}
 }
 
 function Btn_calcBias() {

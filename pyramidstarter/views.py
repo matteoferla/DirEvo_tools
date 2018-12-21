@@ -37,7 +37,7 @@ if os.path.isfile('email_details.json'):
 
 print('reporting from views.py')
 
-STATUS = 'upgradetemp'
+STATUS = 'beta'
 FRAME = 'templates/frame.mako'
 
 try:

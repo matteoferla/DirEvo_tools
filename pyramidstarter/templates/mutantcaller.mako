@@ -2,12 +2,9 @@
 <div class="card">
                 <div class="card-header">
                      <h1 class="card-title">MutantCaller</h1>
-                    <h4 class="card-subtitle mb-2 text-muted">Quickly identify mutations</h4>
+                    <h4 class="card-subtitle mb-2 text-muted">Quickly identify mutations in sequencing traces, including from secondary peaks</h4>
                 </div>
                 <div class="card-body">
-                     <h3>Description</h3>
-                    <div class="bs-callout bs-callout-warning">Add description!</div>
-                    <p></p>
                      <h3>Input</h3>
                     <div id="MC_input">
                         <div class="row">
