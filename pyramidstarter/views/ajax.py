@@ -295,26 +295,11 @@ def sanitize(inputstr): #from https://gist.github.com/dustyfresh/10d4e260499612c
 @view_config(route_name='ajax_email', renderer='json')
 def send_email(request):
     reply = request.json_body
-    subject = 'Comment from ' + sanitize(reply['name'])
+    subject = 'Pedel2 comment from ' + sanitize(reply['name'])
     ip, where = get_ip(request)
-    body = sanitize(reply['message']+'\n'+ip+' '+where)
+    body = sanitize(reply['message'] + '\n' + '*'*10 + ip + ' ' + where)
     recipient = 'matteo.ferla@gmail.com'
-    addressee = recipient if type(recipient) is list else [recipient]
-    # Prepare actual message
-    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (Settings.gmail_user, ", ".join(addressee), subject, body)
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.login(Settings.gmail_user, Settings.gmail_pwd)
-        server.sendmail(Settings.gmail_user, addressee, message)
-        server.close()
-        return json.dumps({'msg': 'successfully sent the mail'})
-    except Exception as e:
-        # print(Settings.gmail_user, Settings.gmail_pwd, str(e))
-        return json.dumps({'msg': str(e)})
-
+    os.system('echo -m "{m}" | mail -s "{s}" {r}'.format(m=body, s=subject, r=recipient))
 
 @view_config(route_name='ajax_test', renderer='json')
 def ajacean_test(request):

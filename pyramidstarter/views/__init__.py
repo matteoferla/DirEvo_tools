@@ -10,14 +10,6 @@ debugprint = print
 
 class Settings:
     path = 'pyramidstarter'
-    # formerly I set these variables each reboot using the route set. Now it is an external file.
-    gmail_user = '??????@gmail.com'
-    gmail_pwd = '*******'
-    gmail_set = False
-    if os.path.isfile('email_details.json'):
-        globals().update(**json.load(open('email_details.json')))  # Dangerous... but I am lazy
-    else:
-        print('No email_details.json')
     status = 'beta'
     frame = os.path.join('..','templates','frame.mako')
 
@@ -33,7 +25,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'
 log.addHandler(handler)
 '''
 
-if os.path.isfile('addressbook.csv'):
+if os.path.isfile('addressbook.csv'): # this really really ought to be a DB
     addressbook = {line.split(',')[0]: line.split(',')[1].replace('\n', '') for line in
                    open('addressbook.csv', 'r').readlines() if line.find(',') != -1}
     print(addressbook)
