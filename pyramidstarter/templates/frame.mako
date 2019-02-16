@@ -107,7 +107,9 @@
                         </a>
                         <a class="${page.m_mutanalyst} dropdown-item" href="/main/mutanalyst">Mutanalyst
                         </a>
-                        <a class="${page.m_pedel} dropdown-item" href="/main/pedel">Pedel
+                        <a class="${page.m_pedelclassic} dropdown-item" href="/main/pedel-classic">Pedel classic
+                        </a>
+                        <a class="${page.m_pedelAA} dropdown-item" href="/main/pedelAA">Pedel AA
                         </a>
                         <!--
                         <a class="${page.m_probably} dropdown-item" href="/main/probably">Chances
@@ -207,7 +209,7 @@
             </div>
             <div class="col-lg-2">
                 <div class="position-fixed vertical-center">
-                    <div class="card" style="min-height: 70vh">
+                    <div class="card" style="min-height: 70vh" id="navigation">
                         <div class="card-header">Navigation</div>
                         <div class="card-body">
                         <div class="d-flex flex-column">

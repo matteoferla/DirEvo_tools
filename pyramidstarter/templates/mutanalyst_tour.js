@@ -15,7 +15,7 @@ window.tutorial = new Tour({
     }
   },
   {
-    element: "#mutanalyst__sequence",
+    element: "#sequence",
     title: "Sequence",
     content: 'The WT in frame <i>nucleotide</i> sequence that was mutated.',
     placement: 'top'
@@ -61,11 +61,11 @@ window.tutorial = new Tour({
   {
     element: "#freqMean",
     title: "Average number of mutations",
-    content: 'The simplest and most commonly employed estimate of the frequency of mutations per sequence is the average of the point mutations per sequence (<i>m</i>), however due to the small sample size this may be off. Hence why the number to look at is the Poisson &lambda;',
+    content: '<p>The simplest and most commonly employed estimate of the frequency of mutations per sequence is the average of the point mutations per sequence (<i>m</i>), however due to the small sample size this may be off. Hence why the number to look at is the Poisson &lambda;</p>',
     placement: 'top'
   },
   {
-    element: "#freq&#x3BB;",
+    element: "#freqλ",
     title: "Estimated mean number of mutations",
     content: 'The distribution of number of mutations per sequence follows a Poisson distribution. By fitting to this single parameter curve one gets a better value.',
     placement: 'top'
@@ -102,9 +102,20 @@ window.tutorial = new Tour({
     title: "Mutational biases",
     content: 'Here are several indicators which show how biased the mutational spectrum is (<i>i.e.</i> how far from an equiprobable spectrum).',
     placement: 'top'
+  },
+    {
+    element: "#pedelAA_result",
+    title: "PedelAA",
+    content: 'If library size is specified, the library redundancy is calculated with PedelAA',
+    placement: 'top'
   }
+
+
+
+
   ],
-    backdrop: true
+    backdrop: true,
+    orphan: true
 });
 
 

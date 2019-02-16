@@ -117,7 +117,7 @@ average of the point mutations per sequence (<i>m</i>), however due to the small
                 per sequence (<span id="size">N/A</span> kb).</p>
             <p class="marginless">The sample variance is <strong><span id="freqVar">N/A</span></strong> mutations
                 per sequence.</p>
-            <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freq&#x3BB;" data-toggle="tooltip" title="The distribution of number of mutations per sequence follows a Poisson distribution.">N/A</span></strong> mutations
+            <p class="marginless">The &#x3BB;<sub>Poisson</sub> is <strong><span id="freqλ" data-toggle="tooltip" title="The distribution of number of mutations per sequence follows a Poisson distribution.">N/A</span></strong> mutations
                 per sequence.</p>
             <br/>
             <div id="disChart" style="width: 80%; height:400px"></div>
@@ -430,5 +430,4 @@ average of the point mutations per sequence (<i>m</i>), however due to the small
                     id="pedelAA_result"></div>
         </div>
     </div>
-</div>
 

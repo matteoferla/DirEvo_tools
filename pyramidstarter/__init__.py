@@ -45,14 +45,6 @@ def main(global_config, **settings):
     config.set_session_factory(SignedCookieSessionFactory('methionine'))
     config.scan()
     config_logging()
-    #### TEMP
-    config.add_route('carlos', '/Carlos')
-    config.add_route('carlos_submit', '/Carlos_submit')
-    config.add_route('epistasis', '/epistasis')
-    config.add_route('ajax_epistasis', '/ajax_epistasis')
-    config.add_route('download_epistasis', '/download_epistasis')
-    config.add_route('create_epistasis', '/create_epistasis')
-    ####
     return config.make_wsgi_app()
 
 

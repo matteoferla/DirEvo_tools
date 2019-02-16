@@ -48,6 +48,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-8  col-lg-6 mb-3">
+                <div class="input-group" role="group">
+                    <div class="input-group-append">
+                        <a type="button" class="btn btn-warning" id="clear_btn" href="/set?clear=true"><i
+                                class="fas fa-dumpster-fire"></i>&nbsp;Clear temp files
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="input-group" role="group" aria-label="Basic example">
             <div class="input-group-prepend">

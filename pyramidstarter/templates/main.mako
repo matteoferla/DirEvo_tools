@@ -17,8 +17,8 @@
                   ("main/planner","epPCR — Planner","Plan or check epPCR reaction to predict mutational load."),
                   ("main/mutantcaller","epPCR — Mutantcaller","Analyse epPCR sequencing files to identify and list point mutations."),
                   ("main/mutanalyst","epPCR — Mutantanalyst","Determine the bias of the submitted sequences for a submitted epPCR library."),
-                  ("main/pedel","epPCR — Pedel","Determine diversity of point mutations within an epPCR library."),
-                  ("main/pedel","epPCR — PedelAA","Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library from an amino acid point of view."),
+                  ("main/pedel-classic","epPCR — Pedel","Determine diversity of point mutations within an epPCR library."),
+                  ("main/pedelAA","epPCR — PedelAA","Given a sequence, mutational spectrum and mutational load, it will say how redundant is the library from an amino acid point of view."),
                   ("main/probably","epPCR — Chances","Determine the rough probability of having a desired point mutation in a library."),
                   ("main/silico","epPCR — Generator","Create random sequences with mutations based on a mutational load and bias."),
                   ("main/glue","Glue — Glue","Determine how well a library of randomised sequences covers its potential sequence complexity."),
@@ -39,6 +39,3 @@
         </div>
     % endfor
 </div>
-
-<br>This is a revamp and expansion of the old server by Wayne Patrick and
-Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.

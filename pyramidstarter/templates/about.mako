@@ -4,8 +4,8 @@
     </div>
     <div class="card-body">
         <h2>Background</h2>
-        Wayne and Andrew wrote this in the naughties. I rewrote a lot of it and
-        added some more.
+        <br>This is a revamp and serious expansion of the old server by Wayne Patrick and
+Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.
         <br>
         <h2>Links</h2>
         <div class="list-group">
@@ -20,13 +20,13 @@
             <a
                     href="https://github.com/matteoferla/mutagenesis"
                     class="list-group-item  list-group-item-success">
-                <h3 class="list-group-item-heading"><i class="fas fa-github" aria-hidden="true"></i> MF&apos;s
+                <h3 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
                     Github: Mutagenesis</h3>
                 <p class="list-group-item-text">The mutagenesis module to handle point mutants</p>
             </a> <a role="button" href="https://github.com/matteoferla/pedel2"
-                    class="list-group-item   list-group-item-success">
+                    class="list-group-item   list-group-item-success"></a>
 
-            <h3 class="list-group-item-heading"><i class="fas fa-github" aria-hidden="true"></i> MF&apos;s
+            <h3 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
                 Github: Pedel2</h3>
 
             <p class="list-group-item-text">What to run this server locally or copy paste something?</p></a>

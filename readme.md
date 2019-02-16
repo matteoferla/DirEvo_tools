@@ -12,7 +12,6 @@ It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
 
 Sorted by urgency:
 
-* *Theme* Get a word from Wayne and Matilda about the theme
 * *Pedel-AA* a-elements linkage is broken in certain bits. :angry:
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
 * *Pedel-AA* graphs —original functionality

@@ -5,27 +5,17 @@
         <h3 class="card-subtitle mb-2 text-muted">Programme for Estimating Diversity in Error-prone PCR Libraries (amino acid version)</h3>
     </div>
     <div class="card-body">
-        <div id="pedelAA_intro">
-            <h3>Description</h3>
-            ${collapse_section('pedelAA_overview','Overview', file='pedelAA_overview.mako') |n}
-            ${collapse_section('pedelAA_Rx_note','Note on R<sub>x</sub> statistics', file='pedelAA_note_on_Rx.mako') |n}
-        </div>
-
-
         <div id="pedelAA_input">
             <h3>Input</h3>
             <!--section-->
             <h4>Sequence</h4>
-            <p>In frame sequence that was mutagenised. Note that all symbols that aren&apos;t
-                uppecase ATUGC, will be discarded along with a Fasta header (<i>e.g.</i> &apos;&gt;T.
-                maritima Cystathionine &#x3B2;-lyase&apos;), therefore for masked sequences
-                use lowercase.</p>
+            <p></p>
 
             <div class="row">
                 <div class="col-xl-12 mb-1">
                     <div class="input-group">
                         <div class="input-group-prepend" data-toggle="tooltip" data-placement="top"
-                             title="In frame sequence that was mutagenised.">
+                             title="In frame DNA sequence that was mutagenised.">
                             <span class="input-group-text">Sequence</span>
 
                         </div>
@@ -332,5 +322,27 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="pedelAA_note_on_Rx_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&#xD7;</button>
+                        <h4 class="modal-title">Notes about R<sub>x</sub> statistics</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%include file="pedelAA_note_on_Rx.mako" args="page=page"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </div>
+
+<!-- to be moved with JQuery-->
+<a data-toggle="modal" data-target="#pedelAA_note_on_Rx_modal" style="cursor:pointer" class="btn btn-success my-1" id="note_btn"><i class="far fa-sticky-note"></i> Note about Rx</a>

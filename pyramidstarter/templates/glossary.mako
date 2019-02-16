@@ -81,6 +81,14 @@
                     For more see: <a href="https://blog.matteoferla.com/2018/01/gc-transversions-aka-english-scrabble.html">Matteo&apos;s
                     blogpost on mutational biases <i class="fas fa-external-link" aria-hidden="true"></i></a>
                 </li>
+                <li class="list-group-item" id="retransformation">
+                    <h3>I transformed into a competent strain then into my test strain, what's my library size?</h3>
+                    <p>Library size is the number of variants counted or estimated after the library construction transformation.
+                        This is not the population size of the culture, which will be repeats of originals (unless using the MP6 plasmid) and no unique variants are added.
+                        Often the test strain is sick and poorly competent, so two transformations are done.
+                        Namely, a library is assembled, transformed (into a high competency strain, <i>e.g.</i> DH5&alpha;, TOP10 etc.) and plasmid prepped and re-transformed (into the test strain).
+                        In this case the library size is based on the original transformation as no new variants are getting added &mdash;worse still, there is a bottleneck event which will result in some skewness.</p>
+                </li>
             </ul>
         </div>
   </div>
