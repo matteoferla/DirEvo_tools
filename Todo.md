@@ -1,20 +1,20 @@
 # Summary
 
-| program | Tour | Fx |
-| ------- | -------| --- |
-| MutantCaller | results is poor | Some fx tweaks |
-| Mutanalyst | &#10003; | &#10003; |
-| Pedel classic | &#10005; | Minor |
-| Pedel AA | Incomplete | More... |
-| Driver | &#10003; | table? |
-| Glue | &#10005; | extra? |
-| GlueIT | &#10005; | extra? |
-| QQC | | reverse strand |
-| Deepscan | &#10005; | &#10003; |
-| Mutantprimer | &#10005; | &#10003; |
-| Landscape | &#10005; | &#10003; |
-| Silico | &#10005; | Demo |
-| Probably  | &#10005; | &#10003; |
+| program | Tour | Overview | Fx |
+| ------- | -------| --- | --- |
+| MutantCaller | results is poor | &#10003; | Some fx tweaks |
+| Mutanalyst | &#10003; | &#10003; | &#10003; |
+| Pedel classic | &#10005; | ? | Minor |
+| Pedel AA | Incomplete | &#10003; | More... |
+| Driver | &#10003; | &#10003; | table? |
+| Glue | &#10005; | &#10003; | extra? |
+| GlueIT | &#10005; | &#10003; | extra? |
+| QQC | &#10005; | &#10003; | reverse strand |
+| Deepscan | &#10005; | &#10003; |  &#10003; |
+| Mutantprimer   | &#10003; | &#10005; | &#10003; |
+| Landscape | &#10005; | &#10003; | &#10003; |
+| Silico   | &#10005;  | &#10005; | Demo |
+| Probably   | &#10005;  | &#10005; | &#10003; |
 
 # To Do list
 
