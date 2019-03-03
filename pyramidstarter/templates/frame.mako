@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <%page args="request, page"/>
+    <%page args="request, page, scheme='https', port=443"/> ## change to scheme='http', port=8080
 <html lang="${request.locale_name}">
 <head>
     <meta charset="utf-8">
@@ -8,34 +8,34 @@
     <meta name="description" content="Mutagenesis tools">
     <meta name="author" content="Matteo Ferla et al.">
     <link rel="icon" type="image/png" sizes="16x16"
-          href="${request.static_url('pyramidstarter:static/favicon-16x16.png', _scheme='https')}">
+          href="${request.static_url('pyramidstarter:static/favicon-16x16.png', _scheme=scheme,  _port=port)}">
     <link rel="icon" type="image/png" sizes="96x96"
-          href="${request.static_url('pyramidstarter:static/favicon-96x96.png', _scheme='https')}">
+          href="${request.static_url('pyramidstarter:static/favicon-96x96.png', _scheme=scheme,  _port=port)}">
     <title>Pedel revamp</title>
     <!-- Bootstrap core CSS-->
-    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootswatch/dist/darkly/bootstrap.min.css', _scheme='https')}" id="theme_CSS">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootswatch/dist/darkly/bootstrap.min.css', _scheme=scheme,  _port=port)}" id="theme_CSS">
     <!--Fontawesome-->
     <link rel="stylesheet"
-          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.min.css', _scheme='https')}">
+          href="${request.static_url('pyramidstarter:static/Font-Awesome-Pro/css/all.min.css', _scheme=scheme,  _port=port)}">
     <!-- was bootstrap-theme-->
-    <link href="${request.static_url('pyramidstarter:static/bs-callout.css', _scheme='https')}"
+    <link href="${request.static_url('pyramidstarter:static/bs-callout.css', _scheme=scheme,  _port=port)}"
           rel="stylesheet">
     <!--slider-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/css/bootstrap-slider.min.css', _scheme='https')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/css/bootstrap-slider.min.css', _scheme=scheme,  _port=port)}"
           rel="stylesheet">
     <!--switch-->
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css', _scheme='https')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css', _scheme=scheme,  _port=port)}"
           rel="stylesheet">
-    <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css', _scheme='https')}"
+    <link href="${request.static_url('pyramidstarter:static/bootstrap-select.min.css', _scheme=scheme,  _port=port)}"
           rel="stylesheet">
     <!--pyspinner-->
-    <link href="${request.static_url('pyramidstarter:static/pyspinner.css', _scheme='https')}"
+    <link href="${request.static_url('pyramidstarter:static/pyspinner.css', _scheme=scheme,  _port=port)}"
           rel="stylesheet">
     <!--main CSS-->
-    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/sitewide.css', _scheme='https')}">
+    <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/sitewide.css', _scheme=scheme,  _port=port)}">
     <!--tour-->
     % if 'tour' in page.requirements:
-        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap-tour/build/css/bootstrap-tour.min.css', _scheme='https')}"/>
+        <link rel="stylesheet" href="${request.static_url('pyramidstarter:static/bootstrap-tour/build/css/bootstrap-tour.min.css', _scheme=scheme,  _port=port)}"/>
     % endif
     <!--
         <style>
@@ -351,16 +351,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
             integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
             crossorigin="anonymous"></script>
-    <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js', _scheme='https')}"></script> -->
+    <!--<script type='text/javascript' src="${request.static_url('pyramidstarter:static/bootstrap/dist/js/bootstrap.min.js', _scheme=scheme,  _port=port)}"></script> -->
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.min.js', _scheme='https')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-slider/dist/bootstrap-slider.min.js', _scheme=scheme,  _port=port)}"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/js/bootstrap-switch.min.js', _scheme='https')}"></script>
-    <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js', _scheme='https')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-switch/dist/js/bootstrap-switch.min.js', _scheme=scheme,  _port=port)}"></script>
+    <script type='text/javascript' src="${request.static_url('pyramidstarter:static/FileSaver.min.js', _scheme=scheme,  _port=port)}"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js', _scheme='https')}"></script>
+            src="${request.static_url('pyramidstarter:static/bootstrap-select.min.js', _scheme=scheme,  _port=port)}"></script>
     <script type='text/javascript'
-            src="${request.static_url('pyramidstarter:static/sitewide.js', _scheme='https')}"></script>
+            src="${request.static_url('pyramidstarter:static/sitewide.js', _scheme=scheme,  _port=port)}"></script>
     <!--copied from https://stackoverflow.com/questions/19192747/how-to-dynamically-change-themes-after-clicking-a-drop-down-menu-of-themes-->
     % if 'plotly' in page.requirements:
         <script type='text/javascript' src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -369,7 +369,7 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
     % endif
     % if 'tour' in page.requirements:
-        <script src="${request.static_url('pyramidstarter:static/bootstrap-tour/build/js/bootstrap-tour.min.js', _scheme='https')}"></script>
+        <script src="${request.static_url('pyramidstarter:static/bootstrap-tour/build/js/bootstrap-tour.min.js', _scheme=scheme,  _port=port)}"></script>
     % endif
 
     <script>

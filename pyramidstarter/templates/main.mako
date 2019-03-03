@@ -27,6 +27,7 @@
                   ("main/QQC","QQC calculator","Determine the diversity of a library randomised at a single codon from a single sequencing file with the quick quality control method."),
                   ("main/landscape","Landscape","Determine the mutational landscape of a protein from a Rosetta pmut_scan output."),
                   ("main/codon_autopop-up","Codon helper","A tool to help pick the ideal degenerate codons for site-saturation mutagenesis and library construction."),
+                  ("main/press","SynBio press","A fun random generator of Synthetic biology text (a dissociated press).")
                   )
     %>
     % for link, enboldened, text in elements:

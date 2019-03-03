@@ -23,7 +23,7 @@ def home_callable(request):
 @view_config(route_name='upcoming', renderer=Settings.frame)
 def upcoming_callable(request):
     log_passing(request)
-    return {'page': Fields(request=request, m_upcoming='active', body='upcoming.mako', md=markdown.markdown(open('readme.md').read()))}
+    return {'page': Fields(request=request, m_upcoming='active', body='upcoming.mako', md=markdown.markdown(open('todo.md').read()))}
 
 @view_config(route_name='admin', renderer=Settings.frame, http_cache=0)
 def admin_callable(request):

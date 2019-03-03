@@ -8,7 +8,6 @@
                     <div id="silico_intro">
                         <p>You never know when you need a random sequence.</p>
                     </div>
-                    <div class="bs-callout bs-callout-warning">Under construction. Half-abandonned actually as I figured something out.</div>
                     <div
                     id="silico_input">
                             <!--section-->

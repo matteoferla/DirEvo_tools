@@ -3,6 +3,8 @@
         <h1 class="card-title">About</h1>
     </div>
     <div class="card-body">
+        <h2>Authors</h2>
+        <p>Fill out</p>
         <h2>Background</h2>
         <br>This is a revamp and serious expansion of the old server by Wayne Patrick and
 Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_blank">Here</a>.
@@ -12,29 +14,24 @@ Andrew Firth found <a href="http://guinevere.otago.ac.nz/aef/STATS/" target="_bl
             <a role="button" href="/main/glossary"
                class="list-group-item list-group-item-info">
 
-                <h3 class="list-group-item-heading"><i class="fas fa-book" aria-hidden="true"></i> FAQ</h3>
+                <h4 class="list-group-item-heading"><i class="fas fa-book" aria-hidden="true"></i> FAQ</h4>
 
                 <p class="list-group-item-text">Feeling lexicologically challenged or have a common
                     question?</p>
             </a>
-            <a
-                    href="https://github.com/matteoferla/mutagenesis"
+            <a href="https://github.com/matteoferla/mutagenesis"
                     class="list-group-item  list-group-item-success">
-                <h3 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
-                    Github: Mutagenesis</h3>
+                <h4 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
+                    Github: Mutagenesis</h4>
                 <p class="list-group-item-text">The mutagenesis module to handle point mutants</p>
-            </a> <a role="button" href="https://github.com/matteoferla/pedel2"
-                    class="list-group-item   list-group-item-success"></a>
+            </a>
+            <a role="button" href="https://github.com/matteoferla/pedel2"
+                    class="list-group-item   list-group-item-success">
 
-            <h3 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
-                Github: Pedel2</h3>
+            <h4 class="list-group-item-heading"><i class="fab fa-github" aria-hidden="true"></i> MF&apos;s
+                Github: Pedel2</h4>
 
             <p class="list-group-item-text">What to run this server locally or copy paste something?</p></a>
-            <a
-                    role="button" href="/admin" class="list-group-item list-group-item-warning">
-                <h3 class="list-group-item-heading"><i class="fas fa-gamepad" aria-hidden="true"></i> Admin</h3>
-                <p class="list-group-item-text">The admin page (password required)</p>
-            </a>
         </div>
     </div>
 </div>
