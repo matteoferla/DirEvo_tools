@@ -15,22 +15,42 @@ window.tutorial = new Tour({
         element: "#pedelAA_size",
         title: "Library size",
         content: 'Like elsewhere, library size is the number of variants counted or estimated after the library construction transformation. This is not the population size of the culture or calculated from a <a href="/main/glossary#retransformation">retransformation</a>.'
-      },{
+      }, {
         element: "#mutTable_raw",
         title: "Mutational spectrum",
-        content: 'Input your mutational spectrum. This can be determined automatically from your data using <a href="/main/mutanalyst">Mutanalyst</a>. '
-      },{
-        element: "#",
-        title: "",
-        content: ''
-      },{
-        element: "#",
-        title: "",
-        content: ''
-      }
+        content: 'Input your mutational spectrum. This can be determined automatically from your data using <a href="/main/mutanalyst">Mutanalyst</a>. ',
+        onShown: function (tour) {
+            $('#pedelAA_demo').trigger('click');
+            $('#pedelAA_calculate').trigger('click');
+        }
+    }, {
+        element: '#pedelAA_result',
+        title: 'Summary',
+        content: 'This tab contants all the summary details of your library',
+        onShown: function (tour) {$('#tablist a[href="#pedelAA_result_main"]').tab('show');},
+        placement: 'top'
+        }, {
+        element: '#pedelAA_result',
+        title: 'Sub table composition',
+        content: 'This tab shows the composition of your library',
+        onShown: function (tour) {
+            $('#tablist a[href="#pedelAA_result_sub"]').tab('show');
+        },
+        placement: 'top'
+    }, {
+        element: '#pedelAA_result',
+        title: 'Sub table composition plotted',
+        content: 'This tab shows the same data, but plotted on a graph',
+        onShown: function (tour) {$('#tablist a[href="#pedelAA_result_graph"]').tab('show');},
+        placement: 'top'
+
+    }
     ],
     backdrop: true
 });
+
+
+
 
 // Initialize the tour
 tutorial.init();

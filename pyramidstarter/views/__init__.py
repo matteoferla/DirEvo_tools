@@ -3,6 +3,7 @@ import os, json
 import urllib.request
 import _thread as thread
 import logging
+import traceback
 
 # debugprint=lambda *x: None
 debugprint = print
@@ -10,7 +11,7 @@ debugprint = print
 
 class Settings:
     path = 'pyramidstarter'
-    status = 'beta'
+    status = 'none'
     frame = os.path.join('..','templates','frame.mako')
 
 ############### LOG! #####################

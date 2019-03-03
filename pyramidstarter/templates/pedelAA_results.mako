@@ -1,6 +1,6 @@
 <br/>
 <div>
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="tablist" >
     <!--main-->
     <li role="presentation" class="nav-item"><a href="#pedelAA_result_main" aria-controls="pedelAA_result_main" role="tab"
         data-toggle="tab" class="nav-link active">Main</a>
