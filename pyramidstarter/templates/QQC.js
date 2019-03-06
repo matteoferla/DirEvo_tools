@@ -1,4 +1,7 @@
 $(function() {
+
+    $('#QQC_direction').bootstrapSwitch('state',false);
+
     var files;
     var chromatomap = {
         A: 'rgb(0.4660, 0.6740, 0.1880)',
@@ -36,6 +39,9 @@ $(function() {
         $('#QQC_preceding').val('');
         $('#QQC_mutation').val('');
         $("#QQC_result").hide();
+        $('.is-invalid').removeClass('is-invalid');
+        $('.is-valid').removeClass('is-valid');
+        $('.invalid-feedback,.valid-feedback').hide();
     })
 
 
@@ -43,16 +49,40 @@ $(function() {
         $("#QQC_result").html('<div class="alert alert-warning" role="alert"><span class="pyspinner"></span> Waiting for server reply.</div>');
         $("#QQC_result").removeClass('hidden');
         $("#QQC_result").show(); //weird combo.
+        $('.is-invalid').removeClass('is-invalid');
+        $('.is-valid').removeClass('is-valid');
+        $('.invalid-feedback,.valid-feedback').hide();
+
         var data = new FormData();
         if (demo) {
             data.append("file", 'demo');
         } else {
-            if (typeof files === 'undefined') {return undefined}
+            if (typeof files === 'undefined') {
+                $("#QQC_result").html('<div class="alert alert-danger" role="alert"><span class="far fa-warning"></span> No Abi trace provided.</div>');
+                $("#error_QQC_upload").show();
+                $('#QQC_upload').addClass('is-invalid');
+                return undefined}
             data.append("file", files[0]);
         }
-        data.append("location", $('#QQC_preceding').val());
+        // parse mutation scheme.
+        var scheme = $('#QQC_mutation').val();
+        if (! scheme) {
+            $("#QQC_result").html('<div class="alert alert-danger" role="alert"><span class="far fa-warning"></span> No mutation codon provided.</div>');
+                $("#error_QQC_mutation").show();
+                $('#QQC_mutation').addClass('is-invalid');
+                return undefined
+        }
+        if (scheme.split(' ').some(value => value.search(/^\d?\D{3}$/) === -1)) {
+            $("#QQC_result").html('<div class="alert alert-danger" role="alert"><span class="far fa-warning"></span>The mutational scheme is incorrect. The guideline is the following: '+$('#QQC_mutation').parent().children().first().data('original-title')+'</div>');
+            $('#QQC_mutation').addClass('is-invalid');
+            $("#error_QQC_mutation").show();
+            return undefined;
+
+        }
         data.append("scheme", $('#QQC_mutation').val());
-        data.append("reversed",! $('#QQC_direction').is(":checked"));
+        // parse rest
+        data.append("location", $('#QQC_preceding').val());
+        data.append("reversed", ! $('#QQC_direction').bootstrapSwitch('state'));
         $.ajax({
             url: '../ajax_QQC',
             type: 'POST',
@@ -60,6 +90,14 @@ $(function() {
 
             success: function(result) {
                 reply = JSON.parse(result.message);
+                if (!! reply.error) {
+                    if (reply.error[1] === 'target_seq not found!') {
+                        $('#error_QQC_preceding').show();
+                        $('#QQC_preceding').addClass('is-invalid');
+                    }
+                    $("#QQC_result").html(reply.html);
+                    return undefined;
+                }
                 window.sessionStorage.setItem('primers', JSON.stringify(reply['data']));
                 $("#QQC_download").removeClass('hidden');
                 $("#QQC_download").show(); //weird combo.

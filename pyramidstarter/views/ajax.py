@@ -68,10 +68,15 @@ def file_ajacean(request, fun):
     except Exception as err:
 
         log_passing(request, json.dumps(data), status='fail ({e})'.format(e=err))
+        if len(err.args):
+            msg = err.args[0]
+        else:
+            msg = 'N/A'
         return {
-            'message': json.dumps({'data': '',
-                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Error.<br/>{0}</div><br/>'.format(
-                                       traceback.format_exc())})}
+            'message': json.dumps({'data': '', 'error': (type(err).__name__, msg),
+                                   'html': '<div class="alert alert-danger" role="alert"><span class="pycorpse"></span> <b>{0}</b> <br/>{1}</div><br/>'.format(type(err).__name__,
+                                       msg)})}
+            #traceback.format_exc()
 
 
 def QQC_inner(request):

@@ -13,6 +13,7 @@
                     <label class="btn btn-warning btn-file" id="QQC_upload_group"> <i class="fas fa-upload" aria-hidden="true"></i> Upload
                         <input type="file"
                                id="QQC_upload" style="display: none;">
+                        <div class="invalid-feedback" id="error_QQC_upload">No abi file provided.</div>
                     </label>
                 </div>
                 <br>
@@ -24,6 +25,7 @@
                         <span class="input-group-text">Upstream seq.</span></div>
                     <input type="text" class="form-control"
                            placeholder="NNNNNNNNNN" id="QQC_preceding">
+                    <div class="invalid-feedback" id="error_QQC_preceding">Invalid sequence provided.</div>
                 </div>
                 <br>
             </div>
@@ -40,6 +42,7 @@
                                                                                                                                    aria-hidden="true"></i></button>
 
                             </span>
+                    <div class="invalid-feedback" id="error_QQC_mutation">Invalid mutation provided.</div>
                 </div>
                 <br>
             </div>
@@ -49,14 +52,14 @@
                          data-placement="top">
                         <span class="input-group-text">Direction</span></div>
                     <input type="checkbox" class="switch"
-                           id="QQC_direction" checked data-off-text="rv" data-on-text="fw" data-off-color="warning"
-                           data-size="large">
+                           id="QQC_direction" data-off-text="rv" data-on-text="fw" data-off-color="warning"
+                           data-size="large" checked="checked">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xl-6 offset-lg-3">
-                <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group my-4" role="group" aria-label="...">
                     <button type="button" class="btn btn-warning" id="QQC_clear"><i class="fas fa-eraser" aria-hidden="true"></i>
                         Clear
                     </button>
@@ -71,7 +74,7 @@
             </div>
             <br>
         </div>
-        <div class="row hidden" id="QQC_result">
+        <div class="hidden" id="QQC_result">
             <div class="alert alert-danger" role="alert"><span class="pycorpse"></span> Oh Snap. Something went wrong</div>
             <br>
         </div>
