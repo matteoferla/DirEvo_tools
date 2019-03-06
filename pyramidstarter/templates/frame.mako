@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-    <%page args="request, page, scheme='https', port=443"/>
-## change to  scheme='http', port=8080
+    <%page args="request, page, scheme='http', port=8080"/>
+## change to  scheme='https', port=443
 <html lang="${request.locale_name}">
 <head>
     <meta charset="utf-8">

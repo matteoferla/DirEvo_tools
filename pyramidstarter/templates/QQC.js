@@ -47,11 +47,12 @@ $(function() {
         if (demo) {
             data.append("file", 'demo');
         } else {
+            if (typeof files === 'undefined') {return undefined}
             data.append("file", files[0]);
         }
         data.append("location", $('#QQC_preceding').val());
         data.append("scheme", $('#QQC_mutation').val());
-        data.append("reverse",! $('#QQC_direction').is(":checked"));
+        data.append("reversed",! $('#QQC_direction').is(":checked"));
         $.ajax({
             url: '../ajax_QQC',
             type: 'POST',

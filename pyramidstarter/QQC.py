@@ -321,7 +321,7 @@ class QQC:
                              for p in range(len(self.scheme_mix))]) - self.codon_peak_freq[i]['ATGC'[bi]]) for i in
                     range(3) for bi in range(4)])
 
-    def __init__(self, peak_int, scheme='NNK', normalise_hack=False):
+    def __init__(self, peak_int, scheme='NNK', normalise_hack=False, reversed=False):
         """
         The QQC object has various attributes:
         * scheme: str of scheme name

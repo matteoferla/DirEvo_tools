@@ -101,8 +101,10 @@ def DS(req):
     return json.dumps({'data': data, 'html': table}, cls=SeqEncoder)
 
 
-def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK'):
+def QQC(file_path, stored_filename, tainted_filename, location, scheme='NNK', reversed=False):
     chroma = Trace.from_filename(file_path)
+    if reversed:
+        chroma = chroma.reverse()
     Q = chroma.QQC(location, scheme)
     index = chroma.find_peak(location)
     span = round(len(chroma.A) / len(chroma.peak_index))

@@ -77,14 +77,16 @@ def file_ajacean(request, fun):
 def QQC_inner(request):
     if request.POST['file'] == 'demo':
         data = {'tainted_filename': 'N/A', 'stored_filename': '22c_demo.ab1',
-                'location': request.POST['location'], 'scheme': request.POST['scheme']}
+                'location': request.POST['location'], 'scheme': request.POST['scheme'], 'reversed': False}
         file_path = os.path.join(Settings.path, 'static',
                                  '22c_demo.ab1')  # variable comes from loop. PyCharm is wrong is its warning.
     else:
         (new_filename, file_path) = save_file(request.POST['file'])
         data = {'tainted_filename': request.POST['file'].filename, 'stored_filename': new_filename,
-                'location': request.POST['location'], 'scheme': request.POST['scheme']}
+                'location': request.POST['location'], 'scheme': request.POST['scheme'], 'reversed': True if request.POST['reversed'] == 'true' else False}
+        print(data)
     return calc.QQC(file_path=file_path, **data), data
+
 
 
 def MC_inner(request):
