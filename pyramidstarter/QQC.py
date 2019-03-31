@@ -83,7 +83,8 @@ class Trace:
         :return: the index of peak_id or peak_index of the first base.
         """
         ## sanitise
-        target_seq = re.sub('[^ATGC]', '', target_seq.upper())
+        target_seq = re.sub('[NRYSWKMBDHV]', '*', target_seq.upper())
+        target_seq = re.sub('[^ATGC\*]', '', target_seq.upper())
         targetdex = re.findall(target_seq, self.peak_id)
         if not targetdex:
             raise ValueError('target_seq not found!')
