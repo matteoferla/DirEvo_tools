@@ -1,8 +1,8 @@
-## Intro
-Repo for the new site, currently called [pedel2](pi.matteoferla.com) —but will change name when inspired.
-I assume that it will be hosted as pedel.enzymes.org.nz or similar in the future.
-See also my [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
-It is currently hosted on a Raspberry pi in my flat, hence the subdomain "pi".
+## DirEvo Tools
+A collection of user-friendly open-source algorithms to aid in the construction and analysis of directed evolution libraries
 
-## Future improvements
-See `todo.md`. 
+Repo for the site [DirEvo Tools](https://direvo.matteoferla.com/). Depends also on the [mutagenesis repository](https://github.com/matteoferla/mutagenesis).
+
+## Abstract
+
+Protein engineering relies greatly upon random mutagenesis. Many protocols commonly involved in random mutagenesis despite being decades old are dominated by uncertainly and are confusing to new experimenters. Consequently, using our knowledge base about mutagenesis, we have created a set of tools, called DirEvo Tools that unifies some previously existing tools (Mutanalyst, PedelAA etc.) into a single pipeline for use at different experimental stages, expands them and adds new functionality, such as mutation calling from sequencing of pooled samples, design of primer plates for mutation scanning or screening and quick quality control calculations.
