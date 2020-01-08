@@ -4,7 +4,7 @@ import markdown
 import logging
 import traceback
 from pyramid.view import view_config, notfound_view_config
-from pyramidstarter.SynBio_press import Press
+from ..SynBio_press import Press
 
 from . import Settings, log_passing, debugprint, Fields
 
@@ -146,7 +146,7 @@ def lumberjack(request):
 
     log_passing(request)
     if 'admin' in request.session and request.session['admin']:
-        log = logging.getLogger('pyramidstarter').handlers[0].stream.getvalue()
+        log = logging.getLogger('direvo').handlers[0].stream.getvalue()
         return {'page': Fields(request=request, m_log='active', body='log.mako', log=log)}
     else:
         return {'page': Fields(request=request, m_admin='active', body='forbidden.mako', code='forbidden.js', status='custom', status_msg='The log is admin only. Sorry', status_class='info')}

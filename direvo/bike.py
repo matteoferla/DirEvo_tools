@@ -7,7 +7,7 @@ elif sys.platform == 'linux':
 else:
     raise Exception("Unknown operating system, {}. This program does not run on Atari, Windows or Solaris or other junk".format(os.name))
 
-PATH = "pyramidstarter/bikeshed"
+PATH = "direvo/bikeshed"
 
 
 def pedel(library_size, sequence_length, mean_number_of_mutations_per_sequence):
@@ -111,7 +111,7 @@ def glueit_csh(library_size,codonfile):
     return str(os.popen(cmd).read())
 
 def glueit(library_size,datfile):
-    cmd= "pyramidstarter/bikeshed/glueITc{OS} {cf}".format(aff=PATH,cf=datfile, OS=SUFFIX)
+    cmd= "direvo/bikeshed/glueITc{OS} {cf}".format(aff=PATH,cf=datfile, OS=SUFFIX)
     #print('The command to run is {f}'.format(f=cmd))
     return str(os.popen(cmd).read())
 

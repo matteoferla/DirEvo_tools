@@ -11,11 +11,11 @@ def pinger(request):
 
 @view_config(route_name='robots')
 def robots(request):
-    txt = os.path.join("pyramidstarter", "static", "robots.txt")
+    txt = os.path.join("direvo", "static", "robots.txt")
     return FileResponse(txt, request=request)
 
 
 @view_config(route_name="favicon")
 def favicon_view(request):
-    icon = os.path.join("pyramidstarter", "static", "favicon.ico")
+    icon = os.path.join("direvo", "static", "favicon.ico")
     return FileResponse(icon, request=request)

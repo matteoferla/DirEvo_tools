@@ -25,16 +25,16 @@ from collections import Counter, defaultdict
 from warnings import warn
 from functools import reduce
 
-from pyramidstarter import bike
-from pyramidstarter.QQC import Trace, scheme_maker, codon_to_AA
-from pyramidstarter.deep_mut_scanning import deep_mutation_scan
-from pyramidstarter.mutagenesis import MutationTable, MutationDNASeq
+from . import bike
+from .QQC import Trace, scheme_maker, codon_to_AA
+from .deep_mut_scanning import deep_mutation_scan
+from .mutagenesis import MutationTable, MutationDNASeq
 
 from mako.template import Template
 
-PATH = "/opt/app-root/src/pyramidstarter/"
+PATH = "/opt/app-root/src/direvo/"
 if not os.path.isdir(PATH):
-    PATH = "pyramidstarter/"
+    PATH = "direvo/"
 if __name__ == '__main__':
     PATH = ''
 
@@ -271,7 +271,7 @@ def pedelAA(jsonreq):
         with open(filename + '.nuc.dat', 'w') as f:
             f.write('\n'.join([' '.join([str(jsonreq[origin+'2'+destination]) if origin!=destination else '0' for destination in pbases]) for origin in pbases ]))
     #test file...
-    #filename = 'pyramidstarter/tmp/56a80370-c6d3-4827-adbe-5cfbeecf39dc'
+    #filename = 'direvo/tmp/56a80370-c6d3-4827-adbe-5cfbeecf39dc'
     #warn('To test, the wrapper is circumvented.')
     data=bike.pedelAA(filename + '.setup')
     #print(data['html'])
@@ -608,6 +608,6 @@ if __name__ == "__main__":
     #print(pedelAA({'size':10000,'ninsert': 0, 'ndelete': 0,'load': 5,'A2T': '5', 'A2G': '8', 'A2C': '5', 'T2A': '14', 'T2G': '0', 'T2C': '5', 'G2A': '9', 'G2T': '4', 'G2C': '2', 'C2A': '3', 'C2T': '6', 'C2G': '3','nucnorm':0,'distr':'Poisson','ncycles':30,'eff':0.8,'sequence':'ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTCCGCGGCGAGGGCGAGGGCGATGCCACCAACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCGTGGCCTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTCTTTCAAGGACGACGGTACCTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTTCAACAGCCACTACGTCTATATCACGGCCGACAAGCAGAAGAACTGCATCAAGGCTAACTTCAAGATCCGCCACAACGTTGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCCATCAGTCCAAGCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATTACACATGGCATGGACGAGCTGTACAAGTAA'}))
     #print(codonAA({'list': 'ASR', 'antilist': ''})[70:])
     #print(codonAA({'list': 'ASR', 'antilist': 'C'})[70:])
-    #print(pmut_renumber(open('pyramidstarter/static/dog-intermediate_scores.txt','r').read()))
+    #print(pmut_renumber(open('direvo/static/dog-intermediate_scores.txt','r').read()))
     #delete_temp()
     pass

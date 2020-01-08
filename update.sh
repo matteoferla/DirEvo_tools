@@ -7,12 +7,12 @@ echo '********** KILL *****************';
 kill $(sudo netstat -ltnp | grep ':8080' | awk '{split($7,a,"/"); print a[1]}')
 
 #echo '********** COMPILE *****************';
-#cd pyramidstarter/bikeshed
+#cd direvo/bikeshed
 #sh compile.sh linux;
 #cd ../..;
 #chmod -R 777 .;
 
 echo '********** RUN *****************';
-nohup python3 app.py > pyramidstarter/static/bash_log.txt 2>&1 &
+nohup python3 app.py > direvo/static/bash_log.txt 2>&1 &
 echo 'All done!';
-echo 'Having trouble: cat pyramidstarter/static/bash_log.txt';
+echo 'Having trouble: cat direvo/static/bash_log.txt';

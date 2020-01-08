@@ -10,7 +10,7 @@ from itertools import product
 from warnings import warn
 from pyramid.view import view_config
 
-import pyramidstarter.calculations as calc
+from .. import calculations as calc
 
 from . import Settings, log_passing, debugprint, get_ip, Fields
 
@@ -191,7 +191,7 @@ def lander(request):
         if 'demo' in request.POST:  # JSON
             for file in ['unreact', 'intermediate', 'whole']:
                 s, q = calc.pmut_renumber(
-                    open('pyramidstarter/static/dog-{f}_scores.txt'.format(f=file), 'r').readlines())
+                    open('direvo/static/dog-{f}_scores.txt'.format(f=file), 'r').readlines())
                 scores.append(s)
                 seqs.append(q)
             headers = ['Substrate', 'Transition', 'Product']

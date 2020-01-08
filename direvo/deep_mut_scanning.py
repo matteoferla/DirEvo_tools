@@ -18,7 +18,7 @@ from Bio.SeqUtils import MeltingTemp as mt
 import math
 from warnings import warn
 import random, re
-from pyramidstarter.mutagenesis import Mutation
+from direvo.mutagenesis import Mutation
 
 
 def parse_AAmutation(mutation, sequence, offset=0,check=True):

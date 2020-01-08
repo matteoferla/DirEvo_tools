@@ -1,32 +1,16 @@
-import os
-#from pprint import PrettyPrinter
+from waitress import serve
+from pyramid.paster import get_app, setup_logging
+import os, argparse
 
-from pyramid.paster import get_app
-from pyramid.paster import get_appsettings
+# custom `app.py` due to os.environs...
+parser = argparse.ArgumentParser()
+parser.add_argument('--d', action='store_true', help='run in dev mode')
+if parser.parse_args().d:
+    print('*'*10+'RUNNING IN DEV MODE'+'*' * 10)
+    configfile = 'development.ini'
+else:
+    configfile = 'production.ini'
 
-#pprint = PrettyPrinter().pprint
-#pprinter = pprint.PrettyPrinter().pprint
-
-if __name__ == '__main__':
-    here = os.path.dirname(os.path.abspath(__file__))
-    ip = '0.0.0.0'
-    port = 8080
-    if os.path.isdir("/opt/app-root/src/pyramidstarter/"):  # openshift specific relic
-        os.chdir("/opt/app-root/src/")
-    elif os.path.join(os.getcwd(), 'app.py') != __file__:  # generic weird location fixer...
-        if os.path.split(__file__)[0]:  # no idea why it would fail...
-            os.chdir(os.path.split(__file__)[0])
-    config = os.path.join(here, 'production.ini')
-    # config = os.path.join(here, 'production.ini')
-
-    print('Binding to {ip}:{port}'.format(ip=ip, port=port))
-    app = get_app(config, 'main')  # find 'main' method in __init__.py.  That is our wsgi app
-    settings = get_appsettings(config,
-                               'main')  # don't really need this but is an example on how to get settings from the '.ini' files
-
-    # Waitress
-    from waitress import serve
-
-    print("Starting Waitress.")
-    print("working directory: ", os.getcwd())
-    serve(app, host=ip, port=port, threads=50)
+setup_logging(configfile)
+app = get_app(configfile, 'main') #, options={'SQL_URL': os.environ['SQL_URL']}
+serve(app, host='0.0.0.0', port=8080, threads=50)

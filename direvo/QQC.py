@@ -419,7 +419,7 @@ def QQC_test():
 
 def MC_test():
     seq = 'GTGGAACAGGATGTGGTGTTTAGCAAAGTGAATGTGGCTGGCGAGGAAATTGCGGGAGCGAAAATTCAGTTGAAAGACGCGCAGGGCCAGGTGGTGCATAGCTGGACCAGCAAAGCGGGCCAAAGCGAAACCGTGAAGCTGAAAGCCGGCACCTATACCTTTCATGAGGCGAGCGCACCGACCGGCTATCTGGCGGTGACCGATATTACCTTTGAAGTGGATGTGCAGGGCAAAGTTACAGTGAAAGATgcgaatGGCAATGGTGTGAAAGCGGAG'
-    x = Trace.from_filename('pyramidstarter/static/demo_MC.ab1').reverse().align(seq)
+    x = Trace.from_filename('direvo/static/demo_MC.ab1').reverse().align(seq)
     pprint(x.alignment)
     ref = Seq(x.alignment[1].replace('-', '')).translate()
     query = Seq(x.alignment[0].replace('-', '')).translate()

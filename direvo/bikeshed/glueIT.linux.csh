@@ -16,15 +16,15 @@ foreach codon (`sed 's/-/@/g' $id`)
   set mN3 = `echo $codon | sed 's/./& /g' | awk '{print $3}'`
   if ($mN1 != "@" && $mN2 != "@" && $mN3 != "@") then
     set sN1 = `awk -F: '{if ($1=="'"$mN1"'") print $2}' \
-      pyramidstarter/bikeshed/ambignt.txt`
+      direvo/bikeshed/ambignt.txt`
     set sN2 = `awk -F: '{if ($1=="'"$mN2"'") print $2}' \
-      pyramidstarter/bikeshed/ambignt.txt`
+      direvo/bikeshed/ambignt.txt`
     set sN3 = `awk -F: '{if ($1=="'"$mN3"'") print $2}' \
-      pyramidstarter/bikeshed/ambignt.txt`
+      direvo/bikeshed/ambignt.txt`
     echo "<b>Codon ${count}</b> ($codon): X = ${sN1}, Y = ${sN2}, Z = ${sN3}.<br>"
 
     set dat1 = \
-      `awk '{print $1,$2}' pyramidstarter/bikeshed/aa2codon.dat | sed 'y/U/T/' | \
+      `awk '{print $1,$2}' direvo/bikeshed/aa2codon.dat | sed 'y/U/T/' | \
       sed 's/\([ACGT]\)\([ACGT]\)\([ACGT]\)/1\12\23\3/' | \
       sed 's/1['$sN1']/'$mN1'/g' | \
       sed 's/2['$sN2']/'$mN2'/g' | \
@@ -45,7 +45,7 @@ foreach codon (`sed 's/-/@/g' $id`)
     #This count includes the stop codons - needed for the denominator in the 
     #  exp terms in glue1AAc.
     set ncodons = \
-      `awk '{print $1,$2}' pyramidstarter/bikeshed/aa2codon.dat | sed 'y/U/T/' | \
+      `awk '{print $1,$2}' direvo/bikeshed/aa2codon.dat | sed 'y/U/T/' | \
       sed 's/\([ACGT]\)\([ACGT]\)\([ACGT]\)/1\12\23\3/' | \
       sed 's/1['$sN1']/'$mN1'/g' | \
       sed 's/2['$sN2']/'$mN2'/g' | \
@@ -61,4 +61,4 @@ foreach codon (`sed 's/-/@/g' $id`)
   @ count += 1
 end
 
-pyramidstarter/bikeshed/glueITc.linux $id.dat
+direvo/bikeshed/glueITc.linux $id.dat

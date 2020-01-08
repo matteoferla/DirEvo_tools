@@ -1,10 +1,10 @@
 Paste
 biopython
+numpy
 scipy
+pyramid
 pyramid_chameleon
 pyramid_debugtoolbar
 waitress
 openpyxl
 markdown
-pyramid
-numpy

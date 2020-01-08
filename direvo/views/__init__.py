@@ -10,7 +10,7 @@ debugprint = print
 
 
 class Settings:
-    path = 'pyramidstarter'
+    path = 'direvo'
     status = 'none'
     frame = os.path.join('..','templates','frame.mako')
 
@@ -81,7 +81,7 @@ def get_ip(req):
 def log_passing_para(req, extra, status):
     try:
         ip,where=get_ip(req)
-        logging.getLogger('pyramidstarter').info(
+        logging.getLogger('direvo').info(
             ip + '\t' + where + '\t' + req.upath_info + '\t' + extra + '\t' + status)
     except Exception as err:
         debugprint('MAJOR LOGGING ERROR: {}'.format(str(err)))
