@@ -1,18 +1,18 @@
-[submodule "pyramidstarter/static/bootstrap"]
-	path = pyramidstarter/static/bootstrap
+[submodule "direvo/static/bootstrap"]
+	path = direvo/static/bootstrap
 	url = https://github.com/twbs/bootstrap.git
-[submodule "pyramidstarter/static/bootstrap-slider"]
-	path = pyramidstarter/static/bootstrap-slider
+[submodule "direvo/static/bootstrap-slider"]
+	path = direvo/static/bootstrap-slider
 	url = https://github.com/seiyria/bootstrap-slider.git
-[submodule "pyramidstarter/static/bootswatch"]
-	path = pyramidstarter/static/bootswatch
+[submodule "direvo/static/bootswatch"]
+	path = direvo/static/bootswatch
 	url = https://github.com/thomaspark/bootswatch.git
-[submodule "pyramidstarter/static/bootstrap-switch"]
-	path = pyramidstarter/static/bootstrap-switch
+[submodule "direvo/static/bootstrap-switch"]
+	path = direvo/static/bootstrap-switch
 	url = https://github.com/Bttstrp/bootstrap-switch.git
-[submodule "pyramidstarter/static/bootstrap-tour"]
-	path = pyramidstarter/static/bootstrap-tour
+[submodule "direvo/static/bootstrap-tour"]
+	path = direvo/static/bootstrap-tour
 	url = https://github.com/sorich87/bootstrap-tour.git
-[submodule "pyramidstarter/static/Font-Awesome-Pro"]
-	path = pyramidstarter/static/Font-Awesome-Pro
+[submodule "direvo/static/Font-Awesome-Pro"]
+	path = direvo/static/Font-Awesome-Pro
 	url = https://github.com/FortAwesome/Font-Awesome-Pro.git
