@@ -1,0 +1,12 @@
+[submodule "direvo/static/bootstrap"]
+	path = direvo/static/bootstrap
+	url = https://github.com/twbs/bootstrap.git
+[submodule "direvo/static/bootstrap-slider"]
+	path = direvo/static/bootstrap-slider
+	url = https://github.com/seiyria/bootstrap-slider.git
+[submodule "direvo/static/bootswatch"]
+	path = direvo/static/bootswatch
+	url = https://github.com/thomaspark/bootswatch.git
+[submodule "direvo/static/Font-Awesome-Pro"]
+	path = direvo/static/Font-Awesome-Pro
+	url = https://github.com/FortAwesome/Font-Awesome-Pro.git
