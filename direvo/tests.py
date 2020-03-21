@@ -14,4 +14,4 @@ class ViewTests(unittest.TestCase):
         from direvo.views.pages import my_view
         request = testing.DummyRequest()
         info = my_view(request)
-        self.assertEqual(info['project'], 'Pyramidstarter')
+        self.assertEqual(info['project'], 'direvo')
