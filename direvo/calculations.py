@@ -29,15 +29,8 @@ from . import bike
 from .QQC import Trace, scheme_maker, codon_to_AA
 from .deep_mut_scanning import deep_mutation_scan
 from .mutagenesis import MutationTable, MutationDNASeq
-
+from .utility import Settings
 from mako.template import Template
-
-PATH = "/opt/app-root/src/direvo/"
-if not os.path.isdir(PATH):
-    PATH = "direvo/"
-if __name__ == '__main__':
-    PATH = ''
-
 
 class SeqEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -210,7 +203,7 @@ def glueit_csh(jsonreq):
     :return:
     """
     library_size=int(jsonreq['library_size']) #it will be stringified anyway. Not sure why I am converting it.
-    filename = os.path.join(PATH, 'tmp', '{0}.txt'.format(uuid.uuid4()))
+    filename = os.path.join(Settings.path, 'tmp', '{0}.txt'.format(uuid.uuid4()))
     with open(filename, 'w') as f:
         for i in range(1,int(jsonreq['num_codons'])):
             f.write(jsonreq['codon{}'.format(i)]+'\n')
@@ -219,7 +212,7 @@ def glueit_csh(jsonreq):
     return json.dumps({'data': None, 'html': html})
 
 def glueit(jsonreq):
-    filename = os.path.join(PATH, 'tmp', '{0}.dat'.format(uuid.uuid4()))
+    filename = os.path.join(Settings.path, 'tmp', '{0}.dat'.format(uuid.uuid4()))
     with open(filename, 'w') as f:
         library_size=int(jsonreq['library_size'])
         num_codon=int(jsonreq['num_codons'])
@@ -235,7 +228,7 @@ def glueit(jsonreq):
 
 def pedelAA(jsonreq):
     # Super hacky for now. I struggled with the maths in python mode.
-    filename = os.path.join(PATH, 'tmp', '{0}'.format(uuid.uuid4()))
+    filename = os.path.join(Settings.path, 'tmp', '{0}'.format(uuid.uuid4()))
     #sequence file
     seq=re.sub('[^ATGC]','',jsonreq['sequence'].upper().replace('U','T'))
     assert not len(seq) % 3, 'Sequence is not a multiple of three.'
@@ -258,8 +251,8 @@ def pedelAA(jsonreq):
     with open(filename+'.setup','w') as f:
         f.write(' \n'.join([filename+'.fasta',
                       filename + '.nuc.dat',
-                      os.path.join(PATH, 'bikeshed','aa2codon.dat'),
-                      os.path.join(PATH, 'bikeshed', 'Acodon.dat'),
+                      os.path.join(Settings.path, 'bikeshed','aa2codon.dat'),
+                      os.path.join(Settings.path, 'bikeshed', 'Acodon.dat'),
                       filename+'.html',
                       filename + 'matrix.html',
                       filename + 'table.html',
@@ -275,7 +268,7 @@ def pedelAA(jsonreq):
     #warn('To test, the wrapper is circumvented.')
     data=bike.pedelAA(filename + '.setup')
     #print(data['html'])
-    html=str(open(os.path.join(PATH,'templates','pedelAA_results.mako')).read()).format(**data)
+    html=str(open(os.path.join(Settings.path,'templates','pedelAA_results.mako')).read()).format(**data)
     return json.dumps({'data': data['sub_table_data'], 'html': html})
 
 
@@ -317,8 +310,8 @@ def driver(jsonreq):
         xtrue = '1' if xtrue == True else '0'
     else:
         pass # most likely a number already.
-    listfile =os.path.join(PATH, 'tmp', 'listfile_{0}.txt'.format(uuid.uuid4()))
-    outfile = os.path.join(PATH, 'tmp', 'outfile_{0}.txt'.format(uuid.uuid4()))
+    listfile =os.path.join(Settings.path, 'tmp', 'listfile_{0}.txt'.format(uuid.uuid4()))
+    outfile = os.path.join(Settings.path, 'tmp', 'outfile_{0}.txt'.format(uuid.uuid4()))
 
     open(listfile,'w').write('\n'.join([str(len(pos)),*pos]))
     driver_out=bike.driver(sequence_length=jsonreq['length'],
@@ -370,7 +363,7 @@ def silico(jsonreq):
     hreply ='<pre><code>>variant_'+' '.join([str(m) for m in sorted(seq.mutations, key=lambda x: x.num_aa)])+'\n'+str(seq)+'</pre></code>'
     return json.dumps({'data': None, 'html':hreply})
 
-(codonball, codontallyball)=json.load(open(os.path.join(PATH,'AAcalc.json'),'r'))
+(codonball, codontallyball)=json.load(open(os.path.join(Settings.path,'AAcalc.json'),'r'))
 AAnamemask = {'R': 'R', 'Ser': 'S', 'W': 'W', 'His': 'H', 'Isoleucine': 'I', 'Tryptophan': 'W', 'Thr': 'T', 'I': 'I',
               'Cys': 'C', 'Gln': 'Q', 'Y': 'Y', 'Methionine': 'M', 'Proline': 'P', 'K': 'K', 'S': 'S', 'Valine': 'V',
               'Glutamine': 'Q', 'Tyr': 'Y', 'Val': 'V', 'Histidine': 'H', 'Lysine': 'K', 'Glutamate': 'E', 'L': 'L',
@@ -596,8 +589,8 @@ def pmut_renumber(scores, AAlphabet='A C D E F G H I K L M N P Q R S T V W Y',de
     return outdex, outseq
 
 def delete_temp():
-    for file in os.listdir(os.path.join(PATH,'tmp/')):
-        os.remove(os.path.join(PATH,'tmp',file))
+    for file in os.listdir(os.path.join(Settings.path,'tmp/')):
+        os.remove(os.path.join(Settings.path,'tmp',file))
 
 if __name__ == "__main__":
     #driver({'positions': '250 274 375 650 655 757 763 982 991', 'mean': '2', 'xtrue': True, 'library_size': '1600', 'length': '1425'})
