@@ -312,3 +312,4 @@ def send_email(request):
 def ajacean_test(request):
     return {'message': '<div class="alert alert-success" role="alert">I got this back.</div>'}
 
+

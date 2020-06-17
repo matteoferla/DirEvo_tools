@@ -1,7 +1,7 @@
 import os
 
 class Settings:
-    #lazy singleton.
+    #making into a singleton.
     path = 'direvo'
     status = 'none'
     frame = os.path.join('..', 'templates', 'frame.mako')

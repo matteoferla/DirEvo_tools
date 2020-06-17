@@ -73,7 +73,7 @@
             &#x2630;
         </button>
         <a class="navbar-brand"
-           href="#">Pedel Redux</a>
+           href="#">DirEvo Tools</a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="${page.m_home} nav-item"><a href="/" class="nav-link">Home</a>
