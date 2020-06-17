@@ -39,6 +39,7 @@ def main(global_config, **settings):
                   'glossary']:
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
+    config.add_route('params', '/params/{mode}')
     config.add_route('main', '/main/{page}')
     config.add_route('favicon', '/favicon.ico')
     config.add_route('robots', '/robots.txt')
