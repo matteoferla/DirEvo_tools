@@ -231,9 +231,13 @@
                             <hr/>
                             <a data-toggle="modal" data-target="#comment_modal" style="cursor:pointer"  class="btn btn-warning my-1" id="feedback"><i class="far fa-comment"></i> Feedback</a>
                             <hr/>
-                            <a href='#' class="btn btn-info my-1" id="twitter"><i class="fab fa-twitter"></i> Twitter</a>
-                            <a href='#' class="btn btn-info my-1" id="blogger"><i class="fab fa-blogger-b"></i> Blog</a>
-                            <a href='https://github.com/matteoferla/pedel2' class="btn btn-info my-1" id="github" target="_blank"><i class="fab fa-github"></i> Github</a>
+                            <a href='#social_modal' class="btn btn-info my-1" id="twitter"
+                            data-toggle="modal" data-target="#overview_modal" style="cursor:pointer"
+                            ><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href='#social_modal' class="btn btn-info my-1" id="blogger"
+                            data-toggle="modal" data-target="#overview_modal" style="cursor:pointer"
+                            ><i class="fab fa-blogger-b"></i> Blog</a>
+                            <a href='https://github.com/matteoferla/DirEvo_tools' class="btn btn-info my-1" id="github" target="_blank"><i class="fab fa-github"></i> Github</a>
                 </li>
                         </div>
 
@@ -293,6 +297,22 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" id="comment_send">Send</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="social_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="overview_title">Overview</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="overview_body">
+                <p></p>
             </div>
         </div>
     </div>
