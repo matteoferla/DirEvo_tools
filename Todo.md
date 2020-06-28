@@ -20,6 +20,9 @@
 
 Sorted by urgency:
 
+* *upcoming* status 500.
+* *citations* route temporarily
+* *bootstrap switch* --> reg switch
 * *Pedel-AA* a-elements linkage is broken in certain bits. :angry:
 * *Pedel*  range of conditions not done yet, but pedel_batch wrapper made. —original functionality
 * *Pedel-AA* graphs —original functionality

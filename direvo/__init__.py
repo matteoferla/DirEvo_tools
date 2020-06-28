@@ -1,5 +1,6 @@
 from pyramid.config import Configurator
 from pyramid.session import SignedCookieSessionFactory
+from .log import config_logging
 
 
 def main(global_config, **settings):
@@ -39,7 +40,8 @@ def main(global_config, **settings):
                   'glossary']:
         config.add_route(route, '/' + route)
         # deepscan mutanalyst misc about QQC pedel driver glue mutantcaller mutantprimers no longer here
-    config.add_route('params', '/params/{mode}')
+    config.add_route('params', '/params')
+    config.add_route('ajax_params', '/params/{mode}')
     config.add_route('main', '/main/{page}')
     config.add_route('favicon', '/favicon.ico')
     config.add_route('robots', '/robots.txt')
@@ -49,44 +51,4 @@ def main(global_config, **settings):
     return config.make_wsgi_app()
 
 
-def config_logging():
-    import logging, io
-    ##### original crap #######
-    log_ini = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            "simple": {
-                "format": "%(asctime)s [%(levelname)-8s] %(name)s: %(message)s",
-                "datefmt": "%Y-%m-%d %H:%M:%S"
-            }
-        },
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-                "level": "DEBUG",
-                "formatter": "simple",  # key name of our formatter
-                "stream": None
-            }
-        },
-        "loggers": {
-            "": {
-                "handlers": ["console"],  # ["console", "mail", "standard_file", "rotating_file", etc]
-                "level": "DEBUG",
-                "propagate": True
-            }
-        }
-    }
 
-    logging.config.dictConfig(log_ini)  # configure log
-
-    ###### mine #######
-    logging.captureWarnings(True)
-
-    log = logging.getLogger(__name__)
-    f = io.StringIO('This is the StringIO stream of the Log', '\n')
-    handler = logging.StreamHandler(f)
-    handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'))
-    log.addHandler(handler)
-
-    return

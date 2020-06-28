@@ -16,7 +16,6 @@ from . import Settings, log_passing, debugprint, get_ip, Fields
 
 ######
 
-
 @view_config(route_name='ajax_mutantprimers', renderer='json')
 @view_config(route_name='ajax_deepscan', renderer='json')
 def deepscanner(request):
