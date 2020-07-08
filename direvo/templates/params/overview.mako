@@ -24,6 +24,10 @@
     NB. the atom order in the params is not the atom order, so the backbone can be anywhere in the smiles
     (<i>e.g.</i> <code>*NC(C(=O)*){sidechain}</code> or <code>*NC{sidechain}(C(=O)*)CN*</code>).
 </p>
+<p4>Atom names</p4>
+<p>The names of the atoms can be specified. Using the atom order as they appear in the SMILES,
+    you can supply either an array/list (with '-' or 'null' to mark atoms you do not which to specify, (<i>e.g.</i><code>['-', ' CX ', 'CY']</code>) or
+    a object/hash/dictionary with keys the index and the value the name (<i>e.g.</i><code>{5: ' CX '}</code>)</p>
 <p4>SMILES</p4>
 <p>A SMILES is <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system" target="_blank">
     a string that represents a molecule <i class="fab fa-wikipedia-w"></i></a>. For example <code>CC</code> is propane.</p>
@@ -32,10 +36,10 @@
     <ul>
     <li> a molecule drawerer here —I am thinking Ketcher</li>
     <li> a PDB route with or without SMILES (module has it already)</li>
-    <li> atom name option (module has it already)</li>
+    <li> constraints for covalents (module has it already)</li>
     <li> conformers (module has it already)</li>
     <li> amino acid from side chain</li>
-    <li> testing —this homeserver is currently on a Rasperry Pi and hosts other apps so I don't wish to overburden it.</li>
+    <li> testing in pyrosetta of the ligand (module does it) —this homeserver is currently on a Rasperry Pi and hosts other apps so I don't wish to overburden it.</li>
 </ul>
 
     </p>

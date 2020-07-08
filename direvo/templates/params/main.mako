@@ -19,6 +19,15 @@
                         </div>
                         <div class="col-6 pb-3">
                             <div class="input-group">
+                                <div class="input-group-prepend" data-toggle="tooltip" title="atom names in JSON format. see information."
+                                data-placement="top">
+                                    <span class="input-group-text">Atom names (opt.)</span></div>
+                                <input type="text" class="form-control"
+                                placeholder="['CX', 'CY', 'OW']" id="params_atomnames">
+                            </div>
+                        </div>
+                        <div class="col-6 pb-3">
+                            <div class="input-group">
                                 <div class="input-group-prepend" data-toggle="tooltip" title="Name of the ligand or AA for humans"
                                 data-placement="top">
                                     <span class="input-group-text">Longer name</span></div>
@@ -39,10 +48,10 @@
                     <div class="row">
                         <div class="col-12 pb-3">
                             <div class="input-group">
-                                <div class="input-group-prepend" data-toggle="tooltip" title="SMILES"
+                                <div class="input-group-prepend" data-toggle="tooltip" title="SMILES. See information for more"
                                 data-placement="top">
                                     <span class="input-group-text">SMILES</span></div>
-                                <input type="text" min="0" class="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="CC[OH]" id="params_smiles">
                             </div>
                         </div>
@@ -50,10 +59,10 @@
                         <div class="col-12">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text">Mol/PDB/Mol2</span>
+                                <span class="input-group-text">Mol file</span>
                               </div>
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="params_file">
+                                <input type="file" class="custom-file-input" id="params_file" accept=".mol,.sdf,.mol2,.pdb,.mdl">
                                 <label class="custom-file-label" for="params_file">Choose file</label>
                               </div>
                             </div>

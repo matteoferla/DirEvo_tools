@@ -9,6 +9,14 @@ class Pamars {
 
     // ===== Getters and Setters =================
 
+    get generic() {
+        return $('#params_generic').prop('checked');
+    }
+
+    get atomnames() {
+        return params_atomnames.value;
+    }
+
     get name() {
         const pn = $(params_name);
         pn.removeClass('is-invalid');
@@ -85,7 +93,9 @@ class Pamars {
             url: "params/smiles", data: {
                 smiles: this.smiles,
                 name: this.name,
-                title: this.title
+                title: this.title,
+                generic: this.generic,
+                atomnames: this.atomnames,
             }
         }).fail(xhr => this.show_error.call(this, xhr))
             .done(msg => this.show_results.call(this, msg));
@@ -100,6 +110,8 @@ class Pamars {
             url: "params/mol", data: {
                 name: this.name,
                 title: this.title,
+                generic: this.generic,
+                atomnames: this.atomnames,
                 extension: extension,
                 block: block
             }

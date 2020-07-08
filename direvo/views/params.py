@@ -39,13 +39,36 @@ class ParamViews:
 
     @property  # cached
     def atomnames(self) -> Union[List[str], None]:
+        def clean(name):
+            if name in ('null', 'None', '-'):
+                return None
+            else:
+                return re.sub(r'[^\w ]','', name)
         if self._atomnames is not None:
             return self._atomnames
-        if 'atomnames' in self.request.params:
+        if 'atomnames' in self.request.params and self.request.params['atomnames'] != '':
             self._atomnames = json.loads(self.request.params['atomnames'])
+            if isinstance(self._atomnames, str) and ',' in self._atomnames:
+                self._atomnames = self._atomnames.split(',')
+            # remove empties
+            if isinstance(self._atomnames, list):
+                self._atomnames = [clean(an) for an in self._atomnames]
+            elif isinstance(self.atomnames, dict):
+                self._atomnames = {int(i): clean(an) for i, an in self._atomnames.items()}
+            else:
+                raise ValueError('atomnames in odd format')
             return self._atomnames
         else:
             return None
+
+    @property
+    def generic(self) -> bool:
+        if 'generic' not in self.request.params:
+            return False
+        elif self.request.params['generic'] in (True, 'true', 'True', 'yes',):
+            return True
+        else:
+            return False
 
     # ==== views =======================================================================================================
 
@@ -79,7 +102,13 @@ class ParamViews:
 
     def from_smiles(self) -> dict:
         smiles = self.get('smiles').strip()
-        p = Params.from_smiles(smiles, self.name, generic=False, atomnames=self.atomnames)
+        p = Params.from_smiles(smiles, self.name, generic=self.generic, atomnames=self.atomnames)
+        return self.to_dict(p)
+
+    def from_smiles_w_pdbfiles(self) -> dict:
+        smiles = self.get('smiles').strip()
+        p = Params.from_smiles_w_pdbfile(pdb_file, smiles, generic=self.generic, name=self.name,
+                              proximityBonding=False)
         return self.to_dict(p)
 
     def from_mol(self) -> dict:
@@ -87,9 +116,11 @@ class ParamViews:
             mol = Chem.MolFromMolBlock(self.get('block'), sanitize=True, removeHs=False, strictParsing=True)
         elif self.get('extension') in ('mol2',):
             mol = Chem.MolFromMol2Block(self.get('block'), sanitize=True, removeHs=False)
+        elif self.get('extension') in ('pdb',):
+            mol = Chem.MolFromPDBBlock(self.get('block'), sanitize=True, removeHs=False, proximityBonding=False)
         else:
             raise exc.HTTPClientError(f"Format {self.get('extension')} not supported")
-        p = Params.from_mol(mol, self.name, generic=False, atomnames=self.atomnames)
+        p = Params.from_mol(mol, self.name, generic=self.generic, atomnames=self.atomnames)
         return self.to_dict(p)
 
     def from_pdb(self) -> dict:
