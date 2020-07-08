@@ -218,7 +218,7 @@
                                 <a href='#' class="btn btn-success my-1" id="tour"><i class="far fa-compass"></i> Tutorial</a>
                             %endif
                             %if page.overview:
-                                <a data-toggle="modal" data-target="#overview_modal" style="cursor:pointer" class="btn btn-success my-1" id="overview"><i class="far fa-map"></i> Background</a>
+                                <a data-toggle="modal" data-target="#overview_modal" style="cursor:pointer" class="btn btn-success my-1" id="overview"><i class="far fa-map"></i> Information</a>
                             %endif
                             %if page.notes:
                                 %for note_file,note_title in page.notes:
@@ -232,11 +232,11 @@
                             <a data-toggle="modal" data-target="#comment_modal" style="cursor:pointer"  class="btn btn-warning my-1" id="feedback"><i class="far fa-comment"></i> Feedback</a>
                             <hr/>
                             <a href='#social_modal' class="btn btn-info my-1" id="twitter"
-                            data-toggle="modal" data-target="#overview_modal" style="cursor:pointer"
-                            ><i class="fab fa-twitter"></i> Twitter</a>
-                            <a href='#social_modal' class="btn btn-info my-1" id="blogger"
-                            data-toggle="modal" data-target="#overview_modal" style="cursor:pointer"
-                            ><i class="fab fa-blogger-b"></i> Blog</a>
+                            data-toggle="modal" data-target="#social_modal" style="cursor:pointer"
+                            ><i class="fab fa-blogger-b"></i> Various links</a>
+                            <a href='#cite_modal' class="btn btn-info my-1" id="cite"
+                            data-toggle="modal" data-target="#cite_modal" style="cursor:pointer"
+                            ><i class="fab fa-scroll-old"></i> Citation</a>
                             <a href='https://github.com/matteoferla/DirEvo_tools' class="btn btn-info my-1" id="github" target="_blank"><i class="fab fa-github"></i> Github</a>
                 </li>
                         </div>
@@ -302,6 +302,30 @@
     </div>
 </div>
 
+<div class="modal" id="cite_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="comment_title">Citations</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="comment_body">
+                <p>This site contains several tools with different citations.</p>
+                <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="far fa-magic"></i></span><b>Various tools</b> to be published</li>
+                    <li><span class="fa-li"><i class="far fa-scanner"></i></span><b>Deepscan and Mutant primers</b> Acevedo-Rocha CG, Ferla M, Reetz MT. Directed Evolution of Proteins Based on Mutational Scanning. Methods Mol Biol. 2018;1685:87-128. doi:<a href="https://dx.doi.org/10.1007/978-1-4939-7366-8_6" target="_blank">10.1007/978-1-4939-7366-8_6 <i class="far fa-external-link"></i></a></li>
+                  <li><span class="fa-li"><i class="far fa-money-bill-wave"></i></span><b>Quick quality control</b> Acevedo-Rocha CG, Reetz MT, Nov Y. Economical analysis of saturation mutagenesis experiments. Sci Rep. 2015;5:10654. Published 2015 Jul 20. doi:<a href="https://dx.doi.org/10.1038/srep10654" target="_blank">10.1038/srep10654 <i class="far fa-external-link"></i></a></li>
+                  <li><span class="fa-li"><i class="far fa-dna"></i></span><b>Mutanalyst</b> Ferla MP. Mutanalyst, an online tool for assessing the mutational spectrum of epPCR libraries with poor sampling. BMC Bioinformatics. 2016;17:152. Published 2016 Apr 4. doi:<a href="https://dx.doi.org/10.1186/s12859-016-0996-7"  target="_blank">10.1186/s12859-016-0996-7 <i class="far fa-external-link"></i></a></li>
+                <li><span class="fa-li"><i class="far fa-bicycle"></i></span><b>Pedel</b> Patrick WM, Firth AE, Blackburn JM. User-friendly algorithms for estimating completeness and diversity in randomized protein-encoding libraries. Protein Eng. 2003;16(6):451-457. doi:<a href="https://dx.doi.org/10.1093/protein/gzg057" target="_blank">10.1093/protein/gzg057 <i class="far fa-external-link"></i></a></li>
+                  <li><span class="fa-li"><i class="far fa-biking-mountain"></i></span><b>PedelAA and Glue-it</b> Firth AE, Patrick WM. GLUE-IT and PEDEL-AA: new programmes for analyzing protein diversity in randomized libraries. Nucleic Acids Res. 2008;36(Web Server issue):W281-W285. doi:<a href="https://dx.doi.org/10.1093/nar/gkn226" target="_blank">10.1093/nar/gkn226 <i class="far fa-external-link"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="social_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -312,7 +336,27 @@
                 </button>
             </div>
             <div class="modal-body" id="overview_body">
-                <p></p>
+                <p>Links to academic resources and academic social media presence of the authors</p>
+                <div class="list-group list-group-flush">
+  <a href="https://blog.matteoferla.com/" class="list-group-item list-group-item-action" target="_blank">
+    Matteo Ferla's Blog
+  </a>
+  <a href="https://twitter.com/CaGuAcRo1" class="list-group-item list-group-item-action" target="_blank">
+    Carlos Acevedo-Rocha's Twitter
+  </a>
+  <a href="https://www.matteoferla.com" class="list-group-item list-group-item-action" target="_blank">
+    Matteo Ferla's homepage
+  </a>
+  <a href="https://michelanglo.sgc.ox.ac.uk" class="list-group-item list-group-item-action" target="_blank">
+    Michelanglo (create, edit and share interactive protein views)
+  </a>
+  <a href="https://twitter.com/matteoferla" class="list-group-item list-group-item-action" target="_blank">
+    Matteo Ferla's Twitter (inactive)
+  </a>
+
+
+
+</div>
             </div>
         </div>
     </div>

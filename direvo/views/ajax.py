@@ -6,6 +6,7 @@ import shutil
 import smtplib
 import traceback
 import uuid
+import logging
 from itertools import product
 from warnings import warn
 from pyramid.view import view_config
@@ -13,6 +14,8 @@ from pyramid.view import view_config
 from .. import calculations as calc
 
 from . import Settings, log_passing, debugprint, get_ip, Fields
+
+from ..slack import notify_admin
 
 ######
 
@@ -298,8 +301,17 @@ def sanitize(inputstr): #from https://gist.github.com/dustyfresh/10d4e260499612c
     return sanitized
 
 
+
 @view_config(route_name='ajax_email', renderer='json')
+def send_message(request):
+    ip, where = get_ip(request)
+    reply = request.json_body
+    body = sanitize(reply['message'] + '\n' + '*' * 10 + ip + ' ' + where)
+    notify_admin(body)
+
+
 def send_email(request):
+    warn('No longer used.')
     reply = request.json_body
     subject = 'Pedel2 comment from ' + sanitize(reply['name'])
     ip, where = get_ip(request)

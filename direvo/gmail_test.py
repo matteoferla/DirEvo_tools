@@ -24,6 +24,3 @@ def send_email(user, pwd, recipient, subject, body):
         print('successfully sent the mail')
     except Exception as e:
         print("failed to send mail")
-
-if __name__ == '__main__':
-    send_email('squidonius.tango@gmail.com','****','matteo.ferla@gmail.com','TEST','Hello!')
