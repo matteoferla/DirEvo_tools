@@ -55,7 +55,7 @@
                                 placeholder="CC[OH]" id="params_smiles">
                             </div>
                         </div>
-                            <p class="col-12 text-center">or</p>
+                        <p class="col-12 text-center">or</p>
                         <div class="col-12">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -65,8 +65,37 @@
                                 <input type="file" class="custom-file-input" id="params_file" accept=".mol,.sdf,.mol2,.pdb,.mdl">
                                 <label class="custom-file-label" for="params_file">Choose file</label>
                               </div>
+                                <div class="input-group-append">
+                                <div class="border rounded-right border-dark bg-secondary text-muted align-middle">
+
+                                <div class="custom-control custom-switch py-1">
+                                                      <input class="custom-control-input" id="params_protons" type="checkbox">
+                                                      <label class="custom-control-label" for="params_protons">Protonate</label>
+                                    </div></div></div>
                             </div>
                             <br>
+                        </div>
+                        <p class="col-12 text-center">or</p>
+                        <div class="col-6 pb-3">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend" data-toggle="tooltip" title="PDB containing a residue with 3-name specified above (can be a full protein)">
+                                <span class="input-group-text">PDB file</span>
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="params_pdb_file" accept=".pdb">
+                                <label class="custom-file-label" for="params_pdb_file">Choose file</label>
+                              </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="col-6 pb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend" data-toggle="tooltip" title="SMILES to fix PDB. See information for more"
+                                data-placement="top">
+                                    <span class="input-group-text">SMILES</span></div>
+                                <input type="text" class="form-control"
+                                placeholder="CC[OH]" id="params_pdb_smiles">
+                            </div>
                         </div>
                     </div>
                     <!-- row-->

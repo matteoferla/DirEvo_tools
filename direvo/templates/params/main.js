@@ -3,7 +3,6 @@
 class Pamars {
     constructor() {
         this.out = $(params_result);
-        this._file = null;
         this.clear();
     }
 
@@ -11,6 +10,10 @@ class Pamars {
 
     get generic() {
         return $('#params_generic').prop('checked');
+    }
+
+    get protons() {
+        return $('#params_protons').prop('checked');
     }
 
     get atomnames() {
@@ -68,10 +71,12 @@ class Pamars {
     // ===== Button events =================
 
     calculate() {
-        if (params_file.files.length === 0) {
-            this.calc_smiles();
-        } else {
+        if (params_file.files.length !== 0) {
             this.calc_mol();
+        } else if (params_pdb_file.files.length !== 0) {
+            this.calc_smiles_pdb();
+        } else {
+            this.calc_smiles();
         }
     }
 
@@ -86,12 +91,34 @@ class Pamars {
         $(params_name).val('LIG');
         $(params_title).val('ligand');
         $(params_result).hide();
+        params_file.value = null;
+        params_pdb_file.value = null;
     }
 
     calc_smiles () {
         $.post({
             url: "params/smiles", data: {
                 smiles: this.smiles,
+                name: this.name,
+                title: this.title,
+                generic: this.generic,
+                atomnames: this.atomnames,
+            }
+        }).fail(xhr => this.show_error.call(this, xhr))
+            .done(msg => this.show_results.call(this, msg));
+    }
+
+    async calc_smiles_pdb () {
+        let f = params_pdb_file.files[0];
+        const block = await f.text();
+        const extension = f.name.split('\.').pop().toLowerCase();
+        if ((extension !== 'pdb') && (extension !== 'ent'))
+        {   params_pdb_file.classList.add("is-invalid");
+            throw 'Shove your damn CIF file where the sun dont shine. You prat.'}
+        $.post({
+            url: "params/smiles_pdb", data: {
+                smiles: params_pdb_smiles.value, //optional.
+                block: block,
                 name: this.name,
                 title: this.title,
                 generic: this.generic,
@@ -111,6 +138,7 @@ class Pamars {
                 name: this.name,
                 title: this.title,
                 generic: this.generic,
+                protons: this.protons,
                 atomnames: this.atomnames,
                 extension: extension,
                 block: block
@@ -123,8 +151,15 @@ class Pamars {
 
     show_results(msg) {
         this.out.show();
-        const icon = '<i class="far fa-download"></i>';
-        const text = `
+        let text = '';
+        if (msg.error !== undefined) {
+            text = `<div class="alert alert-danger w-100 py-3" role="alert">
+                      An error occured parsing your request (${msg.error}).
+                      Please check the fields are correct and try again.
+                    </div>`;
+        } else {
+            const icon = '<i class="far fa-download"></i>';
+            text = `
             <div class="col-12"><h4>Results</h4></div>
             <div class="col-12">Final SMILES: ${msg.smiles}</div>
             <div class="col-12 col-md-6">${msg.svg}</div>
@@ -136,7 +171,10 @@ class Pamars {
                  Rdkit-to-params repo <i class="fab fa-github"></i></a>
             </div>
             <div class="col-12 pt-3">${icon} <a href="data:text/plain;charset=utf-8,${encodeURIComponent(msg.params)}" target="_blank" download="${this.title}.params">download params</a></div>
-            <div class="col-12">${icon} <a href="data:text/plain;charset=utf-8,${encodeURIComponent(msg.pdb)}" target="_blank" download="${this.title}.pdb">download PDB</a></div>`;
+            <div class="col-12">${icon} <a href="data:text/plain;charset=utf-8,${encodeURIComponent(msg.pdb)}" target="_blank" download="${this.title}.pdb">download PDB</a></div>
+            <div class="col-12">${icon} <a href="data:text/plain;charset=utf-8,${encodeURIComponent(msg.rotamers)}" target="_blank" download="${this.title}.pdb">download rotamers (requires params editing)</a></div>
+`;
+        }
         this.out.html(text);
     }
 

@@ -25,6 +25,14 @@ class ParamViews:
         else:
             raise exc.HTTPClientError(f'Query parameter {key} was not provided.')
 
+    def get_bool(self, key) -> bool:
+        if key not in self.request.params:
+            return False
+        elif self.request.params[key] in (True, 'true', 'True', 'yes',):
+            return True
+        else:
+            return False
+
     @property
     def name(self) -> str:
         if 'name' in self.request.params:
@@ -63,12 +71,7 @@ class ParamViews:
 
     @property
     def generic(self) -> bool:
-        if 'generic' not in self.request.params:
-            return False
-        elif self.request.params['generic'] in (True, 'true', 'True', 'yes',):
-            return True
-        else:
-            return False
+        return self.get_bool('generic')
 
     # ==== views =======================================================================================================
 
@@ -87,28 +90,22 @@ class ParamViews:
                 return self.from_smiles()
             elif mode == 'mol':
                 return self.from_mol()
-            elif mode == 'pdb':
+            elif mode == 'smiles_pdb':
                 return self.from_pdb()
             else:
                 raise exc.HTTPClientError(f'Unknown mode `{mode}`')
         except exc.HTTPError as error:
             self.request.response.status_code = error.status_code
-            return {'error': str(error)}
+            return {'error': f'{error.__class__.__name__}: {error}'}
         except Exception as error:
             log.exception(f'{error.__class__.__name__}: {error}')
-            return {'error': str(error)}
+            return {'error': f'{error.__class__.__name__}: {error}'}
 
     # ==== operations ==================================================================================================
 
     def from_smiles(self) -> dict:
         smiles = self.get('smiles').strip()
         p = Params.from_smiles(smiles, self.name, generic=self.generic, atomnames=self.atomnames)
-        return self.to_dict(p)
-
-    def from_smiles_w_pdbfiles(self) -> dict:
-        smiles = self.get('smiles').strip()
-        p = Params.from_smiles_w_pdbfile(pdb_file, smiles, generic=self.generic, name=self.name,
-                              proximityBonding=False)
         return self.to_dict(p)
 
     def from_mol(self) -> dict:
@@ -120,11 +117,28 @@ class ParamViews:
             mol = Chem.MolFromPDBBlock(self.get('block'), sanitize=True, removeHs=False, proximityBonding=False)
         else:
             raise exc.HTTPClientError(f"Format {self.get('extension')} not supported")
+        if self.get_bool('protons') is True:
+            mol = AllChem.AddHs(mol)
         p = Params.from_mol(mol, self.name, generic=self.generic, atomnames=self.atomnames)
         return self.to_dict(p)
 
     def from_pdb(self) -> dict:
-        raise NotImplementedError
+        smiles = self.get('smiles').strip()
+        block = self.get('block').strip()
+        if smiles != '':
+            p = Params.from_smiles_w_pdbblock(pdb_block=block,
+                                         smiles=smiles,
+                                         generic=self.generic,
+                                         name=self.name,
+                                         proximityBonding=False)
+            return self.to_dict(p)
+        else:
+            protein = Chem.MolFromPDBBlock(block, removeHs=False, proximityBonding=False)
+            mol = Chem.SplitMolByPDBResidues(protein, whiteList=[self.name])[self.name]
+            AllChem.SanitizeMol(mol)
+            mol = AllChem.AddHs(mol)
+            p = Params.from_mol(mol, self.name, generic=self.generic, atomnames=self.atomnames)
+            return self.to_dict(p)
 
     # ==== common ======================================================================================================
 
@@ -137,7 +151,16 @@ class ParamViews:
                  'smiles': Chem.MolToSmiles(params.mol),
                  'params': params.dumps(),
                  'svg': self.get_svg(params),
+                 'rotamers': self.get_conformers(params),
                  'pdb': Chem.MolToPDBBlock(params.dummyless)}
+
+    def get_conformers(self, params):
+        mol = params.dummyless
+        AllChem.EmbedMultipleConfs(mol)
+        rotamerblock = ''
+        for cid in range(mol.GetNumConformers()):
+            rotamerblock += Chem.MolToPDBBlock(mol, confId=cid)
+        return rotamerblock
 
     def get_svg(self, p):
         mol = Chem.Mol(p.mol)
