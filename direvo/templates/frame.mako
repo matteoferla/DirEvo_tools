@@ -433,7 +433,8 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
     % endif
     % if 'tour' in page.requirements:
-        <script src="/static/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+        ## <script src="/static/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/js/bootstrap-tour.min.js" integrity="sha512-kcDHM4gaMoZGaCaJ56XjGiknuwMeQFxssvIDnuuCp22PJYO8XvOeMibWtkdZTZtbPXfvLE9WweEVToVtM/wlMw==" crossorigin="anonymous"></script>
     % endif
 
     <script>

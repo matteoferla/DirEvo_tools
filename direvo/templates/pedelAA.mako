@@ -76,8 +76,10 @@
                 <br>
             </div>
             <div class="row">
+                <div class="col-12">
                 <div id="pedelAA_&#xA7;cycles" class="card bg-light card-body mb-3 well-lg">
-                    <div class="col-xl-4 mb-1">
+                    <div class="row">
+                        <div class="col-xl-4 mb-1">
                         <div class="input-group">
                             <div class="input-group-prepend" data-toggle="tooltip"
                                  title="Number of PCR cycles"
@@ -105,6 +107,8 @@
                                 class="fa fa-calculator" aria-hidden="true"></i> Calculator
                         </button>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
             <!-- <p>For a note about Poisson vs. PCR distribution see <a href="#" data-toggle="modal"
