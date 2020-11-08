@@ -2,6 +2,7 @@
 
 // Instance the tour
 window.tutorial = new Tour({
+  framework: "bootstrap4",
   steps: [
   {
     element: "#mutanalyst_method",

@@ -37,8 +37,8 @@
     <link rel="stylesheet" href="/static/sitewide.css">
     <!--tour-->
     % if 'tour' in page.requirements:
-        ## <link rel="stylesheet" href="/static/bootstrap-tour/build/css/bootstrap-tour.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/css/bootstrap-tour.min.css" integrity="sha512-sFyS37kke5UvcMHcV8k0NSAT2QWjeLEXKVm0JOXgFd8cd1XMMWqez/mL64g6m+HAS8jBjvPwi5ctTiYX2BRRpQ==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/static/bootstrap-tourist.css"/>
+        ## <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/css/bootstrap-tour.min.css" integrity="sha512-sFyS37kke5UvcMHcV8k0NSAT2QWjeLEXKVm0JOXgFd8cd1XMMWqez/mL64g6m+HAS8jBjvPwi5ctTiYX2BRRpQ==" crossorigin="anonymous" />
     % endif
     <!--
         <style>
@@ -433,8 +433,8 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
     % endif
     % if 'tour' in page.requirements:
-        ## <script src="/static/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/js/bootstrap-tour.min.js" integrity="sha512-kcDHM4gaMoZGaCaJ56XjGiknuwMeQFxssvIDnuuCp22PJYO8XvOeMibWtkdZTZtbPXfvLE9WweEVToVtM/wlMw==" crossorigin="anonymous"></script>
+        <script src="/static/bootstrap-tourist.js"></script>
+        ## <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/js/bootstrap-tour.min.js" integrity="sha512-kcDHM4gaMoZGaCaJ56XjGiknuwMeQFxssvIDnuuCp22PJYO8XvOeMibWtkdZTZtbPXfvLE9WweEVToVtM/wlMw==" crossorigin="anonymous"></script>
     % endif
 
     <script>
