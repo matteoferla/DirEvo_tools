@@ -26,8 +26,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
           rel="stylesheet">
     <!--switch-->
-    ##<link href="/static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js" integrity="sha512-J+763o/bd3r9iW+gFEqTaeyi+uAphmzkE/zU8FxY6iAvD3nQKXa+ZAWkBI9QS9QkYEKddQoiy0I5GDxKf/ORBA==" crossorigin="anonymous"></script>
+    ## <link href="/static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.min.css" integrity="sha512-lANJTDwF23Xos7T5Q7SNbZ7dFxLG8YSQJ2qCGrav0Fhe5vns60+tUECZv+9udXdKiX3/YTWt++tEKyEcuZv4dQ==" crossorigin="anonymous" />
     <link href="/static/bootstrap-select.min.css"
           rel="stylesheet">
     <!--pyspinner-->
@@ -38,7 +38,7 @@
     <!--tour-->
     % if 'tour' in page.requirements:
         ## <link rel="stylesheet" href="/static/bootstrap-tour/build/css/bootstrap-tour.min.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/js/bootstrap-tour.min.js" integrity="sha512-kcDHM4gaMoZGaCaJ56XjGiknuwMeQFxssvIDnuuCp22PJYO8XvOeMibWtkdZTZtbPXfvLE9WweEVToVtM/wlMw==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/css/bootstrap-tour.min.css" integrity="sha512-sFyS37kke5UvcMHcV8k0NSAT2QWjeLEXKVm0JOXgFd8cd1XMMWqez/mL64g6m+HAS8jBjvPwi5ctTiYX2BRRpQ==" crossorigin="anonymous" />
     % endif
     <!--
         <style>
