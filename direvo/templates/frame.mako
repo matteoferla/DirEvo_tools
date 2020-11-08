@@ -26,8 +26,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
           rel="stylesheet">
     <!--switch-->
-    <link href="/static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
-          rel="stylesheet">
+    ##<link href="/static/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js" integrity="sha512-J+763o/bd3r9iW+gFEqTaeyi+uAphmzkE/zU8FxY6iAvD3nQKXa+ZAWkBI9QS9QkYEKddQoiy0I5GDxKf/ORBA==" crossorigin="anonymous"></script>
     <link href="/static/bootstrap-select.min.css"
           rel="stylesheet">
     <!--pyspinner-->
@@ -37,7 +37,8 @@
     <link rel="stylesheet" href="/static/sitewide.css">
     <!--tour-->
     % if 'tour' in page.requirements:
-        <link rel="stylesheet" href="/static/bootstrap-tour/build/css/bootstrap-tour.min.css"/>
+        ## <link rel="stylesheet" href="/static/bootstrap-tour/build/css/bootstrap-tour.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.12.0/js/bootstrap-tour.min.js" integrity="sha512-kcDHM4gaMoZGaCaJ56XjGiknuwMeQFxssvIDnuuCp22PJYO8XvOeMibWtkdZTZtbPXfvLE9WweEVToVtM/wlMw==" crossorigin="anonymous"></script>
     % endif
     <!--
         <style>
@@ -237,7 +238,7 @@
                             ><i class="fab fa-blogger-b"></i> Various links</a>
                             <a href='#cite_modal' class="btn btn-info my-1" id="cite"
                             data-toggle="modal" data-target="#cite_modal" style="cursor:pointer"
-                            ><i class="fab fa-scroll-old"></i> Citation</a>
+                            ><i class="far fa-scroll-old"></i> Citation</a>
                             <a href='https://github.com/matteoferla/DirEvo_tools' class="btn btn-info my-1" id="github" target="_blank"><i class="fab fa-github"></i> Github</a>
                 </li>
                         </div>
@@ -418,8 +419,7 @@
     <!--<script type='text/javascript' src="/static/bootstrap/dist/js/bootstrap.min.js"></script> -->
     <script type='text/javascript'
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
-    <script type='text/javascript'
-            src="/static/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/js/bootstrap-switch.min.js"></script>
     <script type='text/javascript' src="/static/FileSaver.min.js"></script>
     <script type='text/javascript'
             src="/static/bootstrap-select.min.js"></script>
