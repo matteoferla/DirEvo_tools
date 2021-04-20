@@ -13,7 +13,6 @@ N = "\n"
 T = "\t"
 # N = "<br/>
 from Bio.Seq import Seq
-from Bio.Alphabet import generic_dna
 from Bio.SeqUtils import MeltingTemp as mt
 import math
 from warnings import warn
@@ -83,7 +82,7 @@ def deep_mutation_scan(region, section, target_temp=55, overlap_len=22, primer_r
     if isinstance(region, Seq):
         pass
     elif isinstance(region, str):
-        region = Seq(region, generic_dna)
+        region = Seq(region)
     else:
         raise TypeError('Sequence is neither string or Seq.')
     region = region.ungap(' ')  # spaces!

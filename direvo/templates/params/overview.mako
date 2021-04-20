@@ -32,6 +32,17 @@
 <h4>SMILES</h4>
 <p>A SMILES is <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system" target="_blank">
     a string that represents a molecule <i class="fab fa-wikipedia-w"></i></a>. For example <code>CC</code> is propane.</p>
+<p>Protonation is very important for Rosetta, so it is important to make sure the protonation is correct. Specifically,
+The SMILES <code>CC(=O)O</code> is acetic acid (no charge), while <code>CC(=O)[O-]</code> is acetate (negative, conjugate base),
+which is more likely to be the required tautomer. Likewise ethylamine at pH 7 is most likely <code>CC[NH3+]</code>
+than <code>CCN</code> (same as <code>CC[NH2]</code>).
+</p>
+<h4>Amino acids</h4>
+<p>If the SMILE provided is in the form <code>*NC({sidechain})C(=O)*</code> then the atom names will be greek lettered
+and the compound will be an amino acid. If <code>[NH3+]C({sidechain})C(=O)[O-]</code> is provided a ligand is made.</p>
+Do note that for some applications, where residues are selected by properties, it could be useful to add manually
+any <a href="https://graylab.jhu.edu/PyRosetta.documentation/pyrosetta.rosetta.core.chemical.html#pyrosetta.rosetta.core.chemical.ResidueProperty">relevant  properties</a>,
+such as aliphatic.
 <h4>PDB</h4>
 <p>A ligand in a PDB is often unprotonated and has no indication of what the format charges are,
 nor are bonds necessarily correct —a double bond is a repeated CONECT entry, but aromatic bonds cannot be specified.

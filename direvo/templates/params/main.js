@@ -1,6 +1,6 @@
 // <%text>
 
-class Pamars {
+class Params {
     constructor() {
         this.out = $(params_result);
         this.clear();
@@ -195,7 +195,7 @@ class Pamars {
 ///////////// DOM
 
 $(function () {
-    window.params = new Pamars();
+    window.params = new Params();
 
     $('#params_demo').click(() => window.params.demo());
     $('#params_clear').click(() => window.params.clear());
