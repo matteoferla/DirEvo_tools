@@ -12,7 +12,6 @@ from warnings import warn
 
 from collections import OrderedDict
 from itertools import product
-from Bio.Alphabet import NucleotideAlphabet
 from Bio.Data import CodonTable
 from Bio.Seq import Seq
 from Bio._py3k import basestring  # I am not overly sure what this does compared to str. I just copied.
@@ -400,7 +399,6 @@ class MutationDNASeq(Seq):
 
     It has the following arguments:
     * The mutations list contains Mutation objects.
-    * alphabet, always NucleotideAlphabet()
     * _data', a str accessible via str()
     * wt, a str without the mutation
     """
@@ -416,7 +414,7 @@ class MutationDNASeq(Seq):
             raise TypeError("The sequence data given to a Seq object should be a string (not another Seq object etc)")
         else:
             self._data = data
-        self.alphabet = NucleotideAlphabet()  # Can only be nucleotide...
+        #self.alphabet = NucleotideAlphabet()  # Can only be nucleotide...
         self.wt = data
         self.mutations = []
 
@@ -476,7 +474,7 @@ class MutationDNASeq(Seq):
         Returns a Seq() object, where the sequence is that with the mutation added (`_data`), not the wild type (`wt`).
         :return: Seq instance.
         """
-        return Seq(self._data, alphabet=NucleotideAlphabet())
+        return Seq(self._data)
 
 
 class MutationTable:
