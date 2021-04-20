@@ -14,7 +14,8 @@ from collections import OrderedDict
 from itertools import product
 from Bio.Data import CodonTable
 from Bio.Seq import Seq
-from Bio._py3k import basestring  # I am not overly sure what this does compared to str. I just copied.
+#from Bio._py3k import basestring  # I am not overly sure what this does compared to str. I just copied.
+# biopython has since fixed this.
 
 __author__ = 'Matteo'
 __version__ = "N/A"
@@ -410,7 +411,7 @@ class MutationDNASeq(Seq):
         if isinstance(data, Seq):
             self._data = data._data
             # TODO assert if nucleotide
-        elif not isinstance(data, basestring):
+        elif not isinstance(data, str):
             raise TypeError("The sequence data given to a Seq object should be a string (not another Seq object etc)")
         else:
             self._data = data
