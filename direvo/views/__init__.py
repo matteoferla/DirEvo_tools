@@ -88,7 +88,8 @@ def get_ip(req):
         ip = '0.0.0.0'
     # print(ip)
     debugprint('ip is ' + ip)
-    where = whois(ip)
+    #where = whois(ip)
+    where = 'Unknown'
     return ip,where
 
 def log_passing_para(req, extra, status):
