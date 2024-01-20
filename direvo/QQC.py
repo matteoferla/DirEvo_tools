@@ -21,6 +21,7 @@ from Bio import SeqIO
 from Bio import pairwise2
 from Bio.Seq import Seq
 from scipy.optimize import minimize
+from typing import Union
 
 pprint = PrettyPrinter().pprint
 
@@ -34,10 +35,15 @@ class Trace:
 
     def __init__(self, record=None, **kwargs):
         if record:
-            for ni, N in enumerate(record.annotations['abif_raw']['FWO_1'].upper()):
+            fwo: Union[bytes, str] = record.annotations['abif_raw']['FWO_1']
+            # in some previous version of Biopython this was a string, now it is bytes.
+            if isinstance(fwo, bytes):
+                fwo: str = fwo.decode()
+            for ni, N in enumerate(fwo.upper()):
                 setattr(self, N, record.annotations['abif_raw']['DATA{0}'.format(9 + ni)])
             self.peak_index = record.annotations['abif_raw']['PLOC1']
-            self.peak_id = record.annotations['abif_raw']['PBAS1']
+            pbas: Union[bytes, str] = record.annotations['abif_raw']['PBAS1']
+            self.peak_id = pbas if isinstance(pbas, str) else pbas.decode()  # old: str new bytes
         else:
             for k in ['A', 'T', 'G', 'C', 'peak_id', 'peak_index']:
                 setattr(self, k, kwargs[k])
@@ -87,7 +93,7 @@ class Trace:
         target_seq = re.sub('[^ATGC\*]', '', target_seq.upper())
         targetdex = re.findall(target_seq, self.peak_id)
         if not targetdex:
-            raise ValueError('target_seq not found!')
+            raise ValueError(f'target_seq {target_seq} not found in {self.peak_id}')
         elif len(targetdex) > 1:
             if strict:
                 raise ValueError('Ambiguous sequence given!')
@@ -160,7 +166,7 @@ class Trace:
         # play around... >>> pairwise2.align.localxs(''.join([random.choice('A T G C'.split()) for i in range(100)]), ''.join([random.choice('A T G C'.split()) for i in range(60)]),-5,-.2)
         match = pairwise2.align.globalxs(self.peak_id, ref_seq, -5, -.2, one_alignment_only=True)[0]
         if not match:
-            raise ValueError('target_seq not found!')
+            raise ValueError(f'target_seq ({self.peak_id}) not found in {ref_seq}')
         # case 1. The read is longer than the CDS
         if match[1][0] == '-':
             # front trim
@@ -408,10 +414,10 @@ class QQC:
 
 
 def QQC_test():
-    file = "example data/ACE-AA-088-02-60Â°C-BM3-A82_NDT-VHG-TGG-T7Hi-T7minus1.ab1"
+    file = "direvo/static/22c_demo.ab1" #demo_MC.ab1
     x = Trace.from_filename(file)
-    q = x.QQC('CGT GAT TTT', '22c')
-    # q = x.QQC('CGT GAT TTT', 'NNK') # works
+    q = x.QQC('CGTGATTTT', '22c')
+    q = x.QQC('CGTGATTTT', '1NDT 9VHG 1TGG')
     print('Bases ', sum([p[i][b] for p in q.codon_peak_freq_split for i in range(3) for b in 'ATGC']) / (
         3 * len(q.codon_peak_freq_split)))
     print('AA ', sum(q.empirical_AA_probabilities.values()))
@@ -432,4 +438,7 @@ def MC_test():
 
 
 if __name__ == "__main__":
+    print('MC test')
     MC_test()
+    print('QQC test')
+    QQC_test()
