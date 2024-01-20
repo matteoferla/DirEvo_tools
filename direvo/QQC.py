@@ -21,7 +21,13 @@ from Bio import SeqIO
 from Bio import pairwise2
 from Bio.Seq import Seq
 from scipy.optimize import minimize
-from typing import Union
+from typing import Union, List, Tuple, Dict
+ChrType = str  # of length 1
+NucleotideFrequenceType = Dict[ChrType, float]
+TrinucleotideFrequencyType = List[NucleotideFrequenceType]
+# a list of 3 positions each with a dictionary of the probability of each base,
+# corresponds to a single primer in `.scheme_mix`.
+SchemeType = Tuple[int, TrinucleotideFrequencyType]
 
 pprint = PrettyPrinter().pprint
 
@@ -227,7 +233,7 @@ class Trace:
         return {'snr': snrMedian, 'main_peaks': main_peaks, 'minor_peaks': minor_peaks, 'outliers':outball}
 
 
-def scheme_maker(scheme):
+def scheme_maker(scheme_name) -> List[SchemeType]:
     """
     FORMERLY A STATIC METHOD.
     converts a name of a scheme to a probability set.
@@ -238,16 +244,16 @@ def scheme_maker(scheme):
     :return: a LIST of n primers each being a list of 3 positions each with a dictionary of the probability of each base.
     """
     # check first if reserved word.
-    scheme = scheme.upper().replace('-trick'.upper(), '')
-    if scheme == 'Tang'.upper() or scheme.lower() == '20c':
-        scheme = '12NDT 6VHA 1TGG 1ATG'
-    elif scheme.lower() == '19c':
-        scheme = ''
-    elif scheme.lower() == '21c':
-        scheme = ''
-    elif scheme == 'Kille'.upper() or scheme.lower() == '22c':
+    scheme_name: str = scheme_name.upper().replace('-trick'.upper(), '')
+    if scheme_name == 'Tang'.upper() or scheme_name.lower() == '20c':
+        scheme_name = '12NDT 6VHA 1TGG 1ATG'
+    elif scheme_name.lower() == '19c':
+        raise NotImplementedError('19c')
+    elif scheme_name.lower() == '21c':
+        raise NotImplementedError('21c')
+    elif scheme_name == 'Kille'.upper() or scheme_name.lower() == '22c':
         # dx.doi.org / 10.1038 / srep10654
-        scheme = '1NDT 9VHG 1TGG'
+        scheme_name = '1NDT 9VHG 1TGG'
     else:
         pass  # there seems no need to store a boolean?
     # Biopython can handle this somewhere but tyhis is easier.
@@ -267,7 +273,7 @@ def scheme_maker(scheme):
                   'H': 'ATC',
                   'D': 'ATG'}
     # split for analysis
-    schemelist = scheme.split()
+    schemelist: List[str] = scheme_name.split()
     proportions = []
     codons = []
     for m in schemelist:
@@ -328,7 +334,7 @@ class QQC:
                              for p in range(len(self.scheme_mix))]) - self.codon_peak_freq[i]['ATGC'[bi]]) for i in
                     range(3) for bi in range(4)])
 
-    def __init__(self, peak_int, scheme='NNK', normalise_hack=False, reversed=False):
+    def __init__(self, peak_int, scheme_name='NNK', normalise_hack=False, reversed=False):
         """
         The QQC object has various attributes:
         * scheme: str of scheme name
@@ -341,8 +347,8 @@ class QQC:
         """
 
         self.peak_int = peak_int
-        self.scheme = scheme
-        self.scheme_mix = scheme_maker(scheme)
+        self.scheme_name = scheme_name
+        self.scheme_mix: List[SchemeType] = scheme_maker(scheme_name)
         self.scheme_pred = [
             {b: sum([self.scheme_mix[p][0] * self.scheme_mix[p][1][i][b] for p in range(len(self.scheme_mix))]) for b in
              'ATGC'} for i in range(3)]
@@ -367,21 +373,23 @@ class QQC:
         self.Qpool = (wsum + abs(wmin)) / (1 + abs(wmin))
         # calculate AA...
         schemeprobball = []
+        primer: SchemeType
         for primer in self.scheme_mix:
             schemeprobball.append(codon_to_AA(primer[1]))
         self.scheme_AA_probabilities = {
             aa: sum([self.scheme_mix[pi][0] * schemeprobball[pi][aa] for pi in range(len(schemeprobball))]) for aa in
             schemeprobball[0].keys()}
-        if len(self.scheme_mix) == 1:  # i.e. the easy case...
+        print('scheme_mix', self.scheme_mix, len(self.scheme_mix))
+        if len(self.scheme_mix) == 1:  # i.e. the easy case only one primer in the mix
             # triadic product (horizontal vector x vertical vector x stacked vector
             # codprob = bsxfun( @ mtimes, codon(1,:)'*codon(2,:), reshape(codon(3,:),1,1,4));
             self.codon_peak_freq_split = [self.codon_peak_freq]
             self.empirical_AA_probabilities = codon_to_AA(self.codon_peak_freq)
         else:  # deconvolute!
-            prinumb = len(self.scheme_mix)
+            prinumb: int = len(self.scheme_mix)
             offness_zero = np.array([[[0.25 for b in 'ATGC'] for i in range(3)] for p in
                                      range(prinumb)])  # ones(3,4,numel(ppro))
-            res = minimize(self._targetfun, offness_zero)
+            res = minimize(self._targetfun, offness_zero.flatten())
             r = res.x.reshape(prinumb, 3, 4)
             self.codon_peak_freq_split = [
                 [{'ATGC'[bi]: abs(r[p, i, bi] * self.scheme_mix[p][1][i]['ATGC'[bi]]) for bi in range(4)} for i in
