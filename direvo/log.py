@@ -27,13 +27,12 @@ def config_logging():
             }
         }
     }
-
     logging.config.dictConfig(log_ini)  # configure log
 
     ###### mine #######
     logging.captureWarnings(True)
 
-    log = logging.getLogger(__name__)
+    log = logging.getLogger('direvo')
     f = io.StringIO('This is the StringIO stream of the Log', '\n')
     handler = logging.StreamHandler(f)
     handler.setFormatter(logging.Formatter('%(asctime)s\t%(levelname)s\t%(message)s'))
